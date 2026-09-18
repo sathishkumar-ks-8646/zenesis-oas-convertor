@@ -68,7 +68,7 @@ reads it.
 ## Vendor extensions
 
 Ten keys are in use. Each one has a matching rule in `rules.json` in
-[zenesis-oas-convertor](https://github.com/sathish-dev-git/zenesis-oas-convertor), which is what turns
+[zenesis-oas-convertor](https://github.com/sathishkumar-ks-8646/zenesis-oas-convertor), which is what turns
 these documents into vendor-neutral OpenAPI:
 
 | Key | What the converter does with it |

@@ -208,10 +208,10 @@
             }
           },
                     "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         }
       },
@@ -291,10 +291,10 @@
             }
           },
                     "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         }
       }
@@ -334,10 +334,10 @@
             "description": "AutoML analysis deployment executed successfully. No content is returned."
           },
                     "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         }
       }
@@ -374,10 +374,10 @@
             "description": "AutoML analysis deleted successfully. No content is returned."
           },
                     "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         }
       },
@@ -530,10 +530,10 @@
             }
           },
                     "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         }
       }
@@ -616,10 +616,10 @@
             }
           },
                     "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         }
       }
@@ -659,10 +659,10 @@
             "description": "AutoML analysis model deleted successfully. No content is returned."
           },
                     "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         }
       }
@@ -766,10 +766,10 @@
             }
           },
                     "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         }
       },
@@ -948,10 +948,10 @@
             }
           },
                     "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         }
       }
@@ -991,10 +991,10 @@
             "description": "AutoML analysis deployment deleted successfully. No content is returned."
           },
                     "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         }
       }
@@ -1126,10 +1126,10 @@
             }
           },
                     "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         }
       }

@@ -120,10 +120,10 @@
             }
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -294,10 +294,10 @@
             }
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -456,10 +456,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -589,10 +589,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -728,10 +728,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -862,10 +862,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -1016,10 +1016,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -1231,10 +1231,10 @@
             }
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -1575,10 +1575,10 @@
             }
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -1867,10 +1867,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -1947,10 +1947,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -2144,10 +2144,10 @@
             }
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -2345,10 +2345,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-doc": {
@@ -2489,10 +2489,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -2691,10 +2691,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-doc": {
@@ -2844,10 +2844,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -2975,10 +2975,10 @@
             }
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -3112,10 +3112,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -3248,10 +3248,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -3398,10 +3398,10 @@
             }
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -3563,10 +3563,10 @@
             }
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -3682,10 +3682,10 @@
             }
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -3809,10 +3809,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -3877,10 +3877,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -4010,10 +4010,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -4138,10 +4138,10 @@
             ]
           },
           "4XX": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
           },
           "500": {
-            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+            "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
           }
         },
         "x-zenesis-sections": {
@@ -5549,7 +5549,7 @@
       },
       "Error": {
         "type": "object",
-        "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/schemas/Error"
+        "$ref": "https://raw.githubusercontent.com/sathishkumar-ks-8646/analytics-api-docs/refs/heads/main/zoho-analytics-api-common.json#/components/schemas/Error"
       },
       "GetOrgAdminsResponse": {
         "type": "object",

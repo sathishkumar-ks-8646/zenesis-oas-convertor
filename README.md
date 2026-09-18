@@ -6,12 +6,12 @@ Point it at a folder of JSON specs and it writes a folder of standards-compliant
 ones. No dependencies, no network, no config required to start.
 
 The specs themselves are not stored here. They are the `zenesis-oas/` folder of
-[analytics-api-docs](https://github.com/sathish-dev-git/analytics-api-docs),
+[analytics-api-docs](https://github.com/sathishkumar-ks-8646/analytics-api-docs),
 included as a git submodule and pinned to one commit, so every conversion states
 which revision of the source it came from.
 
 ```bash
-git clone --recurse-submodules https://github.com/sathish-dev-git/zenesis-oas-convertor.git
+git clone --recurse-submodules https://github.com/sathishkumar-ks-8646/zenesis-oas-convertor.git
 python3 -m zenesis_oas inventory analytics-api-docs/zenesis-oas/        # what vendor keys are in here?
 python3 -m zenesis_oas convert   analytics-api-docs/zenesis-oas/ dist/  # write clean OpenAPI
 python3 -m zenesis_oas verify    analytics-api-docs/zenesis-oas/        # prove nothing was lost

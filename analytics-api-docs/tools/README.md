@@ -42,6 +42,6 @@ still missing.
 ## Keeping in step with the converter
 
 `KNOWN_VENDOR_KEYS` mirrors the `rules` object of `rules.json` in
-[zenesis-oas-convertor](https://github.com/sathish-dev-git/zenesis-oas-convertor). A key in the specs
+[zenesis-oas-convertor](https://github.com/sathishkumar-ks-8646/zenesis-oas-convertor). A key in the specs
 but not in that set is an error here; a key in the set that appears in no spec is a warning, which
 usually means a convention was retired and the rule can go too.

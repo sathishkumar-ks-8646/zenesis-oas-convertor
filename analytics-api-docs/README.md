@@ -39,16 +39,16 @@ rename here is a change there too.
 ```
                        ┌─► zenesis-oas-convertor ──► clean OpenAPI 3.x ──► Swagger UI, SDK generators, MCP
 analytics-api-docs ────┤
-   (you are here)      └─► okf-bundle ──────────────► zoho-analytics-okf (OKF v0.2 bundle for AI agents)
+   (you are here)      └─► okf-bundle ──────────────► analytics-okf (OKF v0.2 bundle for AI agents)
                        │
                        └─► the Zenesis renderer ───► www.zoho.com/analytics/api/v2/
 ```
 
 | Repository | Role |
 |---|---|
-| [zenesis-oas-convertor](https://github.com/sathish-dev-git/zenesis-oas-convertor) | Converts `zenesis-oas/` into vendor-neutral OpenAPI: strips `x-zenesis-*`, rewrites private conventions into ecosystem ones, folds error tables and rate limits into descriptions. Reads this repository through its `analytics-api-docs/` submodule. |
-| [okf-bundle](https://github.com/sathish-dev-git/okf-bundle) | Build sources for the agent knowledge bundle. Reads `md/`, `zenesis-oas/`, `zenesis-oas-samples/` and the common JSON through its `analytics-api-docs/` submodule. |
-| [zoho-analytics-okf](https://github.com/sathish-dev-git/zoho-analytics-okf) | The published Open Knowledge Format bundle that `okf-bundle` generates. |
+| [zenesis-oas-convertor](https://github.com/sathishkumar-ks-8646/zenesis-oas-convertor) | Converts `zenesis-oas/` into vendor-neutral OpenAPI: strips `x-zenesis-*`, rewrites private conventions into ecosystem ones, folds error tables and rate limits into descriptions. Reads this repository through its `analytics-api-docs/` submodule. |
+| [okf-bundle](https://github.com/sathishkumar-ks-8646/okf-bundle) | Build sources for the agent knowledge bundle. Reads `md/`, `zenesis-oas/`, `zenesis-oas-samples/` and the common JSON through its `analytics-api-docs/` submodule. |
+| [analytics-okf](https://github.com/sathishkumar-ks-8646/analytics-okf) | The published Open Knowledge Format bundle that `okf-bundle` generates. |
 
 Neither consumer holds a copy. Each includes this repository as a **git submodule** named
 `analytics-api-docs`, tracking `main` and pinned to one commit, so every build states exactly which

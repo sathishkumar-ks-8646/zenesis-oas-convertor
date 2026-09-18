@@ -1,0 +1,80 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zenesis renderer configuration - dsml-grouped-api",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post.requestBody.content['application/x-www-form-urlencoded'].examples.regressionAnalysis",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "regression"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post.requestBody.content['application/x-www-form-urlencoded'].examples.classificationAnalysis",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "classification"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post.requestBody.content['application/x-www-form-urlencoded'].examples.clusteringAnalysis",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "clustering"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post",
+      "update": {
+        "x-zenesis-doc": {
+          "show": true,
+          "usecaseTags": {
+            "regression": {
+              "name": "Regression Algorithms",
+              "description": "<p>Applicable when <strong>predictionType</strong> is set to <strong>REGRESSION</strong>.</p>"
+            },
+            "classification": {
+              "name": "Classification Algorithms",
+              "description": "<p>Applicable when <strong>predictionType</strong> is set to <strong>CLASSIFICATION</strong>.</p>"
+            },
+            "clustering": {
+              "name": "Clustering Algorithms",
+              "description": "<p>Applicable when <strong>predictionType</strong> is set to <strong>CLUSTERING</strong>.</p>"
+            }
+          }
+        }
+      },
+      "x-migration": "Renderer layout config."
+    },
+    {
+      "target": "$.components.schemas.CreateAutoMLAnalysisConfig.oneOf[0]",
+      "update": {
+        "x-zenesis-usecase-tag": "regression"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.CreateAutoMLAnalysisConfig.oneOf[1]",
+      "update": {
+        "x-zenesis-usecase-tag": "classification"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.CreateAutoMLAnalysisConfig.oneOf[2]",
+      "update": {
+        "x-zenesis-usecase-tag": "clustering"
+      },
+      "x-migration": "Renderer grouping key."
+    }
+  ]
+}

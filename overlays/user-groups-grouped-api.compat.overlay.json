@@ -1,0 +1,2970 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zenesis legacy compatibility - user-groups-grouped-api - shrink this to zero",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/restapi/v2/orgadmins'].get.responses['200'].content['application/json'].examples.singleOrgAdmin",
+      "update": {
+        "description": "Single admin"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgadmins'].get.responses['200'].content['application/json'].examples.singleOrgAdmin",
+      "update": {
+        "summary": "Organization with exactly one Organization Admin."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgadmins'].get.responses['200'].content['application/json'].examples.multipleOrgAdmins",
+      "update": {
+        "description": "Multiple admins"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgadmins'].get.responses['200'].content['application/json'].examples.multipleOrgAdmins",
+      "update": {
+        "summary": "Organization with several Organization Admins."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgadmins'].get.responses['200'].content['application/json'].examples.noOrgAdmins",
+      "update": {
+        "description": "No admins"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgadmins'].get.responses['200'].content['application/json'].examples.noOrgAdmins",
+      "update": {
+        "summary": "Organization where no Organization Admin has been assigned - all admin operations are handled by the Account Admin."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgadmins'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Organization not found.",
+            "resolution": "Verify the ZANALYTICS-ORGID header value."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not the Account Admin of the organization.",
+            "resolution": "This API is strictly restricted to the Account Admin. Organization Admins and other roles cannot call this endpoint."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.share.read."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgadmins'].get",
+      "update": {
+        "x-zenesis-title": "Get Org Admins"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgadmins'].get",
+      "update": {
+        "description": "Returns the email addresses of the users who currently hold the Organization Admin role in the specified organization. This is a convenience endpoint that is equivalent to filtering the Get Users response for the Organization Admin role."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgadmins'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Unlike the other organization user management APIs, which can be invoked by both the Account Admin and the Organization Admins, this API is restricted to the Account Admin of the organization. An Organization Admin invoking this API fails with error code <b>7301</b>.</li><li>When no Organization Admin has been assigned, the API returns HTTP 200 with an empty <b>orgAdmins</b> array.</li><li>The users listed here are the users whose role was set to <b>ORGADMIN</b> using the Add Users or Change User Role API.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].get.responses['200'].content['application/json'].examples.mixedRoles",
+      "update": {
+        "description": "Mixed roles"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].get.responses['200'].content['application/json'].examples.mixedRoles",
+      "update": {
+        "summary": "Organization holding users across every org-level role, including a deactivated user."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].get.responses['200'].content['application/json'].examples.smallOrg",
+      "update": {
+        "description": "Small organization"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].get.responses['200'].content['application/json'].examples.smallOrg",
+      "update": {
+        "summary": "Organization with only a few members and no Organization Admin assigned."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].get.responses['200'].content['application/json'].examples.clientPortalOrg",
+      "update": {
+        "description": "Client portal"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].get.responses['200'].content['application/json'].examples.clientPortalOrg",
+      "update": {
+        "summary": "Response returned when the Account Admin is also a Client Portal Admin - every user entry carries the portal domain it belongs to."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Organization not found.",
+            "resolution": "Verify the ZANALYTICS-ORGID header value."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
+            "resolution": "Ensure the caller holds the Account Admin or Organization Admin role in the organization."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.read."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].get",
+      "update": {
+        "x-zenesis-title": "Get Users"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].get",
+      "update": {
+        "description": "Returns the list of all the users who are members of the specified organization, along with their current status and org-level role.\n\nThe org-level role governs what the user can do across the entire organization. It is distinct from the workspace-level role, which governs what the user can do within a specific workspace and is managed using the workspace sharing APIs."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Both the Account Admin and the Organization Admins of the organization can invoke this API.</li><li>Deactivated users continue to be listed in the response with <b>status</b> set to <b>false</b>. They are not removed from the list.</li><li>A user who has been invited but has not yet accepted the invitation is not listed until they accept and join the organization.</li><li>The <b>domainName</b> field is returned for every user only when the Account Admin of the organization is also a Client Portal Admin. When the Account Admin is not a Client Portal Admin, only <b>emailId</b>, <b>status</b> and <b>role</b> are returned.</li><li>A user added through a client portal domain is scoped to that portal. Such users access Zoho Analytics only through the branded portal URL and do not appear as standard organization members.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.defaultRoleInvite",
+      "update": {
+        "description": "Default role"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.defaultRoleInvite",
+      "update": {
+        "summary": "Invites two users without specifying a role, so both join with the default USER role."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.viewerInvite",
+      "update": {
+        "description": "Viewer role"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.viewerInvite",
+      "update": {
+        "summary": "Invites a user with read-only access to the organization."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.orgAdminInvite",
+      "update": {
+        "description": "Org Admin"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.orgAdminInvite",
+      "update": {
+        "summary": "Invites a user as an Organization Admin. Can be invoked only by the Account Admin of the organization."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainInvite",
+      "update": {
+        "description": "Portal domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainInvite",
+      "update": {
+        "summary": "Scopes the addition to a single client portal domain, so the users are added as portal users of that portal."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].post.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Organization not found.",
+            "resolution": "Verify the ZANALYTICS-ORGID header value."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
+            "resolution": "Ensure the caller holds the Account Admin or Organization Admin role in the organization."
+          },
+          {
+            "name": "6004",
+            "description": "Adding these users would exceed the organization's user seat limit under the current plan.",
+            "resolution": "Upgrade the plan to accommodate more users, or remove unused user accounts before adding new ones."
+          },
+          {
+            "name": "6026",
+            "description": "The current plan does not support adding extra users (free plan restriction).",
+            "resolution": "Upgrade to a paid plan to invite additional users."
+          },
+          {
+            "name": "6071",
+            "description": "One or more of the specified email addresses is already a member of this organization.",
+            "resolution": "Remove the already-existing email addresses from the emailIds list and retry."
+          },
+          {
+            "name": "6089",
+            "description": "Attempted to assign the ORGADMIN role through a custom domain (domainName). The Organization Admin role cannot be assigned through a custom portal domain.",
+            "resolution": "Omit domainName when assigning the ORGADMIN role, or use a different role for domain-based additions."
+          },
+          {
+            "name": "8060",
+            "description": "The specified domainName does not exist.",
+            "resolution": "Provide a valid client portal domain name configured for the organization."
+          },
+          {
+            "name": "8061",
+            "description": "The specified domainName does not belong to the calling user or to the organization's Account Admin.",
+            "resolution": "Use a domain name that is administered by the Account Admin of this organization."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.create."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].post",
+      "update": {
+        "x-zenesis-title": "Add Users"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].post",
+      "update": {
+        "description": "Adds one or more users to the specified organization. The invited users receive an email notification. Users who are new to Zoho are prompted to create a Zoho account before accepting the invitation."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>A maximum of 1000 email addresses can be sent in a single request.</li><li>The request is applied as a single batch. If any email address in the list is already a member of the organization, the request fails with error code <b>6071</b> and none of the users are added.</li><li>When <b>role</b> is not provided, the invited users join with the <b>USER</b> role.</li><li>Organization Admins can assign only the <b>USER</b> and <b>VIEWER</b> roles. Only the Account Admin of the organization can assign the <b>ORGADMIN</b> role.</li><li>The <b>ORGADMIN</b> role cannot be assigned along with <b>domainName</b>. This combination always fails with error code <b>6089</b>, irrespective of the role of the calling user.</li><li>If the addition would exceed the user seat limit of the plan, the request fails with error code <b>6004</b> before any user is added. Free plans do not support additional users and fail with error code <b>6026</b>.</li><li>An invited user is not listed by the Get Users API until they accept the invitation and join the organization.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.singleUserRemoval",
+      "update": {
+        "description": "Single user"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.singleUserRemoval",
+      "update": {
+        "summary": "Removes one user from the standard organization context."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.bulkRemoval",
+      "update": {
+        "description": "Multiple users"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.bulkRemoval",
+      "update": {
+        "summary": "Removes several users in a single request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainRemoval",
+      "update": {
+        "description": "Portal domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainRemoval",
+      "update": {
+        "summary": "Scopes the removal to a single client portal, leaving users of the main organization and of other portals untouched."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].delete.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Organization not found.",
+            "resolution": "Verify the ZANALYTICS-ORGID header value."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
+            "resolution": "Ensure the caller holds the Account Admin or Organization Admin role in the organization."
+          },
+          {
+            "name": "8114",
+            "description": "One or more of the specified email addresses are not members of this organization.",
+            "resolution": "Verify all email addresses using the Get Users API before calling this API."
+          },
+          {
+            "name": "8060",
+            "description": "The specified domainName does not exist.",
+            "resolution": "Provide a valid client portal domain name configured for the organization."
+          },
+          {
+            "name": "8061",
+            "description": "The specified domainName does not belong to the calling user or to the organization's Account Admin.",
+            "resolution": "Use a domain name that is administered by the Account Admin of this organization."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.delete."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].delete",
+      "update": {
+        "x-zenesis-title": "Remove Users"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].delete",
+      "update": {
+        "description": "Removes one or more users from the specified organization. The removed users immediately lose access to all the workspaces and views in the organization."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users'].delete",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>This is a permanent operation. All the workspace-level share permissions of the removed users are revoked, and the users must be invited again using the Add Users API to regain access.</li><li>A maximum of 1000 email addresses can be sent in a single request.</li><li>Every email address in the list must already be a member of the organization. The request fails as a whole with error code <b>8114</b> on the first non-member email address, and no user is removed.</li><li>The Account Admin of the organization cannot be removed using this API. Transfer the ownership of the organization first if the Account Admin has to be removed.</li><li>The workspaces owned by a removed user are not deleted. The workspaces and their contents remain intact, though the ownership may have to be transferred separately.</li><li>Always specify <b>domainName</b> when removing portal-scoped users. Without it, the user is looked up in the standard organization context and the request fails with error code <b>8114</b> if the user exists only in the portal domain.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/active'].put.requestBody.content['application/x-www-form-urlencoded'].examples.singleReactivation",
+      "update": {
+        "description": "Single user"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/active'].put.requestBody.content['application/x-www-form-urlencoded'].examples.singleReactivation",
+      "update": {
+        "summary": "Reactivates one previously deactivated user."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/active'].put.requestBody.content['application/x-www-form-urlencoded'].examples.bulkReactivation",
+      "update": {
+        "description": "Multiple users"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/active'].put.requestBody.content['application/x-www-form-urlencoded'].examples.bulkReactivation",
+      "update": {
+        "summary": "Reactivates several users in a single request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/active'].put.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainReactivation",
+      "update": {
+        "description": "Portal domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/active'].put.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainReactivation",
+      "update": {
+        "summary": "Reactivates a user within a specific client portal domain."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/active'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Organization not found.",
+            "resolution": "Verify the ZANALYTICS-ORGID header value."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
+            "resolution": "Ensure the caller holds the Account Admin or Organization Admin role in the organization."
+          },
+          {
+            "name": "6004",
+            "description": "Activating these users would exceed the organization's user seat limit.",
+            "resolution": "Check the current user count using the Get Resource Details API. Upgrade the plan or remove unused users before reactivating."
+          },
+          {
+            "name": "8114",
+            "description": "One or more of the specified email addresses are not members of this organization.",
+            "resolution": "Verify all email addresses using the Get Users API before calling this API."
+          },
+          {
+            "name": "8060",
+            "description": "The specified domainName does not exist.",
+            "resolution": "Provide a valid client portal domain name configured for the organization."
+          },
+          {
+            "name": "8061",
+            "description": "The specified domainName does not belong to the calling user or to the organization's Account Admin.",
+            "resolution": "Use a domain name that is administered by the Account Admin of this organization."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.update."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/active'].put",
+      "update": {
+        "x-zenesis-title": "Activate Users"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/active'].put",
+      "update": {
+        "description": "Reactivates one or more previously deactivated users in the specified organization. Once activated, the users regain access to the organization and to all the workspaces that were shared with them earlier."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/active'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>A maximum of 1000 email addresses can be sent in a single request.</li><li>The operation is idempotent. Activating an already-active user succeeds silently and raises no error.</li><li>Every email address in the list must already be a member of the organization, even if currently deactivated. Non-members cause the request to fail with error code <b>8114</b>.</li><li>A deactivated user continues to occupy a seat with respect to the plan limits. If the reactivation would exceed the user seat limit, the request fails with error code <b>6004</b>.</li><li>All the workspace shares of a deactivated user are preserved and are restored on reactivation.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/inactive'].put.requestBody.content['application/x-www-form-urlencoded'].examples.temporarySuspension",
+      "update": {
+        "description": "Single user"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/inactive'].put.requestBody.content['application/x-www-form-urlencoded'].examples.temporarySuspension",
+      "update": {
+        "summary": "Temporarily suspends the access of one user, for example while they are on extended leave."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/inactive'].put.requestBody.content['application/x-www-form-urlencoded'].examples.bulkDeactivation",
+      "update": {
+        "description": "Multiple users"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/inactive'].put.requestBody.content['application/x-www-form-urlencoded'].examples.bulkDeactivation",
+      "update": {
+        "summary": "Deactivates several users in a single request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/inactive'].put.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainDeactivation",
+      "update": {
+        "description": "Portal domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/inactive'].put.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainDeactivation",
+      "update": {
+        "summary": "Suspends a portal user while preserving their portal-specific shares and permissions."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/inactive'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Organization not found.",
+            "resolution": "Verify the ZANALYTICS-ORGID header value."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
+            "resolution": "Ensure the caller holds the Account Admin or Organization Admin role in the organization."
+          },
+          {
+            "name": "8114",
+            "description": "One or more of the specified email addresses are not members of this organization.",
+            "resolution": "Verify all email addresses using the Get Users API before calling this API."
+          },
+          {
+            "name": "8060",
+            "description": "The specified domainName does not exist.",
+            "resolution": "Provide a valid client portal domain name configured for the organization."
+          },
+          {
+            "name": "8061",
+            "description": "The specified domainName does not belong to the calling user or to the organization's Account Admin.",
+            "resolution": "Use a domain name that is administered by the Account Admin of this organization."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.update."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/inactive'].put",
+      "update": {
+        "x-zenesis-title": "Deactivate Users"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/inactive'].put",
+      "update": {
+        "description": "Deactivates one or more users in the specified organization. Deactivated users cannot log in or access any workspace in the organization. Their data and permissions are retained and can be restored by reactivating them, which makes this the recommended approach for a temporary suspension rather than a permanent removal."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/inactive'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>A maximum of 1000 email addresses can be sent in a single request.</li><li>The operation is idempotent. Deactivating an already-inactive user succeeds silently and raises no error.</li><li>Every email address in the list must already be a member of the organization. Non-members cause the request to fail with error code <b>8114</b>.</li><li>The Account Admin of the organization cannot be deactivated using this API.</li><li>All the workspace shares of the user are preserved while they are deactivated, though the user cannot access them. The shares are restored on reactivation.</li><li>Deactivation is reversible and preserves the user data, shares and role. Removal, performed using the Remove Users API, is permanent - the shares are revoked and the user has to be invited again.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.promoteToOrgAdmin",
+      "update": {
+        "description": "Promote user"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.promoteToOrgAdmin",
+      "update": {
+        "summary": "Promotes a standard user to Organization Admin. Can be invoked only by the Account Admin of the organization."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.downgradeToViewer",
+      "update": {
+        "description": "Downgrade users"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.downgradeToViewer",
+      "update": {
+        "summary": "Downgrades several users to read-only Viewer access in a single request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.resetToUser",
+      "update": {
+        "description": "Reset role"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.resetToUser",
+      "update": {
+        "summary": "Resets an Organization Admin back to the standard USER role."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainRoleChange",
+      "update": {
+        "description": "Portal domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainRoleChange",
+      "update": {
+        "summary": "Changes the role of a user within a specific client portal domain, leaving their role in the main organization unaffected."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/role'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Organization not found.",
+            "resolution": "Verify the ZANALYTICS-ORGID header value."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
+            "resolution": "Ensure the caller holds the Account Admin or Organization Admin role in the organization."
+          },
+          {
+            "name": "6089",
+            "description": "Attempted to assign the ORGADMIN role through a custom domain (domainName).",
+            "resolution": "Omit domainName when assigning the Organization Admin role."
+          },
+          {
+            "name": "8114",
+            "description": "One or more of the specified email addresses are not members of this organization.",
+            "resolution": "Verify all email addresses using the Get Users API before calling this API."
+          },
+          {
+            "name": "8060",
+            "description": "The specified domainName does not exist.",
+            "resolution": "Provide a valid client portal domain name configured for the organization."
+          },
+          {
+            "name": "8061",
+            "description": "The specified domainName does not belong to the calling user or to the organization's Account Admin.",
+            "resolution": "Use a domain name that is administered by the Account Admin of this organization."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.update."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/role'].put",
+      "update": {
+        "x-zenesis-title": "Change User Role"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/role'].put",
+      "update": {
+        "description": "Changes the org-level role of one or more users in the specified organization. The role change takes effect immediately and the access permissions of the users across all the workspaces adjust to reflect the new role."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/users/role'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>A maximum of 1000 email addresses can be sent in a single request. The same role is applied to every user in the list.</li><li>Organization Admins can assign only the <b>USER</b> and <b>VIEWER</b> roles. Promoting a user to <b>ORGADMIN</b> can be done only by the Account Admin of the organization, and any other caller fails with error code <b>7301</b>.</li><li>The <b>ORGADMIN</b> role cannot be assigned along with <b>domainName</b>. This combination always fails with error code <b>6089</b>, irrespective of the role of the calling user.</li><li>Every email address in the list must already be a member of the organization. Non-members cause the request to fail with error code <b>8114</b>.</li><li>The operation is idempotent. Applying the role that a user already holds succeeds silently and raises no error.</li><li>The role of a deactivated user can be changed. The new role takes effect when the user is reactivated.</li><li>Demoting an Organization Admin removes their org-wide management capabilities immediately, but does not affect their workspace-level permissions.</li><li>Setting the <b>VIEWER</b> role for a user who owns workspaces makes them read-only at the org level, but does not transfer the workspaces they own. They may continue to hold Workspace Admin access on those workspaces.</li><li>A role change performed within a client portal domain is scoped to that portal. The role of the user in the main organization and in other portals is unaffected.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].get.responses['200'].content['application/json'].examples.customRoles",
+      "update": {
+        "description": "Custom roles"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].get.responses['200'].content['application/json'].examples.customRoles",
+      "update": {
+        "summary": "Organization holding two custom roles at different access levels. Every permission group and every flag is present, including the ones set to false."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].get.responses['200'].content['application/json'].examples.noCustomRoles",
+      "update": {
+        "description": "No custom roles"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].get.responses['200'].content['application/json'].examples.noCustomRoles",
+      "update": {
+        "summary": "Organization in which no custom role has been defined yet. An empty array is a success, not an error."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "6142",
+            "description": "The subscription plan of the organization does not include custom roles.",
+            "resolution": "Upgrade the plan to one that includes custom roles."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization, custom roles are not enabled for the organization, or the request was made through a Client Portal (White Label) custom domain.",
+            "resolution": "Call the API as an Account Admin or Organization Admin from the standard API host, with the custom roles feature enabled for the organization."
+          },
+          {
+            "name": "7309",
+            "description": "No authentication was supplied with the request.",
+            "resolution": "Send the Authorization header carrying a valid OAuth token."
+          },
+          {
+            "name": "8083",
+            "description": "The ZANALYTICS-ORGID header is missing.",
+            "resolution": "Add the ZANALYTICS-ORGID header to the request."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token, or the token does not carry the usermanagement scope.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.read."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].get",
+      "update": {
+        "x-zenesis-title": "Get Custom Roles"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].get",
+      "update": {
+        "description": "Returns every custom role defined in the organization identified by the ZANALYTICS-ORGID header, along with the complete permission definition of each role.\n\nThis is the only way to read a role definition back - there is no get-by-ID variant. The accessType and permissions returned for a role are in exactly the shape accepted by the Update Custom Role API, so a role can be read, edited and posted back without any transformation."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be an Account Admin or Organization Admin of the organization. No other role qualifies - Workspace Admins, view owners, users holding a custom role and shared users all fail with error code <b>7301</b>.</li><li>The custom roles feature must be enabled for the organization, otherwise the API fails with error code <b>7301</b> even for an Account Admin. A subscription plan that does not include custom roles fails with error code <b>6142</b>.</li><li>This API is not available through a Client Portal (White Label) custom domain. Such requests are rejected with error code <b>7301</b> before any business logic runs.</li><li>There is no path parameter for the organization - the roles returned belong to the organization named in the <b>ZANALYTICS-ORGID</b> header.</li><li>This is the only API that reads a role definition. There is no get-by-ID variant, so filter the returned list client-side on <b>roleId</b> or <b>roleName</b>.</li><li>The response is always complete - all seven permission groups and every flag are returned, including the ones set to false. This differs from the request side of the Create and Update APIs, where an omitted flag is treated as false.</li><li>The <b>accessType</b> and <b>permissions</b> of a role are returned in exactly the shape accepted by the Update Custom Role API. Read the role here, change the flags needed and send the whole object back - this round-trip is the supported way to make a partial permission edit.</li><li>The <b>roleId</b> values returned here are required as the role-id path parameter of the Update Custom Role and Delete Custom Role APIs. They are returned as strings even though they are numeric.</li><li>The response reports role definitions only. It does not indicate which users hold a role.</li><li>The list is not paginated and its order is not guaranteed. Sort client-side if presentation order matters.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].post.requestBody.content['application/x-www-form-urlencoded'].examples.dashboardOnlyRole",
+      "update": {
+        "description": "Dashboard only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].post.requestBody.content['application/x-www-form-urlencoded'].examples.dashboardOnlyRole",
+      "update": {
+        "summary": "Creates a role at the most restricted access level. No data, design or datasource permission may appear, and createFolder is the only creation flag available. export is enabled alongside manageEmailSchedules, as the dependency rule requires."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].post.requestBody.content['application/x-www-form-urlencoded'].examples.reportAnalystRole",
+      "update": {
+        "description": "Reports and dashboards"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].post.requestBody.content['application/x-www-form-urlencoded'].examples.reportAnalystRole",
+      "update": {
+        "summary": "Creates a role that reaches reports as well as dashboards. Raising the access level unlocks manageDataAlerts, which ALL_DASHBOARDS would reject with error 7576."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].post.requestBody.content['application/x-www-form-urlencoded'].examples.fullAccessRole",
+      "update": {
+        "description": "Full access"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].post.requestBody.content['application/x-www-form-urlencoded'].examples.fullAccessRole",
+      "update": {
+        "summary": "Creates a role at the only level that allows dataPermissions, designPermissions, datasourcePermissions and the table creation flags. designModify pulls in both preset permissions, useDatasource pulls in createTable, and every other datasource flag pulls in viewDatasource."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].post.responses['200'].content['application/json'].examples.roleCreated",
+      "update": {
+        "description": "Role created"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].post.responses['200'].content['application/json'].examples.roleCreated",
+      "update": {
+        "summary": "Returns the identifier of the newly created role. This is the only place the identifier is returned on creation."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].post.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "6142",
+            "description": "The subscription plan of the organization does not include custom roles.",
+            "resolution": "Upgrade the plan to one that includes custom roles."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization, custom roles are not enabled for the organization, or the request was made through a Client Portal (White Label) custom domain.",
+            "resolution": "Call the API as an Account Admin or Organization Admin from the standard API host, with the custom roles feature enabled for the organization."
+          },
+          {
+            "name": "7309",
+            "description": "No authentication was supplied with the request.",
+            "resolution": "Send the Authorization header carrying a valid OAuth token."
+          },
+          {
+            "name": "7553",
+            "description": "A role with the given roleName already exists in the organization. The check covers built-in role names as well as other custom roles.",
+            "resolution": "Choose a different name for the role."
+          },
+          {
+            "name": "7554",
+            "description": "The accessType value did not resolve to a known access level.",
+            "resolution": "Send one of ALL_DASHBOARDS, ALL_REPORTS_AND_DASHBOARDS or ALL_DATA_REPORTS_AND_DASHBOARDS."
+          },
+          {
+            "name": "7559",
+            "description": "manageEmailSchedules is enabled but export is not.",
+            "resolution": "Set publishPermissions.export to true, or disable manageEmailSchedules."
+          },
+          {
+            "name": "7573",
+            "description": "A dataPermissions flag is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+            "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or set every dataPermissions flag to false."
+          },
+          {
+            "name": "7574",
+            "description": "designModify is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+            "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or disable designModify."
+          },
+          {
+            "name": "7575",
+            "description": "createTable, createQueryTable or createFormula is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+            "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or disable those flags. createFolder is allowed at every level."
+          },
+          {
+            "name": "7576",
+            "description": "manageDataAlerts is enabled while accessType is ALL_DASHBOARDS.",
+            "resolution": "Use ALL_REPORTS_AND_DASHBOARDS or ALL_DATA_REPORTS_AND_DASHBOARDS, or disable manageDataAlerts."
+          },
+          {
+            "name": "7577",
+            "description": "dataArchives is enabled but not every other dataPermissions flag is enabled.",
+            "resolution": "Enable every dataPermissions flag, or disable dataArchives."
+          },
+          {
+            "name": "7578",
+            "description": "designModify is enabled without both accessAdminPresets and createPreset.",
+            "resolution": "Set sharePermissions.accessAdminPresets and sharePermissions.createPreset to true."
+          },
+          {
+            "name": "7579",
+            "description": "interactionPermissions.read is missing or false. Read permission must always be enabled.",
+            "resolution": "Set interactionPermissions.read to true."
+          },
+          {
+            "name": "7584",
+            "description": "A datasourcePermissions flag is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+            "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or disable the datasourcePermissions group."
+          },
+          {
+            "name": "7585",
+            "description": "useDatasource is enabled but createTable is not.",
+            "resolution": "Set createPermissions.createTable to true."
+          },
+          {
+            "name": "7586",
+            "description": "editDatasource, syncData, useDatasource or removeDatasource is enabled without viewDatasource.",
+            "resolution": "Set datasourcePermissions.viewDatasource to true."
+          },
+          {
+            "name": "8078",
+            "description": "A mandatory attribute was sent with an empty value. The error message names the attribute.",
+            "resolution": "Provide a non-empty value for the attribute."
+          },
+          {
+            "name": "8083",
+            "description": "The ZANALYTICS-ORGID header is missing.",
+            "resolution": "Add the ZANALYTICS-ORGID header to the request."
+          },
+          {
+            "name": "8504",
+            "description": "CONFIG was not sent, or a mandatory attribute is missing from it.",
+            "resolution": "Send a CONFIG object containing every mandatory attribute."
+          },
+          {
+            "name": "8507",
+            "description": "roleName exceeds 30 characters, or the serialized permissions object exceeds its size limit.",
+            "resolution": "Shorten the value."
+          },
+          {
+            "name": "8509",
+            "description": "roleName contains characters other than letters, digits, spaces, underscore and hyphen, or accessType is not one of the three allowed values.",
+            "resolution": "Correct the value."
+          },
+          {
+            "name": "8534",
+            "description": "CONFIG is not valid JSON.",
+            "resolution": "Fix the JSON and URL encode it correctly."
+          },
+          {
+            "name": "8539",
+            "description": "An attribute carries a value that is structurally valid but not accepted, such as an empty roleName.",
+            "resolution": "Send a non-empty, valid value."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token, or the token does not carry the usermanagement scope.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.create."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].post",
+      "update": {
+        "x-zenesis-title": "Create Custom Role"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].post",
+      "update": {
+        "description": "Creates one custom role in the organization identified by the ZANALYTICS-ORGID header, and returns its identifier.\n\nThe role name, the access type and the permissions are all mandatory. The permissions are validated as a whole against the access type and against the cross-group dependency rules before anything is stored, so a rejected request creates nothing and can be corrected and retried safely."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be an Account Admin or Organization Admin of the organization, custom roles must be enabled for the organization, and the request must not arrive through a Client Portal (White Label) custom domain. Any of these failing yields error code <b>7301</b>.</li><li><b>roleName</b>, <b>accessType</b> and <b>permissions</b> are all mandatory. Omitting any of them fails with error code <b>8504</b>; sending one with an empty value fails with error code <b>8539</b> or <b>8078</b>.</li><li><b>roleName</b> is limited to 1 to 30 characters made of letters, digits, spaces, underscore and hyphen, and must be unique across the organization - the uniqueness check covers built-in role names too. A longer name fails with error code <b>8507</b>, disallowed characters fail with <b>8509</b>, and a clash fails with <b>7553</b>.</li><li><b>accessType</b> is a ceiling. Every permission group is only available at or above a given level - see the CustomRolePermissions schema. Enabling a permission above the chosen level is an error (<b>7573</b>, <b>7574</b>, <b>7575</b>, <b>7576</b> or <b>7584</b> depending on the group), not a silent no-op.</li><li><b>interactionPermissions.read</b> must be explicitly true. It is not defaulted - a <b>permissions</b> object that omits <b>interactionPermissions</b> entirely, or sets <b>read</b> to false, fails with error code <b>7579</b> before any other rule is evaluated.</li><li>Every flag that is omitted from <b>permissions</b> is treated as false. A group that is left out is entirely disabled.</li><li>Four rules reach across permission groups: <b>designModify</b> requires both <b>accessAdminPresets</b> and <b>createPreset</b> (<b>7578</b>); <b>manageEmailSchedules</b> requires <b>export</b> (<b>7559</b>); <b>useDatasource</b> requires <b>createTable</b> (<b>7585</b>); and <b>editDatasource</b>, <b>syncData</b>, <b>useDatasource</b> and <b>removeDatasource</b> each require <b>viewDatasource</b> (<b>7586</b>). <b>dataArchives</b> additionally requires every other data permission to be enabled (<b>7577</b>).</li><li>All validation runs before anything is stored, and the rules fire in a fixed order, so a payload with several problems reports one error at a time. A rejected request creates no role and is safe to correct and retry.</li><li>This API is not an upsert. Re-creating an existing name fails with error code <b>7553</b> rather than returning or updating the existing role.</li><li>One role is created per call. There is no bulk-create variant.</li><li>Creating a role grants nothing by itself. Until the role is assigned to a user or a workspace through the user management and sharing APIs, it has no effect.</li><li>Only the new <b>roleId</b> is returned. Use the Get Custom Roles API to read the stored definition back.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameOnly",
+      "update": {
+        "description": "Rename only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameOnly",
+      "update": {
+        "summary": "Renames the role. accessType and permissions are preserved untouched, so this is the one edit that needs no prior read."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.replacePermissions",
+      "update": {
+        "description": "Replace permissions"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.replacePermissions",
+      "update": {
+        "summary": "Replaces the access level and the entire permission set after reading the current definition with the Get Custom Roles API. The role name is preserved. accessType is resent even though it is unchanged, because permissions cannot be sent on its own."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameAndDowngrade",
+      "update": {
+        "description": "Rename and downgrade"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameAndDowngrade",
+      "update": {
+        "summary": "Renames the role and lowers it to the dashboard-only level in one call. Every permission above the new ceiling has been removed from the payload - leaving a higher-level flag enabled would fail the request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "6142",
+            "description": "The subscription plan of the organization does not include custom roles.",
+            "resolution": "Upgrade the plan to one that includes custom roles."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization, custom roles are not enabled for the organization, or the request was made through a Client Portal (White Label) custom domain.",
+            "resolution": "Call the API as an Account Admin or Organization Admin from the standard API host, with the custom roles feature enabled for the organization."
+          },
+          {
+            "name": "7309",
+            "description": "No authentication was supplied with the request.",
+            "resolution": "Send the Authorization header carrying a valid OAuth token."
+          },
+          {
+            "name": "7548",
+            "description": "No custom role exists for the given role-id in this organization.",
+            "resolution": "Verify the role identifier using the Get Custom Roles API."
+          },
+          {
+            "name": "7553",
+            "description": "A role with the given roleName already exists in the organization. The check covers built-in role names as well as other custom roles.",
+            "resolution": "Choose a different name for the role."
+          },
+          {
+            "name": "7554",
+            "description": "The accessType value did not resolve to a known access level.",
+            "resolution": "Send one of ALL_DASHBOARDS, ALL_REPORTS_AND_DASHBOARDS or ALL_DATA_REPORTS_AND_DASHBOARDS."
+          },
+          {
+            "name": "7559",
+            "description": "manageEmailSchedules is enabled but export is not.",
+            "resolution": "Set publishPermissions.export to true, or disable manageEmailSchedules."
+          },
+          {
+            "name": "7573",
+            "description": "A dataPermissions flag is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+            "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or set every dataPermissions flag to false."
+          },
+          {
+            "name": "7574",
+            "description": "designModify is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+            "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or disable designModify."
+          },
+          {
+            "name": "7575",
+            "description": "createTable, createQueryTable or createFormula is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+            "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or disable those flags. createFolder is allowed at every level."
+          },
+          {
+            "name": "7576",
+            "description": "manageDataAlerts is enabled while accessType is ALL_DASHBOARDS.",
+            "resolution": "Use ALL_REPORTS_AND_DASHBOARDS or ALL_DATA_REPORTS_AND_DASHBOARDS, or disable manageDataAlerts."
+          },
+          {
+            "name": "7577",
+            "description": "dataArchives is enabled but not every other dataPermissions flag is enabled.",
+            "resolution": "Enable every dataPermissions flag, or disable dataArchives."
+          },
+          {
+            "name": "7578",
+            "description": "designModify is enabled without both accessAdminPresets and createPreset.",
+            "resolution": "Set sharePermissions.accessAdminPresets and sharePermissions.createPreset to true."
+          },
+          {
+            "name": "7579",
+            "description": "interactionPermissions.read is missing or false. Read permission must always be enabled.",
+            "resolution": "Set interactionPermissions.read to true."
+          },
+          {
+            "name": "7580",
+            "description": "One of accessType and permissions was sent without the other.",
+            "resolution": "Send accessType and permissions together, or send neither."
+          },
+          {
+            "name": "7581",
+            "description": "The CONFIG contained neither roleName nor accessType, so there is nothing to update.",
+            "resolution": "Send roleName, or accessType together with permissions."
+          },
+          {
+            "name": "7584",
+            "description": "A datasourcePermissions flag is enabled while accessType is below ALL_DATA_REPORTS_AND_DASHBOARDS.",
+            "resolution": "Raise accessType to ALL_DATA_REPORTS_AND_DASHBOARDS, or disable the datasourcePermissions group."
+          },
+          {
+            "name": "7585",
+            "description": "useDatasource is enabled but createTable is not.",
+            "resolution": "Set createPermissions.createTable to true."
+          },
+          {
+            "name": "7586",
+            "description": "editDatasource, syncData, useDatasource or removeDatasource is enabled without viewDatasource.",
+            "resolution": "Set datasourcePermissions.viewDatasource to true."
+          },
+          {
+            "name": "8083",
+            "description": "The ZANALYTICS-ORGID header is missing.",
+            "resolution": "Add the ZANALYTICS-ORGID header to the request."
+          },
+          {
+            "name": "8504",
+            "description": "CONFIG was not sent, or a mandatory attribute is missing from it.",
+            "resolution": "Send a CONFIG object containing every mandatory attribute."
+          },
+          {
+            "name": "8507",
+            "description": "roleName exceeds 30 characters, or the serialized permissions object exceeds its size limit.",
+            "resolution": "Shorten the value."
+          },
+          {
+            "name": "8509",
+            "description": "roleName contains characters other than letters, digits, spaces, underscore and hyphen, or accessType is not one of the three allowed values.",
+            "resolution": "Correct the value."
+          },
+          {
+            "name": "8525",
+            "description": "The role-id in the request URI is not numeric, so the request matched no route.",
+            "resolution": "Send a numeric role identifier."
+          },
+          {
+            "name": "8534",
+            "description": "CONFIG is not valid JSON.",
+            "resolution": "Fix the JSON and URL encode it correctly."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token, or the token does not carry the usermanagement scope.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.update."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].put",
+      "update": {
+        "x-zenesis-title": "Update Custom Role"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].put",
+      "update": {
+        "description": "Renames a custom role, replaces its access type and permissions, or does both in one call.\n\nThis is a replace, not a merge. Whenever permissions is supplied, the stored definition is discarded and rebuilt from the object sent - every flag left out becomes false. Read the current definition with the Get Custom Roles API, edit it, and send the whole object back. Sending roleName alone is the one edit that leaves the permission definition untouched."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be an Account Admin or Organization Admin of the organization, custom roles must be enabled for the organization, and the request must not arrive through a Client Portal (White Label) custom domain. Any of these failing yields error code <b>7301</b>.</li><li>At least one of <b>roleName</b> or <b>accessType</b> must be present. A CONFIG carrying neither fails with error code <b>7581</b>.</li><li><b>accessType</b> and <b>permissions</b> are all-or-nothing. Sending one without the other - including sending <b>permissions</b> alone - fails with error code <b>7580</b>. To change permissions without changing the level, resend the role's current <b>accessType</b> alongside them.</li><li>Exactly three CONFIG shapes are valid: <b>roleName</b> alone (rename, permissions preserved); <b>accessType</b> with <b>permissions</b> (level and permission set replaced, name preserved); and all three together (everything replaced).</li><li><b>permissions</b> is replaced, never merged. A payload containing one group wipes the other six, and any flag left out becomes false. Always start from the definition returned by the Get Custom Roles API.</li><li>Whenever <b>permissions</b> is supplied it is validated in full with the same rules as the Create Custom Role API, so an update can fail with any of the create-time permission errors.</li><li>Lowering <b>accessType</b> is a two-part change. The lower level and the cleaned permission set must arrive in the same payload - a higher-level flag left enabled fails with <b>7573</b>, <b>7574</b>, <b>7575</b>, <b>7576</b> or <b>7584</b> depending on the group.</li><li>The new <b>roleName</b> follows the same rules as on creation - 1 to 30 characters, letters, digits, spaces, underscore and hyphen only, and unique across the organization (<b>7553</b>).</li><li>Validation happens before anything is stored. A rejected update leaves the role exactly as it was.</li><li>Changes apply immediately to every user who holds the role. There is no versioning, draft or staged rollout.</li><li>A non-numeric role-id never reaches the API and fails at routing with error code <b>8525</b>; a numeric but unknown role-id fails with <b>7548</b>.</li><li>The API returns HTTP 204 No Content with an empty body on success. Read the new definition back with the Get Custom Roles API.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].delete.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "6142",
+            "description": "The subscription plan of the organization does not include custom roles.",
+            "resolution": "Upgrade the plan to one that includes custom roles."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization, custom roles are not enabled for the organization, or the request was made through a Client Portal (White Label) custom domain.",
+            "resolution": "Call the API as an Account Admin or Organization Admin from the standard API host, with the custom roles feature enabled for the organization."
+          },
+          {
+            "name": "7309",
+            "description": "No authentication was supplied with the request.",
+            "resolution": "Send the Authorization header carrying a valid OAuth token."
+          },
+          {
+            "name": "7548",
+            "description": "No custom role exists for the given role-id in this organization.",
+            "resolution": "Verify the role identifier using the Get Custom Roles API."
+          },
+          {
+            "name": "8083",
+            "description": "The ZANALYTICS-ORGID header is missing.",
+            "resolution": "Add the ZANALYTICS-ORGID header to the request."
+          },
+          {
+            "name": "8525",
+            "description": "The role-id in the request URI is not numeric, so the request matched no route.",
+            "resolution": "Send a numeric role identifier."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token, or the token does not carry the usermanagement scope.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.delete."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].delete",
+      "update": {
+        "x-zenesis-title": "Delete Custom Role"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].delete",
+      "update": {
+        "description": "Deletes a custom role definition from the organization.\n\nOnly the definition is removed. Users who held the role are not deleted, and reassigning them is done through the user management APIs. The operation cannot be undone, and re-creating the same name later produces a new role with a new identifier."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs/roles/{role-id}'].delete",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be an Account Admin or Organization Admin of the organization, custom roles must be enabled for the organization, and the request must not arrive through a Client Portal (White Label) custom domain. Any of these failing yields error code <b>7301</b>.</li><li>This API removes the role definition only. Users who held the role are not deleted - reassigning them is done through the user management APIs, not here.</li><li>The operation is irreversible. The definition cannot be restored, and re-creating the same name produces a new role with a new <b>roleId</b> and no history.</li><li>The API is not idempotent. A second delete of the same role-id fails with error code <b>7548</b> rather than returning 204. Treat that as already deleted rather than as a failure to retry.</li><li>The response reports nothing about impact - it does not say how many users held the role. Establish that through the user management APIs before deleting.</li><li>A non-numeric role-id never reaches the API and fails at routing with error code <b>8525</b>; a numeric but unknown role-id fails with <b>7548</b>.</li><li>One role is deleted per call. There is no bulk-delete variant.</li><li>The API returns HTTP 204 No Content with an empty body on success. Confirm with the Get Custom Roles API.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].get.responses['200'].content['application/json'].examples.mixedRoles",
+      "update": {
+        "description": "Mixed roles"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].get.responses['200'].content['application/json'].examples.mixedRoles",
+      "update": {
+        "summary": "Standard organization holding users across every workspace-level role, including a deactivated user."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].get.responses['200'].content['application/json'].examples.customRoleUsers",
+      "update": {
+        "description": "Custom roles"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].get.responses['200'].content['application/json'].examples.customRoleUsers",
+      "update": {
+        "summary": "Workspace holding users assigned to a custom role, listed with the exact custom role name."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].get.responses['200'].content['application/json'].examples.clientPortalUsers",
+      "update": {
+        "description": "Client portal"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].get.responses['200'].content['application/json'].examples.clientPortalUsers",
+      "update": {
+        "summary": "Response returned when the Account Admin is also a Client Portal Admin - every user entry carries the portal domain it was added through."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+            "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.read."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].get",
+      "update": {
+        "x-zenesis-title": "Get Workspace Users"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].get",
+      "update": {
+        "description": "Returns the list of all the users who have access to the specified workspace, along with their workspace-level role and active status.\n\nThe response covers the Account Admin, the Organization Admins, the Workspace Admins, the standard users, and the users assigned to a custom role."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be a Workspace Admin of the workspace. Account Admins and Organization Admins also have access, and an Organization Admin can view any workspace in their organization.</li><li>Deactivated users continue to be listed in the response with <b>status</b> set to <b>false</b>. They are not removed from the workspace on deactivation.</li><li>Users assigned to a custom role are listed with <b>role</b> set to the exact custom role name defined in the organization, and not to a numeric identifier.</li><li>The <b>domainName</b> field is returned for every user only when the Account Admin of the organization is also a Client Portal Admin. Standard users then show the default Zoho Analytics domain, and portal users show their portal's custom domain.</li><li>The email addresses returned by this API are the input for the Add Workspace Users, Remove Workspace Users, Change Workspace Users Status and Change Workspace Users Role APIs.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.standardUserAddition",
+      "update": {
+        "description": "Standard users"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.standardUserAddition",
+      "update": {
+        "summary": "Adds two users to the workspace with the standard User role."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.workspaceAdminAddition",
+      "update": {
+        "description": "Workspace Admin"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.workspaceAdminAddition",
+      "update": {
+        "summary": "Adds a user directly with the Workspace Admin role."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainAddition",
+      "update": {
+        "description": "Portal domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainAddition",
+      "update": {
+        "summary": "Scopes the addition to a single client portal domain, so the user is added as a portal user of that portal."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.bulkRoleAddition",
+      "update": {
+        "description": "Bulk roles"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.bulkRoleAddition",
+      "update": {
+        "summary": "Adds two groups of users with different workspace-level roles in a single request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.bulkPortalAddition",
+      "update": {
+        "description": "Mixed portals"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.bulkPortalAddition",
+      "update": {
+        "summary": "Adds users belonging to two different client portal domains in a single request, each group processed in its own portal context."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+            "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+          },
+          {
+            "name": "7550",
+            "description": "The specified role name does not exist as a custom role in the organization.",
+            "resolution": "Use WORKSPACEADMIN, USER, or the exact name of a custom role defined in the organization."
+          },
+          {
+            "name": "8060",
+            "description": "The specified domainName does not exist.",
+            "resolution": "Provide a valid client portal domain name configured for the organization."
+          },
+          {
+            "name": "8061",
+            "description": "The specified domainName does not belong to the organization's Account Admin.",
+            "resolution": "Use a domain name that is administered by the Account Admin of this organization."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.create."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post",
+      "update": {
+        "x-zenesis-title": "Add Workspace Users"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post",
+      "update": {
+        "description": "Adds one or more users to the specified workspace with a given workspace-level role.\n\nThe users can be supplied in two ways - as a flat list of email addresses that all share a single role, or as up to 20 groups of users that each carry their own role and client portal domain."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>The calling user must be a Workspace Admin of the workspace. Account Admins and Organization Admins also have access.</li><li>A maximum of 1000 email addresses can be sent in a single list, and a maximum of 20 groups can be sent in the <b>users</b> array. Split larger operations into multiple calls.</li><li>When <b>role</b> is not provided, the users are added with the workspace-level <b>USER</b> role.</li><li>Adding a user who already has access to the workspace updates their role to the specified role. Re-adding a user with the role they already hold succeeds silently.</li><li>A custom role name must exactly match an existing custom role defined in the organization. An unknown role name fails with error code <b>7550</b>.</li><li>Always specify <b>domainName</b> for portal users. Portal-only users do not exist in the standard Zoho Analytics domain, and an addition attempted without the domain may fail.</li><li>No prerequisite API call is needed to construct the request. Invoke Get Workspace Users afterwards to verify the additions.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.singleUserRemoval",
+      "update": {
+        "description": "Single user"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.singleUserRemoval",
+      "update": {
+        "summary": "Removes one user from the workspace in the standard domain context."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.bulkRemoval",
+      "update": {
+        "description": "Multiple users"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.bulkRemoval",
+      "update": {
+        "summary": "Removes several users from the workspace in a single request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainRemoval",
+      "update": {
+        "description": "Portal domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainRemoval",
+      "update": {
+        "summary": "Scopes the removal to a single client portal domain so that the correct portal user record is targeted."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].delete.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+            "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+          },
+          {
+            "name": "8060",
+            "description": "The specified domainName does not exist.",
+            "resolution": "Provide a valid client portal domain name configured for the organization."
+          },
+          {
+            "name": "8061",
+            "description": "The specified domainName does not belong to the organization's Account Admin.",
+            "resolution": "Use a domain name that is administered by the Account Admin of this organization."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.delete."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].delete",
+      "update": {
+        "x-zenesis-title": "Remove Workspace Users"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].delete",
+      "update": {
+        "description": "Removes one or more users from the specified workspace. The removed users lose all access to this workspace immediately, while their membership in the organization and their access to other workspaces remain unaffected."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].delete",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>The calling user must be a Workspace Admin of the workspace. Account Admins and Organization Admins also have access.</li><li>A maximum of 1000 email addresses can be sent in a single request.</li><li>This API removes the entire workspace access of the user, including the shared views, the group memberships within the workspace, and the Workspace Admin role if they hold it. All the view-level and workspace-level permissions of the user are deleted immediately.</li><li>To revoke only the Workspace Admin role and leave the user in the workspace as a regular user, use the Remove Workspace Admins API instead.</li><li>Always specify <b>domainName</b> when removing portal users. Without it, the lookup is performed in the standard Zoho Analytics domain and a portal-only user will not be found.</li><li>Verify the membership using the Get Workspace Users API before invoking this API. The behaviour for a user who is not in the workspace depends on the domain context.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.promoteToWorkspaceAdmin",
+      "update": {
+        "description": "Promote user"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.promoteToWorkspaceAdmin",
+      "update": {
+        "summary": "Promotes a user to the Workspace Admin role."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.customRoleAssignment",
+      "update": {
+        "description": "Custom role"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.customRoleAssignment",
+      "update": {
+        "summary": "Moves a user to a custom role defined in the organization, using the exact custom role name."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainRoleChange",
+      "update": {
+        "description": "Portal domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainRoleChange",
+      "update": {
+        "summary": "Changes the role of a portal user within a specific client portal domain."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.bulkRoleChange",
+      "update": {
+        "description": "Bulk roles"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.bulkRoleChange",
+      "update": {
+        "summary": "Moves two groups of users to different workspace-level roles in a single request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.bulkPortalRoleChange",
+      "update": {
+        "description": "Mixed portals"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.bulkPortalRoleChange",
+      "update": {
+        "summary": "Changes the roles of users belonging to two different client portal domains in a single request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization. Workspace Admins cannot invoke this API.",
+            "resolution": "Invoke this API using the credentials of an Account Admin or an Organization Admin."
+          },
+          {
+            "name": "7550",
+            "description": "The specified role name does not exist as a custom role in the organization.",
+            "resolution": "Use WORKSPACEADMIN, USER, or the exact name of a custom role defined in the organization."
+          },
+          {
+            "name": "8060",
+            "description": "The specified domainName does not exist.",
+            "resolution": "Provide a valid client portal domain name configured for the organization."
+          },
+          {
+            "name": "8061",
+            "description": "The specified domainName does not belong to the organization's Account Admin.",
+            "resolution": "Use a domain name that is administered by the Account Admin of this organization."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.update."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put",
+      "update": {
+        "x-zenesis-title": "Change Workspace Users Role"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put",
+      "update": {
+        "description": "Changes the workspace-level role of one or more users in the specified workspace.\n\nThe users can be supplied in two ways - as a flat list of email addresses that all move to a single role, or as up to 20 groups of users that each move to their own role and client portal domain."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>This API requires Account Admin or Organization Admin access. Workspace Admins cannot invoke it and receive error code <b>7301</b>, which prevents a Workspace Admin from promoting themselves or demoting other admins.</li><li>A maximum of 1000 email addresses can be sent in a single list, and a maximum of 20 groups can be sent in the <b>users</b> array. Split larger operations into multiple calls.</li><li>A custom role name must exactly match an existing custom role defined in the organization. An unknown role name fails with error code <b>7550</b>.</li><li>The operation is idempotent. Applying the role that a user already holds succeeds silently.</li><li>Assigning the <b>USER</b> role to a current Workspace Admin removes their admin capabilities immediately, while their workspace access continues as a regular user.</li><li>Always specify <b>domainName</b> for portal users, so that the correct portal user record is updated. Without it, the change is attempted in the standard Zoho Analytics domain.</li><li><b>VIEWER</b> is an org-level role and is not a valid workspace-level role value. At workspace level, org-level Viewers are listed as <b>User</b>.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/status'].put.requestBody.content['application/x-www-form-urlencoded'].examples.deactivateUser",
+      "update": {
+        "description": "Deactivate user"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/status'].put.requestBody.content['application/x-www-form-urlencoded'].examples.deactivateUser",
+      "update": {
+        "summary": "Suspends the workspace access of a single user, for example while they are on extended leave."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/status'].put.requestBody.content['application/x-www-form-urlencoded'].examples.activateUsers",
+      "update": {
+        "description": "Activate users"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/status'].put.requestBody.content['application/x-www-form-urlencoded'].examples.activateUsers",
+      "update": {
+        "summary": "Restores the workspace access of several previously deactivated users."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/status'].put.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainDeactivation",
+      "update": {
+        "description": "Portal domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/status'].put.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainDeactivation",
+      "update": {
+        "summary": "Suspends the access of a portal user within a specific client portal domain."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/status'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not the Account Admin of the organization. Only the Account Admin can change the status of workspace users.",
+            "resolution": "Invoke this API using the credentials of the Account Admin of the organization."
+          },
+          {
+            "name": "8060",
+            "description": "The specified domainName does not exist.",
+            "resolution": "Provide a valid client portal domain name configured for the organization."
+          },
+          {
+            "name": "8061",
+            "description": "The specified domainName does not belong to the organization's Account Admin.",
+            "resolution": "Use a domain name that is administered by the Account Admin of this organization."
+          },
+          {
+            "name": "8119",
+            "description": "Invalid value for operation. Only activate and deactivate are accepted.",
+            "resolution": "Pass exactly activate or deactivate in the operation field. The value is case-sensitive."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.usermanagement.update."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/status'].put",
+      "update": {
+        "x-zenesis-title": "Change Workspace Users Status"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/status'].put",
+      "update": {
+        "description": "Activates or deactivates one or more users in the specified workspace. Deactivation suspends the access of a user without removing them from the workspace - their role and permissions are preserved and are restored exactly as they were on reactivation."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/status'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>This API is restricted to the Account Admin of the organization that owns the workspace. Workspace Admins and Organization Admins cannot invoke it and receive error code <b>7301</b>.</li><li>A maximum of 1000 email addresses can be sent in a single request.</li><li>The <b>operation</b> value is case-sensitive. Only <b>activate</b> and <b>deactivate</b> in lower case are valid - any other value, including <b>Activate</b> or <b>ACTIVATE</b>, fails with error code <b>8119</b> before any change is made.</li><li>The operation is idempotent. Activating an already-active user, or deactivating an already-inactive user, succeeds silently.</li><li>All the shares, roles and permissions of a deactivated user are preserved and are restored on reactivation.</li><li>Always specify <b>domainName</b> when the users belong to a client portal domain.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].get.responses['200'].content['application/json'].examples.singleAdmin",
+      "update": {
+        "description": "Single admin"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].get.responses['200'].content['application/json'].examples.singleAdmin",
+      "update": {
+        "summary": "Standard organization with exactly one Workspace Admin."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].get.responses['200'].content['application/json'].examples.multipleAdmins",
+      "update": {
+        "description": "Multiple admins"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].get.responses['200'].content['application/json'].examples.multipleAdmins",
+      "update": {
+        "summary": "Standard organization with several Workspace Admins in a single domain context."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].get.responses['200'].content['application/json'].examples.portalDomainAdmins",
+      "update": {
+        "description": "Client portal"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].get.responses['200'].content['application/json'].examples.portalDomainAdmins",
+      "update": {
+        "summary": "Response returned when the Account Admin is also a Client Portal Admin - the admins are grouped by domain context."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
+            "resolution": "Only Account Admins and Organization Admins can manage the Workspace Admins of a workspace."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.share.read."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].get",
+      "update": {
+        "x-zenesis-title": "Get Workspace Admins"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].get",
+      "update": {
+        "description": "Returns the users who currently hold the Workspace Admin role in the specified workspace, grouped by domain context."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be an Account Admin or an Organization Admin of the organization that owns the workspace. Workspace Admins and regular users cannot invoke this API.</li><li>Only workspace-level admins are listed. Account Admins and Organization Admins are not returned here, even though they have effective admin access to the workspace.</li><li><b>workspaceAdmins</b> is always an array. In a standard organization it holds a single entry without <b>domainName</b>. When the Account Admin is also a Client Portal Admin, it holds one entry per domain context - one for the standard Zoho Analytics domain and one for each client portal domain - each carrying its <b>domainName</b>.</li><li>The Get Workspace Users API returns all the users of the workspace including its admins, whereas this API returns only the admin subset. Use this API when only the admin list is needed, for example before invoking Remove Workspace Admins.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].post.requestBody.content['application/x-www-form-urlencoded'].examples.silentPromotion",
+      "update": {
+        "description": "Silent promotion"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].post.requestBody.content['application/x-www-form-urlencoded'].examples.silentPromotion",
+      "update": {
+        "summary": "Promotes a user to Workspace Admin without sending a notification email."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].post.requestBody.content['application/x-www-form-urlencoded'].examples.notifiedPromotion",
+      "update": {
+        "description": "Notified promotion"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].post.requestBody.content['application/x-www-form-urlencoded'].examples.notifiedPromotion",
+      "update": {
+        "summary": "Promotes several users to Workspace Admin and notifies each of them by email."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].post.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainPromotion",
+      "update": {
+        "description": "Portal domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].post.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainPromotion",
+      "update": {
+        "summary": "Promotes a portal user to Workspace Admin within their client portal domain and notifies them by email."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].post.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
+            "resolution": "Only Account Admins and Organization Admins can manage the Workspace Admins of a workspace."
+          },
+          {
+            "name": "7390",
+            "description": "One or more of the specified users holds the org-level Viewer role and cannot be promoted to Workspace Admin.",
+            "resolution": "Change the org-level role of those users to USER using the Change User Role API, and then add them as Workspace Admins."
+          },
+          {
+            "name": "8060",
+            "description": "The specified domainName does not exist.",
+            "resolution": "Provide a valid client portal domain name configured for the organization."
+          },
+          {
+            "name": "8061",
+            "description": "The specified domainName does not belong to the organization's Account Admin.",
+            "resolution": "Use a domain name that is administered by the Account Admin of this organization."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.share.create."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].post",
+      "update": {
+        "x-zenesis-title": "Add Workspace Admins"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].post",
+      "update": {
+        "description": "Grants the Workspace Admin role to one or more users in the specified workspace. The users must already be members of the workspace, or of the specified client portal domain."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>The calling user must be an Account Admin or an Organization Admin of the organization that owns the workspace.</li><li>A maximum of 1000 email addresses can be sent in a single request.</li><li>The users must already have been added to the workspace using the Add Workspace Users API before they can be promoted to Workspace Admin.</li><li>Email addresses that already hold the Workspace Admin role are skipped silently, and no error is raised for such duplicates. Only genuinely new admins receive a notification email when <b>inviteMail</b> is set to true.</li><li>Users who hold the org-level Viewer role cannot be promoted to Workspace Admin. If any email address in the request belongs to a Viewer, the entire batch fails with error code <b>7390</b>. Change their org-level role to <b>USER</b> using the Change User Role API first.</li><li>A failure in delivering the notification email does not roll back the promotion. The promotion is committed even when <b>inviteMail</b> is set to true and the email cannot be delivered.</li><li>Always specify <b>domainName</b> when promoting portal users, so that the operation is scoped to their portal.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.silentDemotion",
+      "update": {
+        "description": "Silent demotion"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.silentDemotion",
+      "update": {
+        "summary": "Revokes the Workspace Admin role from a user without sending a notification email."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.notifiedDemotion",
+      "update": {
+        "description": "Notified demotion"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.notifiedDemotion",
+      "update": {
+        "summary": "Revokes the Workspace Admin role from several users and notifies each of them by email."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainDemotion",
+      "update": {
+        "description": "Portal domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainDemotion",
+      "update": {
+        "summary": "Revokes the Workspace Admin role from a portal user within their client portal domain."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].delete.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not an Account Admin or Organization Admin of the organization.",
+            "resolution": "Only Account Admins and Organization Admins can manage the Workspace Admins of a workspace."
+          },
+          {
+            "name": "8040",
+            "description": "One or more of the specified email addresses are not currently Workspace Admins of this workspace.",
+            "resolution": "Verify that every email address is a current Workspace Admin using the Get Workspace Admins API before invoking this API."
+          },
+          {
+            "name": "8060",
+            "description": "The specified domainName does not exist.",
+            "resolution": "Provide a valid client portal domain name configured for the organization."
+          },
+          {
+            "name": "8061",
+            "description": "The specified domainName does not belong to the organization's Account Admin.",
+            "resolution": "Use a domain name that is administered by the Account Admin of this organization."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.share.delete."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].delete",
+      "update": {
+        "x-zenesis-title": "Remove Workspace Admins"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].delete",
+      "update": {
+        "description": "Revokes the Workspace Admin role from one or more users in the specified workspace. The users remain in the workspace as regular users and retain their existing view-level access."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/admins'].delete",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>The calling user must be an Account Admin or an Organization Admin of the organization that owns the workspace.</li><li>A maximum of 1000 email addresses can be sent in a single request.</li><li>Every email address in the request must currently hold the Workspace Admin role in this workspace. A non-admin email address causes the entire batch to fail with error code <b>8040</b>, and no demotion is applied. Verify the current admin membership using the Get Workspace Admins API before invoking this API.</li><li>This API only demotes. To remove a user from the workspace entirely, use the Remove Workspace Users API instead.</li><li>Removing the last Workspace Admin is allowed. The workspace is then managed only by the Account Admin and the Organization Admins.</li><li>A failure in delivering the notification email does not roll back the demotion. The demotion is committed even when <b>notifyMail</b> is set to true and the email cannot be delivered.</li><li>Always specify <b>domainName</b> when demoting portal users, so that the operation is scoped to their portal.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].get.responses['200'].content['application/json'].examples.multipleGroups",
+      "update": {
+        "description": "Multiple groups"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].get.responses['200'].content['application/json'].examples.multipleGroups",
+      "update": {
+        "summary": "Standard organization holding several groups with different membership, one of which has no description."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].get.responses['200'].content['application/json'].examples.emptyGroup",
+      "update": {
+        "description": "Empty group"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].get.responses['200'].content['application/json'].examples.emptyGroup",
+      "update": {
+        "summary": "Workspace holding a single group that has no members yet."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].get.responses['200'].content['application/json'].examples.clientPortalGroups",
+      "update": {
+        "description": "Client portal"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].get.responses['200'].content['application/json'].examples.clientPortalGroups",
+      "update": {
+        "summary": "Response returned when the Account Admin is also a Client Portal Admin - every group entry carries the portal domain it belongs to."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+            "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.share.read."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].get",
+      "update": {
+        "x-zenesis-title": "Get Group List"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].get",
+      "update": {
+        "description": "Returns all the groups defined in the specified workspace, along with their descriptions and current member lists.\n\nGroups are named collections of users within a workspace. A view shared with a group is accessible to every current and future member of that group, which makes groups the way to manage view-level sharing permissions in bulk."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be a Workspace Admin of the workspace. Account Admins and Organization Admins also have access.</li><li>Groups are scoped to a single workspace. A group created in one workspace is not accessible in another workspace.</li><li>The <b>domainName</b> field is returned in each group entry only when the Account Admin of the organization is also a Client Portal Admin. Standard organization responses do not include it.</li><li>A user accessing Zoho Analytics through a client portal URL sees only the groups that belong to their portal domain. The full list across all domain contexts is visible only to Workspace Admins and Client Portal Admins.</li><li>The <b>groupId</b> values returned here are required as the group-id path parameter in the Rename Group, Add Group Members, Remove Group Members, Delete Group and Get Group Details APIs.</li><li>A WL Workspace Admin in a disabled-workspace portal context cannot invoke any of the group APIs and receives error code <b>7301</b>.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].post.requestBody.content['application/x-www-form-urlencoded'].examples.silentCreation",
+      "update": {
+        "description": "Silent creation"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].post.requestBody.content['application/x-www-form-urlencoded'].examples.silentCreation",
+      "update": {
+        "summary": "Creates a group with two initial members and sends no invitation email."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].post.requestBody.content['application/x-www-form-urlencoded'].examples.invitedCreation",
+      "update": {
+        "description": "Invited creation"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].post.requestBody.content['application/x-www-form-urlencoded'].examples.invitedCreation",
+      "update": {
+        "summary": "Creates a described group and sends a custom invitation email to the initial members."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].post.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainCreation",
+      "update": {
+        "description": "Portal domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].post.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainCreation",
+      "update": {
+        "summary": "Creates a group scoped to a single client portal domain, whose members must all belong to that portal."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].post.responses['200'].content['application/json'].examples.groupCreated",
+      "update": {
+        "description": "Group created"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].post.responses['200'].content['application/json'].examples.groupCreated",
+      "update": {
+        "summary": "Returns the identifier of the newly created group."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].post.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7282",
+            "description": "A group with the same name already exists in this workspace. Group names must be unique within a workspace.",
+            "resolution": "Choose a different name for the group."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+            "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+          },
+          {
+            "name": "8060",
+            "description": "The specified domainName does not exist.",
+            "resolution": "Provide a valid client portal domain name configured for the organization."
+          },
+          {
+            "name": "8061",
+            "description": "The specified domainName does not belong to the organization's Account Admin.",
+            "resolution": "Use a domain name that is administered by the Account Admin of this organization."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.share.create."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].post",
+      "update": {
+        "x-zenesis-title": "Create Group"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].post",
+      "update": {
+        "description": "Creates a new group in the specified workspace and adds the initial members to it. An invitation email can optionally be sent to those members at creation time."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>The calling user must be a Workspace Admin of the workspace. Account Admins and Organization Admins also have access.</li><li>The group name must be unique within the workspace. A duplicate name fails with error code <b>7282</b>. The same name can exist in different workspaces.</li><li>A minimum of 1 and a maximum of 1000 email addresses can be sent. The users must already be members of the workspace, or of the specified client portal domain.</li><li>No duplicate check is performed on <b>emailIds</b> at creation - the same address listed more than once results in a single membership.</li><li>The <b>domainName</b> association is set at creation only and cannot be changed afterwards. To move a group to a different portal domain, delete it and create it again.</li><li>When <b>domainName</b> is provided, every email address must belong to a user within that portal domain. Standard Zoho Analytics domain users cannot be added to a portal-domain group. When it is omitted, an org-wide group is created and any workspace user can be a member.</li><li>When <b>inviteMail</b> is set to true without <b>mailSubject</b> or <b>mailMessage</b>, the invitation is sent with a system generated subject and message.</li><li>A failure in delivering the invitation email does not roll back the operation. The group and its members are created even when the email cannot be delivered.</li><li>Only the new <b>groupId</b> is returned. Use the Get Group Details API to retrieve the full group record.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].get.responses['200'].content['application/json'].examples.standardGroup",
+      "update": {
+        "description": "Standard group"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].get.responses['200'].content['application/json'].examples.standardGroup",
+      "update": {
+        "summary": "Details of a group in a standard organization."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].get.responses['200'].content['application/json'].examples.portalGroup",
+      "update": {
+        "description": "Portal group"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].get.responses['200'].content['application/json'].examples.portalGroup",
+      "update": {
+        "summary": "Details of a group scoped to a client portal domain, which carries the portal domain in the response."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+            "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+          },
+          {
+            "name": "7338",
+            "description": "The specified group-id does not belong to this workspace.",
+            "resolution": "Retrieve the correct group identifier using the Get Group List API."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.share.read."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].get",
+      "update": {
+        "x-zenesis-title": "Get Group Details"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].get",
+      "update": {
+        "description": "Returns the full details of a single group - its name, description and complete member list."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be a Workspace Admin of the workspace. Account Admins and Organization Admins also have access.</li><li>The <b>data.groups</b> value of this API is a single object, unlike the Get Group List API, where it is an array.</li><li>The <b>domainName</b> field is returned when the Account Admin of the organization is also a Client Portal Admin, or when the request is made through a custom portal domain URL. This is broader than the Get Group List API, which returns it only for Client Portal Admins.</li><li>Use the Get Group List API to discover the <b>groupId</b> values, and then this API for the details of a specific group.</li><li>Read the current <b>groupDesc</b> from this API before invoking the Rename Group API, since that API resets the description when it is not supplied.</li><li>The group-id in the request URI must belong to the workspace in the request URI. A group from another workspace fails with error code <b>7338</b>.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameOnly",
+      "update": {
+        "description": "Rename only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameOnly",
+      "update": {
+        "summary": "Renames the group without providing a description, which resets the existing description to an empty string."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameWithDescription",
+      "update": {
+        "description": "With description"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameWithDescription",
+      "update": {
+        "summary": "Renames the group and sets a new description in the same request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.descriptionOnly",
+      "update": {
+        "description": "Description only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.descriptionOnly",
+      "update": {
+        "summary": "Updates only the description, passing the existing name back so that it is left unchanged."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7282",
+            "description": "The new group name is already used by another group in this workspace.",
+            "resolution": "Choose a name that is not already in use."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+            "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+          },
+          {
+            "name": "7338",
+            "description": "The specified group-id does not belong to this workspace.",
+            "resolution": "Retrieve the correct group identifier using the Get Group List API."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.share.update."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].put",
+      "update": {
+        "x-zenesis-title": "Rename Group"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].put",
+      "update": {
+        "description": "Updates the name and the description of an existing group in the specified workspace. Both values are replaced atomically."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The calling user must be a Workspace Admin of the workspace. Account Admins and Organization Admins also have access.</li><li>The new group name must be unique within the workspace. A name already used by another group fails with error code <b>7282</b>.</li><li>Renaming a group to the name it already holds succeeds silently.</li><li>When <b>groupDesc</b> is not provided, the existing description of the group is permanently overwritten with an empty string. It is not preserved. Read the current description using the Get Group Details API and pass it back if only the name has to be changed.</li><li>The group-id in the request URI must belong to the workspace in the request URI. A group from another workspace fails with error code <b>7338</b>.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].delete.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+            "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+          },
+          {
+            "name": "7338",
+            "description": "The specified group-id does not belong to this workspace.",
+            "resolution": "Retrieve the correct group identifier using the Get Group List API."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.share.delete."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].delete",
+      "update": {
+        "x-zenesis-title": "Delete Group"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].delete",
+      "update": {
+        "description": "Permanently deletes a group from the workspace. Every view-level access grant that was based on the membership of this group is revoked immediately for all its former members, unless they hold that access through another path."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}'].delete",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>The calling user must be a Workspace Admin of the workspace. Account Admins and Organization Admins also have access.</li><li>This operation is irreversible. There is no soft-delete or trash mechanism for groups - once deleted, the group and its sharing configuration cannot be restored.</li><li>A group holding active members is deleted regardless. Every view share that references the group is also removed, and all the members lose their group-based access simultaneously.</li><li>Users who hold access to the same views through a direct share, through another group, or through a workspace-level role are unaffected.</li><li>The group-id in the request URI must belong to the workspace in the request URI. A group from another workspace fails with error code <b>7338</b>.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].post.requestBody.content['application/x-www-form-urlencoded'].examples.silentAddition",
+      "update": {
+        "description": "Silent addition"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].post.requestBody.content['application/x-www-form-urlencoded'].examples.silentAddition",
+      "update": {
+        "summary": "Adds two members to the group without sending an invitation email."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].post.requestBody.content['application/x-www-form-urlencoded'].examples.invitedAddition",
+      "update": {
+        "description": "Invited addition"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].post.requestBody.content['application/x-www-form-urlencoded'].examples.invitedAddition",
+      "update": {
+        "summary": "Adds a member and sends a custom invitation email informing them of their group access."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].post.requestBody.content['application/x-www-form-urlencoded'].examples.portalGroupAddition",
+      "update": {
+        "description": "Portal group"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].post.requestBody.content['application/x-www-form-urlencoded'].examples.portalGroupAddition",
+      "update": {
+        "summary": "Adds a portal user to a group scoped to their portal domain. No domainName is sent - the domain is carried by the group itself."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].post.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+            "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+          },
+          {
+            "name": "7338",
+            "description": "The specified group-id does not belong to this workspace.",
+            "resolution": "Retrieve the correct group identifier using the Get Group List API."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.share.create."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].post",
+      "update": {
+        "x-zenesis-title": "Add Group Members"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].post",
+      "update": {
+        "description": "Adds one or more users to an existing group. The users must already have access to the workspace, or to the client portal domain that the group belongs to. An invitation email can optionally be sent to the newly added members."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>The calling user must be a Workspace Admin of the workspace. Account Admins and Organization Admins also have access.</li><li>A minimum of 1 and a maximum of 1000 email addresses can be sent in a single request.</li><li>The users must already have been added to the workspace using the Add Workspace Users API before they can be added to a group.</li><li>This API has no <b>domainName</b> attribute. The client portal domain context is resolved automatically from the group, which carries the domain association set at creation. The members to be added must be users within that domain.</li><li>Email addresses that are already members of the group are skipped silently and no error is raised. Only genuinely new members receive an invitation email when <b>inviteMail</b> is set to true.</li><li>When <b>inviteMail</b> is set to true without <b>mailSubject</b> or <b>mailMessage</b>, the invitation is sent with a system generated subject and message.</li><li>A failure in delivering the invitation email does not roll back the addition. The members are added even when the email cannot be delivered.</li><li>Adding a member immediately grants them access to every view that is currently shared with the group.</li><li>The group-id in the request URI must belong to the workspace in the request URI. A group from another workspace fails with error code <b>7338</b>.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.silentRemoval",
+      "update": {
+        "description": "Silent removal"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.silentRemoval",
+      "update": {
+        "summary": "Removes a single member from the group without sending a notification email."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.notifiedRemoval",
+      "update": {
+        "description": "Notified removal"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.notifiedRemoval",
+      "update": {
+        "summary": "Removes several members and notifies each of them that their group access has been revoked."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.portalGroupRemoval",
+      "update": {
+        "description": "Portal group"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.portalGroupRemoval",
+      "update": {
+        "summary": "Removes a portal user from a group scoped to their portal domain."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].delete.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id value in the request URI."
+          },
+          {
+            "name": "7301",
+            "description": "The calling user is not a Workspace Admin, Account Admin or Organization Admin of the workspace.",
+            "resolution": "Ensure that the caller has at least Workspace Admin access to the workspace."
+          },
+          {
+            "name": "7338",
+            "description": "The specified group-id does not belong to this workspace.",
+            "resolution": "Retrieve the correct group identifier using the Get Group List API."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid or expired OAuth token.",
+            "resolution": "Provide a valid token with the scope ZohoAnalytics.share.delete."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].delete",
+      "update": {
+        "x-zenesis-title": "Remove Group Members"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].delete",
+      "update": {
+        "description": "Removes one or more members from a group. The removed users lose any view-level access that was granted exclusively through their membership of this group. Their workspace membership, direct shares on views, and membership of other groups are unaffected."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/groups/{group-id}/members'].delete",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The Zoho account of the calling user must be confirmed (email verified) to invoke this API.</li><li>The calling user must be a Workspace Admin of the workspace. Account Admins and Organization Admins also have access.</li><li>A minimum of 1 and a maximum of 1000 email addresses can be sent in a single request.</li><li>An email address that is not a member of the group is ignored silently, and the remaining valid members are still processed.</li><li>Removing every member of a group is allowed. The group continues to exist with no members and can be repopulated or deleted later.</li><li>This API has no <b>domainName</b> attribute. The client portal domain context is inherited from the group.</li><li>A failure in delivering the notification email does not roll back the removal. The members are removed even when the email cannot be delivered.</li><li>If the only path a removed user had to a shared view was through this group, they lose that access immediately. Access held through a direct share or through another group that shares the same view is retained.</li><li>The group-id in the request URI must belong to the workspace in the request URI. A group from another workspace fails with error code <b>7338</b>.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.components.schemas.ChangeWorkspaceUsersStatusConfig.properties.operation",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Restore access",
+          "Suspend access"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.CustomRole.properties.accessType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Dashboards only - the most restricted level",
+          "Reports and dashboards - additionally allows managing data alerts",
+          "Tables, reports and dashboards - the only level at which data, design, table creation and datasource permissions are available"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.CreateCustomRoleConfig.properties.accessType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Dashboards only - the most restricted level",
+          "Reports and dashboards - additionally allows managing data alerts",
+          "Tables, reports and dashboards - the only level at which data, design, table creation and datasource permissions are available"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.UpdateCustomRoleConfig.properties.accessType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Dashboards only - the most restricted level",
+          "Reports and dashboards - additionally allows managing data alerts",
+          "Tables, reports and dashboards - the only level at which data, design, table creation and datasource permissions are available"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ChangeWorkspaceUsersStatusConfig.properties.operation['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.CustomRole.properties.accessType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.CreateCustomRoleConfig.properties.accessType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.UpdateCustomRoleConfig.properties.accessType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    }
+  ]
+}

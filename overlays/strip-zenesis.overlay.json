@@ -1,0 +1,50 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Strip Zenesis conventions (document-independent)",
+    "version": "1.0.0",
+    "x-note": "Recursive descent, so this works unchanged on ANY Zenesis spec. It only DELETES. It cannot convert x-zenesis-enums-desc into x-enumDescriptions, cannot fold x-zenesis-sections, x-zenesis-statuscodes or x-zenesis-security into a description, and cannot un-swap example summary/description, because Overlay actions carry literal values rather than transforms. Using this file DISCARDS real API documentation. Prefer `zenesis-oas convert`."
+  },
+  "actions": [
+    {
+      "target": "$..['x-zenesis-title']",
+      "remove": true
+    },
+    {
+      "target": "$..['x-zenesis-sections']",
+      "remove": true
+    },
+    {
+      "target": "$..['x-zenesis-doc']",
+      "remove": true
+    },
+    {
+      "target": "$..['x-zenesis-usecase-tag']",
+      "remove": true
+    },
+    {
+      "target": "$..['x-zenesis-enums-desc']",
+      "remove": true
+    },
+    {
+      "target": "$..['x-zenesis-statuscodes']",
+      "remove": true
+    },
+    {
+      "target": "$..['x-zenesis-security']",
+      "remove": true
+    },
+    {
+      "target": "$..['x-zenesis-shared-note']",
+      "remove": true
+    },
+    {
+      "target": "$..['x-zenesis-shared-notes']",
+      "remove": true
+    },
+    {
+      "target": "$..['x-zenesis-description-pageName']",
+      "remove": true
+    }
+  ]
+}

@@ -1,0 +1,436 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zenesis legacy compatibility - org-management-grouped-api - shrink this to zero",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/restapi/v2/orgs'].get.responses['200'].content['application/json'].examples.singleOrganisation",
+      "update": {
+        "description": "Single organisation"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs'].get.responses['200'].content['application/json'].examples.singleOrganisation",
+      "update": {
+        "summary": "The user is the Account Admin of exactly one organisation, which is therefore also the default organisation."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs'].get.responses['200'].content['application/json'].examples.multipleOrganisations",
+      "update": {
+        "description": "Multiple organisations"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs'].get.responses['200'].content['application/json'].examples.multipleOrganisations",
+      "update": {
+        "summary": "The user owns one organisation and holds the Organization Admin role in another. The role and workspace count differ per entry."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs'].get.responses['200'].content['application/json'].examples.sharedUserOrganisations",
+      "update": {
+        "description": "Shared user"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs'].get.responses['200'].content['application/json'].examples.sharedUserOrganisations",
+      "update": {
+        "summary": "The user owns one organisation and is a shared user in another, where numberOfWorkspaces reflects only the workspaces shared with them."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs'].get.responses['200'].content['application/json'].examples.noOrganisations",
+      "update": {
+        "description": "No organisations"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs'].get.responses['200'].content['application/json'].examples.noOrganisations",
+      "update": {
+        "summary": "The user holds no Zoho Analytics organisation membership. An empty orgs array is returned instead of an error."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.read scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs'].get",
+      "update": {
+        "x-zenesis-title": "Get Organizations"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs'].get",
+      "update": {
+        "description": "Returns the list of Zoho Analytics organisations that the authenticated user belongs to. For each organisation the response holds the role of the user within that organisation, the number of workspaces, and the plan details.\n\nThis is a user-scoped API. The `ZANALYTICS-ORGID` header is not required, and the result reflects the membership of the caller across all organisations rather than the contents of a single organisation."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/orgs'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>Only active organisations are returned. Organisations that are expired or blocked are suppressed from the response.</li>\n<li>A user who holds no Zoho Analytics organisation membership receives HTTP 200 with an empty <code>orgs</code> array. No error is raised.</li>\n<li>Only one entry in the list can have <code>isDefault</code> set to true. When the user belongs to a single organisation, that organisation is always the default.</li>\n<li><code>numberOfWorkspaces</code> is role dependent. For the Account Admin and Organization Admin roles it is the total number of workspaces in the organisation. For every other role it is the number of workspaces shared with the user.</li>\n<li>A user who is an Account Admin in one organisation and a regular user in another sees both organisations in the list, with <code>role</code> and <code>numberOfWorkspaces</code> differing per entry.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/resources'].get.responses['200'].content['application/json'].examples.enterprisePlanUsage",
+      "update": {
+        "description": "Enterprise plan"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/resources'].get.responses['200'].content['application/json'].examples.enterprisePlanUsage",
+      "update": {
+        "summary": "A plan that mixes fixed and unlimited allocations, including a resource whose usage tracking is deferred (archivedrows) and a resource tracked at sub-unit precision (apiUnits)."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/resources'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Organisation not found.",
+            "resolution": "Verify the ZANALYTICS-ORGID header value. The organisation ID can be obtained using the Get Organizations API."
+          },
+          {
+            "name": "7301",
+            "description": "The user is not an Account Admin or an Organization Admin of the specified organisation.",
+            "resolution": "Only Account Admins and Organization Admins can view the resource details."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.usermanagement.read scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/resources'].get",
+      "update": {
+        "x-zenesis-title": "Get Resource Details"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/resources'].get",
+      "update": {
+        "description": "Returns the current resource allocation and usage statistics of the specified organisation. The response covers plan-governed metrics such as user seats, row limits, API units, and scheduled imports, and is useful for monitoring consumption against the plan limits.\n\nThe authenticated user must be an Account Admin or an Organization Admin of the organisation sent in the `ZANALYTICS-ORGID` header."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/resources'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>This API is restricted to Account Admins and Organization Admins. A Workspace Admin or a regular user receives error code 7301.</li>\n<li><code>allocated</code> returns <code>Unlimited</code> when the plan places no cap on the resource. <code>remaining</code> is then also returned as <code>Unlimited</code>.</li>\n<li><code>used</code> returns <code>null</code> when usage tracking for the resource is asynchronous or not yet computed, as happens with <code>archivedrows</code>. <code>remaining</code> is then calculated from <code>allocated</code> assuming zero usage.</li>\n<li>API unit consumption is tracked at sub-unit precision, so the <code>used</code> and <code>remaining</code> values of <code>apiUnits</code> can hold decimal values.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/subscription'].get.responses['200'].content['application/json'].examples.activeSubscription",
+      "update": {
+        "description": "Active subscription"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/subscription'].get.responses['200'].content['application/json'].examples.activeSubscription",
+      "update": {
+        "summary": "A paid plan with add-ons purchased and a scheduled billing date."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/subscription'].get.responses['200'].content['application/json'].examples.trialSubscription",
+      "update": {
+        "description": "Trial subscription"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/subscription'].get.responses['200'].content['application/json'].examples.trialSubscription",
+      "update": {
+        "summary": "An organisation on an active trial period. trialEndsOn is returned and billingDate is -1."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/subscription'].get.responses['200'].content['application/json'].examples.internalPlan",
+      "update": {
+        "description": "Internal plan"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/subscription'].get.responses['200'].content['application/json'].examples.internalPlan",
+      "update": {
+        "summary": "An internal or ultimate plan that does not follow the standard billing cycle, so billingDate is -1 and trialStatus is false."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/subscription'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Organisation not found.",
+            "resolution": "Verify the ZANALYTICS-ORGID header value. The organisation ID can be obtained using the Get Organizations API."
+          },
+          {
+            "name": "7301",
+            "description": "The user is not an Account Admin or an Organization Admin of the specified organisation.",
+            "resolution": "Only Account Admins and Organization Admins can view the subscription details."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.usermanagement.read scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/subscription'].get",
+      "update": {
+        "x-zenesis-title": "Get Subscription Details"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/subscription'].get",
+      "update": {
+        "description": "Returns the current subscription plan, the add-on details, the billing date, and the trial status of the specified organisation.\n\nThe authenticated user must be an Account Admin or an Organization Admin of the organisation sent in the `ZANALYTICS-ORGID` header."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/subscription'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>This API is restricted to Account Admins and Organization Admins. Any other role receives error code 7301.</li>\n<li>When the organisation is on a trial, <code>trialStatus</code> returns true and <code>trialEndsOn</code> is included in the response. <code>billingDate</code> can return <code>-1</code> during the trial.</li>\n<li>Internal and ultimate plans do not follow the standard billing cycle. For these plans <code>billingDate</code> returns <code>-1</code> and <code>trialStatus</code> returns false.</li>\n<li>When a trial has expired, <code>trialStatus</code> returns false and the organisation can be in a restricted state. Use the Get Resource Details API to check the current limits.</li>\n<li><code>addOns</code> returns an empty string when no add-ons have been purchased.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/metadetails'].get.parameters[1].examples.workspaceLookup",
+      "update": {
+        "description": "Workspace lookup"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/metadetails'].get.parameters[1].examples.workspaceLookup",
+      "update": {
+        "summary": "Resolves a workspace name into its workspace ID. Only workspace information is returned."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/metadetails'].get.parameters[1].examples.workspaceViewLookup",
+      "update": {
+        "description": "View lookup"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/metadetails'].get.parameters[1].examples.workspaceViewLookup",
+      "update": {
+        "summary": "Resolves a workspace name and a view name within it, returning both the workspace ID and the view ID."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/metadetails'].get.responses['200'].content['application/json'].examples.workspaceLookup",
+      "update": {
+        "description": "Workspace lookup"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/metadetails'].get.responses['200'].content['application/json'].examples.workspaceLookup",
+      "update": {
+        "summary": "Response for a workspace-only lookup. The views object is absent because viewName was not sent."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/metadetails'].get.responses['200'].content['application/json'].examples.workspaceViewLookup",
+      "update": {
+        "description": "View lookup"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/metadetails'].get.responses['200'].content['application/json'].examples.workspaceViewLookup",
+      "update": {
+        "summary": "Response for a combined workspace and view lookup. The views object holds the resolved view ID and type."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/metadetails'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Organisation not found.",
+            "resolution": "Verify the ZANALYTICS-ORGID header value. The organisation ID can be obtained using the Get Organizations API."
+          },
+          {
+            "name": "7104",
+            "description": "Workspace or view not found for the provided name.",
+            "resolution": "Verify the exact spelling and case of workspaceName and viewName. The names are case sensitive."
+          },
+          {
+            "name": "7301",
+            "description": "The user does not have Read access on the workspace or the view.",
+            "resolution": "Ensure the workspace or the view is shared with the user, or that the user holds the Workspace Admin, Account Admin, or Organization Admin role."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.read scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/metadetails'].get",
+      "update": {
+        "x-zenesis-title": "Get Meta Details From Name"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/metadetails'].get",
+      "update": {
+        "description": "Resolves a workspace, and optionally a view within it, by name and returns the corresponding IDs. Use this API when the human-readable names of a workspace and a view are known but their IDs are needed to call other workspace-scoped or view-scoped APIs.\n\n- When only `workspaceName` is sent, the response holds the workspace ID, the workspace description, and the organisation ID.\n- When both `workspaceName` and `viewName` are sent, the response additionally holds the ID, description, and type of the view."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/metadetails'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>Workspace names are unique within an organisation and view names are unique within a workspace. The match is exact and case sensitive, so <code>Sales Analytics</code> and <code>sales analytics</code> are treated as different names.</li>\n<li>The lookup is scoped to the organisation sent in the <code>ZANALYTICS-ORGID</code> header. A workspace of the same name in a different organisation is not found, and the request fails with error code 7104.</li>\n<li>When <code>viewName</code> is sent and the view does not exist in the workspace, the request fails with error code 7104. Workspace metadata is not returned in failure responses.</li>\n<li>When <code>viewName</code> is sent, permission is checked against the view. If the view is not accessible to the user, the request fails with error code 7301 even when the user can see the workspace.</li>\n<li>A workspace-only lookup succeeds only when at least one view in the workspace is shared with the user. If the workspace holds views but none are shared with the user, the request fails with error code 7301.</li>\n<li>This API is the recommended way to bootstrap name-based integrations. Resolve <code>workspaceId</code> and <code>viewId</code> here and pass them to downstream APIs, instead of hard-coding numeric IDs that can change across environments.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.components.schemas.GetOrganizationsResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded",
+          "Request failed"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.GetResourceDetailsResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded",
+          "Request failed"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.GetSubscriptionDetailsResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded",
+          "Request failed"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.GetMetaDetailsResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded",
+          "Request failed"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.GetOrganizationsResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.GetResourceDetailsResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.GetSubscriptionDetailsResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.GetMetaDetailsResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    }
+  ]
+}

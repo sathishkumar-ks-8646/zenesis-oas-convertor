@@ -1,0 +1,2679 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zenesis legacy compatibility - data-operations-grouped-api - shrink this to zero",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].post.requestBody.content['application/x-www-form-urlencoded'].examples.addRow",
+      "update": {
+        "description": "Add a row"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].post.requestBody.content['application/x-www-form-urlencoded'].examples.addRow",
+      "update": {
+        "summary": "Writes a single row using the column name and value pairs sent in columns."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].post.requestBody.content['application/x-www-form-urlencoded'].examples.addDateRow",
+      "update": {
+        "description": "Add dated row"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].post.requestBody.content['application/x-www-form-urlencoded'].examples.addDateRow",
+      "update": {
+        "summary": "Writes a row containing date columns, declaring the format of each date column separately."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateMatching",
+      "update": {
+        "description": "Update matching rows"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateMatching",
+      "update": {
+        "summary": "Updates only the rows that satisfy the criteria."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateAll",
+      "update": {
+        "description": "Update all rows"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateAll",
+      "update": {
+        "summary": "Updates every row in the table. criteria must not be sent along with updateAllRows."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].put.requestBody.content['application/x-www-form-urlencoded'].examples.upsertRow",
+      "update": {
+        "description": "Update or add"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].put.requestBody.content['application/x-www-form-urlencoded'].examples.upsertRow",
+      "update": {
+        "summary": "Updates the rows matching the criteria, and adds a new row when nothing matches."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.deleteMatching",
+      "update": {
+        "description": "Delete matching rows"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.deleteMatching",
+      "update": {
+        "summary": "Deletes only the rows that satisfy the criteria."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.deleteAll",
+      "update": {
+        "description": "Delete all rows"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/rows'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.deleteAll",
+      "update": {
+        "summary": "Deletes every row in the table. criteria must not be sent along with deleteAllRows."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/data'].post.requestBody.content['multipart/form-data'].examples.fileImport",
+      "update": {
+        "description": "Import using FILE"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/data'].post.requestBody.content['multipart/form-data'].examples.fileImport",
+      "update": {
+        "summary": "File upload. The FILE part carries the file contents; the value shown here is a placeholder for the uploaded file."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/data'].post.requestBody.content['multipart/form-data'].examples.dataImport",
+      "update": {
+        "description": "Import using DATA"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/data'].post.requestBody.content['multipart/form-data'].examples.dataImport",
+      "update": {
+        "summary": "Raw data import. The data is sent inline as a string, with no file upload."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/data'].post",
+      "update": {
+        "x-zenesis-title": "Import Data into a New Table"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/data'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CSV specific attributes - commentChar, delimiter and quoted - are mandatory if autoIdentify is set to false.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].post.requestBody.content['multipart/form-data'].examples.fileImport",
+      "update": {
+        "description": "Import using FILE"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].post.requestBody.content['multipart/form-data'].examples.fileImport",
+      "update": {
+        "summary": "File upload using the updateadd import type. Rows whose matchingColumns values match an existing row are updated; the rest are appended."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].post.requestBody.content['multipart/form-data'].examples.dataImport",
+      "update": {
+        "description": "Import using DATA"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].post.requestBody.content['multipart/form-data'].examples.dataImport",
+      "update": {
+        "summary": "Raw data import using the updateadd import type. The data is sent inline as a string, with no file upload."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].post",
+      "update": {
+        "x-zenesis-title": "Import Data into an Existing Table"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CSV specific attributes - commentChar, delimiter and quoted - are mandatory if autoIdentify is set to false.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.filteredExport",
+      "update": {
+        "description": "Export using criteria"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.filteredExport",
+      "update": {
+        "summary": "Exports only the rows matching the criteria as a CSV file."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.protectedExport",
+      "update": {
+        "description": "Export with password"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.protectedExport",
+      "update": {
+        "summary": "Exports the selected columns into a password protected CSV file. Shows every attribute the CONFIG accepts; only the mandatory ones need to be sent."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.jsonExport",
+      "update": {
+        "description": "Export as JSON"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.jsonExport",
+      "update": {
+        "summary": "Exports the data as a JSON file with each row returned as column name and value pairs."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.xmlExport",
+      "update": {
+        "description": "Export as XML"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.xmlExport",
+      "update": {
+        "summary": "Exports the data as an XML file. Set keyValueFormat to true to return each row as column name and value pairs."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.xlsExport",
+      "update": {
+        "description": "Export as XLS"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.xlsExport",
+      "update": {
+        "summary": "Exports the selected columns into an Excel workbook."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.pdfExport",
+      "update": {
+        "description": "Export as PDF"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.pdfExport",
+      "update": {
+        "summary": "Exports the data as a PDF file using the PDF specific page setup attributes."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.htmlExport",
+      "update": {
+        "description": "Export as HTML"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.htmlExport",
+      "update": {
+        "summary": "Exports the data as an HTML file with the title and description placed at the top."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.imageExport",
+      "update": {
+        "description": "Export as image"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.imageExport",
+      "update": {
+        "summary": "Exports the view as an image of the given dimensions and format."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get",
+      "update": {
+        "x-zenesis-title": "Export Data from a View"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiInfo": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nExport Data API is restricted for the resources given below. For these, use the Asynchronous Export APIs instead.<ul><li>Tables having more than one million rows.</li><li>Tables and Views from live connect workspaces.</li><li>Dashboard and Query Table view types.</li></ul>\n</span></blockquote>"
+            }
+          },
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a GET request, so the CONFIG value is sent as a query parameter. The JSONObject must be stringified and URL encoded before it is appended to the request URL.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].post.requestBody.content['multipart/form-data'].examples.csvImport",
+      "update": {
+        "description": "CSV file import"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].post.requestBody.content['multipart/form-data'].examples.csvImport",
+      "update": {
+        "summary": "File upload. The FILE part carries the file contents; the value shown here is a placeholder for the uploaded file."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].post.requestBody.content['multipart/form-data'].examples.jsonImport",
+      "update": {
+        "description": "JSON file import"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].post.requestBody.content['multipart/form-data'].examples.jsonImport",
+      "update": {
+        "summary": "File upload. The FILE part carries the file contents; the value shown here is a placeholder for the uploaded file."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].post",
+      "update": {
+        "x-zenesis-title": "Create Import Job for a New Table"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CSV specific attributes - commentChar, delimiter and quoted - are mandatory if autoIdentify is set to false.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.filteredExport",
+      "update": {
+        "description": "Export query result"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.filteredExport",
+      "update": {
+        "summary": "Runs the SQL SELECT statement and exports the result as a CSV file."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.tableFilteredExport",
+      "update": {
+        "description": "Export using per-table criteria"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.tableFilteredExport",
+      "update": {
+        "summary": "Applies one filter expression per table referenced by the query."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.protectedExport",
+      "update": {
+        "description": "Export with password"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.protectedExport",
+      "update": {
+        "summary": "Exports the selected columns into a password protected CSV file. Shows every attribute the CONFIG accepts; only the mandatory ones need to be sent."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.jsonExport",
+      "update": {
+        "description": "Export as JSON"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.jsonExport",
+      "update": {
+        "summary": "Exports the data as a JSON file with each row returned as column name and value pairs."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.xmlExport",
+      "update": {
+        "description": "Export as XML"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.xmlExport",
+      "update": {
+        "summary": "Exports the data as an XML file. Set keyValueFormat to true to return each row as column name and value pairs."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.xlsExport",
+      "update": {
+        "description": "Export as XLS"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.xlsExport",
+      "update": {
+        "summary": "Exports the selected columns into an Excel workbook."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.pdfExport",
+      "update": {
+        "description": "Export as PDF"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.pdfExport",
+      "update": {
+        "summary": "Exports the data as a PDF file using the PDF specific page setup attributes."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.htmlExport",
+      "update": {
+        "description": "Export as HTML"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.htmlExport",
+      "update": {
+        "summary": "Exports the data as an HTML file with the title and description placed at the top."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get",
+      "update": {
+        "x-zenesis-title": "Create Export Job using SQL Query"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a GET request, so the CONFIG value is sent as a query parameter. The JSONObject must be stringified and URL encoded before it is appended to the request URL.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].post.requestBody.content['multipart/form-data'].examples.appendImport",
+      "update": {
+        "description": "Append import"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].post.requestBody.content['multipart/form-data'].examples.appendImport",
+      "update": {
+        "summary": "Appends every row in the uploaded file to the table."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].post.requestBody.content['multipart/form-data'].examples.updateAddImport",
+      "update": {
+        "description": "Update add import"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].post.requestBody.content['multipart/form-data'].examples.updateAddImport",
+      "update": {
+        "summary": "Rows whose matchingColumns values match an existing row are updated; the remaining rows are appended as new rows. matchingColumns is mandatory for this import type."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].post",
+      "update": {
+        "x-zenesis-title": "Create Import Job for an Existing Table"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CSV specific attributes - commentChar, delimiter and quoted - are mandatory if autoIdentify is set to false.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.filteredExport",
+      "update": {
+        "description": "Export using criteria"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.filteredExport",
+      "update": {
+        "summary": "Exports only the rows matching the criteria as a CSV file."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.protectedExport",
+      "update": {
+        "description": "Export with password"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.protectedExport",
+      "update": {
+        "summary": "Exports the selected columns into a password protected CSV file. Shows every attribute the CONFIG accepts; only the mandatory ones need to be sent."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.jsonExport",
+      "update": {
+        "description": "Export as JSON"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.jsonExport",
+      "update": {
+        "summary": "Exports the data as a JSON file with each row returned as column name and value pairs."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.xmlExport",
+      "update": {
+        "description": "Export as XML"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.xmlExport",
+      "update": {
+        "summary": "Exports the data as an XML file. Set keyValueFormat to true to return each row as column name and value pairs."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.xlsExport",
+      "update": {
+        "description": "Export as XLS"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.xlsExport",
+      "update": {
+        "summary": "Exports the selected columns into an Excel workbook."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.pdfExport",
+      "update": {
+        "description": "Export as PDF"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.pdfExport",
+      "update": {
+        "summary": "Exports the data as a PDF file using the PDF specific page setup attributes."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.htmlExport",
+      "update": {
+        "description": "Export as HTML"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.htmlExport",
+      "update": {
+        "summary": "Exports the data as an HTML file with the title and description placed at the top."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.imageExport",
+      "update": {
+        "description": "Export as image"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.imageExport",
+      "update": {
+        "summary": "Exports the view as an image of the given dimensions and format."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get",
+      "update": {
+        "x-zenesis-title": "Create Export Job using View ID"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a GET request, so the CONFIG value is sent as a query parameter. The JSONObject must be stringified and URL encoded before it is appended to the request URL.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.firstBatch",
+      "update": {
+        "description": "First batch"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.firstBatch",
+      "update": {
+        "summary": "Opens the batch import job. batchKey must be \"start\"; the response returns the batchKey to use for every following batch."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.followUpBatch",
+      "update": {
+        "description": "Follow up batch"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.followUpBatch",
+      "update": {
+        "summary": "Uploads an intermediate batch using the batchKey returned by the first call."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.lastBatch",
+      "update": {
+        "description": "Last batch"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.lastBatch",
+      "update": {
+        "summary": "Uploads the final batch and closes the job. isLastBatch must be true."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data/batch'].post",
+      "update": {
+        "x-zenesis-title": "Batch Import Data into New Table"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data/batch'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CSV specific attributes - commentChar, delimiter and quoted - are mandatory if autoIdentify is set to false.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.firstBatch",
+      "update": {
+        "description": "First batch"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.firstBatch",
+      "update": {
+        "summary": "Opens the batch import job using the updateadd import type. batchKey must be \"start\"; the response returns the batchKey to use for every following batch."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.followUpBatch",
+      "update": {
+        "description": "Follow up batch"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.followUpBatch",
+      "update": {
+        "summary": "Uploads an intermediate batch using the batchKey returned by the first call. Every batch repeats the same import configuration."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.lastBatch",
+      "update": {
+        "description": "Last batch"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.lastBatch",
+      "update": {
+        "summary": "Uploads the final batch and closes the job. isLastBatch must be true."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data/batch'].post",
+      "update": {
+        "x-zenesis-title": "Batch Import Data into Existing Table"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data/batch'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CSV specific attributes - commentChar, delimiter and quoted - are mandatory if autoIdentify is set to false.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/importjobs/{job-id}'].get",
+      "update": {
+        "x-zenesis-title": "Get Import Job Details"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/exportjobs/{job-id}'].get",
+      "update": {
+        "x-zenesis-title": "Get Export Job Details"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/exportjobs/{job-id}/data'].get",
+      "update": {
+        "x-zenesis-title": "Download Exported Data"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/exportjobs/{job-id}/data'].get",
+      "update": {
+        "description": "Download the file produced by a completed asynchronous export job. The job must have reached jobCode 1004; calling earlier fails with 8121 (queued) or 8122 (running), and 8123 if the job failed. Only the user who created the job may download it."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/exportjobs/{job-id}/data'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiInfo": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe exported file is available only for one hour after the export job completes.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/importdetails'].get.responses['200'].content['application/json'].examples.importDetails",
+      "update": {
+        "description": "Last import details"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/importdetails'].get.responses['200'].content['application/json'].examples.importDetails",
+      "update": {
+        "summary": "Details of the most recent import performed on the view."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/importdetails'].get",
+      "update": {
+        "x-zenesis-title": "Get Last Import Details"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/sync'].post.requestBody.content['application/x-www-form-urlencoded'].examples.refetchWithCredentials",
+      "update": {
+        "description": "Refetch with credentials"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/sync'].post.requestBody.content['application/x-www-form-urlencoded'].examples.refetchWithCredentials",
+      "update": {
+        "summary": "Refetches the data by passing the datasource credentials."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/sync'].post.requestBody.content['application/x-www-form-urlencoded'].examples.refetchStoredCredentials",
+      "update": {
+        "description": "Refetch stored credentials"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/sync'].post.requestBody.content['application/x-www-form-urlencoded'].examples.refetchStoredCredentials",
+      "update": {
+        "summary": "Refetches the data using the credentials already saved for the datasource. CONFIG is not sent."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/sync'].post",
+      "update": {
+        "x-zenesis-title": "Refetch Data"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources/{datasource-id}/sync'].post.requestBody.content['application/x-www-form-urlencoded'].examples.syncWithCredentials",
+      "update": {
+        "description": "Sync with credentials"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources/{datasource-id}/sync'].post.requestBody.content['application/x-www-form-urlencoded'].examples.syncWithCredentials",
+      "update": {
+        "summary": "Initiates a sync by passing the datasource credentials."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources/{datasource-id}/sync'].post.requestBody.content['application/x-www-form-urlencoded'].examples.syncSpecificInterval",
+      "update": {
+        "description": "Sync one interval"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources/{datasource-id}/sync'].post.requestBody.content['application/x-www-form-urlencoded'].examples.syncSpecificInterval",
+      "update": {
+        "summary": "Initiates a sync for a specific sync interval when multiple intervals are configured for the datasource."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources/{datasource-id}/sync'].post",
+      "update": {
+        "x-zenesis-title": "Sync Data"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources/{datasource-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateCredentials",
+      "update": {
+        "description": "Update credentials"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources/{datasource-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateCredentials",
+      "update": {
+        "summary": "Updates the login credentials of an Amazon RDS MySQL connection."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources/{datasource-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateSnowflake",
+      "update": {
+        "description": "Update Snowflake connection"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources/{datasource-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateSnowflake",
+      "update": {
+        "summary": "Updates a Snowflake connection, where hostName carries the full account name and warehouseName is mandatory."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources/{datasource-id}'].put",
+      "update": {
+        "x-zenesis-title": "Update Datasource Connection"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources'].get.responses['200'].content['application/json'].examples.singleInterval",
+      "update": {
+        "description": "Single sync interval"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources'].get.responses['200'].content['application/json'].examples.singleInterval",
+      "update": {
+        "summary": "A datasource with one sync schedule. The sync details sit directly on the datasource."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources'].get.responses['200'].content['application/json'].examples.multipleIntervals",
+      "update": {
+        "description": "Multiple sync intervals"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources'].get.responses['200'].content['application/json'].examples.multipleIntervals",
+      "update": {
+        "summary": "A datasource with more than one sync schedule. The sync details move into the syncIntervals array, each with its own syncIntervalId."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/datasources'].get",
+      "update": {
+        "x-zenesis-title": "Get Datasources"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.components.schemas.ColumnDataType.properties.dataType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Plain text",
+          "Multi line",
+          "Email address",
+          "Whole number",
+          "Positive number",
+          "Decimal number",
+          "Currency value",
+          "Percentage value",
+          "Date value",
+          "Boolean value",
+          "URL value",
+          "Auto number",
+          "Geo location"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportSummary.properties.importOperation",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Table created",
+          "Table updated"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BatchImportSuccessResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobCreationResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobDetailsResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.GetDatasourcesResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.GetDatasourcesResponse.properties.data.properties.dataSources.items.properties.databridgeStatus",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Agent is connected",
+          "Agent is not reachable"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.GetLastImportDetailsResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.GetLastImportDetailsResponse.properties.data.properties.lastImportStatus",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Everything loaded, or nothing needed loading",
+          "Some rows loaded and some did not",
+          "The load did not complete"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportJobCreationResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportJobDetailsResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.properties.fileType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "CSV file",
+          "JSON file"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.properties.thousandSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "DOT",
+          "SPACE",
+          "SINGLE QUOTE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.properties.decimalSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "DOT",
+          "COMMA"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.oneOf[0].properties.delimiter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "TAB",
+          "SEMICOLON",
+          "SPACE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.oneOf[0].properties.quoted",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "NONE",
+          "SINGLE QUOTE",
+          "DOUBLE QUOTE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.properties.fileType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "CSV file",
+          "JSON file"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.properties.thousandSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "DOT",
+          "SPACE",
+          "SINGLE QUOTE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.properties.decimalSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "DOT",
+          "COMMA"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.oneOf[0].properties.delimiter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "TAB",
+          "SEMICOLON",
+          "SPACE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.oneOf[0].properties.quoted",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "NONE",
+          "SINGLE QUOTE",
+          "DOUBLE QUOTE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.properties.fileType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "CSV file",
+          "JSON file"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.properties.thousandSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "DOT",
+          "SPACE",
+          "SINGLE QUOTE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.properties.decimalSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "DOT",
+          "COMMA"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.oneOf[0].properties.delimiter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "TAB",
+          "SEMICOLON",
+          "SPACE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.oneOf[0].properties.quoted",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "NONE",
+          "SINGLE QUOTE",
+          "DOUBLE QUOTE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.properties.fileType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "CSV file",
+          "JSON file"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.properties.thousandSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "DOT",
+          "SPACE",
+          "SINGLE QUOTE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.properties.decimalSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "DOT",
+          "COMMA"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.oneOf[0].properties.delimiter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "TAB",
+          "SEMICOLON",
+          "SPACE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.oneOf[0].properties.quoted",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "NONE",
+          "SINGLE QUOTE",
+          "DOUBLE QUOTE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigNewTable.properties.thousandSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "DOT",
+          "SPACE",
+          "SINGLE QUOTE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigNewTable.properties.decimalSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "DOT",
+          "COMMA"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigNewTable.properties.delimiter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "TAB",
+          "SEMICOLON",
+          "SPACE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigNewTable.properties.quoted",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "NONE",
+          "SINGLE QUOTE",
+          "DOUBLE QUOTE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigExistingTable.properties.thousandSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "DOT",
+          "SPACE",
+          "SINGLE QUOTE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigExistingTable.properties.decimalSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "DOT",
+          "COMMA"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigExistingTable.properties.delimiter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "TAB",
+          "SEMICOLON",
+          "SPACE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigExistingTable.properties.quoted",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "NONE",
+          "SINGLE QUOTE",
+          "DOUBLE QUOTE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.properties.responseFormat",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "CSV format",
+          "JSON format",
+          "XML format",
+          "XLS format",
+          "PDF format",
+          "HTML format",
+          "Image format"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[0].properties.delimiter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "TAB",
+          "SEMICOLON",
+          "SPACE",
+          "PIPE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[0].properties.recordDelimiter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "DOS",
+          "UNIX",
+          "MAC"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[0].properties.quoted",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "SINGLE",
+          "DOUBLE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.paperSize",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "LETTER",
+          "LEGAL",
+          "TABLOID",
+          "A3",
+          "A4",
+          "AUTO"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.paperStyle",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Portrait orientation",
+          "Landscape orientation"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.showTitle",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AT TOP",
+          "AT BOTTOM",
+          "NONE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.showDesc",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AT TOP",
+          "AT BOTTOM",
+          "NONE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.exportLanguage",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "ENGLISH",
+          "CHINESE",
+          "JAPANESE",
+          "EUROPEAN",
+          "KOREAN"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.columnWidthRatio",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AS IN VIEW",
+          "FIT TO CONTENT",
+          "EQUAL WIDTH"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[5].properties.includeTitle",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AT TOP",
+          "AT BOTTOM",
+          "NONE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[5].properties.includeDesc",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AT TOP",
+          "AT BOTTOM",
+          "NONE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[5].properties.columnWidthRatio",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AS IN VIEW",
+          "FIT TO CONTENT",
+          "EQUAL WIDTH"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[6].properties.imageFormat",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "PNG image",
+          "JPG image",
+          "JPEG image"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.properties.responseFormat",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "CSV format",
+          "JSON format",
+          "XML format",
+          "XLS format",
+          "PDF format",
+          "HTML format"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[0].properties.delimiter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "TAB",
+          "SEMICOLON",
+          "SPACE",
+          "PIPE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[0].properties.recordDelimiter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "DOS",
+          "UNIX",
+          "MAC"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[0].properties.quoted",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "SINGLE",
+          "DOUBLE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.paperSize",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "LETTER",
+          "LEGAL",
+          "TABLOID",
+          "A3",
+          "A4",
+          "AUTO"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.paperStyle",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Portrait orientation",
+          "Landscape orientation"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.showTitle",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AT TOP",
+          "AT BOTTOM",
+          "NONE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.showDesc",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AT TOP",
+          "AT BOTTOM",
+          "NONE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.exportLanguage",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "ENGLISH",
+          "CHINESE",
+          "JAPANESE",
+          "EUROPEAN",
+          "KOREAN"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.columnWidthRatio",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AS IN VIEW",
+          "FIT TO CONTENT",
+          "EQUAL WIDTH"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[5].properties.includeTitle",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AT TOP",
+          "AT BOTTOM",
+          "NONE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[5].properties.includeDesc",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AT TOP",
+          "AT BOTTOM",
+          "NONE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[5].properties.columnWidthRatio",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AS IN VIEW",
+          "FIT TO CONTENT",
+          "EQUAL WIDTH"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.properties.responseFormat",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "CSV format",
+          "JSON format",
+          "XML format",
+          "XLS format",
+          "PDF format",
+          "HTML format",
+          "Image format"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[0].properties.delimiter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "COMMA",
+          "TAB",
+          "SEMICOLON",
+          "SPACE",
+          "PIPE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[0].properties.recordDelimiter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "DOS",
+          "UNIX",
+          "MAC"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[0].properties.quoted",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "SINGLE",
+          "DOUBLE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.paperSize",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "LETTER",
+          "LEGAL",
+          "TABLOID",
+          "A3",
+          "A4",
+          "AUTO"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.paperStyle",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Portrait orientation",
+          "Landscape orientation"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.showTitle",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AT TOP",
+          "AT BOTTOM",
+          "NONE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.showDesc",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AT TOP",
+          "AT BOTTOM",
+          "NONE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.exportLanguage",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "ENGLISH",
+          "CHINESE",
+          "JAPANESE",
+          "EUROPEAN",
+          "KOREAN"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.columnWidthRatio",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AS IN VIEW",
+          "FIT TO CONTENT",
+          "EQUAL WIDTH"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[5].properties.includeTitle",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AT TOP",
+          "AT BOTTOM",
+          "NONE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[5].properties.includeDesc",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AT TOP",
+          "AT BOTTOM",
+          "NONE"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[5].properties.columnWidthRatio",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "AS IN VIEW",
+          "FIT TO CONTENT",
+          "EQUAL WIDTH"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[6].properties.imageFormat",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "PNG image",
+          "JPG image",
+          "JPEG image"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DatasourceConnectionConfig.properties.connType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Individual fields (hostName, port, userName, password)",
+          "A single connectionString"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DatasourceConnectionConfig.properties.sshTunnelAuthType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Password authentication",
+          "Public key authentication"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.SyncTableDetails.items.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Schedule is running",
+          "Schedule is paused"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ColumnDataType.properties.dataType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportSummary.properties.importOperation['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportSuccessResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobCreationResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobDetailsResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.GetDatasourcesResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.GetDatasourcesResponse.properties.data.properties.dataSources.items.properties.databridgeStatus['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.GetLastImportDetailsResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.GetLastImportDetailsResponse.properties.data.properties.lastImportStatus['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportJobCreationResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportJobDetailsResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.properties.fileType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.properties.thousandSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.properties.thousandSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.properties.decimalSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.properties.decimalSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.oneOf[0].properties.delimiter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.oneOf[0].properties.delimiter['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.oneOf[0].properties.quoted['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.oneOf[0].properties.quoted['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.properties.fileType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.properties.thousandSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.properties.thousandSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.properties.decimalSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.properties.decimalSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.oneOf[0].properties.delimiter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.oneOf[0].properties.delimiter['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.oneOf[0].properties.quoted['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.oneOf[0].properties.quoted['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.properties.fileType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.properties.thousandSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.properties.thousandSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.properties.decimalSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.properties.decimalSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.oneOf[0].properties.delimiter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.oneOf[0].properties.delimiter['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.oneOf[0].properties.quoted['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.oneOf[0].properties.quoted['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.properties.fileType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.properties.thousandSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.properties.thousandSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.properties.decimalSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.properties.decimalSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.oneOf[0].properties.delimiter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.oneOf[0].properties.delimiter['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.oneOf[0].properties.quoted['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.oneOf[0].properties.quoted['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigNewTable.properties.thousandSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigNewTable.properties.thousandSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigNewTable.properties.decimalSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigNewTable.properties.decimalSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigNewTable.properties.delimiter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigNewTable.properties.delimiter['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigNewTable.properties.quoted['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigNewTable.properties.quoted['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigExistingTable.properties.thousandSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigExistingTable.properties.thousandSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigExistingTable.properties.decimalSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigExistingTable.properties.decimalSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigExistingTable.properties.delimiter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigExistingTable.properties.delimiter['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigExistingTable.properties.quoted['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.BatchImportConfigExistingTable.properties.quoted['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.properties.responseFormat['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[0].properties.delimiter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[0].properties.delimiter['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[0].properties.recordDelimiter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[0].properties.recordDelimiter['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[0].properties.quoted['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[0].properties.quoted['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.paperSize['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.paperSize['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.paperStyle['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.showTitle['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.showTitle['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.showDesc['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.showDesc['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.exportLanguage['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.exportLanguage['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.columnWidthRatio['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4].properties.columnWidthRatio['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[5].properties.includeTitle['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[5].properties.includeTitle['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[5].properties.includeDesc['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[5].properties.includeDesc['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[5].properties.columnWidthRatio['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[5].properties.columnWidthRatio['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[6].properties.imageFormat['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.properties.responseFormat['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[0].properties.delimiter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[0].properties.delimiter['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[0].properties.recordDelimiter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[0].properties.recordDelimiter['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[0].properties.quoted['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[0].properties.quoted['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.paperSize['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.paperSize['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.paperStyle['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.showTitle['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.showTitle['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.showDesc['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.showDesc['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.exportLanguage['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.exportLanguage['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.columnWidthRatio['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4].properties.columnWidthRatio['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[5].properties.includeTitle['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[5].properties.includeTitle['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[5].properties.includeDesc['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[5].properties.includeDesc['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[5].properties.columnWidthRatio['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[5].properties.columnWidthRatio['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.properties.responseFormat['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[0].properties.delimiter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[0].properties.delimiter['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[0].properties.recordDelimiter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[0].properties.recordDelimiter['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[0].properties.quoted['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[0].properties.quoted['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.paperSize['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.paperSize['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.paperStyle['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.showTitle['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.showTitle['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.showDesc['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.showDesc['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.exportLanguage['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.exportLanguage['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.columnWidthRatio['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4].properties.columnWidthRatio['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[5].properties.includeTitle['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[5].properties.includeTitle['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[5].properties.includeDesc['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[5].properties.includeDesc['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[5].properties.columnWidthRatio['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[5].properties.columnWidthRatio['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[6].properties.imageFormat['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DatasourceConnectionConfig.properties.connType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DatasourceConnectionConfig.properties.connType['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DatasourceConnectionConfig.properties.sshTunnelAuthType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DatasourceConnectionConfig.properties.sshTunnelAuthType['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.SyncTableDetails.items.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    }
+  ]
+}

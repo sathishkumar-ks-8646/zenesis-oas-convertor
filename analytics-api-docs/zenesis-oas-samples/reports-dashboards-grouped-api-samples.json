@@ -1,0 +1,605 @@
+{
+ "/restapi/v2/workspaces/{workspace-id}/reports": {
+  "post": {
+   "Curl": {
+    "snippets": [
+     {
+      "code": "curl \"https://analyticsapi.zoho.com/restapi/v2/workspaces/35130000001055707/reports\" -X 'POST' -H 'ZANALYTICS-ORGID: <org-id>' -H 'Authorization: Zoho-oauthtoken <access_token>' --data-urlencode 'CONFIG={\"baseTableName\":\"Sales\",\"title\":\"New Chart\",\"reportType\":\"chart\",\"chartType\":\"bar\",\"axisColumns\":[{\"type\":\"xAxis\",\"columnName\":\"Date\",\"operation\":\"year\"},{\"type\":\"yAxis\",\"columnName\":\"Sales\",\"operation\":\"sum\"}]}'"
+     }
+    ]
+   },
+   "C#": {
+    "snippets": [
+     {
+      "code": "using System;\nusing System.Collections.Generic;\nusing System.Text.Json;\nusing ZohoAnalytics;\n\nnamespace ZohoAnalyticsTest\n{\n    class Program\n    {\n        long orgId = 55522777;\n        long workspaceId = 35130000001055707;\n\n        public void CreateReport(IAnalyticsClient ac)\n        {\n            Dictionary<string, object> config = new Dictionary<string, object>();\n            config.Add(\"baseTableName\", \"Sales\");\n            config.Add(\"title\", \"New Chart\");\n            config.Add(\"reportType\", \"chart\");\n            List<Dictionary<string, object>> axisColumns = new List<Dictionary<string, object>>();\n            axisColumns.Add(new Dictionary<string, object>{{\"type\",\"xAxis\"},{\"columnName\",\"Date\"},{\"operation\",\"year\"}});\n            axisColumns.Add(new Dictionary<string, object>{{\"type\",\"yAxis\"},{\"columnName\",\"Sales\"},{\"operation\",\"sum\"}});\n            config.Add(\"axisColumns\", axisColumns);\n            IWorkspaceAPI ws = ac.GetWorkspaceInstance(orgId, workspaceId);\n            long viewId = ws.CreateReport(config);\n            Console.WriteLine(viewId);\n        }\n\n        static void Main(string[] args)\n        {\n            string clientId = \"1000.xxxxxxx\";\n            string clientSecret = \"xxxxxxx\";\n            string refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n            IAnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n            Program obj = new Program();\n            obj.CreateReport(ac);\n        }\n    }\n}"
+     }
+    ]
+   },
+   "Go": {
+    "snippets": [
+     {
+      "code": "package main\n\nimport (\n    \"fmt\"\n    ZAnalytics \"zoho/pkg/analyticsclient\"\n)\n\nvar (\n    clientId = \"1000.xxxxxxx\"\n    clientSecret = \"xxxxxxx\"\n    refreshToken = \"1000.xxxxxxx.xxxxxxx\"\n    orgId = \"55522777\"\n    workspaceId = \"35130000001055707\"\n)\n\nfunc CreateReport(ac ZAnalytics.Client) {\n    baseTableName := \"Sales\"\n    xAxis := map[string]interface{}{\"type\": \"xAxis\", \"columnName\": \"Date\", \"operation\": \"year\"}\n    yAxis := map[string]interface{}{\"type\": \"yAxis\", \"columnName\": \"Sales\", \"operation\": \"sum\"}\n    axisColumns := []map[string]interface{}{xAxis, yAxis}\n    config := map[string]interface{}{\"baseTableName\": baseTableName, \"title\": \"New Chart\", \"reportType\": \"chart\", \"axisColumns\": axisColumns}\n    workspace := ZAnalytics.GetWorkspaceInstance(&ac, orgId, workspaceId)\n    viewId, exception := workspace.CreateReport(config)\n    if exception != nil { fmt.Println(exception.ErrorMessage); return }\n    fmt.Println(viewId)\n}\n\nfunc main() {\n    ac := ZAnalytics.GetAnalyticsClient(clientId, clientSecret, refreshToken)\n    CreateReport(ac)\n}"
+     }
+    ]
+   },
+   "Java": {
+    "snippets": [
+     {
+      "code": "import com.zoho.analytics.client.*;\nimport org.json.*;\n\npublic class Test {\n    private long orgId = 55522777l;\n    private long workspaceId = 35130000001055707l;\n\n    public static void main(String args[]) {\n        String clientId = \"1000.xxxxxxx\";\n        String clientSecret = \"xxxxxxx\";\n        String refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n        Test tObj = new Test();\n        AnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n        try {\n            tObj.createReport(ac);\n        } catch (Exception ex) {\n            ex.printStackTrace();\n        }\n    }\n\n    public void createReport(AnalyticsClient ac) throws Exception {\n        String baseTableName = \"Sales\";\n        JSONObject xAxis = new JSONObject();\n        xAxis.put(\"type\", \"xAxis\");\n        xAxis.put(\"columnName\", \"Date\");\n        xAxis.put(\"operation\", \"year\");\n        JSONObject yAxis = new JSONObject();\n        yAxis.put(\"type\", \"yAxis\");\n        yAxis.put(\"columnName\", \"Sales\");\n        yAxis.put(\"operation\", \"sum\");\n        JSONArray axisColumns = new JSONArray();\n        axisColumns.put(xAxis);\n        axisColumns.put(yAxis);\n        JSONObject config = new JSONObject();\n        config.put(\"baseTableName\", baseTableName);\n        config.put(\"title\", \"New Chart\");\n        config.put(\"reportType\", \"chart\");\n        config.put(\"axisColumns\", axisColumns);\n        WorkspaceAPI workspace = ac.getWorkspaceInstance(orgId, workspaceId);\n        long viewId = workspace.createReport(config);\n        System.out.println(viewId);\n    }\n}"
+     }
+    ]
+   },
+   "Php": {
+    "snippets": [
+     {
+      "code": "<?php\nrequire 'AnalyticsClient.php';\n\nclass Test {\n    public $ac;\n    public $org_id = \"55522777\";\n    public $workspace_id = \"35130000001055707\";\n    function __construct() {\n        $this->ac = new AnalyticsClient(\"1000.xxxxxxx\", \"xxxxxxx\", \"1000.xxxxxxx.xxxxxxx\");\n    }\n\n    function createReport() {\n        $base_table_name = \"Sales\";\n        $x_axis = [\"type\" => \"xAxis\", \"columnName\" => \"Date\", \"operation\" => \"year\"];\n        $y_axis = [\"type\" => \"yAxis\", \"columnName\" => \"Sales\", \"operation\" => \"sum\"];\n        $axis_columns = [$x_axis, $y_axis];\n        $config = [\"baseTableName\" => $base_table_name, \"title\" => \"New Chart\", \"reportType\" => \"chart\", \"axisColumns\" => $axis_columns];\n        $workspace = $this->ac->getWorkspaceInstance($this->org_id, $this->workspace_id);\n        $view_id = $workspace->createReport($config);\n        print_r($view_id);\n    }\n}\n\n$obj = new Test();\n$obj->createReport();\n?>"
+     }
+    ]
+   },
+   "Python": {
+    "snippets": [
+     {
+      "code": "from AnalyticsClient import AnalyticsClient\n\nclass Config:\n    CLIENTID = \"1000.xxxxxxx\"\n    CLIENTSECRET = \"xxxxxxx\"\n    REFRESHTOKEN = \"1000.xxxxxxx.xxxxxxx\"\n    ORGID = \"55522777\"\n    WORKSPACEID = \"35130000001055707\"\n\nclass sample:\n    ac = AnalyticsClient(Config.CLIENTID, Config.CLIENTSECRET, Config.REFRESHTOKEN)\n\n    def create_report(self, ac):\n        base_table_name = \"Sales\"\n        xaxis = {\"type\": \"xAxis\", \"columnName\": \"Date\", \"operation\": \"year\"}\n        yaxis = {\"type\": \"yAxis\", \"columnName\": \"Sales\", \"operation\": \"sum\"}\n        axis_columns = [xaxis, yaxis]\n        config = {\"baseTableName\": base_table_name, \"title\": \"New Chart\", \"reportType\": \"chart\", \"axisColumns\": axis_columns}\n        workspace = ac.get_workspace_instance(Config.ORGID, Config.WORKSPACEID)\n        view_id = workspace.create_report(config)\n        print(view_id)\n\nobj = sample()\nobj.create_report(obj.ac)"
+     }
+    ]
+   },
+   "Node": {
+    "snippets": [
+     {
+      "code": "var analyticsClient = require('./AnalyticsClient');\nvar ac = new analyticsClient('1000.xxxxxxx', 'xxxxxxx', '1000.xxxxxxx.xxxxxxx');\nvar orgId = '55522777';\nvar workspaceId = '35130000001055707';\n\nvar baseTableName = 'Sales';\nvar xAxis = { type: 'xAxis', columnName: 'Date', operation: 'year' };\nvar yAxis = { type: 'yAxis', columnName: 'Sales', operation: 'sum' };\nvar axisColumns = [xAxis, yAxis];\nvar config = { baseTableName: baseTableName, title: 'New Chart', reportType: 'chart', axisColumns: axisColumns };\nvar workspace = ac.getWorkspaceInstance(orgId, workspaceId);\nworkspace.createReport(config).then((viewId) => { console.log(viewId); }).catch((error) => { console.log(error); });"
+     }
+    ]
+   },
+   "Ruby": {
+    "snippets": [
+     {
+      "code": "require 'zoho_analytics_client'\n\nclass Config\n  ORGID = \"55522777\"\n  WORKSPACEID = \"35130000001055707\"\nend\n\nclass Sample\n  def initialize\n    @ac = AnalyticsClient.new.with_data_center(\"US\").with_oauth({\n      \"clientId\" => \"1000.xxxxxxx\",\n      \"clientSecret\" => \"xxxxxxx\",\n      \"refreshToken\" => \"1000.xxxxxxx.xxxxxxx\"\n    }).build\n  end\n\n  def create_report\n    base_table_name = \"Sales\"\n    xaxis = { \"type\" => \"xAxis\", \"columnName\" => \"Date\", \"operation\" => \"year\" }\n    yaxis = { \"type\" => \"yAxis\", \"columnName\" => \"Sales\", \"operation\" => \"sum\" }\n    axis_columns = [xaxis, yaxis]\n    config = { \"baseTableName\" => base_table_name, \"title\" => \"New Chart\", \"reportType\" => \"chart\", \"axisColumns\" => axis_columns }\n    workspace = @ac.get_workspace_instance(Config::ORGID, Config::WORKSPACEID)\n    view_id = workspace.create_report(config)\n    puts view_id\n  end\nend\n\nobj = Sample.new\nobj.create_report"
+     }
+    ]
+   },
+   "Deluge": {
+    "snippets": [
+     {
+      "code": "orgId = \"55522777\";\nworkspaceId = \"35130000001055707\";\nheadersMap = Map();\nheadersMap.put(\"ZANALYTICS-ORGID\", orgId);\nconfig = Map();\nconfig.put(\"baseTableName\", \"Sales\");\nconfig.put(\"title\", \"New Chart\");\nconfig.put(\"reportType\", \"chart\");\nparameters = \"CONFIG=\" + zoho.encryption.urlEncode(config.toString());\nresponse = invokeurl\n[\n  url :\"https://analyticsapi.zoho.com/restapi/v2/workspaces/\" + workspaceId + \"/reports\"\n  type :POST\n  parameters:parameters\n  headers:headersMap\n  connection:\"analytics_oauth_connection\"\n];\ninfo response;"
+     }
+    ]
+   }
+  }
+ },
+ "/restapi/v2/workspaces/{workspace-id}/reports/{view-id}": {
+  "put": {
+   "Curl": {
+    "snippets": [
+     {
+      "code": "curl \"https://analyticsapi.zoho.com/restapi/v2/workspaces/35130000001055707/reports/35130000001055901\" -X 'PUT' -H 'ZANALYTICS-ORGID: <org-id>' -H 'Authorization: Zoho-oauthtoken <access_token>' --data-urlencode 'CONFIG={\"reportType\":\"chart\",\"chartType\":\"line\",\"description\":\"Sales Summary Updated\",\"axisColumns\":[{\"type\":\"xAxis\",\"columnName\":\"Date\",\"operation\":\"year\"},{\"type\":\"yAxis\",\"columnName\":\"Cost\",\"operation\":\"sum\"}]}'"
+     }
+    ]
+   },
+   "C#": {
+    "snippets": [
+     {
+      "code": "using System;\nusing System.Collections.Generic;\nusing System.Text.Json;\nusing ZohoAnalytics;\n\nnamespace ZohoAnalyticsTest\n{\n    class Program\n    {\n        long orgId = 55522777;\n        long workspaceId = 35130000001055707;\n\n        public void UpdateReport(IAnalyticsClient ac)\n        {\n            long viewId = 35130000001055901L;\n            Dictionary<string, object> config = new Dictionary<string, object>();\n            config.Add(\"reportType\", \"chart\");\n            List<Dictionary<string, object>> axisColumns = new List<Dictionary<string, object>>();\n            axisColumns.Add(new Dictionary<string, object>{{\"type\",\"xAxis\"},{\"columnName\",\"Date\"},{\"operation\",\"year\"}});\n            axisColumns.Add(new Dictionary<string, object>{{\"type\",\"yAxis\"},{\"columnName\",\"Cost\"},{\"operation\",\"sum\"}});\n            config.Add(\"axisColumns\", axisColumns);\n            IWorkspaceAPI ws = ac.GetWorkspaceInstance(orgId, workspaceId);\n            ws.UpdateReport(viewId, config);\n            Console.WriteLine(\"Success\");\n        }\n\n        static void Main(string[] args)\n        {\n            string clientId = \"1000.xxxxxxx\";\n            string clientSecret = \"xxxxxxx\";\n            string refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n            IAnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n            Program obj = new Program();\n            obj.UpdateReport(ac);\n        }\n    }\n}"
+     }
+    ]
+   },
+   "Go": {
+    "snippets": [
+     {
+      "code": "package main\n\nimport (\n    \"fmt\"\n    ZAnalytics \"zoho/pkg/analyticsclient\"\n)\n\nvar (\n    clientId = \"1000.xxxxxxx\"\n    clientSecret = \"xxxxxxx\"\n    refreshToken = \"1000.xxxxxxx.xxxxxxx\"\n    orgId = \"55522777\"\n    workspaceId = \"35130000001055707\"\n)\n\nfunc UpdateReport(ac ZAnalytics.Client) {\n    viewId := \"35130000001055901\"\n    xAxis := map[string]interface{}{\"type\": \"xAxis\", \"columnName\": \"Date\", \"operation\": \"year\"}\n    yAxis := map[string]interface{}{\"type\": \"yAxis\", \"columnName\": \"Cost\", \"operation\": \"sum\"}\n    axisColumns := []map[string]interface{}{xAxis, yAxis}\n    config := map[string]interface{}{\"reportType\": \"chart\", \"axisColumns\": axisColumns}\n    workspace := ZAnalytics.GetWorkspaceInstance(&ac, orgId, workspaceId)\n    exception := workspace.UpdateReport(viewId, config)\n    if exception != nil { fmt.Println(exception.ErrorMessage); return }\n    fmt.Println(\"Success\")\n}\n\nfunc main() {\n    ac := ZAnalytics.GetAnalyticsClient(clientId, clientSecret, refreshToken)\n    UpdateReport(ac)\n}"
+     }
+    ]
+   },
+   "Java": {
+    "snippets": [
+     {
+      "code": "import com.zoho.analytics.client.*;\nimport org.json.*;\n\npublic class Test {\n    private long orgId = 55522777l;\n    private long workspaceId = 35130000001055707l;\n\n    public static void main(String args[]) {\n        String clientId = \"1000.xxxxxxx\";\n        String clientSecret = \"xxxxxxx\";\n        String refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n        Test tObj = new Test();\n        AnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n        try {\n            tObj.updateReport(ac);\n        } catch (Exception ex) {\n            ex.printStackTrace();\n        }\n    }\n\n    public void updateReport(AnalyticsClient ac) throws Exception {\n        long viewId = 35130000001055901l;\n        JSONObject xAxis = new JSONObject();\n        xAxis.put(\"type\", \"xAxis\");\n        xAxis.put(\"columnName\", \"Date\");\n        xAxis.put(\"operation\", \"year\");\n        JSONObject yAxis = new JSONObject();\n        yAxis.put(\"type\", \"yAxis\");\n        yAxis.put(\"columnName\", \"Cost\");\n        yAxis.put(\"operation\", \"sum\");\n        JSONArray axisColumns = new JSONArray();\n        axisColumns.put(xAxis);\n        axisColumns.put(yAxis);\n        JSONObject config = new JSONObject();\n        config.put(\"reportType\", \"chart\");\n        config.put(\"axisColumns\", axisColumns);\n        WorkspaceAPI workspace = ac.getWorkspaceInstance(orgId, workspaceId);\n        workspace.updateReport(viewId, config);\n        System.out.println(\"success\");\n    }\n}"
+     }
+    ]
+   },
+   "Php": {
+    "snippets": [
+     {
+      "code": "<?php\nrequire 'AnalyticsClient.php';\n\nclass Test {\n    public $ac;\n    public $org_id = \"55522777\";\n    public $workspace_id = \"35130000001055707\";\n    function __construct() {\n        $this->ac = new AnalyticsClient(\"1000.xxxxxxx\", \"xxxxxxx\", \"1000.xxxxxxx.xxxxxxx\");\n    }\n\n    function updateReport() {\n        $view_id = \"35130000001055901\";\n        $x_axis = [\"type\" => \"xAxis\", \"columnName\" => \"Date\", \"operation\" => \"year\"];\n        $y_axis = [\"type\" => \"yAxis\", \"columnName\" => \"Cost\", \"operation\" => \"sum\"];\n        $axis_columns = [$x_axis, $y_axis];\n        $config = [\"reportType\" => \"chart\", \"axisColumns\" => $axis_columns];\n        $workspace = $this->ac->getWorkspaceInstance($this->org_id, $this->workspace_id);\n        $workspace->updateReport($view_id, $config);\n        echo \"success\n\";\n    }\n}\n\n$obj = new Test();\n$obj->updateReport();\n?>"
+     }
+    ]
+   },
+   "Python": {
+    "snippets": [
+     {
+      "code": "from AnalyticsClient import AnalyticsClient\n\nclass Config:\n    CLIENTID = \"1000.xxxxxxx\"\n    CLIENTSECRET = \"xxxxxxx\"\n    REFRESHTOKEN = \"1000.xxxxxxx.xxxxxxx\"\n    ORGID = \"55522777\"\n    WORKSPACEID = \"35130000001055707\"\n\nclass sample:\n    ac = AnalyticsClient(Config.CLIENTID, Config.CLIENTSECRET, Config.REFRESHTOKEN)\n\n    def update_report(self, ac):\n        view_id = \"35130000001055901\"\n        xaxis = {\"type\": \"xAxis\", \"columnName\": \"Date\", \"operation\": \"year\"}\n        yaxis = {\"type\": \"yAxis\", \"columnName\": \"Cost\", \"operation\": \"sum\"}\n        axis_columns = [xaxis, yaxis]\n        config = {\"reportType\": \"chart\", \"axisColumns\": axis_columns}\n        workspace = ac.get_workspace_instance(Config.ORGID, Config.WORKSPACEID)\n        workspace.update_report(view_id, config)\n        print(\"success\")\n\nobj = sample()\nobj.update_report(obj.ac)"
+     }
+    ]
+   },
+   "Node": {
+    "snippets": [
+     {
+      "code": "var analyticsClient = require('./AnalyticsClient');\nvar ac = new analyticsClient('1000.xxxxxxx', 'xxxxxxx', '1000.xxxxxxx.xxxxxxx');\nvar orgId = '55522777';\nvar workspaceId = '35130000001055707';\n\nvar viewId = '35130000001055901';\nvar xAxis = { type: 'xAxis', columnName: 'Date', operation: 'year' };\nvar yAxis = { type: 'yAxis', columnName: 'Cost', operation: 'sum' };\nvar axisColumns = [xAxis, yAxis];\nvar config = { reportType: 'chart', axisColumns: axisColumns };\nvar workspace = ac.getWorkspaceInstance(orgId, workspaceId);\nworkspace.updateReport(viewId, config).then(() => { console.log('success'); }).catch((error) => { console.log(error); });"
+     }
+    ]
+   },
+   "Ruby": {
+    "snippets": [
+     {
+      "code": "require 'zoho_analytics_client'\n\nclass Config\n  ORGID = \"55522777\"\n  WORKSPACEID = \"35130000001055707\"\nend\n\nclass Sample\n  def initialize\n    @ac = AnalyticsClient.new.with_data_center(\"US\").with_oauth({\n      \"clientId\" => \"1000.xxxxxxx\",\n      \"clientSecret\" => \"xxxxxxx\",\n      \"refreshToken\" => \"1000.xxxxxxx.xxxxxxx\"\n    }).build\n  end\n\n  def update_report\n    view_id = \"35130000001055901\"\n    xaxis = { \"type\" => \"xAxis\", \"columnName\" => \"Date\", \"operation\" => \"year\" }\n    yaxis = { \"type\" => \"yAxis\", \"columnName\" => \"Cost\", \"operation\" => \"sum\" }\n    axis_columns = [xaxis, yaxis]\n    config = { \"reportType\" => \"chart\", \"axisColumns\" => axis_columns }\n    workspace = @ac.get_workspace_instance(Config::ORGID, Config::WORKSPACEID)\n    workspace.update_report(view_id, config)\n    puts \"success\"\n  end\nend\n\nobj = Sample.new\nobj.update_report"
+     }
+    ]
+   },
+   "Deluge": {
+    "snippets": [
+     {
+      "code": "orgId = \"55522777\";\nworkspaceId = \"35130000001055707\";\nviewId = \"35130000001055901\";\nheadersMap = Map();\nheadersMap.put(\"ZANALYTICS-ORGID\", orgId);\nconfig = Map();\nconfig.put(\"reportType\", \"chart\");\nparameters = \"CONFIG=\" + zoho.encryption.urlEncode(config.toString());\ninvokeurl\n[\n  url :\"https://analyticsapi.zoho.com/restapi/v2/workspaces/\" + workspaceId + \"/reports/\" + viewId\n  type :PUT\n  parameters:parameters\n  headers:headersMap\n  connection:\"analytics_oauth_connection\"\n];\ninfo \"success\";"
+     }
+    ]
+   }
+  }
+ },
+ "/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata": {
+  "get": {
+   "Curl": {
+    "snippets": [
+     {
+      "code": "curl \"https://analyticsapi.zoho.com/restapi/v2/workspaces/35130000001055707/reports/35130000001055901/metadata\" -H 'ZANALYTICS-ORGID: <org-id>' -H 'Authorization: Zoho-oauthtoken <access_token>'"
+     }
+    ]
+   },
+   "C#": {
+    "snippets": [
+     {
+      "code": "using System;\nusing System.Collections.Generic;\nusing System.Text.Json;\nusing ZohoAnalytics;\n\nnamespace ZohoAnalyticsTest\n{\n    class Program\n    {\n        long orgId = 55522777;\n        long workspaceId = 35130000001055707;\n\n        public void GetReportMetadata(IAnalyticsClient ac)\n        {\n            long viewId = 35130000001055901L;\n            IViewAPI view = ac.GetViewInstance(orgId, workspaceId, viewId);\n            JsonElement reportConfig = view.GetReportMetadata();\n            Console.WriteLine(reportConfig);\n        }\n\n        static void Main(string[] args)\n        {\n            string clientId = \"1000.xxxxxxx\";\n            string clientSecret = \"xxxxxxx\";\n            string refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n            IAnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n            Program obj = new Program();\n            obj.GetReportMetadata(ac);\n        }\n    }\n}"
+     }
+    ]
+   },
+   "Go": {
+    "snippets": [
+     {
+      "code": "package main\n\nimport (\n    \"fmt\"\n    ZAnalytics \"zoho/pkg/analyticsclient\"\n)\n\nvar (\n    clientId = \"1000.xxxxxxx\"\n    clientSecret = \"xxxxxxx\"\n    refreshToken = \"1000.xxxxxxx.xxxxxxx\"\n    orgId = \"55522777\"\n    workspaceId = \"35130000001055707\"\n)\n\nfunc GetReportMetadata(ac ZAnalytics.Client) {\n    viewId := \"35130000001055901\"\n    view := ZAnalytics.GetViewInstance(&ac, orgId, workspaceId, viewId)\n    reportConfig, exception := view.GetReportMetadata()\n    if exception != nil { fmt.Println(exception.ErrorMessage); return }\n    fmt.Println(reportConfig)\n}\n\nfunc main() {\n    ac := ZAnalytics.GetAnalyticsClient(clientId, clientSecret, refreshToken)\n    GetReportMetadata(ac)\n}"
+     }
+    ]
+   },
+   "Java": {
+    "snippets": [
+     {
+      "code": "import com.zoho.analytics.client.*;\nimport org.json.*;\n\npublic class Test {\n    private long orgId = 55522777l;\n    private long workspaceId = 35130000001055707l;\n\n    public static void main(String args[]) {\n        String clientId = \"1000.xxxxxxx\";\n        String clientSecret = \"xxxxxxx\";\n        String refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n        Test tObj = new Test();\n        AnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n        try {\n            tObj.getReportMetadata(ac);\n        } catch (Exception ex) {\n            ex.printStackTrace();\n        }\n    }\n\n    public void getReportMetadata(AnalyticsClient ac) throws Exception {\n        long viewId = 35130000001055901l;\n        ViewAPI view = ac.getViewInstance(orgId, workspaceId, viewId);\n        JSONObject reportConfig = view.getReportMetadata();\n        System.out.println(reportConfig);\n    }\n}"
+     }
+    ]
+   },
+   "Php": {
+    "snippets": [
+     {
+      "code": "<?php\nrequire 'AnalyticsClient.php';\n\nclass Test {\n    public $ac;\n    public $org_id = \"55522777\";\n    public $workspace_id = \"35130000001055707\";\n    function __construct() {\n        $this->ac = new AnalyticsClient(\"1000.xxxxxxx\", \"xxxxxxx\", \"1000.xxxxxxx.xxxxxxx\");\n    }\n\n    function getReportMetadata() {\n        $view_id = \"35130000001055901\";\n        $view = $this->ac->getViewInstance($this->org_id, $this->workspace_id, $view_id);\n        $report_config = $view->getReportMetadata();\n        print_r($report_config);\n    }\n}\n\n$obj = new Test();\n$obj->getReportMetadata();\n?>"
+     }
+    ]
+   },
+   "Python": {
+    "snippets": [
+     {
+      "code": "from AnalyticsClient import AnalyticsClient\n\nclass Config:\n    CLIENTID = \"1000.xxxxxxx\"\n    CLIENTSECRET = \"xxxxxxx\"\n    REFRESHTOKEN = \"1000.xxxxxxx.xxxxxxx\"\n    ORGID = \"55522777\"\n    WORKSPACEID = \"35130000001055707\"\n\nclass sample:\n    ac = AnalyticsClient(Config.CLIENTID, Config.CLIENTSECRET, Config.REFRESHTOKEN)\n\n    def get_report_metadata(self, ac):\n        view_id = \"35130000001055901\"\n        view = ac.get_view_instance(Config.ORGID, Config.WORKSPACEID, view_id)\n        report_config = view.get_report_metadata()\n        print(report_config)\n\nobj = sample()\nobj.get_report_metadata(obj.ac)"
+     }
+    ]
+   },
+   "Node": {
+    "snippets": [
+     {
+      "code": "var analyticsClient = require('./AnalyticsClient');\nvar ac = new analyticsClient('1000.xxxxxxx', 'xxxxxxx', '1000.xxxxxxx.xxxxxxx');\nvar orgId = '55522777';\nvar workspaceId = '35130000001055707';\n\nvar viewId = '35130000001055901';\nvar view = ac.getViewInstance(orgId, workspaceId, viewId);\nview.getReportMetadata().then((reportConfig) => { console.log(reportConfig); }).catch((error) => { console.log(error); });"
+     }
+    ]
+   },
+   "Ruby": {
+    "snippets": [
+     {
+      "code": "require 'zoho_analytics_client'\n\nclass Config\n  ORGID = \"55522777\"\n  WORKSPACEID = \"35130000001055707\"\nend\n\nclass Sample\n  def initialize\n    @ac = AnalyticsClient.new.with_data_center(\"US\").with_oauth({\n      \"clientId\" => \"1000.xxxxxxx\",\n      \"clientSecret\" => \"xxxxxxx\",\n      \"refreshToken\" => \"1000.xxxxxxx.xxxxxxx\"\n    }).build\n  end\n\n  def get_report_metadata\n    view_id = \"35130000001055901\"\n    view = @ac.get_view_instance(Config::ORGID, Config::WORKSPACEID, view_id)\n    report_config = view.get_report_metadata\n    puts report_config\n  end\nend\n\nobj = Sample.new\nobj.get_report_metadata"
+     }
+    ]
+   },
+   "Deluge": {
+    "snippets": [
+     {
+      "code": "orgId = \"55522777\";\nworkspaceId = \"35130000001055707\";\nviewId = \"35130000001055901\";\nheadersMap = Map();\nheadersMap.put(\"ZANALYTICS-ORGID\", orgId);\nresponse = invokeurl\n[\n  url :\"https://analyticsapi.zoho.com/restapi/v2/workspaces/\" + workspaceId + \"/reports/\" + viewId + \"/metadata\"\n  type :GET\n  headers:headersMap\n  connection:\"analytics_oauth_connection\"\n];\ninfo response;"
+     }
+    ]
+   }
+  }
+ },
+ "/restapi/v2/dashboards": {
+  "get": {
+   "Curl": {
+    "snippets": [
+     {
+      "code": "curl \"https://analyticsapi.zoho.com/restapi/v2/dashboards\" -H 'ZANALYTICS-ORGID: <org-id>' -H 'Authorization: Zoho-oauthtoken <access_token>'"
+     }
+    ]
+   },
+   "C#": {
+    "snippets": [
+     {
+      "code": "using System;\nusing System.Collections.Generic;\nusing System.Text.Json;\nusing ZohoAnalytics;\n\nnamespace ZohoAnalyticsTest\n{\n    class Program\n    {\n        long orgId = 55522777;\n        long workspaceId = 35130000001055707;\n\n        public void GetDashboards(IAnalyticsClient ac)\n        {\n            JsonElement result = ac.GetDashboards();\n            Console.WriteLine(result);\n        }\n\n        static void Main(string[] args)\n        {\n            string clientId = \"1000.xxxxxxx\";\n            string clientSecret = \"xxxxxxx\";\n            string refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n            IAnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n            Program obj = new Program();\n            obj.GetDashboards(ac);\n        }\n    }\n}"
+     }
+    ]
+   },
+   "Go": {
+    "snippets": [
+     {
+      "code": "package main\n\nimport (\n    \"fmt\"\n    ZAnalytics \"zoho/pkg/analyticsclient\"\n)\n\nvar (\n    clientId = \"1000.xxxxxxx\"\n    clientSecret = \"xxxxxxx\"\n    refreshToken = \"1000.xxxxxxx.xxxxxxx\"\n    orgId = \"55522777\"\n    workspaceId = \"35130000001055707\"\n)\n\nfunc GetDashboards(ac ZAnalytics.Client) {\n    result, exception := ac.GetDashboards()\n    if exception != nil { fmt.Println(exception.ErrorMessage); return }\n    fmt.Println(result)\n}\n\nfunc main() {\n    ac := ZAnalytics.GetAnalyticsClient(clientId, clientSecret, refreshToken)\n    GetDashboards(ac)\n}"
+     }
+    ]
+   },
+   "Java": {
+    "snippets": [
+     {
+      "code": "import com.zoho.analytics.client.*;\nimport org.json.*;\n\npublic class Test {\n    private long orgId = 55522777l;\n    private long workspaceId = 35130000001055707l;\n\n    public static void main(String args[]) {\n        String clientId = \"1000.xxxxxxx\";\n        String clientSecret = \"xxxxxxx\";\n        String refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n        Test tObj = new Test();\n        AnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n        try {\n            tObj.getDashboards(ac);\n        } catch (Exception ex) {\n            ex.printStackTrace();\n        }\n    }\n\n    public void getDashboards(AnalyticsClient ac) throws Exception {\n        JSONObject result = ac.getDashboards();\n        System.out.println(result);\n    }\n}"
+     }
+    ]
+   },
+   "Php": {
+    "snippets": [
+     {
+      "code": "<?php\nrequire 'AnalyticsClient.php';\n\nclass Test {\n    public $ac;\n    public $org_id = \"55522777\";\n    public $workspace_id = \"35130000001055707\";\n    function __construct() {\n        $this->ac = new AnalyticsClient(\"1000.xxxxxxx\", \"xxxxxxx\", \"1000.xxxxxxx.xxxxxxx\");\n    }\n\n    function getDashboards() {\n        $response = $this->ac->getDashboards();\n        print_r($response);\n    }\n}\n\n$obj = new Test();\n$obj->getDashboards();\n?>"
+     }
+    ]
+   },
+   "Python": {
+    "snippets": [
+     {
+      "code": "from AnalyticsClient import AnalyticsClient\n\nclass Config:\n    CLIENTID = \"1000.xxxxxxx\"\n    CLIENTSECRET = \"xxxxxxx\"\n    REFRESHTOKEN = \"1000.xxxxxxx.xxxxxxx\"\n    ORGID = \"55522777\"\n    WORKSPACEID = \"35130000001055707\"\n\nclass sample:\n    ac = AnalyticsClient(Config.CLIENTID, Config.CLIENTSECRET, Config.REFRESHTOKEN)\n\n    def get_dashboards(self, ac):\n        result = ac.get_dashboards()\n        print(result)\n\nobj = sample()\nobj.get_dashboards(obj.ac)"
+     }
+    ]
+   },
+   "Node": {
+    "snippets": [
+     {
+      "code": "var analyticsClient = require('./AnalyticsClient');\nvar ac = new analyticsClient('1000.xxxxxxx', 'xxxxxxx', '1000.xxxxxxx.xxxxxxx');\nac.getDashboards().then((result) => { console.log(result); }).catch((error) => { console.log(error); });"
+     }
+    ]
+   },
+   "Ruby": {
+    "snippets": [
+     {
+      "code": "require 'zoho_analytics_client'\n\nclass Config\n  ORGID = \"55522777\"\n  WORKSPACEID = \"35130000001055707\"\nend\n\nclass Sample\n  def initialize\n    @ac = AnalyticsClient.new.with_data_center(\"US\").with_oauth({\n      \"clientId\" => \"1000.xxxxxxx\",\n      \"clientSecret\" => \"xxxxxxx\",\n      \"refreshToken\" => \"1000.xxxxxxx.xxxxxxx\"\n    }).build\n  end\n\n  def get_dashboards\n    result = @ac.get_dashboards\n    puts result\n  end\nend\n\nobj = Sample.new\nobj.get_dashboards"
+     }
+    ]
+   },
+   "Deluge": {
+    "snippets": [
+     {
+      "code": "orgId = \"55522777\";\nheadersMap = Map();\nheadersMap.put(\"ZANALYTICS-ORGID\", orgId);\nresponse = invokeurl\n[\n  url :\"https://analyticsapi.zoho.com/restapi/v2/dashboards\"\n  type :GET\n  headers:headersMap\n  connection:\"analytics_oauth_connection\"\n];\ninfo response;"
+     }
+    ]
+   }
+  }
+ },
+ "/restapi/v2/dashboards/owned": {
+  "get": {
+   "Curl": {
+    "snippets": [
+     {
+      "code": "curl \"https://analyticsapi.zoho.com/restapi/v2/dashboards/owned\" -H 'ZANALYTICS-ORGID: <org-id>' -H 'Authorization: Zoho-oauthtoken <access_token>'"
+     }
+    ]
+   },
+   "C#": {
+    "snippets": [
+     {
+      "code": "using System;\nusing System.Collections.Generic;\nusing System.Text.Json;\nusing ZohoAnalytics;\n\nnamespace ZohoAnalyticsTest\n{\n    class Program\n    {\n        long orgId = 55522777;\n        long workspaceId = 35130000001055707;\n\n        public void GetOwnedDashboards(IAnalyticsClient ac)\n        {\n            JsonElement result = ac.GetOwnedDashboards();\n            Console.WriteLine(result);\n        }\n\n        static void Main(string[] args)\n        {\n            string clientId = \"1000.xxxxxxx\";\n            string clientSecret = \"xxxxxxx\";\n            string refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n            IAnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n            Program obj = new Program();\n            obj.GetOwnedDashboards(ac);\n        }\n    }\n}"
+     }
+    ]
+   },
+   "Go": {
+    "snippets": [
+     {
+      "code": "package main\n\nimport (\n    \"fmt\"\n    ZAnalytics \"zoho/pkg/analyticsclient\"\n)\n\nvar (\n    clientId = \"1000.xxxxxxx\"\n    clientSecret = \"xxxxxxx\"\n    refreshToken = \"1000.xxxxxxx.xxxxxxx\"\n    orgId = \"55522777\"\n    workspaceId = \"35130000001055707\"\n)\n\nfunc GetOwnedDashboards(ac ZAnalytics.Client) {\n    result, exception := ac.GetOwnedDashboards()\n    if exception != nil { fmt.Println(exception.ErrorMessage); return }\n    fmt.Println(result)\n}\n\nfunc main() {\n    ac := ZAnalytics.GetAnalyticsClient(clientId, clientSecret, refreshToken)\n    GetOwnedDashboards(ac)\n}"
+     }
+    ]
+   },
+   "Java": {
+    "snippets": [
+     {
+      "code": "import com.zoho.analytics.client.*;\nimport org.json.*;\n\npublic class Test {\n    private long orgId = 55522777l;\n    private long workspaceId = 35130000001055707l;\n\n    public static void main(String args[]) {\n        String clientId = \"1000.xxxxxxx\";\n        String clientSecret = \"xxxxxxx\";\n        String refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n        Test tObj = new Test();\n        AnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n        try {\n            tObj.getOwnedDashboards(ac);\n        } catch (Exception ex) {\n            ex.printStackTrace();\n        }\n    }\n\n    public void getOwnedDashboards(AnalyticsClient ac) throws Exception {\n        JSONArray result = ac.getOwnedDashboards();\n        System.out.println(result);\n    }\n}"
+     }
+    ]
+   },
+   "Php": {
+    "snippets": [
+     {
+      "code": "<?php\nrequire 'AnalyticsClient.php';\n\nclass Test {\n    public $ac;\n    public $org_id = \"55522777\";\n    public $workspace_id = \"35130000001055707\";\n    function __construct() {\n        $this->ac = new AnalyticsClient(\"1000.xxxxxxx\", \"xxxxxxx\", \"1000.xxxxxxx.xxxxxxx\");\n    }\n\n    function getOwnedDashboards() {\n        $response = $this->ac->getOwnedDashboards();\n        print_r($response);\n    }\n}\n\n$obj = new Test();\n$obj->getOwnedDashboards();\n?>"
+     }
+    ]
+   },
+   "Python": {
+    "snippets": [
+     {
+      "code": "from AnalyticsClient import AnalyticsClient\n\nclass Config:\n    CLIENTID = \"1000.xxxxxxx\"\n    CLIENTSECRET = \"xxxxxxx\"\n    REFRESHTOKEN = \"1000.xxxxxxx.xxxxxxx\"\n    ORGID = \"55522777\"\n    WORKSPACEID = \"35130000001055707\"\n\nclass sample:\n    ac = AnalyticsClient(Config.CLIENTID, Config.CLIENTSECRET, Config.REFRESHTOKEN)\n\n    def get_owned_dashboards(self, ac):\n        result = ac.get_owned_dashboards()\n        print(result)\n\nobj = sample()\nobj.get_owned_dashboards(obj.ac)"
+     }
+    ]
+   },
+   "Node": {
+    "snippets": [
+     {
+      "code": "var analyticsClient = require('./AnalyticsClient');\nvar ac = new analyticsClient('1000.xxxxxxx', 'xxxxxxx', '1000.xxxxxxx.xxxxxxx');\nac.getOwnedDashboards().then((result) => { console.log(result); }).catch((error) => { console.log(error); });"
+     }
+    ]
+   },
+   "Ruby": {
+    "snippets": [
+     {
+      "code": "require 'zoho_analytics_client'\n\nclass Config\n  ORGID = \"55522777\"\n  WORKSPACEID = \"35130000001055707\"\nend\n\nclass Sample\n  def initialize\n    @ac = AnalyticsClient.new.with_data_center(\"US\").with_oauth({\n      \"clientId\" => \"1000.xxxxxxx\",\n      \"clientSecret\" => \"xxxxxxx\",\n      \"refreshToken\" => \"1000.xxxxxxx.xxxxxxx\"\n    }).build\n  end\n\n  def get_owned_dashboards\n    result = @ac.get_owned_dashboards\n    puts result\n  end\nend\n\nobj = Sample.new\nobj.get_owned_dashboards"
+     }
+    ]
+   },
+   "Deluge": {
+    "snippets": [
+     {
+      "code": "orgId = \"55522777\";\nheadersMap = Map();\nheadersMap.put(\"ZANALYTICS-ORGID\", orgId);\nresponse = invokeurl\n[\n  url :\"https://analyticsapi.zoho.com/restapi/v2/dashboards/owned\"\n  type :GET\n  headers:headersMap\n  connection:\"analytics_oauth_connection\"\n];\ninfo response;"
+     }
+    ]
+   }
+  }
+ },
+ "/restapi/v2/dashboards/shared": {
+  "get": {
+   "Curl": {
+    "snippets": [
+     {
+      "code": "curl \"https://analyticsapi.zoho.com/restapi/v2/dashboards/shared\" -H 'ZANALYTICS-ORGID: <org-id>' -H 'Authorization: Zoho-oauthtoken <access_token>'"
+     }
+    ]
+   },
+   "C#": {
+    "snippets": [
+     {
+      "code": "using System;\nusing System.Collections.Generic;\nusing System.Text.Json;\nusing ZohoAnalytics;\n\nnamespace ZohoAnalyticsTest\n{\n    class Program\n    {\n        long orgId = 55522777;\n        long workspaceId = 35130000001055707;\n\n        public void GetSharedDashboards(IAnalyticsClient ac)\n        {\n            JsonElement result = ac.GetSharedDashboards();\n            Console.WriteLine(result);\n        }\n\n        static void Main(string[] args)\n        {\n            string clientId = \"1000.xxxxxxx\";\n            string clientSecret = \"xxxxxxx\";\n            string refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n            IAnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n            Program obj = new Program();\n            obj.GetSharedDashboards(ac);\n        }\n    }\n}"
+     }
+    ]
+   },
+   "Go": {
+    "snippets": [
+     {
+      "code": "package main\n\nimport (\n    \"fmt\"\n    ZAnalytics \"zoho/pkg/analyticsclient\"\n)\n\nvar (\n    clientId = \"1000.xxxxxxx\"\n    clientSecret = \"xxxxxxx\"\n    refreshToken = \"1000.xxxxxxx.xxxxxxx\"\n    orgId = \"55522777\"\n    workspaceId = \"35130000001055707\"\n)\n\nfunc GetSharedDashboards(ac ZAnalytics.Client) {\n    result, exception := ac.GetSharedDashboards()\n    if exception != nil { fmt.Println(exception.ErrorMessage); return }\n    fmt.Println(result)\n}\n\nfunc main() {\n    ac := ZAnalytics.GetAnalyticsClient(clientId, clientSecret, refreshToken)\n    GetSharedDashboards(ac)\n}"
+     }
+    ]
+   },
+   "Java": {
+    "snippets": [
+     {
+      "code": "import com.zoho.analytics.client.*;\nimport org.json.*;\n\npublic class Test {\n    private long orgId = 55522777l;\n    private long workspaceId = 35130000001055707l;\n\n    public static void main(String args[]) {\n        String clientId = \"1000.xxxxxxx\";\n        String clientSecret = \"xxxxxxx\";\n        String refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n        Test tObj = new Test();\n        AnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n        try {\n            tObj.getSharedDashboards(ac);\n        } catch (Exception ex) {\n            ex.printStackTrace();\n        }\n    }\n\n    public void getSharedDashboards(AnalyticsClient ac) throws Exception {\n        JSONArray result = ac.getSharedDashboards();\n        System.out.println(result);\n    }\n}"
+     }
+    ]
+   },
+   "Php": {
+    "snippets": [
+     {
+      "code": "<?php\nrequire 'AnalyticsClient.php';\n\nclass Test {\n    public $ac;\n    public $org_id = \"55522777\";\n    public $workspace_id = \"35130000001055707\";\n    function __construct() {\n        $this->ac = new AnalyticsClient(\"1000.xxxxxxx\", \"xxxxxxx\", \"1000.xxxxxxx.xxxxxxx\");\n    }\n\n    function getSharedDashboards() {\n        $response = $this->ac->getSharedDashboards();\n        print_r($response);\n    }\n}\n\n$obj = new Test();\n$obj->getSharedDashboards();\n?>"
+     }
+    ]
+   },
+   "Python": {
+    "snippets": [
+     {
+      "code": "from AnalyticsClient import AnalyticsClient\n\nclass Config:\n    CLIENTID = \"1000.xxxxxxx\"\n    CLIENTSECRET = \"xxxxxxx\"\n    REFRESHTOKEN = \"1000.xxxxxxx.xxxxxxx\"\n    ORGID = \"55522777\"\n    WORKSPACEID = \"35130000001055707\"\n\nclass sample:\n    ac = AnalyticsClient(Config.CLIENTID, Config.CLIENTSECRET, Config.REFRESHTOKEN)\n\n    def get_shared_dashboards(self, ac):\n        result = ac.get_shared_dashboards()\n        print(result)\n\nobj = sample()\nobj.get_shared_dashboards(obj.ac)"
+     }
+    ]
+   },
+   "Node": {
+    "snippets": [
+     {
+      "code": "var analyticsClient = require('./AnalyticsClient');\nvar ac = new analyticsClient('1000.xxxxxxx', 'xxxxxxx', '1000.xxxxxxx.xxxxxxx');\nac.getSharedDashboards().then((result) => { console.log(result); }).catch((error) => { console.log(error); });"
+     }
+    ]
+   },
+   "Ruby": {
+    "snippets": [
+     {
+      "code": "require 'zoho_analytics_client'\n\nclass Config\n  ORGID = \"55522777\"\n  WORKSPACEID = \"35130000001055707\"\nend\n\nclass Sample\n  def initialize\n    @ac = AnalyticsClient.new.with_data_center(\"US\").with_oauth({\n      \"clientId\" => \"1000.xxxxxxx\",\n      \"clientSecret\" => \"xxxxxxx\",\n      \"refreshToken\" => \"1000.xxxxxxx.xxxxxxx\"\n    }).build\n  end\n\n  def get_shared_dashboards\n    result = @ac.get_shared_dashboards\n    puts result\n  end\nend\n\nobj = Sample.new\nobj.get_shared_dashboards"
+     }
+    ]
+   },
+   "Deluge": {
+    "snippets": [
+     {
+      "code": "orgId = \"55522777\";\nheadersMap = Map();\nheadersMap.put(\"ZANALYTICS-ORGID\", orgId);\nresponse = invokeurl\n[\n  url :\"https://analyticsapi.zoho.com/restapi/v2/dashboards/shared\"\n  type :GET\n  headers:headersMap\n  connection:\"analytics_oauth_connection\"\n];\ninfo response;"
+     }
+    ]
+   }
+  }
+ },
+ "/restapi/v2/workspaces/{workspace-id}/dashboards": {
+  "post": {
+   "Curl": {
+    "snippets": [
+     {
+      "code": "curl \"https://analyticsapi.zoho.com/restapi/v2/workspaces/35130000001055707/dashboards\" -X 'POST' -H 'ZANALYTICS-ORGID: <org-id>' -H 'Authorization: Zoho-oauthtoken <access_token>' --data-urlencode 'CONFIG={\"displayName\":\"Sales Overview\",\"description\":\"Monthly sales KPIs\",\"layout\":{\"1\":{\"type\":\"VIEW\",\"width\":40,\"height\":20,\"left\":0,\"top\":0,\"viewName\":\"Monthly_Sales_Chart\"},\"2\":{\"type\":\"USERFILTERS\",\"width\":80,\"height\":3,\"left\":0,\"top\":20}}}'"
+     }
+    ]
+   },
+   "C#": {
+    "snippets": [
+     {
+      "code": "using System;\nusing System.Collections.Generic;\nusing System.Text.Json;\nusing ZohoAnalytics;\n\nnamespace ZohoAnalyticsTest\n{\n    class Program\n    {\n        long orgId = 55522777;\n        long workspaceId = 35130000001055707;\n\n        public void CreateDashboard(IAnalyticsClient ac)\n        {\n            Dictionary<string, object> viewCard = new Dictionary<string, object>{{\"type\",\"VIEW\"},{\"width\",40},{\"height\",20},{\"left\",0},{\"top\",0},{\"viewName\",\"Monthly_Sales_Chart\"}};\n            Dictionary<string, object> filterCard = new Dictionary<string, object>{{\"type\",\"USERFILTERS\"},{\"width\",80},{\"height\",3},{\"left\",0},{\"top\",20}};\n            Dictionary<string, object> layout = new Dictionary<string, object>{{\"1\",viewCard},{\"2\",filterCard}};\n            Dictionary<string, object> config = new Dictionary<string, object>();\n            config.Add(\"displayName\", \"Sales Overview\");\n            config.Add(\"description\", \"Monthly sales KPIs\");\n            config.Add(\"layout\", layout);\n            IWorkspaceAPI ws = ac.GetWorkspaceInstance(orgId, workspaceId);\n            long dashboardId = ws.CreateDashboard(config);\n            Console.WriteLine(dashboardId);\n        }\n\n        static void Main(string[] args)\n        {\n            string clientId = \"1000.xxxxxxx\";\n            string clientSecret = \"xxxxxxx\";\n            string refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n            IAnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n            Program obj = new Program();\n            obj.CreateDashboard(ac);\n        }\n    }\n}"
+     }
+    ]
+   },
+   "Go": {
+    "snippets": [
+     {
+      "code": "package main\n\nimport (\n    \"fmt\"\n    ZAnalytics \"zoho/pkg/analyticsclient\"\n)\n\nvar (\n    clientId = \"1000.xxxxxxx\"\n    clientSecret = \"xxxxxxx\"\n    refreshToken = \"1000.xxxxxxx.xxxxxxx\"\n    orgId = \"55522777\"\n    workspaceId = \"35130000001055707\"\n)\n\nfunc CreateDashboard(ac ZAnalytics.Client) {\n    viewCard := map[string]interface{}{\"type\": \"VIEW\", \"width\": 40, \"height\": 20, \"left\": 0, \"top\": 0, \"viewName\": \"Monthly_Sales_Chart\"}\n    filterCard := map[string]interface{}{\"type\": \"USERFILTERS\", \"width\": 80, \"height\": 3, \"left\": 0, \"top\": 20}\n    layout := map[string]interface{}{\"1\": viewCard, \"2\": filterCard}\n    config := map[string]interface{}{\"displayName\": \"Sales Overview\", \"description\": \"Monthly sales KPIs\", \"layout\": layout}\n    workspace := ZAnalytics.GetWorkspaceInstance(&ac, orgId, workspaceId)\n    dashboardId, exception := workspace.CreateDashboard(config)\n    if exception != nil { fmt.Println(exception.ErrorMessage); return }\n    fmt.Println(dashboardId)\n}\n\nfunc main() {\n    ac := ZAnalytics.GetAnalyticsClient(clientId, clientSecret, refreshToken)\n    CreateDashboard(ac)\n}"
+     }
+    ]
+   },
+   "Java": {
+    "snippets": [
+     {
+      "code": "import com.zoho.analytics.client.*;\nimport org.json.*;\n\npublic class Test {\n    private long orgId = 55522777l;\n    private long workspaceId = 35130000001055707l;\n\n    public static void main(String args[]) {\n        String clientId = \"1000.xxxxxxx\";\n        String clientSecret = \"xxxxxxx\";\n        String refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n        Test tObj = new Test();\n        AnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n        try {\n            tObj.createDashboard(ac);\n        } catch (Exception ex) {\n            ex.printStackTrace();\n        }\n    }\n\n    public void createDashboard(AnalyticsClient ac) throws Exception {\n        JSONObject viewCard = new JSONObject();\n        viewCard.put(\"type\", \"VIEW\");\n        viewCard.put(\"width\", 40);\n        viewCard.put(\"height\", 20);\n        viewCard.put(\"left\", 0);\n        viewCard.put(\"top\", 0);\n        viewCard.put(\"viewName\", \"Monthly_Sales_Chart\");\n        JSONObject filterCard = new JSONObject();\n        filterCard.put(\"type\", \"USERFILTERS\");\n        filterCard.put(\"width\", 80);\n        filterCard.put(\"height\", 3);\n        filterCard.put(\"left\", 0);\n        filterCard.put(\"top\", 20);\n        JSONObject layout = new JSONObject();\n        layout.put(\"1\", viewCard);\n        layout.put(\"2\", filterCard);\n        JSONObject config = new JSONObject();\n        config.put(\"displayName\", \"Sales Overview\");\n        config.put(\"description\", \"Monthly sales KPIs\");\n        config.put(\"layout\", layout);\n        WorkspaceAPI workspace = ac.getWorkspaceInstance(orgId, workspaceId);\n        long dashboardId = workspace.createDashboard(config);\n        System.out.println(dashboardId);\n    }\n}"
+     }
+    ]
+   },
+   "Php": {
+    "snippets": [
+     {
+      "code": "<?php\nrequire 'AnalyticsClient.php';\n\nclass Test {\n    public $ac;\n    public $org_id = \"55522777\";\n    public $workspace_id = \"35130000001055707\";\n    function __construct() {\n        $this->ac = new AnalyticsClient(\"1000.xxxxxxx\", \"xxxxxxx\", \"1000.xxxxxxx.xxxxxxx\");\n    }\n\n    function createDashboard() {\n        $view_card = [\"type\" => \"VIEW\", \"width\" => 40, \"height\" => 20, \"left\" => 0, \"top\" => 0, \"viewName\" => \"Monthly_Sales_Chart\"];\n        $filter_card = [\"type\" => \"USERFILTERS\", \"width\" => 80, \"height\" => 3, \"left\" => 0, \"top\" => 20];\n        $layout = [\"1\" => $view_card, \"2\" => $filter_card];\n        $config = [\"displayName\" => \"Sales Overview\", \"description\" => \"Monthly sales KPIs\", \"layout\" => $layout];\n        $workspace = $this->ac->getWorkspaceInstance($this->org_id, $this->workspace_id);\n        $dashboard_id = $workspace->createDashboard($config);\n        print_r($dashboard_id);\n    }\n}\n\n$obj = new Test();\n$obj->createDashboard();\n?>"
+     }
+    ]
+   },
+   "Python": {
+    "snippets": [
+     {
+      "code": "from AnalyticsClient import AnalyticsClient\n\nclass Config:\n    CLIENTID = \"1000.xxxxxxx\"\n    CLIENTSECRET = \"xxxxxxx\"\n    REFRESHTOKEN = \"1000.xxxxxxx.xxxxxxx\"\n    ORGID = \"55522777\"\n    WORKSPACEID = \"35130000001055707\"\n\nclass sample:\n    ac = AnalyticsClient(Config.CLIENTID, Config.CLIENTSECRET, Config.REFRESHTOKEN)\n\n    def create_dashboard(self, ac):\n        view_card = {\"type\": \"VIEW\", \"width\": 40, \"height\": 20, \"left\": 0, \"top\": 0, \"viewName\": \"Monthly_Sales_Chart\"}\n        filter_card = {\"type\": \"USERFILTERS\", \"width\": 80, \"height\": 3, \"left\": 0, \"top\": 20}\n        layout = {\"1\": view_card, \"2\": filter_card}\n        config = {\"displayName\": \"Sales Overview\", \"description\": \"Monthly sales KPIs\", \"layout\": layout}\n        workspace = ac.get_workspace_instance(Config.ORGID, Config.WORKSPACEID)\n        dashboard_id = workspace.create_dashboard(config)\n        print(dashboard_id)\n\nobj = sample()\nobj.create_dashboard(obj.ac)"
+     }
+    ]
+   },
+   "Node": {
+    "snippets": [
+     {
+      "code": "var analyticsClient = require('./AnalyticsClient');\nvar ac = new analyticsClient('1000.xxxxxxx', 'xxxxxxx', '1000.xxxxxxx.xxxxxxx');\nvar orgId = '55522777';\nvar workspaceId = '35130000001055707';\n\nvar viewCard = { type: 'VIEW', width: 40, height: 20, left: 0, top: 0, viewName: 'Monthly_Sales_Chart' };\nvar filterCard = { type: 'USERFILTERS', width: 80, height: 3, left: 0, top: 20 };\nvar layout = { '1': viewCard, '2': filterCard };\nvar config = { displayName: 'Sales Overview', description: 'Monthly sales KPIs', layout: layout };\nvar workspace = ac.getWorkspaceInstance(orgId, workspaceId);\nworkspace.createDashboard(config).then((dashboardId) => { console.log(dashboardId); }).catch((error) => { console.log(error); });"
+     }
+    ]
+   },
+   "Ruby": {
+    "snippets": [
+     {
+      "code": "require 'zoho_analytics_client'\n\nclass Config\n  ORGID = \"55522777\"\n  WORKSPACEID = \"35130000001055707\"\nend\n\nclass Sample\n  def initialize\n    @ac = AnalyticsClient.new.with_data_center(\"US\").with_oauth({\n      \"clientId\" => \"1000.xxxxxxx\",\n      \"clientSecret\" => \"xxxxxxx\",\n      \"refreshToken\" => \"1000.xxxxxxx.xxxxxxx\"\n    }).build\n  end\n\n  def create_dashboard\n    view_card = { \"type\" => \"VIEW\", \"width\" => 40, \"height\" => 20, \"left\" => 0, \"top\" => 0, \"viewName\" => \"Monthly_Sales_Chart\" }\n    filter_card = { \"type\" => \"USERFILTERS\", \"width\" => 80, \"height\" => 3, \"left\" => 0, \"top\" => 20 }\n    layout = { \"1\" => view_card, \"2\" => filter_card }\n    config = { \"displayName\" => \"Sales Overview\", \"description\" => \"Monthly sales KPIs\", \"layout\" => layout }\n    workspace = @ac.get_workspace_instance(Config::ORGID, Config::WORKSPACEID)\n    dashboard_id = workspace.create_dashboard(config)\n    puts dashboard_id\n  end\nend\n\nobj = Sample.new\nobj.create_dashboard"
+     }
+    ]
+   },
+   "Deluge": {
+    "snippets": [
+     {
+      "code": "orgId = \"55522777\";\nworkspaceId = \"35130000001055707\";\nheadersMap = Map();\nheadersMap.put(\"ZANALYTICS-ORGID\", orgId);\nviewCard = Map();\nviewCard.put(\"type\", \"VIEW\");\nviewCard.put(\"width\", 40);\nviewCard.put(\"height\", 20);\nviewCard.put(\"left\", 0);\nviewCard.put(\"top\", 0);\nviewCard.put(\"viewName\", \"Monthly_Sales_Chart\");\nfilterCard = Map();\nfilterCard.put(\"type\", \"USERFILTERS\");\nfilterCard.put(\"width\", 80);\nfilterCard.put(\"height\", 3);\nfilterCard.put(\"left\", 0);\nfilterCard.put(\"top\", 20);\nlayout = Map();\nlayout.put(\"1\", viewCard);\nlayout.put(\"2\", filterCard);\nconfig = Map();\nconfig.put(\"displayName\", \"Sales Overview\");\nconfig.put(\"description\", \"Monthly sales KPIs\");\nconfig.put(\"layout\", layout);\nparameters = \"CONFIG=\" + zoho.encryption.urlEncode(config.toString());\nresponse = invokeurl\n[\n  url :\"https://analyticsapi.zoho.com/restapi/v2/workspaces/\" + workspaceId + \"/dashboards\"\n  type :POST\n  parameters:parameters\n  headers:headersMap\n  connection:\"analytics_oauth_connection\"\n];\ninfo response;"
+     }
+    ]
+   }
+  }
+ },
+ "/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata": {
+  "get": {
+   "Curl": {
+    "snippets": [
+     {
+      "code": "curl -G \"https://analyticsapi.zoho.com/restapi/v2/workspaces/35130000001055707/dashboards/35130000001055801/metadata\" --data-urlencode 'CONFIG={\"include\":\"themes,settings\"}' -H 'ZANALYTICS-ORGID: <org-id>' -H 'Authorization: Zoho-oauthtoken <access_token>'"
+     }
+    ]
+   },
+   "C#": {
+    "snippets": [
+     {
+      "code": "using System;\nusing System.Collections.Generic;\nusing System.Text.Json;\nusing ZohoAnalytics;\n\nnamespace ZohoAnalyticsTest\n{\n    class Program\n    {\n        long orgId = 55522777;\n        long workspaceId = 35130000001055707;\n\n        public void GetDashboardMetadata(IAnalyticsClient ac)\n        {\n            long dashboardId = 35130000001055801L;\n            Dictionary<string, object> config = new Dictionary<string, object>();\n            config.Add(\"include\", \"themes,settings\");\n            IViewAPI view = ac.GetViewInstance(orgId, workspaceId, dashboardId);\n            JsonElement dashboardConfig = view.GetDashboardMetadata(config);\n            Console.WriteLine(dashboardConfig);\n        }\n\n        static void Main(string[] args)\n        {\n            string clientId = \"1000.xxxxxxx\";\n            string clientSecret = \"xxxxxxx\";\n            string refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n            IAnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n            Program obj = new Program();\n            obj.GetDashboardMetadata(ac);\n        }\n    }\n}"
+     }
+    ]
+   },
+   "Go": {
+    "snippets": [
+     {
+      "code": "package main\n\nimport (\n    \"fmt\"\n    ZAnalytics \"zoho/pkg/analyticsclient\"\n)\n\nvar (\n    clientId = \"1000.xxxxxxx\"\n    clientSecret = \"xxxxxxx\"\n    refreshToken = \"1000.xxxxxxx.xxxxxxx\"\n    orgId = \"55522777\"\n    workspaceId = \"35130000001055707\"\n)\n\nfunc GetDashboardMetadata(ac ZAnalytics.Client) {\n    dashboardId := \"35130000001055801\"\n    config := map[string]interface{}{\"include\": \"themes,settings\"}\n    view := ZAnalytics.GetViewInstance(&ac, orgId, workspaceId, dashboardId)\n    dashboardConfig, exception := view.GetDashboardMetadata(config)\n    if exception != nil { fmt.Println(exception.ErrorMessage); return }\n    fmt.Println(dashboardConfig)\n}\n\nfunc main() {\n    ac := ZAnalytics.GetAnalyticsClient(clientId, clientSecret, refreshToken)\n    GetDashboardMetadata(ac)\n}"
+     }
+    ]
+   },
+   "Java": {
+    "snippets": [
+     {
+      "code": "import com.zoho.analytics.client.*;\nimport org.json.*;\n\npublic class Test {\n    private long orgId = 55522777l;\n    private long workspaceId = 35130000001055707l;\n\n    public static void main(String args[]) {\n        String clientId = \"1000.xxxxxxx\";\n        String clientSecret = \"xxxxxxx\";\n        String refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n        Test tObj = new Test();\n        AnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n        try {\n            tObj.getDashboardMetadata(ac);\n        } catch (Exception ex) {\n            ex.printStackTrace();\n        }\n    }\n\n    public void getDashboardMetadata(AnalyticsClient ac) throws Exception {\n        long dashboardId = 35130000001055801l;\n        JSONObject config = new JSONObject();\n        config.put(\"include\", \"themes,settings\");\n        ViewAPI view = ac.getViewInstance(orgId, workspaceId, dashboardId);\n        JSONObject dashboardConfig = view.getDashboardMetadata(config);\n        System.out.println(dashboardConfig);\n    }\n}"
+     }
+    ]
+   },
+   "Php": {
+    "snippets": [
+     {
+      "code": "<?php\nrequire 'AnalyticsClient.php';\n\nclass Test {\n    public $ac;\n    public $org_id = \"55522777\";\n    public $workspace_id = \"35130000001055707\";\n    function __construct() {\n        $this->ac = new AnalyticsClient(\"1000.xxxxxxx\", \"xxxxxxx\", \"1000.xxxxxxx.xxxxxxx\");\n    }\n\n    function getDashboardMetadata() {\n        $dashboard_id = \"35130000001055801\";\n        $config = [\"include\" => \"themes,settings\"];\n        $view = $this->ac->getViewInstance($this->org_id, $this->workspace_id, $dashboard_id);\n        $dashboard_config = $view->getDashboardMetadata($config);\n        print_r($dashboard_config);\n    }\n}\n\n$obj = new Test();\n$obj->getDashboardMetadata();\n?>"
+     }
+    ]
+   },
+   "Python": {
+    "snippets": [
+     {
+      "code": "from AnalyticsClient import AnalyticsClient\n\nclass Config:\n    CLIENTID = \"1000.xxxxxxx\"\n    CLIENTSECRET = \"xxxxxxx\"\n    REFRESHTOKEN = \"1000.xxxxxxx.xxxxxxx\"\n    ORGID = \"55522777\"\n    WORKSPACEID = \"35130000001055707\"\n\nclass sample:\n    ac = AnalyticsClient(Config.CLIENTID, Config.CLIENTSECRET, Config.REFRESHTOKEN)\n\n    def get_dashboard_metadata(self, ac):\n        dashboard_id = \"35130000001055801\"\n        config = {\"include\": \"themes,settings\"}\n        view = ac.get_view_instance(Config.ORGID, Config.WORKSPACEID, dashboard_id)\n        dashboard_config = view.get_dashboard_metadata(config)\n        print(dashboard_config)\n\nobj = sample()\nobj.get_dashboard_metadata(obj.ac)"
+     }
+    ]
+   },
+   "Node": {
+    "snippets": [
+     {
+      "code": "var analyticsClient = require('./AnalyticsClient');\nvar ac = new analyticsClient('1000.xxxxxxx', 'xxxxxxx', '1000.xxxxxxx.xxxxxxx');\nvar orgId = '55522777';\nvar workspaceId = '35130000001055707';\n\nvar dashboardId = '35130000001055801';\nvar config = { include: 'themes,settings' };\nvar view = ac.getViewInstance(orgId, workspaceId, dashboardId);\nview.getDashboardMetadata(config).then((dashboardConfig) => { console.log(dashboardConfig); }).catch((error) => { console.log(error); });"
+     }
+    ]
+   },
+   "Ruby": {
+    "snippets": [
+     {
+      "code": "require 'zoho_analytics_client'\n\nclass Config\n  ORGID = \"55522777\"\n  WORKSPACEID = \"35130000001055707\"\nend\n\nclass Sample\n  def initialize\n    @ac = AnalyticsClient.new.with_data_center(\"US\").with_oauth({\n      \"clientId\" => \"1000.xxxxxxx\",\n      \"clientSecret\" => \"xxxxxxx\",\n      \"refreshToken\" => \"1000.xxxxxxx.xxxxxxx\"\n    }).build\n  end\n\n  def get_dashboard_metadata\n    dashboard_id = \"35130000001055801\"\n    config = { \"include\" => \"themes,settings\" }\n    view = @ac.get_view_instance(Config::ORGID, Config::WORKSPACEID, dashboard_id)\n    dashboard_config = view.get_dashboard_metadata(config)\n    puts dashboard_config\n  end\nend\n\nobj = Sample.new\nobj.get_dashboard_metadata"
+     }
+    ]
+   },
+   "Deluge": {
+    "snippets": [
+     {
+      "code": "orgId = \"55522777\";\nworkspaceId = \"35130000001055707\";\ndashboardId = \"35130000001055801\";\nheadersMap = Map();\nheadersMap.put(\"ZANALYTICS-ORGID\", orgId);\nconfig = Map();\nconfig.put(\"include\", \"themes,settings\");\nparameters = \"CONFIG=\" + zoho.encryption.urlEncode(config.toString());\nresponse = invokeurl\n[\n  url :\"https://analyticsapi.zoho.com/restapi/v2/workspaces/\" + workspaceId + \"/dashboards/\" + dashboardId + \"/metadata?\" + parameters\n  type :GET\n  headers:headersMap\n  connection:\"analytics_oauth_connection\"\n];\ninfo response;"
+     }
+    ]
+   }
+  }
+ },
+ "/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}": {
+  "put": {
+   "Curl": {
+    "snippets": [
+     {
+      "code": "curl \"https://analyticsapi.zoho.com/restapi/v2/workspaces/35130000001055707/dashboards/35130000001055801\" -X 'PUT' -H 'ZANALYTICS-ORGID: <org-id>' -H 'Authorization: Zoho-oauthtoken <access_token>' --data-urlencode 'CONFIG={\"settings\":{\"enableGlobalUF\":\"true\",\"reportAsFilter\":\"true\",\"fitToWidth\":\"false\",\"allowExport\":{\"pdf\":\"false\",\"excel\":\"true\",\"csv\":\"true\",\"html\":\"false\"}}}'"
+     }
+    ]
+   },
+   "C#": {
+    "snippets": [
+     {
+      "code": "using System;\nusing System.Collections.Generic;\nusing System.Text.Json;\nusing ZohoAnalytics;\n\nnamespace ZohoAnalyticsTest\n{\n    class Program\n    {\n        long orgId = 55522777;\n        long workspaceId = 35130000001055707;\n\n        public void UpdateDashboard(IAnalyticsClient ac)\n        {\n            long dashboardId = 35130000001055801L;\n            Dictionary<string, object> allowExport = new Dictionary<string, object>{{\"pdf\",\"false\"},{\"excel\",\"true\"},{\"csv\",\"true\"},{\"html\",\"false\"}};\n            Dictionary<string, object> settings = new Dictionary<string, object>();\n            settings.Add(\"enableGlobalUF\", \"true\");\n            settings.Add(\"reportAsFilter\", \"true\");\n            settings.Add(\"fitToWidth\", \"false\");\n            settings.Add(\"allowExport\", allowExport);\n            Dictionary<string, object> config = new Dictionary<string, object>();\n            config.Add(\"settings\", settings);\n            IWorkspaceAPI ws = ac.GetWorkspaceInstance(orgId, workspaceId);\n            ws.UpdateDashboard(dashboardId, config);\n            Console.WriteLine(\"Success\");\n        }\n\n        static void Main(string[] args)\n        {\n            string clientId = \"1000.xxxxxxx\";\n            string clientSecret = \"xxxxxxx\";\n            string refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n            IAnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n            Program obj = new Program();\n            obj.UpdateDashboard(ac);\n        }\n    }\n}"
+     }
+    ]
+   },
+   "Go": {
+    "snippets": [
+     {
+      "code": "package main\n\nimport (\n    \"fmt\"\n    ZAnalytics \"zoho/pkg/analyticsclient\"\n)\n\nvar (\n    clientId = \"1000.xxxxxxx\"\n    clientSecret = \"xxxxxxx\"\n    refreshToken = \"1000.xxxxxxx.xxxxxxx\"\n    orgId = \"55522777\"\n    workspaceId = \"35130000001055707\"\n)\n\nfunc UpdateDashboard(ac ZAnalytics.Client) {\n    dashboardId := \"35130000001055801\"\n    allowExport := map[string]interface{}{\"pdf\": \"false\", \"excel\": \"true\", \"csv\": \"true\", \"html\": \"false\"}\n    settings := map[string]interface{}{\"enableGlobalUF\": \"true\", \"reportAsFilter\": \"true\", \"fitToWidth\": \"false\", \"allowExport\": allowExport}\n    config := map[string]interface{}{\"settings\": settings}\n    workspace := ZAnalytics.GetWorkspaceInstance(&ac, orgId, workspaceId)\n    exception := workspace.UpdateDashboard(dashboardId, config)\n    if exception != nil { fmt.Println(exception.ErrorMessage); return }\n    fmt.Println(\"Success\")\n}\n\nfunc main() {\n    ac := ZAnalytics.GetAnalyticsClient(clientId, clientSecret, refreshToken)\n    UpdateDashboard(ac)\n}"
+     }
+    ]
+   },
+   "Java": {
+    "snippets": [
+     {
+      "code": "import com.zoho.analytics.client.*;\nimport org.json.*;\n\npublic class Test {\n    private long orgId = 55522777l;\n    private long workspaceId = 35130000001055707l;\n\n    public static void main(String args[]) {\n        String clientId = \"1000.xxxxxxx\";\n        String clientSecret = \"xxxxxxx\";\n        String refreshToken = \"1000.xxxxxxx.xxxxxxx\";\n        Test tObj = new Test();\n        AnalyticsClient ac = new AnalyticsClient(clientId, clientSecret, refreshToken);\n        try {\n            tObj.updateDashboard(ac);\n        } catch (Exception ex) {\n            ex.printStackTrace();\n        }\n    }\n\n    public void updateDashboard(AnalyticsClient ac) throws Exception {\n        long dashboardId = 35130000001055801l;\n        JSONObject allowExport = new JSONObject();\n        allowExport.put(\"pdf\", \"false\");\n        allowExport.put(\"excel\", \"true\");\n        allowExport.put(\"csv\", \"true\");\n        allowExport.put(\"html\", \"false\");\n        JSONObject settings = new JSONObject();\n        settings.put(\"enableGlobalUF\", \"true\");\n        settings.put(\"reportAsFilter\", \"true\");\n        settings.put(\"fitToWidth\", \"false\");\n        settings.put(\"allowExport\", allowExport);\n        JSONObject config = new JSONObject();\n        config.put(\"settings\", settings);\n        WorkspaceAPI workspace = ac.getWorkspaceInstance(orgId, workspaceId);\n        workspace.updateDashboard(dashboardId, config);\n        System.out.println(\"success\");\n    }\n}"
+     }
+    ]
+   },
+   "Php": {
+    "snippets": [
+     {
+      "code": "<?php\nrequire 'AnalyticsClient.php';\n\nclass Test {\n    public $ac;\n    public $org_id = \"55522777\";\n    public $workspace_id = \"35130000001055707\";\n    function __construct() {\n        $this->ac = new AnalyticsClient(\"1000.xxxxxxx\", \"xxxxxxx\", \"1000.xxxxxxx.xxxxxxx\");\n    }\n\n    function updateDashboard() {\n        $dashboard_id = \"35130000001055801\";\n        $allow_export = [\"pdf\" => \"false\", \"excel\" => \"true\", \"csv\" => \"true\", \"html\" => \"false\"];\n        $settings = [\"enableGlobalUF\" => \"true\", \"reportAsFilter\" => \"true\", \"fitToWidth\" => \"false\", \"allowExport\" => $allow_export];\n        $config = [\"settings\" => $settings];\n        $workspace = $this->ac->getWorkspaceInstance($this->org_id, $this->workspace_id);\n        $workspace->updateDashboard($dashboard_id, $config);\n        echo \"success\";\n    }\n}\n\n$obj = new Test();\n$obj->updateDashboard();\n?>"
+     }
+    ]
+   },
+   "Python": {
+    "snippets": [
+     {
+      "code": "from AnalyticsClient import AnalyticsClient\n\nclass Config:\n    CLIENTID = \"1000.xxxxxxx\"\n    CLIENTSECRET = \"xxxxxxx\"\n    REFRESHTOKEN = \"1000.xxxxxxx.xxxxxxx\"\n    ORGID = \"55522777\"\n    WORKSPACEID = \"35130000001055707\"\n\nclass sample:\n    ac = AnalyticsClient(Config.CLIENTID, Config.CLIENTSECRET, Config.REFRESHTOKEN)\n\n    def update_dashboard(self, ac):\n        dashboard_id = \"35130000001055801\"\n        allow_export = {\"pdf\": \"false\", \"excel\": \"true\", \"csv\": \"true\", \"html\": \"false\"}\n        settings = {\"enableGlobalUF\": \"true\", \"reportAsFilter\": \"true\", \"fitToWidth\": \"false\", \"allowExport\": allow_export}\n        config = {\"settings\": settings}\n        workspace = ac.get_workspace_instance(Config.ORGID, Config.WORKSPACEID)\n        workspace.update_dashboard(dashboard_id, config)\n        print(\"success\")\n\nobj = sample()\nobj.update_dashboard(obj.ac)"
+     }
+    ]
+   },
+   "Node": {
+    "snippets": [
+     {
+      "code": "var analyticsClient = require('./AnalyticsClient');\nvar ac = new analyticsClient('1000.xxxxxxx', 'xxxxxxx', '1000.xxxxxxx.xxxxxxx');\nvar orgId = '55522777';\nvar workspaceId = '35130000001055707';\n\nvar dashboardId = '35130000001055801';\nvar allowExport = { pdf: 'false', excel: 'true', csv: 'true', html: 'false' };\nvar settings = { enableGlobalUF: 'true', reportAsFilter: 'true', fitToWidth: 'false', allowExport: allowExport };\nvar config = { settings: settings };\nvar workspace = ac.getWorkspaceInstance(orgId, workspaceId);\nworkspace.updateDashboard(dashboardId, config).then(() => { console.log('success'); }).catch((error) => { console.log(error); });"
+     }
+    ]
+   },
+   "Ruby": {
+    "snippets": [
+     {
+      "code": "require 'zoho_analytics_client'\n\nclass Config\n  ORGID = \"55522777\"\n  WORKSPACEID = \"35130000001055707\"\nend\n\nclass Sample\n  def initialize\n    @ac = AnalyticsClient.new.with_data_center(\"US\").with_oauth({\n      \"clientId\" => \"1000.xxxxxxx\",\n      \"clientSecret\" => \"xxxxxxx\",\n      \"refreshToken\" => \"1000.xxxxxxx.xxxxxxx\"\n    }).build\n  end\n\n  def update_dashboard\n    dashboard_id = \"35130000001055801\"\n    allow_export = { \"pdf\" => \"false\", \"excel\" => \"true\", \"csv\" => \"true\", \"html\" => \"false\" }\n    settings = { \"enableGlobalUF\" => \"true\", \"reportAsFilter\" => \"true\", \"fitToWidth\" => \"false\", \"allowExport\" => allow_export }\n    config = { \"settings\" => settings }\n    workspace = @ac.get_workspace_instance(Config::ORGID, Config::WORKSPACEID)\n    workspace.update_dashboard(dashboard_id, config)\n    puts \"success\"\n  end\nend\n\nobj = Sample.new\nobj.update_dashboard"
+     }
+    ]
+   },
+   "Deluge": {
+    "snippets": [
+     {
+      "code": "orgId = \"55522777\";\nworkspaceId = \"35130000001055707\";\ndashboardId = \"35130000001055801\";\nheadersMap = Map();\nheadersMap.put(\"ZANALYTICS-ORGID\", orgId);\nallowExport = Map();\nallowExport.put(\"pdf\", \"false\");\nallowExport.put(\"excel\", \"true\");\nallowExport.put(\"csv\", \"true\");\nallowExport.put(\"html\", \"false\");\nsettings = Map();\nsettings.put(\"enableGlobalUF\", \"true\");\nsettings.put(\"reportAsFilter\", \"true\");\nsettings.put(\"fitToWidth\", \"false\");\nsettings.put(\"allowExport\", allowExport);\nconfig = Map();\nconfig.put(\"settings\", settings);\nparameters = \"CONFIG=\" + zoho.encryption.urlEncode(config.toString());\ninvokeurl\n[\n  url :\"https://analyticsapi.zoho.com/restapi/v2/workspaces/\" + workspaceId + \"/dashboards/\" + dashboardId\n  type :PUT\n  parameters:parameters\n  headers:headersMap\n  connection:\"analytics_oauth_connection\"\n];\ninfo \"success\";"
+     }
+    ]
+   }
+  }
+ }
+}

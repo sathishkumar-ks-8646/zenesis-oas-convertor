@@ -1,0 +1,736 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zenesis renderer configuration - data-operations-grouped-api",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/data'].post.requestBody.content['multipart/form-data'].examples.fileImport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/data'].post.requestBody.content['multipart/form-data'].examples.dataImport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "json"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/data'].post",
+      "update": {
+        "x-zenesis-doc": {
+          "show": true,
+          "usecaseTags": {
+            "csv": {
+              "name": "CSV Specific Attributes",
+              "description": "<p>Applicable when <strong>fileType</strong> is set to <strong>csv</strong>. These attributes are mandatory when <strong>autoIdentify</strong> is set to <strong>false</strong>.</p>"
+            },
+            "json": {
+              "name": "JSON Specific Attributes",
+              "description": "<p>Applicable when <strong>fileType</strong> is set to <strong>json</strong>.</p>"
+            }
+          }
+        }
+      },
+      "x-migration": "Renderer layout config."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].post.requestBody.content['multipart/form-data'].examples.fileImport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].post.requestBody.content['multipart/form-data'].examples.dataImport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "json"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].post",
+      "update": {
+        "x-zenesis-doc": {
+          "show": true,
+          "usecaseTags": {
+            "csv": {
+              "name": "CSV Specific Attributes",
+              "description": "<p>Applicable when <strong>fileType</strong> is set to <strong>csv</strong>. These attributes are mandatory when <strong>autoIdentify</strong> is set to <strong>false</strong>.</p>"
+            },
+            "json": {
+              "name": "JSON Specific Attributes",
+              "description": "<p>Applicable when <strong>fileType</strong> is set to <strong>json</strong>.</p>"
+            }
+          }
+        }
+      },
+      "x-migration": "Renderer layout config."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.filteredExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.protectedExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.jsonExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "json"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.xmlExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "xml"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.xlsExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "xls"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.pdfExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "pdf"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.htmlExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "html"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.imageExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "image"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/data'].get",
+      "update": {
+        "x-zenesis-doc": {
+          "show": true,
+          "usecaseTags": {
+            "csv": {
+              "name": "CSV Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>csv</strong>.</p>"
+            },
+            "json": {
+              "name": "JSON Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>json</strong>.</p>"
+            },
+            "xml": {
+              "name": "XML Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>xml</strong>.</p>"
+            },
+            "xls": {
+              "name": "XLS Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>xls</strong>.</p>"
+            },
+            "pdf": {
+              "name": "PDF Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>pdf</strong>.</p>"
+            },
+            "html": {
+              "name": "HTML Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>html</strong>.</p>"
+            },
+            "image": {
+              "name": "IMAGE Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>image</strong>.</p>"
+            }
+          }
+        }
+      },
+      "x-migration": "Renderer layout config."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].post.requestBody.content['multipart/form-data'].examples.csvImport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].post.requestBody.content['multipart/form-data'].examples.jsonImport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "json"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].post",
+      "update": {
+        "x-zenesis-doc": {
+          "show": true,
+          "usecaseTags": {
+            "csv": {
+              "name": "CSV Specific Attributes",
+              "description": "<p>Applicable when <strong>fileType</strong> is set to <strong>csv</strong>. These attributes are mandatory when <strong>autoIdentify</strong> is set to <strong>false</strong>.</p>"
+            },
+            "json": {
+              "name": "JSON Specific Attributes",
+              "description": "<p>Applicable when <strong>fileType</strong> is set to <strong>json</strong>.</p>"
+            }
+          }
+        }
+      },
+      "x-migration": "Renderer layout config."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.filteredExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.tableFilteredExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.protectedExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.jsonExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "json"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.xmlExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "xml"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.xlsExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "xls"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.pdfExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "pdf"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get.parameters[2].examples.htmlExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "html"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data'].get",
+      "update": {
+        "x-zenesis-doc": {
+          "show": true,
+          "usecaseTags": {
+            "csv": {
+              "name": "CSV Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>csv</strong>.</p>"
+            },
+            "json": {
+              "name": "JSON Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>json</strong>.</p>"
+            },
+            "xml": {
+              "name": "XML Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>xml</strong>.</p>"
+            },
+            "xls": {
+              "name": "XLS Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>xls</strong>.</p>"
+            },
+            "pdf": {
+              "name": "PDF Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>pdf</strong>.</p>"
+            },
+            "html": {
+              "name": "HTML Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>html</strong>.</p>"
+            }
+          }
+        }
+      },
+      "x-migration": "Renderer layout config."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].post.requestBody.content['multipart/form-data'].examples.appendImport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].post.requestBody.content['multipart/form-data'].examples.updateAddImport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "json"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].post",
+      "update": {
+        "x-zenesis-doc": {
+          "show": true,
+          "usecaseTags": {
+            "csv": {
+              "name": "CSV Specific Attributes",
+              "description": "<p>Applicable when <strong>fileType</strong> is set to <strong>csv</strong>. These attributes are mandatory when <strong>autoIdentify</strong> is set to <strong>false</strong>.</p>"
+            },
+            "json": {
+              "name": "JSON Specific Attributes",
+              "description": "<p>Applicable when <strong>fileType</strong> is set to <strong>json</strong>.</p>"
+            }
+          }
+        }
+      },
+      "x-migration": "Renderer layout config."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.filteredExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.protectedExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.jsonExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "json"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.xmlExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "xml"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.xlsExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "xls"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.pdfExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "pdf"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.htmlExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "html"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get.parameters[3].examples.imageExport",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "image"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data'].get",
+      "update": {
+        "x-zenesis-doc": {
+          "show": true,
+          "usecaseTags": {
+            "csv": {
+              "name": "CSV Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>csv</strong>.</p>"
+            },
+            "json": {
+              "name": "JSON Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>json</strong>.</p>"
+            },
+            "xml": {
+              "name": "XML Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>xml</strong>.</p>"
+            },
+            "xls": {
+              "name": "XLS Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>xls</strong>.</p>"
+            },
+            "pdf": {
+              "name": "PDF Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>pdf</strong>.</p>"
+            },
+            "html": {
+              "name": "HTML Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>html</strong>.</p>"
+            },
+            "image": {
+              "name": "IMAGE Specific Attributes",
+              "description": "<p>Applicable when <strong>responseFormat</strong> is set to <strong>image</strong>.</p>"
+            }
+          }
+        }
+      },
+      "x-migration": "Renderer layout config."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.firstBatch",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.followUpBatch",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.lastBatch",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.firstBatch",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.followUpBatch",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/bulk/workspaces/{workspace-id}/views/{view-id}/data/batch'].post.requestBody.content['multipart/form-data'].examples.lastBatch",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "csv"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.oneOf[0]",
+      "update": {
+        "x-zenesis-usecase-tag": "csv"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigNewTable.oneOf[1]",
+      "update": {
+        "x-zenesis-usecase-tag": "json"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.oneOf[0]",
+      "update": {
+        "x-zenesis-usecase-tag": "csv"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ImportConfigExistingTable.oneOf[1]",
+      "update": {
+        "x-zenesis-usecase-tag": "json"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.oneOf[0]",
+      "update": {
+        "x-zenesis-usecase-tag": "csv"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigNewTable.oneOf[1]",
+      "update": {
+        "x-zenesis-usecase-tag": "json"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.oneOf[0]",
+      "update": {
+        "x-zenesis-usecase-tag": "csv"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.BulkImportConfigExistingTable.oneOf[1]",
+      "update": {
+        "x-zenesis-usecase-tag": "json"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[0]",
+      "update": {
+        "x-zenesis-usecase-tag": "csv"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[1]",
+      "update": {
+        "x-zenesis-usecase-tag": "json"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[2]",
+      "update": {
+        "x-zenesis-usecase-tag": "xml"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[3]",
+      "update": {
+        "x-zenesis-usecase-tag": "xls"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[4]",
+      "update": {
+        "x-zenesis-usecase-tag": "pdf"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[5]",
+      "update": {
+        "x-zenesis-usecase-tag": "html"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportConfig.oneOf[6]",
+      "update": {
+        "x-zenesis-usecase-tag": "image"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[0]",
+      "update": {
+        "x-zenesis-usecase-tag": "csv"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[1]",
+      "update": {
+        "x-zenesis-usecase-tag": "json"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[2]",
+      "update": {
+        "x-zenesis-usecase-tag": "xml"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[3]",
+      "update": {
+        "x-zenesis-usecase-tag": "xls"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[4]",
+      "update": {
+        "x-zenesis-usecase-tag": "pdf"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigSQLQuery.oneOf[5]",
+      "update": {
+        "x-zenesis-usecase-tag": "html"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[0]",
+      "update": {
+        "x-zenesis-usecase-tag": "csv"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[1]",
+      "update": {
+        "x-zenesis-usecase-tag": "json"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[2]",
+      "update": {
+        "x-zenesis-usecase-tag": "xml"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[3]",
+      "update": {
+        "x-zenesis-usecase-tag": "xls"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[4]",
+      "update": {
+        "x-zenesis-usecase-tag": "pdf"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[5]",
+      "update": {
+        "x-zenesis-usecase-tag": "html"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ExportJobConfigViewId.oneOf[6]",
+      "update": {
+        "x-zenesis-usecase-tag": "image"
+      },
+      "x-migration": "Renderer grouping key."
+    }
+  ]
+}

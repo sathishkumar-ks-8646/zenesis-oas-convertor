@@ -1,0 +1,4767 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Zoho Analytics API",
+    "version": "v2",
+    "description": "API for Share & Publish in Zoho Analytics — covering view sharing, publish configurations, embed URLs, and slideshow management."
+  },
+  "servers": [
+    {
+      "url": "https://analyticsapi.zoho.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Sharing",
+      "description": "APIs for sharing workspaces and views with users, and retrieving share details and permissions."
+    },
+    {
+      "name": "Publish",
+      "description": "APIs for making views public, managing private URLs, and updating publish configurations."
+    },
+    {
+      "name": "Embed",
+      "description": "APIs for retrieving embeddable view URLs."
+    },
+    {
+      "name": "Slideshow Management",
+      "description": "APIs for creating, updating, deleting, and listing slideshows and their URLs."
+    }
+  ],
+  "paths": {
+    "/restapi/v2/workspaces/{workspace-id}/share": {
+      "get": {
+        "tags": [
+          "Sharing"
+        ],
+        "x-zenesis-title": "Get Workspace Shared Details",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.share.read"
+            ]
+          }
+        ],
+        "summary": "Get Workspace Shared Details",
+        "description": "Returns the shared details of the specified workspace. The response groups the sharing into four blocks - views shared directly with individual users, views shared with groups, views published publicly, and views shared through a private link.",
+        "operationId": "getWorkspaceSharedDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWorkspaceSharedDetailsResponse"
+                },
+                "examples": {
+                  "userShare": {
+                    "description": "User share",
+                    "summary": "Workspace in which the views are shared directly with individual users, and one dashboard is published publicly.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get share info",
+                      "data": {
+                        "userShareInfo": [
+                          {
+                            "emailId": "user1@example.com",
+                            "views": [
+                              {
+                                "viewId": "1767024000013486001",
+                                "viewName": "Region Wise Sales",
+                                "sharedBy": "owner@example.com",
+                                "permissions": {
+                                  "read": true,
+                                  "export": true,
+                                  "vud": false,
+                                  "addRow": false,
+                                  "updateRow": false,
+                                  "deleteRow": false,
+                                  "deleteAllRows": false,
+                                  "importAppend": false,
+                                  "importAddOrUpdate": false,
+                                  "importDeleteAllAdd": false,
+                                  "importDeleteUpdateAdd": false,
+                                  "drillDown": false,
+                                  "share": false,
+                                  "discussion": true,
+                                  "insight": true,
+                                  "drillThrough": false,
+                                  "accessAdminPresets": false,
+                                  "createPreset": false
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "groupShareInfo": [],
+                        "publicShareInfo": {
+                          "emailId": "Public Visitor",
+                          "views": [
+                            {
+                              "viewId": "1767024000013511013",
+                              "viewName": "Sales Dashboard",
+                              "sharedBy": "owner@example.com",
+                              "permissions": {
+                                "read": true,
+                                "export": false,
+                                "vud": false,
+                                "addRow": false,
+                                "updateRow": false,
+                                "deleteRow": false,
+                                "deleteAllRows": false,
+                                "importAppend": false,
+                                "importAddOrUpdate": false,
+                                "importDeleteAllAdd": false,
+                                "importDeleteUpdateAdd": false,
+                                "drillDown": false,
+                                "share": false,
+                                "discussion": false,
+                                "insight": false,
+                                "drillThrough": false,
+                                "accessAdminPresets": false,
+                                "createPreset": false
+                              }
+                            }
+                          ]
+                        },
+                        "privateLinkShareInfo": {
+                          "emailId": "Private Link",
+                          "views": []
+                        }
+                      }
+                    }
+                  },
+                  "groupShare": {
+                    "description": "Group share",
+                    "summary": "Workspace in which the views are shared with a group, and one report is shared through a private link.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get share info",
+                      "data": {
+                        "userShareInfo": [],
+                        "groupShareInfo": [
+                          {
+                            "groupId": "1767024000013490007",
+                            "groupName": "Sales Team",
+                            "groupDesc": "Regional sales managers",
+                            "groupMembers": [
+                              "user1@example.com",
+                              "user2@example.com"
+                            ],
+                            "views": [
+                              {
+                                "viewId": "1767024000013486001",
+                                "viewName": "Region Wise Sales",
+                                "sharedBy": "owner@example.com",
+                                "permissions": {
+                                  "read": true,
+                                  "export": false,
+                                  "vud": true,
+                                  "addRow": false,
+                                  "updateRow": false,
+                                  "deleteRow": false,
+                                  "deleteAllRows": false,
+                                  "importAppend": false,
+                                  "importAddOrUpdate": false,
+                                  "importDeleteAllAdd": false,
+                                  "importDeleteUpdateAdd": false,
+                                  "drillDown": true,
+                                  "share": false,
+                                  "discussion": false,
+                                  "insight": false,
+                                  "drillThrough": false,
+                                  "accessAdminPresets": false,
+                                  "createPreset": false
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "publicShareInfo": {
+                          "emailId": "Public Visitor",
+                          "views": []
+                        },
+                        "privateLinkShareInfo": {
+                          "emailId": "Private Link",
+                          "views": [
+                            {
+                              "viewId": "1767024000013486001",
+                              "viewName": "Region Wise Sales",
+                              "sharedBy": "owner@example.com",
+                              "permissions": {
+                                "read": true,
+                                "export": false,
+                                "vud": false,
+                                "addRow": false,
+                                "updateRow": false,
+                                "deleteRow": false,
+                                "deleteAllRows": false,
+                                "importAppend": false,
+                                "importAddOrUpdate": false,
+                                "importDeleteAllAdd": false,
+                                "importDeleteUpdateAdd": false,
+                                "drillDown": false,
+                                "share": false,
+                                "discussion": false,
+                                "insight": true,
+                                "drillThrough": false,
+                                "accessAdminPresets": true,
+                                "createPreset": true
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li><code>publicShareInfo</code> and <code>privateLinkShareInfo</code> are always returned, with an empty <code>views</code> array when nothing is published publicly or through a private link.</li><li>The <code>emailId</code> returned inside <code>publicShareInfo</code> and <code>privateLinkShareInfo</code> is a fixed placeholder, not a real user.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Sharing"
+        ],
+        "x-zenesis-title": "Share Views",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.share.create"
+            ]
+          }
+        ],
+        "summary": "Share Views",
+        "description": "Shares the specified views with the specified users or groups, with the selected permissions. A filter criteria can be applied while sharing, so that the shared users see only the matching subset of the data.",
+        "operationId": "shareViews",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/ShareViewsConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "shareWithUsers": {
+                  "description": "Share with users",
+                  "summary": "Shares the listed views with the specified users, granting read and export permission.",
+                  "value": {
+                    "CONFIG": {
+                      "emailIds": [
+                        "user1@example.com",
+                        "user2@example.com"
+                      ],
+                      "viewIds": [
+                        "35130000001055717"
+                      ],
+                      "permissions": {
+                        "read": true,
+                        "export": true
+                      },
+                      "inviteMail": true
+                    }
+                  }
+                },
+                "shareWithGroups": {
+                  "description": "Share with groups",
+                  "summary": "Shares the listed views with the specified groups instead of individual users.",
+                  "value": {
+                    "CONFIG": {
+                      "emailIds": [
+                        "user1@example.com"
+                      ],
+                      "groupIds": [
+                        "35130000001066001"
+                      ],
+                      "viewIds": [
+                        "35130000001055717"
+                      ],
+                      "permissions": {
+                        "read": true,
+                        "vud": true
+                      }
+                    }
+                  }
+                },
+                "filteredShare": {
+                  "description": "Filtered share",
+                  "summary": "Shares a report with a filter criteria, so that the shared user sees only the East region data.",
+                  "value": {
+                    "CONFIG": {
+                      "emailIds": [
+                        "user1@example.com"
+                      ],
+                      "viewIds": [
+                        "35130000001055721"
+                      ],
+                      "permissions": {
+                        "read": true
+                      },
+                      "criteria": "\"SalesTable\".\"Region\"='East'",
+                      "inheritParentFilterCriteria": true
+                    }
+                  }
+                },
+                "columnRestrictedShare": {
+                  "description": "Column restricted share",
+                  "summary": "Shares a view but restricts the shared columns and the columns visible in the underlying data.",
+                  "value": {
+                    "CONFIG": {
+                      "emailIds": [
+                        "user1@example.com"
+                      ],
+                      "viewIds": [
+                        "35130000001055717"
+                      ],
+                      "permissions": {
+                        "read": true,
+                        "vud": true
+                      },
+                      "columns": [
+                        {
+                          "tableName": "SalesTable",
+                          "columnNames": [
+                            "Region",
+                            "Sales"
+                          ]
+                        }
+                      ],
+                      "vudColumns": [
+                        {
+                          "tableName": "SalesTable",
+                          "columnNames": [
+                            "Region"
+                          ]
+                        }
+                      ],
+                      "includeAllColsForVUD": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li><code>vudColumns</code> is applicable only when the <code>vud</code> permission is set to true.</li><li><code>drillColumns</code> is applicable only when the <code>drillDown</code> permission is set to true.</li><li><code>inheritParentFilterCriteria</code> is applicable only for reports, not for tables.</li><li><code>validateSystemTags</code> is applicable only when System Tags are enabled for your organization.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Sharing"
+        ],
+        "x-zenesis-title": "Remove Share",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.share.delete"
+            ]
+          }
+        ],
+        "summary": "Remove Share",
+        "description": "Removes the shared views for the specified users or groups. The sharing can be removed for a specific set of views, or for every view that is currently shared with those users.",
+        "operationId": "removeShare",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/RemoveShareConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "removeSpecificViews": {
+                  "description": "Remove specific views",
+                  "summary": "Removes the sharing of the listed views for the specified users.",
+                  "value": {
+                    "CONFIG": {
+                      "emailIds": [
+                        "user1@example.com",
+                        "user2@example.com"
+                      ],
+                      "viewIds": [
+                        "35130000001055717",
+                        "35130000001055721"
+                      ]
+                    }
+                  }
+                },
+                "removeAllSharedViews": {
+                  "description": "Remove all views",
+                  "summary": "Removes every view currently shared with the specified users.",
+                  "value": {
+                    "CONFIG": {
+                      "emailIds": [
+                        "user1@example.com"
+                      ],
+                      "removeAllViews": true
+                    }
+                  }
+                },
+                "removeGroupShare": {
+                  "description": "Remove group share",
+                  "summary": "Removes the sharing of the listed views for the specified groups.",
+                  "value": {
+                    "CONFIG": {
+                      "emailIds": [
+                        "user1@example.com"
+                      ],
+                      "groupIds": [
+                        "35130000001066001"
+                      ],
+                      "viewIds": [
+                        "35130000001055717"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Specify either <code>viewIds</code> to remove the sharing of particular views, or set <code>removeAllViews</code> to true to remove every view shared with the specified users.</li><li><code>domainName</code> is required only when the shared views have to be removed from a white label domain.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share": {
+      "put": {
+        "tags": [
+          "Sharing"
+        ],
+        "x-zenesis-title": "Update Shared Details For View",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.share.update"
+            ]
+          }
+        ],
+        "summary": "Update Shared Details For View",
+        "description": "Updates the existing sharing configuration of the specified view for the given users or groups. The permissions, filter criteria, and column restrictions sent in the config replace the ones currently in effect for that view.",
+        "operationId": "UpdateSharedDetailsForView",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/UpdateSharedDetailsConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "updateUserPermissions": {
+                  "description": "Update user permissions",
+                  "summary": "Grants export and underlying data permission to the users the view is already shared with.",
+                  "value": {
+                    "CONFIG": {
+                      "emailIds": [
+                        "user1@example.com",
+                        "user2@example.com"
+                      ],
+                      "permissions": {
+                        "read": true,
+                        "export": true,
+                        "vud": true
+                      }
+                    }
+                  }
+                },
+                "updateGroupPermissions": {
+                  "description": "Update group permissions",
+                  "summary": "Updates the sharing configuration of the view for the specified groups.",
+                  "value": {
+                    "CONFIG": {
+                      "groupIds": [
+                        "35130000001066001"
+                      ],
+                      "permissions": {
+                        "read": true,
+                        "drillDown": true
+                      }
+                    }
+                  }
+                },
+                "updateFilterCriteria": {
+                  "description": "Update filter criteria",
+                  "summary": "Replaces the filter criteria applied on the shared report and restricts the columns shared.",
+                  "value": {
+                    "CONFIG": {
+                      "emailIds": [
+                        "user1@example.com"
+                      ],
+                      "permissions": {
+                        "read": true
+                      },
+                      "criteria": "\"SalesTable\".\"Region\"='West'",
+                      "inheritParentFilterCriteria": false,
+                      "columns": [
+                        {
+                          "tableName": "SalesTable",
+                          "columnNames": [
+                            "Region",
+                            "Sales"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>At least one of <code>emailIds</code> or <code>groupIds</code> must be specified, to identify the users or the groups whose sharing configuration has to be updated.</li><li><code>vudColumns</code> is applicable only when the <code>vud</code> permission is set to true.</li><li><code>drillColumns</code> is applicable only when the <code>drillDown</code> permission is set to true.</li><li><code>inheritParentFilterCriteria</code> is applicable only for reports, not for tables.</li><li><code>validateSystemTags</code> is applicable only when System Tags are enabled for your organization.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/share/shareddetails": {
+      "get": {
+        "tags": [
+          "Sharing"
+        ],
+        "x-zenesis-title": "Get Shared Details For Views",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.share.read"
+            ]
+          }
+        ],
+        "summary": "Get Shared Details For Views",
+        "description": "Returns the shared details of the specified views. For every view, the response lists each user or group it is shared to, along with the permissions granted, the filter criteria applied, and any column level restrictions in effect.",
+        "operationId": "getSharedDetailsForViews",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "name": "CONFIG",
+            "in": "query",
+            "required": true,
+            "description": "Config parameter that specifies the views whose shared details have to be fetched.\n\nAs this is a GET request, the value must be stringified and URL encoded before it is sent.",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/GetSharedDetailsConfig"
+            },
+            "examples": {
+              "singleView": {
+                "description": "Single view",
+                "summary": "Fetches the shared details of one view.",
+                "value": {
+                  "viewIds": [
+                    "1767024000013486001"
+                  ]
+                }
+              },
+              "multipleViews": {
+                "description": "Multiple views",
+                "summary": "Fetches the shared details of several views in one call.",
+                "value": {
+                  "viewIds": [
+                    "1767024000013486001",
+                    "1767024000013511013"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSharedDetailsResponse"
+                },
+                "examples": {
+                  "userShare": {
+                    "description": "User share",
+                    "summary": "View shared with an individual user, with a filter criteria and a restricted set of shared columns.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get shared details for views",
+                      "data": {
+                        "sharedDetails": [
+                          {
+                            "viewId": "1767024000013486001",
+                            "shareInfo": [
+                              {
+                                "sharedTo": "user1@example.com",
+                                "sharedBy": "owner@example.com",
+                                "sharedToZuId": "65482910",
+                                "permissionString": "read,export",
+                                "permissions": {
+                                  "read": true,
+                                  "export": true,
+                                  "vud": false,
+                                  "addRow": false,
+                                  "updateRow": false,
+                                  "deleteRow": false,
+                                  "deleteAllRows": false,
+                                  "importAppend": false,
+                                  "importAddOrUpdate": false,
+                                  "importDeleteAllAdd": false,
+                                  "importDeleteUpdateAdd": false,
+                                  "drillDown": false,
+                                  "share": false,
+                                  "discussion": false,
+                                  "insight": false,
+                                  "drillThrough": false,
+                                  "accessAdminPresets": false,
+                                  "createPreset": false
+                                },
+                                "criteria": "\"SalesTable\".\"Region\"='East'",
+                                "inheritParentFilterCriteria": "false",
+                                "isInvalidCriteria": false,
+                                "sharedColumns": [
+                                  "Region",
+                                  "Sales"
+                                ],
+                                "vudColumns": [],
+                                "drillColumns": [],
+                                "isGroupShare": false,
+                                "publicPermLevel": 0,
+                                "isROUser": false
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "groupShare": {
+                    "description": "Group share",
+                    "summary": "View shared with a group, with the underlying data and drill down options limited to specific columns.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get shared details for views",
+                      "data": {
+                        "sharedDetails": [
+                          {
+                            "viewId": "1767024000013486001",
+                            "shareInfo": [
+                              {
+                                "sharedTo": "Sales Team",
+                                "sharedBy": "owner@example.com",
+                                "sharedToZuId": "1767024000013490007",
+                                "permissionString": "read,vud,drillDown",
+                                "permissions": {
+                                  "read": true,
+                                  "export": false,
+                                  "vud": true,
+                                  "addRow": false,
+                                  "updateRow": false,
+                                  "deleteRow": false,
+                                  "deleteAllRows": false,
+                                  "importAppend": false,
+                                  "importAddOrUpdate": false,
+                                  "importDeleteAllAdd": false,
+                                  "importDeleteUpdateAdd": false,
+                                  "drillDown": true,
+                                  "share": false,
+                                  "discussion": false,
+                                  "insight": false,
+                                  "drillThrough": false,
+                                  "accessAdminPresets": false,
+                                  "createPreset": false
+                                },
+                                "criteria": "",
+                                "inheritParentFilterCriteria": "true",
+                                "isInvalidCriteria": false,
+                                "sharedColumns": [],
+                                "vudColumns": [
+                                  "Region"
+                                ],
+                                "drillColumns": [
+                                  "Region"
+                                ],
+                                "isGroupShare": true,
+                                "publicPermLevel": 0,
+                                "isROUser": false
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>As this is a GET request, the CONFIG value must be stringified and URL encoded before it is sent.</li><li>When <code>viewIds</code> is omitted, no view is selected and the shared details are not returned.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share/mypermissions": {
+      "get": {
+        "tags": [
+          "Sharing"
+        ],
+        "x-zenesis-title": "Get User Permissions",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.share.read"
+            ]
+          }
+        ],
+        "summary": "Get User Permissions",
+        "description": "Returns the permissions that the requesting user holds on the specified view. The permissions returned are the effective ones, whether they were granted directly to the user or inherited through a group.",
+        "operationId": "getUserPermissions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserPermissionsResponse"
+                },
+                "examples": {
+                  "readOnlyAccess": {
+                    "description": "Read only access",
+                    "summary": "User who can only view the report, with no export or underlying data access.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get user permissions",
+                      "data": {
+                        "permissions": {
+                          "read": true,
+                          "export": false,
+                          "vud": false,
+                          "addRow": false,
+                          "updateRow": false,
+                          "deleteRow": false,
+                          "deleteAllRows": false,
+                          "importAppend": false,
+                          "importAddOrUpdate": false,
+                          "importDeleteAllAdd": false,
+                          "importDeleteUpdateAdd": false,
+                          "drillDown": false,
+                          "share": false,
+                          "discussion": false,
+                          "insight": false,
+                          "drillThrough": false,
+                          "accessAdminPresets": false,
+                          "createPreset": false
+                        }
+                      }
+                    }
+                  },
+                  "fullAccess": {
+                    "description": "Full access",
+                    "summary": "User who owns the table and therefore holds every permission on it.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get user permissions",
+                      "data": {
+                        "permissions": {
+                          "read": true,
+                          "export": true,
+                          "vud": true,
+                          "addRow": true,
+                          "updateRow": true,
+                          "deleteRow": true,
+                          "deleteAllRows": true,
+                          "importAppend": true,
+                          "importAddOrUpdate": true,
+                          "importDeleteAllAdd": true,
+                          "importDeleteUpdateAdd": true,
+                          "drillDown": true,
+                          "share": true,
+                          "discussion": true,
+                          "insight": true,
+                          "drillThrough": true,
+                          "accessAdminPresets": true,
+                          "createPreset": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiInfo": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The permissions are returned for the user whose access token is used in the request, not for an arbitrary user.</li><li>The endpoint path retains the <code>mypermissions</code> segment.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/public": {
+      "post": {
+        "tags": [
+          "Publish"
+        ],
+        "x-zenesis-title": "Make Views Public",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.create"
+            ]
+          }
+        ],
+        "summary": "Make Views Public",
+        "description": "Makes the specified view publicly accessible and returns the public URL. The audience, the permissions granted on the view, and the rows and columns visible through it are all controlled by the config.",
+        "operationId": "makeViewsPublic",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/MakeViewsPublicConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "publicOnWeb": {
+                  "description": "Public on web",
+                  "summary": "Publishes the view to anyone on the web, with export permission granted.",
+                  "value": {
+                    "CONFIG": {
+                      "publicPermLevel": 1,
+                      "permissions": {
+                        "export": true
+                      }
+                    }
+                  }
+                },
+                "organizationOnly": {
+                  "description": "Organization only",
+                  "summary": "Publishes the view to everyone in the Zoho Analytics organization, with underlying data access.",
+                  "value": {
+                    "CONFIG": {
+                      "publicPermLevel": 2,
+                      "permissions": {
+                        "vud": true,
+                        "export": true
+                      }
+                    }
+                  }
+                },
+                "filteredPublic": {
+                  "description": "Filtered public",
+                  "summary": "Publishes the view so that only the East region rows and a restricted set of columns are visible.",
+                  "value": {
+                    "CONFIG": {
+                      "publicPermLevel": 1,
+                      "permissions": {
+                        "vud": true,
+                        "drillDown": true
+                      },
+                      "vudColumns": [
+                        {
+                          "tableName": "SalesTable",
+                          "columnNames": [
+                            "Region",
+                            "Sales"
+                          ]
+                        }
+                      ],
+                      "drillColumns": [
+                        {
+                          "tableName": "SalesTable",
+                          "columnNames": [
+                            "Region"
+                          ]
+                        }
+                      ],
+                      "criteria": "\"SalesTable\".\"Region\"='East'",
+                      "inheritParentFilterCriteria": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MakeViewsPublicResponse"
+                },
+                "examples": {
+                  "publicUrl": {
+                    "description": "Public URL",
+                    "summary": "Public URL generated for the view that has just been published.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Make view public",
+                      "data": {
+                        "publicUrl": "https://analytics.zoho.com/open-view/1767024000008125004"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li><code>CONFIG</code> may be omitted entirely. When it is, the view is published with the default settings.</li><li><code>vudColumns</code> is applicable only when the <code>vud</code> permission is set to true.</li><li><code>drillColumns</code> is applicable only when the <code>drillDown</code> permission is set to true.</li><li><code>inheritParentFilterCriteria</code> is applicable only for reports, not for tables.</li><li><code>validateSystemTags</code> is applicable only when System Tags are enabled for your organization.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Publish"
+        ],
+        "x-zenesis-title": "Remove Public Permission",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.delete"
+            ]
+          }
+        ],
+        "summary": "Remove Public Permission",
+        "description": "Removes the public access granted on the specified view. Once removed, the public URL generated for the view no longer resolves.",
+        "operationId": "removePublicPermission",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink": {
+      "post": {
+        "tags": [
+          "Publish"
+        ],
+        "x-zenesis-title": "Create Private URL",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.update"
+            ]
+          }
+        ],
+        "summary": "Create Private URL",
+        "description": "Creates a private URL for the specified view and returns it. The private URL can be protected with a password and given a validity period, and the permissions granted through it are controlled by the config.",
+        "operationId": "createPrivateUrl",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/CreatePrivateUrlConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "basicPrivateUrl": {
+                  "description": "Basic private URL",
+                  "summary": "Creates a private URL that grants export permission and applies no further restrictions.",
+                  "value": {
+                    "CONFIG": {
+                      "permissions": {
+                        "export": true
+                      }
+                    }
+                  }
+                },
+                "passwordProtected": {
+                  "description": "Password protected",
+                  "summary": "Creates a private URL protected with a password and valid until the given expiry date.",
+                  "value": {
+                    "CONFIG": {
+                      "permissions": {
+                        "vud": true,
+                        "export": true
+                      },
+                      "password": "Zylker@123",
+                      "expiryDate": "2026-12-31",
+                      "includeAllColsForVUD": false
+                    }
+                  }
+                },
+                "regeneratedKey": {
+                  "description": "Regenerate key",
+                  "summary": "Generates a new private key, disabling the private link that was issued previously.",
+                  "value": {
+                    "CONFIG": {
+                      "regenerateKey": true,
+                      "permissions": {
+                        "export": true
+                      }
+                    }
+                  }
+                },
+                "filteredPrivateUrl": {
+                  "description": "Filtered private URL",
+                  "summary": "Creates a private URL through which only the East region rows and a restricted set of columns are visible.",
+                  "value": {
+                    "CONFIG": {
+                      "criteria": "\"SalesTable\".\"Region\"='East'",
+                      "permissions": {
+                        "vud": true,
+                        "drillDown": true
+                      },
+                      "vudColumns": [
+                        {
+                          "tableName": "SalesTable",
+                          "columnNames": [
+                            "Region",
+                            "Sales"
+                          ]
+                        }
+                      ],
+                      "drillColumns": [
+                        {
+                          "tableName": "SalesTable",
+                          "columnNames": [
+                            "Region"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePrivateUrlResponse"
+                },
+                "examples": {
+                  "privateUrl": {
+                    "description": "Private URL",
+                    "summary": "Private URL generated for the view, ending with the newly issued private key.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Create private url",
+                      "data": {
+                        "privateUrl": "https://analytics.zoho.com/open-view/1767024000003145011/eee1191ea88d52e486aaecf5f748dc56"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li><code>CONFIG</code> may be omitted entirely. When it is, a private URL is created with the default settings.</li><li><code>password</code> and <code>removePassword</code> are mutually exclusive, as are <code>expiryDate</code> and <code>removeExpiryDate</code>.</li><li><code>vudColumns</code> is applicable only when the <code>vud</code> permission is set to true.</li><li><code>drillColumns</code> is applicable only when the <code>drillDown</code> permission is set to true.</li><li>Setting <code>regenerateKey</code> to true disables the private link that was issued previously.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Publish"
+        ],
+        "x-zenesis-title": "Get Private URL",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.read"
+            ]
+          }
+        ],
+        "summary": "Get Private URL",
+        "description": "Returns the private URL through which the specified view can be accessed. A custom domain can be supplied so that the URL is returned with that domain address.",
+        "operationId": "getPrivateUrl",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          },
+          {
+            "name": "CONFIG",
+            "in": "query",
+            "required": false,
+            "description": "Config parameter that controls the domain used to build the private URL.\n\nAs this is a GET request, the value must be stringified and URL encoded before it is sent.",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/GetPrivateUrlConfig"
+            },
+            "examples": {
+              "defaultDomain": {
+                "description": "Default domain",
+                "summary": "Returns the private URL on the default Zoho Analytics domain.",
+                "value": {}
+              },
+              "customDomain": {
+                "description": "Custom domain",
+                "summary": "Returns the private URL on the configured white label domain.",
+                "value": {
+                  "domainName": "analytics.example.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPrivateUrlResponse"
+                },
+                "examples": {
+                  "privateUrl": {
+                    "description": "Private URL",
+                    "summary": "Private URL currently in effect for the view.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get private url",
+                      "data": {
+                        "privateUrl": "https://analytics.zoho.com/open-view/1767024000003145011/eee1191ea88d52e486aaecf5f748dc56"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>As this is a GET request, the CONFIG value must be stringified and URL encoded before it is sent.</li><li><code>CONFIG</code> may be omitted entirely, in which case the private URL is returned on the default domain.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Publish"
+        ],
+        "x-zenesis-title": "Remove Private Access",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.delete"
+            ]
+          }
+        ],
+        "summary": "Remove Private Access",
+        "description": "Removes the private link access granted on the specified view. Once removed, the private URL generated for the view no longer resolves.",
+        "operationId": "removePrivateAccess",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config": {
+      "get": {
+        "tags": [
+          "Publish"
+        ],
+        "x-zenesis-title": "Get Publish Configurations",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.read"
+            ]
+          }
+        ],
+        "summary": "Get Publish Configurations",
+        "description": "Returns the publish configurations of the specified view. The response groups them into three blocks - the public access settings, the private link settings, and the rendering settings applied when the view is accessed through a published URL.",
+        "operationId": "getPublishConfigurations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPublishConfigurationsResponse"
+                },
+                "examples": {
+                  "publicView": {
+                    "description": "Public view",
+                    "summary": "View published on the web, with no private link configured.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get publish configurations",
+                      "data": {
+                        "publicViewConfig": {
+                          "publicPermLevel": 1,
+                          "isListed": false,
+                          "isOrgPublicAllowed": true,
+                          "orgName": "Zylker Analytics",
+                          "isBussOrgPublicAllowed": true,
+                          "businessOrgName": "Zylker Corporation Private Limited"
+                        },
+                        "privateLinkConfig": {
+                          "isPrivate": false,
+                          "isExpired": false,
+                          "password": "-1",
+                          "expiryDate": "-1"
+                        },
+                        "publishConfig": {
+                          "includeTitle": true,
+                          "includeDesc": true,
+                          "includeToolBar": false,
+                          "includeSocialWidgets": false,
+                          "includeSearchBox": false,
+                          "includeDatatypeSymbol": false,
+                          "includeShowHideOption": false,
+                          "isInteractive": true,
+                          "legendPosition": "RIGHT",
+                          "width": 800,
+                          "height": 600,
+                          "autoRefresh": -1,
+                          "URLCriteria": "",
+                          "includeAskZia": true
+                        }
+                      }
+                    }
+                  },
+                  "privateLinkView": {
+                    "description": "Private link view",
+                    "summary": "View shared through a password protected private link, with a filter criteria applied on the published URL.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get publish configurations",
+                      "data": {
+                        "publicViewConfig": {
+                          "publicPermLevel": 2,
+                          "isListed": false,
+                          "isOrgPublicAllowed": true,
+                          "orgName": "Zylker Analytics",
+                          "isBussOrgPublicAllowed": false,
+                          "businessOrgName": "Zylker Corporation Private Limited"
+                        },
+                        "privateLinkConfig": {
+                          "isPrivate": true,
+                          "isExpired": false,
+                          "password": "Zylker@123",
+                          "expiryDate": "2026-12-31"
+                        },
+                        "publishConfig": {
+                          "includeTitle": true,
+                          "includeDesc": true,
+                          "includeToolBar": true,
+                          "includeSocialWidgets": false,
+                          "includeSearchBox": true,
+                          "includeDatatypeSymbol": false,
+                          "includeShowHideOption": false,
+                          "isInteractive": true,
+                          "legendPosition": "RIGHT",
+                          "width": 800,
+                          "height": 600,
+                          "autoRefresh": 30,
+                          "URLCriteria": "\"SalesTable\".\"Region\"='East'",
+                          "includeAskZia": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>In <code>privateLinkConfig</code>, a <code>password</code> or <code>expiryDate</code> of <code>-1</code> means that no password or validity period is set.</li><li><code>legendPosition</code> and <code>includeShowHideOption</code> are returned by this API but cannot be set through Update Publish Configurations.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Publish"
+        ],
+        "x-zenesis-title": "Update Publish Configurations",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.update"
+            ]
+          }
+        ],
+        "summary": "Update Publish Configurations",
+        "description": "Updates the publish configurations of the specified view. These settings control how the view is rendered when it is accessed in the embedded, public, or private link mode.",
+        "operationId": "updatePublishConfigurations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/UpdatePublishConfigurationsConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "minimalEmbed": {
+                  "description": "Minimal embed",
+                  "summary": "Renders the view on its own, without the title, description, or toolbar.",
+                  "value": {
+                    "CONFIG": {
+                      "includeTitle": false,
+                      "includeDesc": false,
+                      "includeToolBar": false
+                    }
+                  }
+                },
+                "fullToolbar": {
+                  "description": "Full toolbar",
+                  "summary": "Renders the view with the toolbar, search box, data type symbols, and the Ask Zia bot.",
+                  "value": {
+                    "CONFIG": {
+                      "includeToolBar": true,
+                      "includeSearchBox": true,
+                      "includeDatatypeSymbol": true,
+                      "includeAskZia": true
+                    }
+                  }
+                },
+                "filteredEmbed": {
+                  "description": "Filtered embed",
+                  "summary": "Applies a filter criteria on the published URL and refreshes the view every thirty minutes.",
+                  "value": {
+                    "CONFIG": {
+                      "URLCriteria": "\"SalesTable\".\"Region\"='East'",
+                      "autoRefresh": 30,
+                      "width": 1024,
+                      "height": 768,
+                      "isInteractive": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Only the attributes sent in the config are updated; the ones omitted retain their current values.</li><li><code>autoRefresh</code> takes the interval in minutes. Send <code>-1</code> to disable the automatic refresh.</li><li><code>isListed</code> applies to the workspace, not to the individual view.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed": {
+      "get": {
+        "tags": [
+          "Embed"
+        ],
+        "x-zenesis-title": "Get Embed URL",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.read"
+            ]
+          }
+        ],
+        "summary": "Get Embed URL",
+        "description": "Returns an embed URL through which the specified view can be accessed. The generated URL is short-lived, which adds more security to it. It does not require a login, and what the viewer can see and do is governed entirely by the permissions, filter criteria, and column restrictions sent in the config.\n\n> **Note:** This API is available only to Embedded Analytics customers.",
+        "operationId": "getEmbedUrl",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/view-id"
+          },
+          {
+            "name": "CONFIG",
+            "in": "query",
+            "required": false,
+            "description": "Config parameter that controls the permissions carried by the embed URL, the rows and columns visible through it, and how long it stays valid.\n\nAs this is a GET request, the value must be stringified and URL encoded before it is sent.",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/GetEmbedUrlConfig"
+            },
+            "examples": {
+              "defaultEmbed": {
+                "description": "Default embed",
+                "summary": "Returns an embed URL with the default rendering options and a one hour validity period.",
+                "value": {}
+              },
+              "filteredEmbed": {
+                "description": "Filtered embed",
+                "summary": "Returns an embed URL through which only the East region rows are visible, with export permission granted.",
+                "value": {
+                  "criteria": "\"SalesTable\".\"Region\"='East'",
+                  "permissions": {
+                    "export": true
+                  },
+                  "includeToolBar": true
+                }
+              },
+              "restrictedColumns": {
+                "description": "Restricted columns",
+                "summary": "Returns an embed URL that grants underlying data and drill down access, limited to specific columns.",
+                "value": {
+                  "permissions": {
+                    "vud": true,
+                    "drillDown": true
+                  },
+                  "vudColumns": [
+                    {
+                      "tableName": "SalesTable",
+                      "columnNames": [
+                        "Region",
+                        "Sales"
+                      ]
+                    }
+                  ],
+                  "drillColumns": [
+                    {
+                      "tableName": "SalesTable",
+                      "columnNames": [
+                        "Region"
+                      ]
+                    }
+                  ],
+                  "legendPosition": "BOTTOMCENTER"
+                }
+              },
+              "localizedEmbed": {
+                "description": "Localized embed",
+                "summary": "Returns a long lived embed URL rendered in French on the configured white label domain.",
+                "value": {
+                  "language": "french",
+                  "domainName": "analytics.example.com",
+                  "validityPeriod": 86400,
+                  "includeTitle": true,
+                  "includeDesc": false
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetEmbedUrlResponse"
+                },
+                "examples": {
+                  "embedUrl": {
+                    "description": "Embed URL",
+                    "summary": "Short-lived embed URL generated for the view, carrying the requested configuration.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get embed url",
+                      "data": {
+                        "embedUrl": "https://analytics.zoho.com/open-view/1767024000003145011?OS=FS&RSCONFIG=******"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiInfo": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>This API is available only to Embedded Analytics customers.</li><li>The generated URL is short-lived and does not require a login. Anyone holding it has the access granted by the config until the validity period elapses.</li></ul>\n</span></blockquote>"
+            }
+          },
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>As this is a GET request, the CONFIG value must be stringified and URL encoded before it is sent.</li><li><code>CONFIG</code> may be omitted entirely, in which case the embed URL is returned with the default rendering options and a one hour validity period.</li><li><code>vudColumns</code> is applicable only when the <code>vud</code> permission is set to true.</li><li><code>drillColumns</code> is applicable only when the <code>drillDown</code> permission is set to true.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/slides": {
+      "post": {
+        "tags": [
+          "Slideshow Management"
+        ],
+        "x-zenesis-title": "Create Slideshow",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.create"
+            ]
+          }
+        ],
+        "summary": "Create Slideshow",
+        "description": "Creates a slideshow in the specified workspace from the given set of views, and returns its ID along with the URL through which it can be accessed.",
+        "operationId": "createSlideshow",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/CreateSlideshowConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "loginRequired": {
+                  "description": "Login required",
+                  "summary": "Creates a slideshow that can be opened only by users who are logged in to Zoho Analytics.",
+                  "value": {
+                    "CONFIG": {
+                      "slideName": "Sales Overview",
+                      "viewIds": [
+                        "1767024000003013087",
+                        "1767024000003015001"
+                      ],
+                      "accessType": 0
+                    }
+                  }
+                },
+                "publicSlideshow": {
+                  "description": "Public slideshow",
+                  "summary": "Creates a slideshow that can be opened without logging in to Zoho Analytics.",
+                  "value": {
+                    "CONFIG": {
+                      "slideName": "Quarterly Highlights",
+                      "viewIds": [
+                        "1767024000003013087",
+                        "1767024000003015001",
+                        "1767024000003011002"
+                      ],
+                      "accessType": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateSlideshowResponse"
+                },
+                "examples": {
+                  "slideshowCreated": {
+                    "description": "Slideshow created",
+                    "summary": "ID and URL of the slideshow that has just been created.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Create slideshow",
+                      "data": {
+                        "slideId": "1767024000003151001",
+                        "slideUrl": "https://analytics.zoho.com/ZDBSlideshow.cc?SLIDEID=1767024000003151001&SLIDEKEY=69ba2ec9bfbe548f494bdf798087db41&AUTOPLAY=true&INTERVAL=25&INCLUDETITLE=true&INCLUDEDESC=true&SOCIALWIDGETS=false"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The order of the IDs in <code>viewIds</code> determines the order in which the views appear in the slideshow.</li><li><code>validateSystemTags</code> is applicable only when System Tags are enabled for your organization.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Slideshow Management"
+        ],
+        "x-zenesis-title": "Get Slideshows",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.read"
+            ]
+          }
+        ],
+        "summary": "Get Slideshows",
+        "description": "Returns the list of slideshows available in the specified workspace, along with the access type of each of them.",
+        "operationId": "getSlideshows",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSlideshowsResponse"
+                },
+                "examples": {
+                  "multipleSlideshows": {
+                    "description": "Multiple slideshows",
+                    "summary": "Workspace holding two slideshows, one requiring a login and one open without it.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get slideshows",
+                      "data": {
+                        "slideshows": [
+                          {
+                            "slideName": "Sales Overview",
+                            "slideId": "1767024000003149001",
+                            "accessType": 0
+                          },
+                          {
+                            "slideName": "Quarterly Highlights",
+                            "slideId": "1767024000003120002",
+                            "accessType": 1
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "noSlideshows": {
+                    "description": "No slideshows",
+                    "summary": "Workspace in which no slideshow has been created yet.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get slideshows",
+                      "data": {
+                        "slideshows": []
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}": {
+      "put": {
+        "tags": [
+          "Slideshow Management"
+        ],
+        "x-zenesis-title": "Update Slideshow",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.update"
+            ]
+          }
+        ],
+        "summary": "Update Slideshow",
+        "description": "Updates the details of the specified slideshow. The name, the views it contains, and its access type can all be changed, and the slide key can be regenerated to invalidate the URL issued previously.",
+        "operationId": "updateSlideshow",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/slide-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/UpdateSlideshowConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "renameSlideshow": {
+                  "description": "Rename slideshow",
+                  "summary": "Changes only the name of the slideshow, leaving its views and access type as they are.",
+                  "value": {
+                    "CONFIG": {
+                      "slideName": "Sales Overview 2026"
+                    }
+                  }
+                },
+                "replaceViews": {
+                  "description": "Replace views",
+                  "summary": "Replaces the set of views in the slideshow and opens it up for access without login.",
+                  "value": {
+                    "CONFIG": {
+                      "viewIds": [
+                        "1767024000003013087",
+                        "1767024000003011002"
+                      ],
+                      "accessType": 1
+                    }
+                  }
+                },
+                "regenerateKey": {
+                  "description": "Regenerate key",
+                  "summary": "Generates a new slide key, disabling the slideshow URL that was issued previously.",
+                  "value": {
+                    "CONFIG": {
+                      "regenerateSlideKey": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Only the attributes sent in the config are updated; the ones omitted retain their current values.</li><li>Sending <code>viewIds</code> replaces the entire set of views in the slideshow rather than adding to it.</li><li>Setting <code>regenerateSlideKey</code> to true disables the slideshow URL that was issued previously.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Slideshow Management"
+        ],
+        "x-zenesis-title": "Delete Slideshow",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.delete"
+            ]
+          }
+        ],
+        "summary": "Delete Slideshow",
+        "description": "Deletes the specified slideshow from the workspace. The views included in the slideshow are not affected; only the slideshow itself and its URL are removed.",
+        "operationId": "deleteSlideshow",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/slide-id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Slideshow Management"
+        ],
+        "x-zenesis-title": "Get Slideshow Details",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.read"
+            ]
+          }
+        ],
+        "summary": "Get Slideshow Details",
+        "description": "Returns the details of the specified slideshow, including its slide key, its access type, and the IDs of the views it contains.",
+        "operationId": "getSlideshowDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/slide-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSlideshowDetailsResponse"
+                },
+                "examples": {
+                  "loginRequired": {
+                    "description": "Login required",
+                    "summary": "Slideshow of three views that can be opened only by users logged in to Zoho Analytics.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get slideshow details",
+                      "data": {
+                        "slideInfo": {
+                          "slideId": "1767024000003149001",
+                          "slideKey": "9a4c1042011ce02fc4a3182fa75a22a9",
+                          "slideName": "Sales Overview",
+                          "accessType": 0,
+                          "viewIds": [
+                            "1767024000003013087",
+                            "1767024000003015001",
+                            "1767024000003011002"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "publicSlideshow": {
+                    "description": "Public slideshow",
+                    "summary": "Slideshow of two views that can be opened without logging in to Zoho Analytics.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get slideshow details",
+                      "data": {
+                        "slideInfo": {
+                          "slideId": "1767024000003120002",
+                          "slideKey": "69ba2ec9bfbe548f494bdf798087db41",
+                          "slideName": "Quarterly Highlights",
+                          "accessType": 1,
+                          "viewIds": [
+                            "1767024000003013087",
+                            "1767024000003015001"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}/publish": {
+      "get": {
+        "tags": [
+          "Slideshow Management"
+        ],
+        "x-zenesis-title": "Get Slideshow URL",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.embed.read"
+            ]
+          }
+        ],
+        "summary": "Get Slideshow URL",
+        "description": "Returns the URL through which the specified slideshow can be accessed. The rendering options sent in the config - the title, description, social widgets, autoplay, and the switching interval - are carried in the query string of the returned URL.",
+        "operationId": "getSlideshowUrl",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/slide-id"
+          },
+          {
+            "name": "CONFIG",
+            "in": "query",
+            "required": false,
+            "description": "Config parameter that controls how the slideshow is rendered when it is opened through the returned URL.\n\nAs this is a GET request, the value must be stringified and URL encoded before it is sent.",
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/GetSlideshowUrlConfig"
+            },
+            "examples": {
+              "autoplaySlideshow": {
+                "description": "Autoplay slideshow",
+                "summary": "Returns a URL that scrolls through the views automatically every twenty five seconds.",
+                "value": {
+                  "includeTitle": true,
+                  "includeDesc": true,
+                  "includeSocialWidgets": false,
+                  "autoplay": true,
+                  "withCustomDomain": false,
+                  "slideInterval": 25
+                }
+              },
+              "minimalSlideshow": {
+                "description": "Minimal slideshow",
+                "summary": "Returns a URL that renders the views on their own, without the title or description.",
+                "value": {
+                  "includeTitle": false,
+                  "includeDesc": false,
+                  "autoplay": false
+                }
+              },
+              "customDomainUrl": {
+                "description": "Custom domain",
+                "summary": "Returns the slideshow URL on the configured white label domain.",
+                "value": {
+                  "withCustomDomain": true,
+                  "autoplay": true,
+                  "slideInterval": 60
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSlideshowUrlResponse"
+                },
+                "examples": {
+                  "slideshowUrl": {
+                    "description": "Slideshow URL",
+                    "summary": "Slideshow URL carrying the rendering options that were sent in the config.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get slideshow url",
+                      "data": {
+                        "slideUrl": "https://analytics.zoho.com/ZDBSlideshow.cc?SLIDEID=1767024000003139001&SLIDEKEY=9c4a1042011ce02fc4a3182fa75a22a9&AUTOPLAY=true&INTERVAL=25&INCLUDETITLE=true&INCLUDEDESC=true&SOCIALWIDGETS=false"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>As this is a GET request, the CONFIG value must be stringified and URL encoded before it is sent.</li><li><code>CONFIG</code> may be omitted entirely, in which case the slideshow URL is returned with the default rendering options.</li><li><code>slideInterval</code> must be between 10 and 300 seconds.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "org-id": {
+        "name": "ZANALYTICS-ORGID",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Organization ID (can be obtained using Get Organizations API)."
+      },
+      "slide-id": {
+        "name": "slide-id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of the slide."
+      },
+      "view-id": {
+        "name": "view-id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of the view."
+      },
+      "workspace-id": {
+        "name": "workspace-id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of the workspace."
+      }
+    },
+    "securitySchemes": {
+      "iam-oauth2-schema": {
+        "type": "oauth2",
+        "description": "Authentication is based on OAuth2 flow",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://accounts.zoho.com/oauth/v2/auth",
+            "tokenUrl": "https://accounts.zoho.com/oauth/v2/token",
+            "scopes": {
+              "ZohoAnalytics.share.create": "Share views with users",
+              "ZohoAnalytics.share.update": "Update share and publish configurations",
+              "ZohoAnalytics.share.delete": "Remove sharing permissions",
+              "ZohoAnalytics.share.read": "Read share details and permissions",
+              "ZohoAnalytics.embed.read": "Read embed and publish URLs"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ColumnPermissionObject": {
+        "type": "object",
+        "title": "ColumnPermissionObject",
+        "description": "JSONObject that maps a table to the set of its columns for which the permission has to be granted.",
+        "properties": {
+          "tableName": {
+            "type": "string",
+            "description": "Name of the table that holds the columns.",
+            "examples": [
+              "table1"
+            ]
+          },
+          "columnNames": {
+            "type": "array",
+            "description": "JSONArray containing the names of the columns in the table.",
+            "items": {
+              "type": "string",
+              "description": "Name of a column in the table."
+            },
+            "examples": [
+              [
+                "column1",
+                "column2"
+              ]
+            ]
+          }
+        },
+        "examples": [
+          {
+            "tableName": "table1",
+            "columnNames": [
+              "column1",
+              "column2"
+            ]
+          }
+        ]
+      },
+      "CreatePrivateUrlConfig": {
+        "type": "object",
+        "title": "CreatePrivateUrlConfig",
+        "description": "Config parameter that controls the permissions granted through the private link, the rows and columns visible through it, and its password and expiry settings.",
+        "properties": {
+          "criteria": {
+            "type": "string",
+            "description": "Filter criteria to be applied on the published view. When a criteria is sent, only the rows matching it are visible; otherwise all the rows are visible.\n\n> **Note:** Refer to the filter criteria documentation for details on how to construct a criteria.",
+            "examples": [
+              "\"SalesTable\".\"Region\"='East'"
+            ]
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/PublishPermissionAttributes"
+          },
+          "regenerateKey": {
+            "type": "boolean",
+            "description": "Controls whether a new private key is generated. When true, the previously generated private link is disabled.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "vudColumns": {
+            "$ref": "#/components/schemas/VUDColumns"
+          },
+          "drillColumns": {
+            "$ref": "#/components/schemas/DrillColumns"
+          },
+          "includeAllColsForVUD": {
+            "type": "boolean",
+            "description": "Controls whether all the columns in the table are included in the underlying data.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "password": {
+            "type": "string",
+            "description": "Password that protects the private link. Anyone accessing the link is prompted for it.",
+            "examples": [
+              "Zylker@123"
+            ]
+          },
+          "removePassword": {
+            "type": "boolean",
+            "description": "Controls whether the existing access password of the private link is removed.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Date on which the private link expires, in yyyy-MM-dd format.",
+            "examples": [
+              "2026-12-31"
+            ]
+          },
+          "removeExpiryDate": {
+            "type": "boolean",
+            "description": "Controls whether the existing validity period of the private link is removed.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "validateSystemTags": {
+            "type": "boolean",
+            "description": "Applicable only when System Tags are enabled for your organization. When true, the request is validated against the System Tags applied to the view specified in the request URI. If that view carries an **Outdated** tag - applied directly, or inherited through lineage from a parent Data Source or Table - the request is rejected. Set this to false to skip the validation and proceed with the request.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
+      "CreatePrivateUrlResponse": {
+        "type": "object",
+        "title": "CreatePrivateUrlResponse",
+        "description": "Response returned by the Create Private URL API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "examples": [
+              "success"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the action performed.",
+            "examples": [
+              "Create private url"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/PrivateUrlData"
+          }
+        }
+      },
+      "CreateSlideshowConfig": {
+        "type": "object",
+        "title": "CreateSlideshowConfig",
+        "description": "Config parameter that specifies the name of the slideshow, the views it contains, and how it can be accessed.",
+        "properties": {
+          "slideName": {
+            "type": "string",
+            "description": "Name of the slideshow.",
+            "examples": [
+              "Sales Overview"
+            ]
+          },
+          "viewIds": {
+            "$ref": "#/components/schemas/SlideViewIds"
+          },
+          "accessType": {
+            "type": "integer",
+            "description": "Controls how the slideshow can be accessed.\n\n- **0** - Access with login.\n- **1** - Access without login.\n- **2** - Sort.",
+            "default": 0,
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "x-zenesis-enums-desc": [
+              "With login",
+              "Without login",
+              "Sort"
+            ]
+          },
+          "validateSystemTags": {
+            "type": "boolean",
+            "description": "Applicable only when System Tags are enabled for your organization. When true, the request is validated against the System Tags applied to the views listed in `viewIds`. If any of those views carries an **Outdated** tag - applied directly, or inherited through lineage from a parent Data Source or Table - the request is rejected and the slideshow is not saved. Set this to false to skip the validation and proceed with the request.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        },
+        "required": [
+          "slideName",
+          "viewIds"
+        ]
+      },
+      "CreateSlideshowData": {
+        "type": "object",
+        "title": "CreateSlideshowData",
+        "description": "JSONObject that holds the ID and the URL of the slideshow that has been created.",
+        "properties": {
+          "slideId": {
+            "type": "string",
+            "description": "ID of the slideshow that has been created.",
+            "examples": [
+              "1767024000003151001"
+            ]
+          },
+          "slideUrl": {
+            "type": "string",
+            "description": "URL through which the slideshow can be accessed.",
+            "examples": [
+              "https://analytics.zoho.com/ZDBSlideshow.cc?SLIDEID=1767024000003151001&SLIDEKEY=69ba2ec9bfbe548f494bdf798087db41&AUTOPLAY=true&INTERVAL=25&INCLUDETITLE=true&INCLUDEDESC=true&SOCIALWIDGETS=false"
+            ]
+          }
+        }
+      },
+      "CreateSlideshowResponse": {
+        "type": "object",
+        "title": "CreateSlideshowResponse",
+        "description": "Response returned by the Create Slideshow API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "examples": [
+              "success"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the action performed.",
+            "examples": [
+              "Create slideshow"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/CreateSlideshowData"
+          }
+        }
+      },
+      "DrillColumns": {
+        "type": "array",
+        "title": "DrillColumns",
+        "description": "JSONArray of JSONObjects that limits the drill down option to the specified columns from the specified tables. This is valid only when the `drillDown` permission is set to true.",
+        "items": {
+          "$ref": "#/components/schemas/ColumnPermissionObject"
+        },
+        "examples": [
+          [
+            {
+              "tableName": "table1",
+              "columnNames": [
+                "column1",
+                "column2"
+              ]
+            }
+          ]
+        ]
+      },
+      "GetEmbedUrlConfig": {
+        "type": "object",
+        "title": "GetEmbedUrlConfig",
+        "description": "Config parameter that controls the permissions carried by the embed URL, the rows and columns visible through it, how the view is rendered, and how long the URL stays valid.",
+        "properties": {
+          "criteria": {
+            "type": "string",
+            "description": "Filter criteria to be applied on the embedded view. When a criteria is sent, only the rows matching it are visible; otherwise all the rows are visible.\n\n> **Note:** Refer to the filter criteria documentation for details on how to construct a criteria.",
+            "examples": [
+              "\"SalesTable\".\"Region\"='East'"
+            ]
+          },
+          "includeTitle": {
+            "type": "boolean",
+            "description": "Controls whether the view name is displayed in the embedded mode.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeDesc": {
+            "type": "boolean",
+            "description": "Controls whether the view description is displayed in the embedded mode.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeToolBar": {
+            "type": "boolean",
+            "description": "Controls whether the toolbar is included in the embedded mode.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeSearchBox": {
+            "type": "boolean",
+            "description": "Controls whether the search box is included in the table.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeDatatypeSymbol": {
+            "type": "boolean",
+            "description": "Controls whether the data type symbol is included in the table column.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "legendPosition": {
+            "type": "string",
+            "description": "Controls the position at which the chart legend is displayed.",
+            "enum": [
+              "RIGHT",
+              "LEFT",
+              "TOPLEFT",
+              "TOPRIGHT",
+              "TOPCENTER",
+              "BOTTOMLEFT",
+              "BOTTOMRIGHT",
+              "BOTTOMCENTER",
+              "NONE"
+            ]
+          },
+          "validityPeriod": {
+            "type": "integer",
+            "description": "Validity period, in seconds, of the generated URL. Once it elapses, the URL stops resolving and a fresh one has to be generated.",
+            "default": 3600
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/PublishPermissionAttributes"
+          },
+          "vudColumns": {
+            "$ref": "#/components/schemas/VUDColumns"
+          },
+          "drillColumns": {
+            "$ref": "#/components/schemas/DrillColumns"
+          },
+          "language": {
+            "type": "string",
+            "description": "Language in which the embedded view is rendered.",
+            "default": "english",
+            "enum": [
+              "english",
+              "chinese",
+              "japanese",
+              "french",
+              "italian",
+              "spanish",
+              "portuguese",
+              "portuguese_td",
+              "german",
+              "chinese_td",
+              "dutch",
+              "russian",
+              "polish",
+              "arabic",
+              "turkish",
+              "hungarian",
+              "hebrew",
+              "swedish",
+              "korean",
+              "danish",
+              "ukranian",
+              "vietnamies",
+              "bulgarian",
+              "croatian",
+              "czech",
+              "hindi",
+              "thai",
+              "indonesian",
+              "malay"
+            ]
+          },
+          "domainName": {
+            "type": "string",
+            "description": "Custom domain to be used, so that the embed URL is returned with the corresponding domain address.",
+            "examples": [
+              "analytics.example.com"
+            ]
+          },
+          "validateSystemTags": {
+            "type": "boolean",
+            "description": "Applicable only when System Tags are enabled for your organization. When true, the request is validated against the System Tags applied to the view specified in the request URI. If that view carries an **Outdated** tag - applied directly, or inherited through lineage from a parent Data Source or Table - the request is rejected. Set this to false to skip the validation and proceed with the request.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
+      "GetEmbedUrlData": {
+        "type": "object",
+        "title": "GetEmbedUrlData",
+        "description": "JSONObject that holds the embed URL generated for the view.",
+        "properties": {
+          "embedUrl": {
+            "type": "string",
+            "description": "Short-lived URL through which the view can be embedded. It stops resolving once the validity period elapses.",
+            "examples": [
+              "https://analytics.zoho.com/open-view/1767024000003145011?OS=FS&RSCONFIG=******"
+            ]
+          }
+        }
+      },
+      "GetEmbedUrlResponse": {
+        "type": "object",
+        "title": "GetEmbedUrlResponse",
+        "description": "Response returned by the Get Embed URL API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "examples": [
+              "success"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the action performed.",
+            "examples": [
+              "Get embed url"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetEmbedUrlData"
+          }
+        }
+      },
+      "GetPrivateUrlConfig": {
+        "type": "object",
+        "title": "GetPrivateUrlConfig",
+        "description": "Config parameter that controls the domain used to build the private URL.",
+        "properties": {
+          "domainName": {
+            "type": "string",
+            "description": "Custom domain to be used, so that the private URL is returned with the corresponding domain address.",
+            "examples": [
+              "analytics.example.com"
+            ]
+          },
+          "validateSystemTags": {
+            "type": "boolean",
+            "description": "Applicable only when System Tags are enabled for your organization. When true, the request is validated against the System Tags applied to the view specified in the request URI. If that view carries an **Outdated** tag - applied directly, or inherited through lineage from a parent Data Source or Table - the request is rejected. Set this to false to skip the validation and proceed with the request.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
+      "GetPrivateUrlResponse": {
+        "type": "object",
+        "title": "GetPrivateUrlResponse",
+        "description": "Response returned by the Get Private URL API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "examples": [
+              "success"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the action performed.",
+            "examples": [
+              "Get private url"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/PrivateUrlData"
+          }
+        }
+      },
+      "GetPublishConfigurationsResponse": {
+        "type": "object",
+        "title": "GetPublishConfigurationsResponse",
+        "description": "Response returned by the Get Publish Configurations API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "examples": [
+              "success"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the action performed.",
+            "examples": [
+              "Get publish configurations"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/PublishConfigurationsData"
+          }
+        }
+      },
+      "GetSharedDetailsConfig": {
+        "type": "object",
+        "title": "GetSharedDetailsConfig",
+        "description": "Config parameter that specifies the views whose shared details have to be fetched.",
+        "properties": {
+          "viewIds": {
+            "$ref": "#/components/schemas/ShareViewIds"
+          }
+        }
+      },
+      "GetSharedDetailsResponse": {
+        "type": "object",
+        "title": "GetSharedDetailsResponse",
+        "description": "Response returned by the Get Shared Details For Views API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "examples": [
+              "success"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the action performed.",
+            "examples": [
+              "Get shared details for views"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/SharedDetailsData"
+          }
+        }
+      },
+      "GetSlideshowDetailsResponse": {
+        "type": "object",
+        "title": "GetSlideshowDetailsResponse",
+        "description": "Response returned by the Get Slideshow Details API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "examples": [
+              "success"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the action performed.",
+            "examples": [
+              "Get slideshow details"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/SlideshowDetailsData"
+          }
+        }
+      },
+      "GetSlideshowUrlConfig": {
+        "type": "object",
+        "title": "GetSlideshowUrlConfig",
+        "description": "Config parameter that controls how the slideshow is rendered when it is opened through the returned URL.",
+        "properties": {
+          "includeTitle": {
+            "type": "boolean",
+            "description": "Controls whether the view name is displayed in the embedded mode.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeDesc": {
+            "type": "boolean",
+            "description": "Controls whether the view description is displayed in the embedded mode.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeSocialWidgets": {
+            "type": "boolean",
+            "description": "Controls whether the social widgets are included in the slide.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "autoplay": {
+            "type": "boolean",
+            "description": "Controls whether the slideshow scrolls to the next view automatically.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "withCustomDomain": {
+            "type": "boolean",
+            "description": "Controls whether the slide URL is returned with your custom domain address.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "slideInterval": {
+            "type": "integer",
+            "description": "Time interval, in seconds, at which the views in the slideshow switch. The value must be between 10 and 300.",
+            "minimum": 10,
+            "maximum": 300,
+            "examples": [
+              25
+            ]
+          }
+        }
+      },
+      "GetSlideshowUrlResponse": {
+        "type": "object",
+        "title": "GetSlideshowUrlResponse",
+        "description": "Response returned by the Get Slideshow URL API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "examples": [
+              "success"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the action performed.",
+            "examples": [
+              "Get slideshow url"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/SlideUrlData"
+          }
+        }
+      },
+      "GetSlideshowsResponse": {
+        "type": "object",
+        "title": "GetSlideshowsResponse",
+        "description": "Response returned by the Get Slideshows API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "examples": [
+              "success"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the action performed.",
+            "examples": [
+              "Get slideshows"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/SlideshowsData"
+          }
+        }
+      },
+      "GetUserPermissionsData": {
+        "type": "object",
+        "title": "GetUserPermissionsData",
+        "description": "JSONObject that holds the permissions of the requesting user on the specified view.",
+        "properties": {
+          "permissions": {
+            "$ref": "#/components/schemas/ViewPermissions"
+          }
+        }
+      },
+      "GetUserPermissionsResponse": {
+        "type": "object",
+        "title": "GetUserPermissionsResponse",
+        "description": "Response returned by the Get User Permissions API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "examples": [
+              "success"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the action performed.",
+            "examples": [
+              "Get user permissions"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetUserPermissionsData"
+          }
+        }
+      },
+      "GetWorkspaceSharedDetailsResponse": {
+        "type": "object",
+        "title": "GetWorkspaceSharedDetailsResponse",
+        "description": "Response returned by the Get Workspace Shared Details API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "examples": [
+              "success"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the action performed.",
+            "examples": [
+              "Get share info"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/WorkspaceShareData"
+          }
+        }
+      },
+      "GroupShareInfo": {
+        "type": "object",
+        "title": "GroupShareInfo",
+        "description": "JSONObject that holds the views shared with a group, along with the details of that group.",
+        "properties": {
+          "groupId": {
+            "type": "string",
+            "description": "ID of the group the views are shared with.",
+            "examples": [
+              "1767024000013490007"
+            ]
+          },
+          "groupName": {
+            "type": "string",
+            "description": "Name of the group.",
+            "examples": [
+              "Sales Team"
+            ]
+          },
+          "groupDesc": {
+            "type": "string",
+            "description": "Description of the group.",
+            "examples": [
+              "Regional sales managers"
+            ]
+          },
+          "groupMembers": {
+            "type": "array",
+            "description": "JSONArray containing the email addresses of the members of the group.",
+            "items": {
+              "type": "string",
+              "description": "Email address of a group member."
+            },
+            "examples": [
+              [
+                "user1@example.com",
+                "user2@example.com"
+              ]
+            ]
+          },
+          "views": {
+            "type": "array",
+            "description": "JSONArray containing the views shared, along with the permissions granted on each of them.",
+            "items": {
+              "$ref": "#/components/schemas/ShareViewObject"
+            }
+          }
+        }
+      },
+      "MakeViewsPublicConfig": {
+        "type": "object",
+        "title": "MakeViewsPublicConfig",
+        "description": "Config parameter that controls who can access the published view, what they are permitted to do with it, and which rows and columns they can see.",
+        "properties": {
+          "publicPermLevel": {
+            "type": "integer",
+            "description": "Controls who can access the view once it is published.\n\n- **1** - Public on the web.\n- **2** - Everyone in the Zoho Analytics Organization.\n- **3** - Everyone in the Zoho Business Organization.",
+            "default": 1,
+            "enum": [
+              1,
+              2,
+              3
+            ]
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/PublishPermissionAttributes"
+          },
+          "vudColumns": {
+            "$ref": "#/components/schemas/VUDColumns"
+          },
+          "drillColumns": {
+            "$ref": "#/components/schemas/DrillColumns"
+          },
+          "criteria": {
+            "type": "string",
+            "description": "Filter criteria to be applied on the published view. When a criteria is sent, only the rows matching it are visible; otherwise all the rows are visible.\n\n> **Note:** Refer to the filter criteria documentation for details on how to construct a criteria.",
+            "examples": [
+              "\"SalesTable\".\"Region\"='East'"
+            ]
+          },
+          "inheritParentFilterCriteria": {
+            "type": "boolean",
+            "description": "Applicable only for reports, not for tables. When true, the filter criteria of the parent tables is also taken into account.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "validateSystemTags": {
+            "type": "boolean",
+            "description": "Applicable only when System Tags are enabled for your organization. When true, the request is validated against the System Tags applied to the view specified in the request URI. If that view carries an **Outdated** tag - applied directly, or inherited through lineage from a parent Data Source or Table - the request is rejected. Set this to false to skip the validation and proceed with the request.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
+      "MakeViewsPublicData": {
+        "type": "object",
+        "title": "MakeViewsPublicData",
+        "description": "JSONObject that holds the public URL generated for the view.",
+        "properties": {
+          "publicUrl": {
+            "type": "string",
+            "description": "URL through which the published view can be accessed.",
+            "examples": [
+              "https://analytics.zoho.com/open-view/1767024000008125004"
+            ]
+          }
+        }
+      },
+      "MakeViewsPublicResponse": {
+        "type": "object",
+        "title": "MakeViewsPublicResponse",
+        "description": "Response returned by the Make Views Public API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "examples": [
+              "success"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the action performed.",
+            "examples": [
+              "Make view public"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/MakeViewsPublicData"
+          }
+        }
+      },
+      "PermissionAttributes": {
+        "type": "object",
+        "title": "PermissionAttributes",
+        "description": "JSONObject that specifies the permissions granted on the shared views. Each key is a permission and its value controls whether that permission is granted.",
+        "properties": {
+          "read": {
+            "type": "boolean",
+            "description": "Permission to access the view. This should always be set to true.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "export": {
+            "type": "boolean",
+            "description": "Permission to export the view data.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "vud": {
+            "type": "boolean",
+            "description": "Permission to view the underlying data.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "drillDown": {
+            "type": "boolean",
+            "description": "Permission to drill down in a chart.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "addRow": {
+            "type": "boolean",
+            "description": "Permission to add a row in the table.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "updateRow": {
+            "type": "boolean",
+            "description": "Permission to update a row in the table.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "deleteRow": {
+            "type": "boolean",
+            "description": "Permission to delete a row in the table.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "deleteAllRows": {
+            "type": "boolean",
+            "description": "Permission to delete all rows in the table.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "importAppend": {
+            "type": "boolean",
+            "description": "Permission to import data into the table using the APPEND option.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "importAddOrUpdate": {
+            "type": "boolean",
+            "description": "Permission to import data into the table using the UPDATEADD option.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "importDeleteAllAdd": {
+            "type": "boolean",
+            "description": "Permission to import data into the table using the TRUNCATEADD option.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "share": {
+            "type": "boolean",
+            "description": "Permission to share the view with other users.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "discussion": {
+            "type": "boolean",
+            "description": "Permission to allow commenting in the view.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "importDeleteUpdateAdd": {
+            "type": "boolean",
+            "description": "Permission to import data into the table using the DELETEUPDATEADD option.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "insight": {
+            "type": "boolean",
+            "description": "Permission to access the insights generated for the view.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        },
+        "required": [
+          "read"
+        ],
+        "examples": [
+          {
+            "read": true,
+            "vud": true,
+            "export": true
+          }
+        ]
+      },
+      "PrivateLinkConfig": {
+        "type": "object",
+        "title": "PrivateLinkConfig",
+        "description": "JSONObject that holds the current private link configuration of the view.",
+        "properties": {
+          "isPrivate": {
+            "type": "boolean",
+            "description": "Indicates whether a private link is currently enabled for the view.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "isExpired": {
+            "type": "boolean",
+            "description": "Indicates whether the validity period set on the private link has elapsed.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "password": {
+            "type": "string",
+            "description": "Password protecting the private link. A value of -1 indicates that no password is set.",
+            "examples": [
+              "-1"
+            ]
+          },
+          "expiryDate": {
+            "type": "string",
+            "description": "Date on which the private link expires, in yyyy-MM-dd format. A value of -1 indicates that no validity period is set.",
+            "examples": [
+              "-1"
+            ]
+          }
+        }
+      },
+      "PrivateLinkShareInfo": {
+        "type": "object",
+        "title": "PrivateLinkShareInfo",
+        "description": "JSONObject that holds the views shared through a private link in the workspace.",
+        "properties": {
+          "emailId": {
+            "type": "string",
+            "description": "Placeholder identifier used for private link access.",
+            "examples": [
+              "Private Link"
+            ]
+          },
+          "views": {
+            "type": "array",
+            "description": "JSONArray containing the views shared, along with the permissions granted on each of them.",
+            "items": {
+              "$ref": "#/components/schemas/ShareViewObject"
+            }
+          }
+        }
+      },
+      "PrivateUrlData": {
+        "type": "object",
+        "title": "PrivateUrlData",
+        "description": "JSONObject that holds the private URL of the view.",
+        "properties": {
+          "privateUrl": {
+            "type": "string",
+            "description": "URL through which the view can be accessed privately. The trailing segment is the private key.",
+            "examples": [
+              "https://analytics.zoho.com/open-view/1767024000003145011/eee1191ea88d52e486aaecf5f748dc56"
+            ]
+          }
+        }
+      },
+      "PublicShareInfo": {
+        "type": "object",
+        "title": "PublicShareInfo",
+        "description": "JSONObject that holds the views published publicly in the workspace.",
+        "properties": {
+          "emailId": {
+            "type": "string",
+            "description": "Placeholder identifier used for public access.",
+            "examples": [
+              "Public Visitor"
+            ]
+          },
+          "views": {
+            "type": "array",
+            "description": "JSONArray containing the views shared, along with the permissions granted on each of them.",
+            "items": {
+              "$ref": "#/components/schemas/ShareViewObject"
+            }
+          }
+        }
+      },
+      "PublicViewConfig": {
+        "type": "object",
+        "title": "PublicViewConfig",
+        "description": "JSONObject that holds the current public access configuration of the view.",
+        "properties": {
+          "publicPermLevel": {
+            "type": "integer",
+            "description": "Level of public access currently in effect for the view.\n\n- **1** - Public on the web.\n- **2** - Everyone in the Zoho Analytics Organization.\n- **3** - Everyone in the Zoho Business Organization.",
+            "enum": [
+              1,
+              2,
+              3
+            ]
+          },
+          "isListed": {
+            "type": "boolean",
+            "description": "Indicates whether the workspace is listed in the Zoho Analytics public workspaces page.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "isOrgPublicAllowed": {
+            "type": "boolean",
+            "description": "Indicates whether the view can be published to everyone in the Zoho Analytics organization.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "orgName": {
+            "type": "string",
+            "description": "Name of the Zoho Analytics organization that owns the view.",
+            "examples": [
+              "Zylker Analytics"
+            ]
+          },
+          "isBussOrgPublicAllowed": {
+            "type": "boolean",
+            "description": "Indicates whether the view can be published to everyone in the Zoho business organization.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "businessOrgName": {
+            "type": "string",
+            "description": "Name of the Zoho business organization that owns the view.",
+            "examples": [
+              "Zylker Corporation Private Limited"
+            ]
+          }
+        }
+      },
+      "PublishConfig": {
+        "type": "object",
+        "title": "PublishConfig",
+        "description": "JSONObject that holds the current rendering configuration applied when the view is accessed through a published URL.",
+        "properties": {
+          "includeTitle": {
+            "type": "boolean",
+            "description": "Indicates whether the view name is displayed in the embedded mode.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeDesc": {
+            "type": "boolean",
+            "description": "Indicates whether the view description is displayed in the embedded mode.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeToolBar": {
+            "type": "boolean",
+            "description": "Indicates whether the toolbar is included in the embedded mode.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeSocialWidgets": {
+            "type": "boolean",
+            "description": "Indicates whether the social widgets are included in the slide.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeSearchBox": {
+            "type": "boolean",
+            "description": "Indicates whether the search box is included in the table.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeDatatypeSymbol": {
+            "type": "boolean",
+            "description": "Indicates whether the data type symbol is included in the table column.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeShowHideOption": {
+            "type": "boolean",
+            "description": "Indicates whether the show or hide columns option is available in the embedded mode.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "isInteractive": {
+            "type": "boolean",
+            "description": "Indicates whether the chart is rendered in the interactive mode.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "legendPosition": {
+            "type": "string",
+            "description": "Position at which the chart legend is displayed.",
+            "enum": [
+              "RIGHT",
+              "LEFT",
+              "TOPLEFT",
+              "TOPRIGHT",
+              "TOPCENTER",
+              "BOTTOMLEFT",
+              "BOTTOMRIGHT",
+              "BOTTOMCENTER",
+              "NONE"
+            ]
+          },
+          "width": {
+            "type": "integer",
+            "description": "Screen width in pixels.",
+            "examples": [
+              800
+            ]
+          },
+          "height": {
+            "type": "integer",
+            "description": "Screen height in pixels.",
+            "examples": [
+              600
+            ]
+          },
+          "autoRefresh": {
+            "type": "integer",
+            "description": "Interval, in minutes, after which the view is refreshed automatically. A value of -1 indicates that the automatic refresh is disabled.",
+            "examples": [
+              -1
+            ]
+          },
+          "URLCriteria": {
+            "type": "string",
+            "description": "Filter criteria applied to the view when it is accessed through the published URL. Empty when no criteria is applied.",
+            "examples": [
+              "\"SalesTable\".\"Region\"='East'"
+            ]
+          },
+          "includeAskZia": {
+            "type": "boolean",
+            "description": "Indicates whether the Ask Zia bot is included.",
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
+      "PublishConfigurationsData": {
+        "type": "object",
+        "title": "PublishConfigurationsData",
+        "description": "JSONObject that holds the publish configurations of the view, grouped by the mode they apply to.",
+        "properties": {
+          "publicViewConfig": {
+            "$ref": "#/components/schemas/PublicViewConfig"
+          },
+          "privateLinkConfig": {
+            "$ref": "#/components/schemas/PrivateLinkConfig"
+          },
+          "publishConfig": {
+            "$ref": "#/components/schemas/PublishConfig"
+          }
+        }
+      },
+      "PublishPermissionAttributes": {
+        "type": "object",
+        "title": "PublishPermissionAttributes",
+        "description": "JSONObject that specifies the permissions granted to anyone accessing the published view. Each key is a permission and its value controls whether it is granted.",
+        "properties": {
+          "export": {
+            "type": "boolean",
+            "description": "Permission to export the data.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "vud": {
+            "type": "boolean",
+            "description": "Permission to view the underlying data.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "drillDown": {
+            "type": "boolean",
+            "description": "Permission to drill down in a chart.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "insight": {
+            "type": "boolean",
+            "description": "Permission to enable the Zia Insights option.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        },
+        "examples": [
+          {
+            "vud": true,
+            "export": true
+          }
+        ]
+      },
+      "RemoveShareConfig": {
+        "type": "object",
+        "title": "RemoveShareConfig",
+        "description": "Config parameter that identifies the users or groups whose sharing has to be removed, and the views to remove it from.\n\nSpecify either `viewIds` to remove the sharing of particular views, or set `removeAllViews` to true to remove every view shared with the specified users.",
+        "properties": {
+          "emailIds": {
+            "$ref": "#/components/schemas/ShareEmailIds"
+          },
+          "viewIds": {
+            "$ref": "#/components/schemas/ShareViewIds"
+          },
+          "removeAllViews": {
+            "type": "boolean",
+            "description": "Controls whether all the views shared with the specified users are removed.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "domainName": {
+            "type": "string",
+            "description": "Name of the domain. Use this to remove the shared views from a white label domain.",
+            "examples": [
+              "analytics.example.com"
+            ]
+          },
+          "groupIds": {
+            "$ref": "#/components/schemas/ShareGroupIds"
+          }
+        },
+        "required": [
+          "emailIds"
+        ]
+      },
+      "ShareColumns": {
+        "type": "array",
+        "title": "ShareColumns",
+        "description": "JSONArray of JSONObjects that limits the share option to the specified columns from the specified tables.",
+        "items": {
+          "$ref": "#/components/schemas/ColumnPermissionObject"
+        },
+        "examples": [
+          [
+            {
+              "tableName": "table1",
+              "columnNames": [
+                "column1",
+                "column2"
+              ]
+            }
+          ]
+        ]
+      },
+      "ShareEmailIds": {
+        "type": "array",
+        "title": "ShareEmailIds",
+        "description": "JSONArray containing the email addresses of the users for whom the share configuration has to be applied.",
+        "items": {
+          "type": "string",
+          "description": "Email address of a user."
+        },
+        "examples": [
+          [
+            "user1@example.com",
+            "user2@example.com"
+          ]
+        ]
+      },
+      "ShareGroupIds": {
+        "type": "array",
+        "title": "ShareGroupIds",
+        "description": "JSONArray containing the IDs of the groups for which the share configuration has to be applied.",
+        "items": {
+          "type": "string",
+          "description": "ID of a group."
+        },
+        "examples": [
+          [
+            "35130000001066001",
+            "35130000001066005"
+          ]
+        ]
+      },
+      "ShareViewIds": {
+        "type": "array",
+        "title": "ShareViewIds",
+        "description": "JSONArray containing the IDs of the views for which the share configuration has to be applied.",
+        "items": {
+          "type": "string",
+          "description": "ID of a view."
+        },
+        "examples": [
+          [
+            "35130000001055717",
+            "35130000001055721"
+          ]
+        ]
+      },
+      "ShareViewObject": {
+        "type": "object",
+        "title": "ShareViewObject",
+        "description": "JSONObject that holds a shared view along with the permissions granted on it.",
+        "properties": {
+          "viewId": {
+            "type": "string",
+            "description": "ID of the shared view.",
+            "examples": [
+              "1767024000013486001"
+            ]
+          },
+          "viewName": {
+            "type": "string",
+            "description": "Name of the shared view.",
+            "examples": [
+              "Region Wise Sales"
+            ]
+          },
+          "sharedBy": {
+            "type": "string",
+            "description": "Email address of the user who shared the view.",
+            "examples": [
+              "owner@example.com"
+            ]
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/ViewPermissions"
+          }
+        }
+      },
+      "ShareViewsConfig": {
+        "type": "object",
+        "title": "ShareViewsConfig",
+        "description": "Config parameter that controls how the views are shared, whom they are shared with, and the permissions granted on them.",
+        "properties": {
+          "emailIds": {
+            "$ref": "#/components/schemas/ShareEmailIds"
+          },
+          "viewIds": {
+            "$ref": "#/components/schemas/ShareViewIds"
+          },
+          "groupIds": {
+            "$ref": "#/components/schemas/ShareGroupIds"
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/PermissionAttributes"
+          },
+          "criteria": {
+            "type": "string",
+            "description": "Filter criteria to be applied while sharing the view. The specified criteria is applied to the reports shared, thereby filtering the data viewed when the report is accessed by the shared user.\n\n> **Note:** Refer to the filter criteria documentation for details on how to construct a criteria.",
+            "examples": [
+              "\"SalesTable\".\"Region\"='East'"
+            ]
+          },
+          "inheritParentFilterCriteria": {
+            "type": "boolean",
+            "description": "Applicable only for reports, not for tables. When true, the filter criteria of the parent tables is also taken into account while sharing.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "inviteMail": {
+            "type": "boolean",
+            "description": "Controls whether the invitation mail is sent to the specified email addresses.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "inviteMailCCMe": {
+            "type": "boolean",
+            "description": "Controls whether the invitation mail is copied to you on sharing.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "mailSubject": {
+            "type": "string",
+            "description": "Subject of the invitation mail.",
+            "examples": [
+              "Sales reports have been shared with you"
+            ]
+          },
+          "mailMessage": {
+            "type": "string",
+            "description": "Message body of the invitation mail.",
+            "examples": [
+              "Please find the shared sales reports for this quarter."
+            ]
+          },
+          "domainName": {
+            "type": "string",
+            "description": "Name of the domain. Use this to share the views to a white label domain.",
+            "examples": [
+              "analytics.example.com"
+            ]
+          },
+          "columns": {
+            "$ref": "#/components/schemas/ShareColumns"
+          },
+          "vudColumns": {
+            "$ref": "#/components/schemas/VUDColumns"
+          },
+          "drillColumns": {
+            "$ref": "#/components/schemas/DrillColumns"
+          },
+          "includeAllColsForVUD": {
+            "type": "boolean",
+            "description": "Controls whether all the columns in the table are included in the underlying data.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "validateSystemTags": {
+            "type": "boolean",
+            "description": "Applicable only when System Tags are enabled for your organization. When true, the request is validated against the System Tags applied to the views listed in `viewIds`. If any of those views carries an **Outdated** tag - applied directly, or inherited through lineage from a parent Data Source or Table - the request is rejected and no views are shared. Set this to false to skip the validation and proceed with the request.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        },
+        "required": [
+          "emailIds",
+          "viewIds",
+          "permissions"
+        ]
+      },
+      "SharedDetail": {
+        "type": "object",
+        "title": "SharedDetail",
+        "description": "JSONObject that holds all the sharing entries of a single view.",
+        "properties": {
+          "viewId": {
+            "type": "string",
+            "description": "ID of the view whose shared details are returned.",
+            "examples": [
+              "1767024000013486001"
+            ]
+          },
+          "shareInfo": {
+            "type": "array",
+            "description": "JSONArray containing one entry for every user or group the view is shared to.",
+            "items": {
+              "$ref": "#/components/schemas/SharedInfo"
+            }
+          }
+        }
+      },
+      "SharedDetailsData": {
+        "type": "object",
+        "title": "SharedDetailsData",
+        "description": "JSONObject that holds the shared details of the requested views.",
+        "properties": {
+          "sharedDetails": {
+            "type": "array",
+            "description": "JSONArray containing one entry for every view whose shared details are returned.",
+            "items": {
+              "$ref": "#/components/schemas/SharedDetail"
+            }
+          }
+        }
+      },
+      "SharedInfo": {
+        "type": "object",
+        "title": "SharedInfo",
+        "description": "JSONObject that holds one sharing entry of a view - the user or group it is shared to, and the permissions and restrictions applied on it.",
+        "properties": {
+          "sharedTo": {
+            "type": "string",
+            "description": "Email address of the user, or name of the group, the view is shared to.",
+            "examples": [
+              "user1@example.com"
+            ]
+          },
+          "sharedBy": {
+            "type": "string",
+            "description": "Email address of the user who shared the view.",
+            "examples": [
+              "owner@example.com"
+            ]
+          },
+          "sharedToZuId": {
+            "type": "string",
+            "description": "Zoho user ID of the user the view is shared to.",
+            "examples": [
+              "65482910"
+            ]
+          },
+          "permissionString": {
+            "type": "string",
+            "description": "Compact string representation of the permissions granted on the view.",
+            "examples": [
+              "read,export"
+            ]
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/ViewPermissions"
+          },
+          "criteria": {
+            "type": "string",
+            "description": "Filter criteria applied on the view while sharing. Empty when no criteria is applied.",
+            "examples": [
+              "\"SalesTable\".\"Region\"='East'"
+            ]
+          },
+          "inheritParentFilterCriteria": {
+            "type": "string",
+            "description": "Indicates whether the filter criteria of the parent tables is also taken into account. Returned as a string value of true or false.",
+            "examples": [
+              "false"
+            ]
+          },
+          "isInvalidCriteria": {
+            "type": "boolean",
+            "description": "Indicates whether the filter criteria applied on the view has become invalid, for example because a referenced column no longer exists.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "sharedColumns": {
+            "type": "array",
+            "description": "JSONArray containing the names of the columns the share option is limited to. Empty when the whole view is shared.",
+            "items": {
+              "type": "string",
+              "description": "Name of a shared column."
+            },
+            "examples": [
+              [
+                "Region",
+                "Sales"
+              ]
+            ]
+          },
+          "vudColumns": {
+            "type": "array",
+            "description": "JSONArray containing the names of the columns the view underlying data option is limited to.",
+            "items": {
+              "type": "string",
+              "description": "Name of a column visible in the underlying data."
+            },
+            "examples": [
+              [
+                "Region"
+              ]
+            ]
+          },
+          "drillColumns": {
+            "type": "array",
+            "description": "JSONArray containing the names of the columns the drill down option is limited to.",
+            "items": {
+              "type": "string",
+              "description": "Name of a column available for drill down."
+            },
+            "examples": [
+              [
+                "Region"
+              ]
+            ]
+          },
+          "isGroupShare": {
+            "type": "boolean",
+            "description": "Indicates whether this entry is a share to a group rather than to an individual user.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "publicPermLevel": {
+            "type": "integer",
+            "description": "Level of public access granted on the view. Applicable only when the view is published publicly.\n\n- **1** - Public on the web.\n- **2** - Everyone in the Zoho Analytics Organization.\n- **3** - Everyone in the Zoho Business Organization.",
+            "enum": [
+              1,
+              2,
+              3
+            ]
+          },
+          "isROUser": {
+            "type": "boolean",
+            "description": "Indicates whether the user the view is shared to is a read-only user of the organization.",
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
+      "SlideInfo": {
+        "type": "object",
+        "title": "SlideInfo",
+        "description": "JSONObject that holds the full details of a slideshow, including the views it contains.",
+        "properties": {
+          "slideId": {
+            "type": "string",
+            "description": "ID of the slideshow.",
+            "examples": [
+              "1767024000003149001"
+            ]
+          },
+          "slideKey": {
+            "type": "string",
+            "description": "Key that authorises access to the slideshow URL. It changes whenever the slide key is regenerated.",
+            "examples": [
+              "9a4c1042011ce02fc4a3182fa75a22a9"
+            ]
+          },
+          "slideName": {
+            "type": "string",
+            "description": "Name of the slideshow.",
+            "examples": [
+              "Sales Overview"
+            ]
+          },
+          "accessType": {
+            "type": "integer",
+            "description": "Indicates how the slideshow can be accessed.\n\n- **0** - Access with login.\n- **1** - Access without login.\n- **2** - Sort.",
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "x-zenesis-enums-desc": [
+              "With login",
+              "Without login",
+              "Sort"
+            ]
+          },
+          "viewIds": {
+            "$ref": "#/components/schemas/SlideViewIds"
+          }
+        },
+        "required": [
+          "slideId",
+          "slideKey",
+          "slideName",
+          "accessType",
+          "viewIds"
+        ]
+      },
+      "SlideUrlData": {
+        "type": "object",
+        "title": "SlideUrlData",
+        "description": "JSONObject that holds the URL of the slideshow. The rendering options sent in the config are carried in the query string of the URL.",
+        "properties": {
+          "slideUrl": {
+            "type": "string",
+            "description": "URL through which the slideshow can be accessed.",
+            "format": "uri",
+            "examples": [
+              "https://analytics.zoho.com/ZDBSlideshow.cc?SLIDEID=1767024000003139001&SLIDEKEY=9c4a1042011ce02fc4a3182fa75a22a9&AUTOPLAY=true&INTERVAL=25&INCLUDETITLE=true&INCLUDEDESC=true&SOCIALWIDGETS=false"
+            ]
+          }
+        },
+        "required": [
+          "slideUrl"
+        ]
+      },
+      "SlideViewIds": {
+        "type": "array",
+        "title": "SlideViewIds",
+        "description": "JSONArray containing the IDs of the views to be included in the slideshow.",
+        "items": {
+          "type": "string",
+          "description": "ID of a view included in the slideshow."
+        },
+        "examples": [
+          [
+            "1767024000003013087",
+            "1767024000003015001"
+          ]
+        ]
+      },
+      "SlideshowDetailsData": {
+        "type": "object",
+        "title": "SlideshowDetailsData",
+        "description": "JSONObject that holds the details of the requested slideshow.",
+        "properties": {
+          "slideInfo": {
+            "$ref": "#/components/schemas/SlideInfo"
+          }
+        }
+      },
+      "SlideshowSummary": {
+        "type": "object",
+        "title": "SlideshowSummary",
+        "description": "JSONObject that holds the basic details of a slideshow in the workspace.",
+        "properties": {
+          "slideName": {
+            "type": "string",
+            "description": "Name of the slideshow.",
+            "examples": [
+              "Sales Overview"
+            ]
+          },
+          "slideId": {
+            "type": "string",
+            "description": "ID of the slideshow.",
+            "examples": [
+              "1767024000003149001"
+            ]
+          },
+          "accessType": {
+            "type": "integer",
+            "description": "Indicates how the slideshow can be accessed.\n\n- **0** - Access with login.\n- **1** - Access without login.\n- **2** - Sort.",
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "x-zenesis-enums-desc": [
+              "With login",
+              "Without login",
+              "Sort"
+            ]
+          }
+        },
+        "required": [
+          "slideName",
+          "slideId",
+          "accessType"
+        ]
+      },
+      "SlideshowsData": {
+        "type": "object",
+        "title": "SlideshowsData",
+        "description": "JSONObject that holds the slideshows available in the workspace.",
+        "properties": {
+          "slideshows": {
+            "type": "array",
+            "description": "JSONArray containing one entry for every slideshow in the workspace.",
+            "items": {
+              "$ref": "#/components/schemas/SlideshowSummary"
+            }
+          }
+        }
+      },
+      "UpdatePublishConfigurationsConfig": {
+        "type": "object",
+        "title": "UpdatePublishConfigurationsConfig",
+        "description": "Config parameter that controls how the view is rendered when it is accessed in the embedded, public, or private link mode.",
+        "properties": {
+          "URLCriteria": {
+            "type": "string",
+            "description": "Filter criteria applied to the view, thereby filtering the data seen when the view is accessed through the published URL.",
+            "examples": [
+              "\"SalesTable\".\"Region\"='East'"
+            ]
+          },
+          "includeTitle": {
+            "type": "boolean",
+            "description": "Controls whether the view name is displayed in the embedded mode.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeDesc": {
+            "type": "boolean",
+            "description": "Controls whether the view description is displayed in the embedded mode.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeToolBar": {
+            "type": "boolean",
+            "description": "Controls whether the toolbar is included in the embedded mode.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeSearchBox": {
+            "type": "boolean",
+            "description": "Controls whether the search box is included in the table.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeDatatypeSymbol": {
+            "type": "boolean",
+            "description": "Controls whether the data type symbol is included in the table column.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "includeSocialWidgets": {
+            "type": "boolean",
+            "description": "Controls whether the social widgets are included in the slide.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "isListed": {
+            "type": "boolean",
+            "description": "Controls whether the workspace is listed in the Zoho Analytics public workspaces page.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "isInteractive": {
+            "type": "boolean",
+            "description": "Controls the chart rendering mode. When true, the chart is rendered in the interactive mode.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "autoRefresh": {
+            "type": "integer",
+            "description": "Interval, in minutes, after which the view is refreshed automatically. A value of -1 disables the automatic refresh.",
+            "default": -1
+          },
+          "width": {
+            "type": "integer",
+            "description": "Screen width in pixels.",
+            "default": 800
+          },
+          "height": {
+            "type": "integer",
+            "description": "Screen height in pixels.",
+            "default": 600
+          },
+          "includeAskZia": {
+            "type": "boolean",
+            "description": "Controls whether the Ask Zia bot is included.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "validateSystemTags": {
+            "type": "boolean",
+            "description": "Applicable only when System Tags are enabled for your organization. When true, the request is validated against the System Tags applied to the view specified in the request URI. If that view carries an **Outdated** tag - applied directly, or inherited through lineage from a parent Data Source or Table - the request is rejected. Set this to false to skip the validation and proceed with the request.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
+      "UpdateSharedDetailsConfig": {
+        "type": "object",
+        "title": "UpdateSharedDetailsConfig",
+        "description": "Config parameter that carries the updated sharing configuration for the view specified in the request URI.\n\nAt least one of `emailIds` or `groupIds` must be specified, to identify the users or the groups whose sharing configuration has to be updated.",
+        "properties": {
+          "emailIds": {
+            "$ref": "#/components/schemas/ShareEmailIds"
+          },
+          "groupIds": {
+            "$ref": "#/components/schemas/ShareGroupIds"
+          },
+          "columns": {
+            "$ref": "#/components/schemas/ShareColumns"
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/PermissionAttributes"
+          },
+          "criteria": {
+            "type": "string",
+            "description": "Filter criteria to be applied while sharing the view. The specified criteria is applied to the reports shared, thereby filtering the data viewed when the report is accessed by the shared user.\n\n> **Note:** Refer to the filter criteria documentation for details on how to construct a criteria.",
+            "examples": [
+              "\"SalesTable\".\"Region\"='East'"
+            ]
+          },
+          "inheritParentFilterCriteria": {
+            "type": "boolean",
+            "description": "Applicable only for reports, not for tables. When true, the filter criteria of the parent tables is also taken into account while sharing.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "domainName": {
+            "type": "string",
+            "description": "Name of the domain. Use this to share the views to a white label domain.",
+            "examples": [
+              "analytics.example.com"
+            ]
+          },
+          "vudColumns": {
+            "$ref": "#/components/schemas/VUDColumns"
+          },
+          "drillColumns": {
+            "$ref": "#/components/schemas/DrillColumns"
+          },
+          "includeAllColsForVUD": {
+            "type": "boolean",
+            "description": "Controls whether all the columns in the table are included in the underlying data.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "validateSystemTags": {
+            "type": "boolean",
+            "description": "Applicable only when System Tags are enabled for your organization. When true, the request is validated against the System Tags applied to the view specified in the request URI. If any of those views carries an **Outdated** tag - applied directly, or inherited through lineage from a parent Data Source or Table - the request is rejected and no views are shared. Set this to false to skip the validation and proceed with the request.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        },
+        "required": [
+          "permissions"
+        ]
+      },
+      "UpdateSlideshowConfig": {
+        "type": "object",
+        "title": "UpdateSlideshowConfig",
+        "description": "Config parameter that carries the updated details of the slideshow. Only the attributes sent are updated; the ones omitted retain their current values.",
+        "properties": {
+          "slideName": {
+            "type": "string",
+            "description": "New name of the slideshow.",
+            "examples": [
+              "Sales Overview 2026"
+            ]
+          },
+          "viewIds": {
+            "$ref": "#/components/schemas/SlideViewIds"
+          },
+          "regenerateSlideKey": {
+            "type": "boolean",
+            "description": "Controls whether a new slide key is generated. When true, the link that was generated previously is disabled.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "accessType": {
+            "type": "integer",
+            "description": "Controls how the slideshow can be accessed.\n\n- **0** - Access with login.\n- **1** - Access without login.\n- **2** - Sort.",
+            "default": 0,
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "x-zenesis-enums-desc": [
+              "With login",
+              "Without login",
+              "Sort"
+            ]
+          },
+          "validateSystemTags": {
+            "type": "boolean",
+            "description": "Applicable only when System Tags are enabled for your organization. When true, the request is validated against the System Tags applied to the views listed in `viewIds`. If any of those views carries an **Outdated** tag - applied directly, or inherited through lineage from a parent Data Source or Table - the request is rejected and the slideshow is not saved. Set this to false to skip the validation and proceed with the request.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
+      "UserShareInfo": {
+        "type": "object",
+        "title": "UserShareInfo",
+        "description": "JSONObject that holds the views shared directly with an individual user.",
+        "properties": {
+          "emailId": {
+            "type": "string",
+            "description": "Email address of the user the views are shared with.",
+            "examples": [
+              "user1@example.com"
+            ]
+          },
+          "views": {
+            "type": "array",
+            "description": "JSONArray containing the views shared, along with the permissions granted on each of them.",
+            "items": {
+              "$ref": "#/components/schemas/ShareViewObject"
+            }
+          }
+        }
+      },
+      "VUDColumns": {
+        "type": "array",
+        "title": "VUDColumns",
+        "description": "JSONArray of JSONObjects that limits the view underlying data option to the specified columns from the specified tables. This is valid only when the `vud` permission is set to true.",
+        "items": {
+          "$ref": "#/components/schemas/ColumnPermissionObject"
+        },
+        "examples": [
+          [
+            {
+              "tableName": "table1",
+              "columnNames": [
+                "column1",
+                "column2"
+              ]
+            }
+          ]
+        ]
+      },
+      "ViewPermissions": {
+        "type": "object",
+        "title": "ViewPermissions",
+        "description": "JSONObject that holds the effective permissions on a view. Each key is a permission and its value indicates whether that permission is in effect.",
+        "properties": {
+          "read": {
+            "type": "boolean",
+            "description": "Indicates whether the view can be accessed.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "export": {
+            "type": "boolean",
+            "description": "Indicates whether the view data can be exported.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "vud": {
+            "type": "boolean",
+            "description": "Indicates whether the underlying data of the view can be viewed.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "addRow": {
+            "type": "boolean",
+            "description": "Indicates whether a row can be added to the table.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "updateRow": {
+            "type": "boolean",
+            "description": "Indicates whether a row in the table can be updated.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "deleteRow": {
+            "type": "boolean",
+            "description": "Indicates whether a row in the table can be deleted.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "deleteAllRows": {
+            "type": "boolean",
+            "description": "Indicates whether all the rows in the table can be deleted.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "importAppend": {
+            "type": "boolean",
+            "description": "Indicates whether data can be imported into the table using the APPEND option.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "importAddOrUpdate": {
+            "type": "boolean",
+            "description": "Indicates whether data can be imported into the table using the UPDATEADD option.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "importDeleteAllAdd": {
+            "type": "boolean",
+            "description": "Indicates whether data can be imported into the table using the TRUNCATEADD option.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "importDeleteUpdateAdd": {
+            "type": "boolean",
+            "description": "Indicates whether data can be imported into the table using the DELETEUPDATEADD option.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "drillDown": {
+            "type": "boolean",
+            "description": "Indicates whether drill down is allowed in a chart.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "share": {
+            "type": "boolean",
+            "description": "Indicates whether the view can be shared with other users.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "discussion": {
+            "type": "boolean",
+            "description": "Indicates whether commenting is allowed in the view.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "insight": {
+            "type": "boolean",
+            "description": "Indicates whether the insights generated for the view can be accessed.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "drillThrough": {
+            "type": "boolean",
+            "description": "Indicates whether drill through to the linked view is allowed.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "accessAdminPresets": {
+            "type": "boolean",
+            "description": "Indicates whether the presets created by the administrator can be accessed.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "createPreset": {
+            "type": "boolean",
+            "description": "Indicates whether new presets can be created on the view.",
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
+      "WorkspaceShareData": {
+        "type": "object",
+        "title": "WorkspaceShareData",
+        "description": "JSONObject that holds the sharing details of the workspace, grouped by the way the views are shared.",
+        "properties": {
+          "userShareInfo": {
+            "type": "array",
+            "description": "JSONArray containing one entry for every user the views are shared with directly.",
+            "items": {
+              "$ref": "#/components/schemas/UserShareInfo"
+            }
+          },
+          "groupShareInfo": {
+            "type": "array",
+            "description": "JSONArray containing one entry for every group the views are shared with.",
+            "items": {
+              "$ref": "#/components/schemas/GroupShareInfo"
+            }
+          },
+          "publicShareInfo": {
+            "$ref": "#/components/schemas/PublicShareInfo"
+          },
+          "privateLinkShareInfo": {
+            "$ref": "#/components/schemas/PrivateLinkShareInfo"
+          }
+        }
+      }
+    }
+  }
+}

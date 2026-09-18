@@ -1,0 +1,503 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zenesis legacy compatibility - dsml-grouped-api - shrink this to zero",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post.requestBody.content['application/x-www-form-urlencoded'].examples.regressionAnalysis",
+      "update": {
+        "description": "Regression analysis"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post.requestBody.content['application/x-www-form-urlencoded'].examples.regressionAnalysis",
+      "update": {
+        "summary": "Creates an analysis that predicts a continuous numeric value, training a Random Forest and a Ridge regression model on the same set of features."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post.requestBody.content['application/x-www-form-urlencoded'].examples.classificationAnalysis",
+      "update": {
+        "description": "Classification analysis"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post.requestBody.content['application/x-www-form-urlencoded'].examples.classificationAnalysis",
+      "update": {
+        "summary": "Creates an analysis that predicts a discrete class label, training a Decision Tree and a Random Forest classifier in a single request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post.requestBody.content['application/x-www-form-urlencoded'].examples.clusteringAnalysis",
+      "update": {
+        "description": "Clustering analysis"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post.requestBody.content['application/x-www-form-urlencoded'].examples.clusteringAnalysis",
+      "update": {
+        "summary": "Creates an unsupervised analysis that groups similar records, so no targetColumn is sent and the larger 16 GB server option is requested."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post.responses['200'].content['application/json'].examples.analysisCreated",
+      "update": {
+        "description": "Analysis created"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post.responses['200'].content['application/json'].examples.analysisCreated",
+      "update": {
+        "summary": "The AutoML analysis was created and its unique ID is returned in the data object."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post",
+      "update": {
+        "x-zenesis-title": "Create AutoML Analysis"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>The algorithm keys sent inside <b>algorithms</b> must belong to the group that matches the selected <b>predictionType</b>.</li>\n<li>More than one algorithm can be configured in a single request. A model is built for each algorithm that is configured.</li>\n<li><b>targetColumn</b> applies to the <b>REGRESSION</b> and <b>CLASSIFICATION</b> prediction types only.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].get.responses['200'].content['application/json'].examples.publishedAndDraft",
+      "update": {
+        "description": "Published and draft"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].get.responses['200'].content['application/json'].examples.publishedAndDraft",
+      "update": {
+        "summary": "Two analyses in the same workspace, one already trained and one still a draft, distinguished by the isDraft flag."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].get.responses['200'].content['application/json'].examples.noAnalysis",
+      "update": {
+        "description": "No analyses"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].get.responses['200'].content['application/json'].examples.noAnalysis",
+      "update": {
+        "summary": "The workspace has no AutoML analyses, so an empty array is returned instead of an error."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis'].get",
+      "update": {
+        "x-zenesis-title": "Get AutoML Analysis In Workspace"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/deployments/{deployment-id}/execute'].post",
+      "update": {
+        "x-zenesis-title": "Run AutoML Analysis"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}'].delete",
+      "update": {
+        "x-zenesis-title": "Delete AutoML Analysis"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}'].get.responses['200'].content['application/json'].examples.singleModel",
+      "update": {
+        "description": "Single model"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}'].get.responses['200'].content['application/json'].examples.singleModel",
+      "update": {
+        "summary": "An analysis created with one algorithm, returning the single trained model along with its score and hyperparameters."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}'].get.responses['200'].content['application/json'].examples.multipleModels",
+      "update": {
+        "description": "Multiple models"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}'].get.responses['200'].content['application/json'].examples.multipleModels",
+      "update": {
+        "summary": "An analysis created with two algorithms, returning one model per algorithm, of which only the better scoring one has been deployed."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}'].get",
+      "update": {
+        "x-zenesis-title": "Get AutoML Analysis Details"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>One model is returned for each algorithm that was configured when the analysis was created.</li>\n<li>The hyperparameter values inside <b>algorithm</b> are returned as strings.</li>\n<li><b>stack</b> is the human-readable form of the <b>serverOption</b> that was sent when the analysis was created.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/analysis'].get.responses['200'].content['application/json'].examples.analysisAcrossWorkspaces",
+      "update": {
+        "description": "Multiple workspaces"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/analysis'].get.responses['200'].content['application/json'].examples.analysisAcrossWorkspaces",
+      "update": {
+        "summary": "Two analyses are returned, each carrying the ID and the name of the workspace it belongs to."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/analysis'].get.responses['200'].content['application/json'].examples.noAnalysis",
+      "update": {
+        "description": "No analyses"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/analysis'].get.responses['200'].content['application/json'].examples.noAnalysis",
+      "update": {
+        "summary": "The organization has no AutoML analyses, so an empty array is returned instead of an error."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/analysis'].get",
+      "update": {
+        "x-zenesis-title": "Get AutoML Analysis In Org"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}'].delete",
+      "update": {
+        "x-zenesis-title": "Delete AutoML Analysis Model"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].get.responses['200'].content['application/json'].examples.truncateAddDeployment",
+      "update": {
+        "description": "Truncate-add deployment"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].get.responses['200'].content['application/json'].examples.truncateAddDeployment",
+      "update": {
+        "summary": "A deployment that replaces the contents of the output table on every run, showing the time at which it last ran."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].get.responses['200'].content['application/json'].examples.appendDeployment",
+      "update": {
+        "description": "Append deployment"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].get.responses['200'].content['application/json'].examples.appendDeployment",
+      "update": {
+        "summary": "A deployment that adds each run's predictions to the output table as new records, running on the larger 16 GB server option."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].get",
+      "update": {
+        "x-zenesis-title": "Get Deployments For A Model"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].post.requestBody.content['application/x-www-form-urlencoded'].examples.hourlyAppend",
+      "update": {
+        "description": "Hourly append"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].post.requestBody.content['application/x-www-form-urlencoded'].examples.hourlyAppend",
+      "update": {
+        "summary": "Runs the deployment once every three hours and adds each run's predictions to the output table as new records."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].post.requestBody.content['application/x-www-form-urlencoded'].examples.weeklyUpdateAdd",
+      "update": {
+        "description": "Weekly upsert"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].post.requestBody.content['application/x-www-form-urlencoded'].examples.weeklyUpdateAdd",
+      "update": {
+        "summary": "Runs the deployment every Monday at 06:30 and upserts the predictions, matching the existing records on Region and Product."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].post.requestBody.content['application/x-www-form-urlencoded'].examples.onDemandTruncateAdd",
+      "update": {
+        "description": "On-demand refresh"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].post.requestBody.content['application/x-www-form-urlencoded'].examples.onDemandTruncateAdd",
+      "update": {
+        "summary": "Creates a deployment with no recurring schedule that is triggered using the Run AutoML Analysis API, replacing the output table contents on every run."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].post.responses['200'].content['application/json'].examples.scheduledDeployment",
+      "update": {
+        "description": "Scheduled deployment"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].post.responses['200'].content['application/json'].examples.scheduledDeployment",
+      "update": {
+        "summary": "The deployment was created against an existing output table, and the IDs of both the output table and the deployment are returned."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].post.responses['200'].content['application/json'].examples.onDemandDeployment",
+      "update": {
+        "description": "On-demand deployment"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].post.responses['200'].content['application/json'].examples.onDemandDeployment",
+      "update": {
+        "summary": "The deployment was created without a recurring schedule; use the returned deploymentId with the Run AutoML Analysis API to execute it."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].post",
+      "update": {
+        "x-zenesis-title": "Create AutoML Analysis Deployment"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li><b>matchingColumns</b> is mandatory only when <b>importType</b> is set to <b>UPDATEADD</b>. It is ignored for the other import types.</li>\n<li>The <b>scheduleDetails</b> attributes that apply depend on the value of <b>calendarFrequency</b>.</li>\n<li>Set <b>calendarFrequency</b> to <b>none</b> to create a deployment that is not run on a recurring schedule, and trigger it using the Run AutoML Analysis API.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/deployments/{deployment-id}'].delete",
+      "update": {
+        "x-zenesis-title": "Delete AutoML Analysis Model Deployment"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/whatif'].post.requestBody.content['application/x-www-form-urlencoded'].examples.regressionInputs",
+      "update": {
+        "description": "Regression inputs"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/whatif'].post.requestBody.content['application/x-www-form-urlencoded'].examples.regressionInputs",
+      "update": {
+        "summary": "Supplies one hypothetical value per feature to a regression model, which returns a continuous numeric prediction."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/whatif'].post.requestBody.content['application/x-www-form-urlencoded'].examples.classificationInputs",
+      "update": {
+        "description": "Classification inputs"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/whatif'].post.requestBody.content['application/x-www-form-urlencoded'].examples.classificationInputs",
+      "update": {
+        "summary": "Supplies one hypothetical value per feature to a classification model, which returns the predicted class label."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/whatif'].post.responses['200'].content['application/json'].examples.numericPrediction",
+      "update": {
+        "description": "Numeric prediction"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/whatif'].post.responses['200'].content['application/json'].examples.numericPrediction",
+      "update": {
+        "summary": "Returned by a regression model, where the predicted value is a continuous number for the target column."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/whatif'].post.responses['200'].content['application/json'].examples.classPrediction",
+      "update": {
+        "description": "Class prediction"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/whatif'].post.responses['200'].content['application/json'].examples.classPrediction",
+      "update": {
+        "summary": "Returned by a classification model, where the predicted value is one of the class labels seen in the target column."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/whatif'].post",
+      "update": {
+        "x-zenesis-title": "AutoML What If Analysis"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/whatif'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>Each key inside <b>features</b> must be the name of a feature column used when the model was trained.</li>\n<li>The prediction is generated in memory and is not written to any table.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.components.schemas.CreateAutoMLAnalysisConfig.properties.serverOption",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "8 GB",
+          "16 GB",
+          "32 GB"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.CreateAutoMLAnalysisDeploymentConfig.properties.serverOption",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "8 GB",
+          "16 GB",
+          "32 GB"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DeploymentScheduleDetails.properties.weekDay",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.CreateAutoMLAnalysisConfig.properties.serverOption['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.CreateAutoMLAnalysisConfig.properties.serverOption['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.CreateAutoMLAnalysisDeploymentConfig.properties.serverOption['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.CreateAutoMLAnalysisDeploymentConfig.properties.serverOption['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DeploymentScheduleDetails.properties.weekDay['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DeploymentScheduleDetails.properties.weekDay['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    }
+  ]
+}

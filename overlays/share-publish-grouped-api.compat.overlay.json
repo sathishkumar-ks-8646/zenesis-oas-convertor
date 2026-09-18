@@ -1,0 +1,1226 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zenesis legacy compatibility - share-publish-grouped-api - shrink this to zero",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].get.responses['200'].content['application/json'].examples.userShare",
+      "update": {
+        "description": "User share"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].get.responses['200'].content['application/json'].examples.userShare",
+      "update": {
+        "summary": "Workspace in which the views are shared directly with individual users, and one dashboard is published publicly."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].get.responses['200'].content['application/json'].examples.groupShare",
+      "update": {
+        "description": "Group share"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].get.responses['200'].content['application/json'].examples.groupShare",
+      "update": {
+        "summary": "Workspace in which the views are shared with a group, and one report is shared through a private link."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].get",
+      "update": {
+        "x-zenesis-title": "Get Workspace Shared Details"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li><code>publicShareInfo</code> and <code>privateLinkShareInfo</code> are always returned, with an empty <code>views</code> array when nothing is published publicly or through a private link.</li><li>The <code>emailId</code> returned inside <code>publicShareInfo</code> and <code>privateLinkShareInfo</code> is a fixed placeholder, not a real user.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].post.requestBody.content['application/x-www-form-urlencoded'].examples.shareWithUsers",
+      "update": {
+        "description": "Share with users"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].post.requestBody.content['application/x-www-form-urlencoded'].examples.shareWithUsers",
+      "update": {
+        "summary": "Shares the listed views with the specified users, granting read and export permission."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].post.requestBody.content['application/x-www-form-urlencoded'].examples.shareWithGroups",
+      "update": {
+        "description": "Share with groups"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].post.requestBody.content['application/x-www-form-urlencoded'].examples.shareWithGroups",
+      "update": {
+        "summary": "Shares the listed views with the specified groups instead of individual users."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].post.requestBody.content['application/x-www-form-urlencoded'].examples.filteredShare",
+      "update": {
+        "description": "Filtered share"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].post.requestBody.content['application/x-www-form-urlencoded'].examples.filteredShare",
+      "update": {
+        "summary": "Shares a report with a filter criteria, so that the shared user sees only the East region data."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].post.requestBody.content['application/x-www-form-urlencoded'].examples.columnRestrictedShare",
+      "update": {
+        "description": "Column restricted share"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].post.requestBody.content['application/x-www-form-urlencoded'].examples.columnRestrictedShare",
+      "update": {
+        "summary": "Shares a view but restricts the shared columns and the columns visible in the underlying data."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].post",
+      "update": {
+        "x-zenesis-title": "Share Views"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li><code>vudColumns</code> is applicable only when the <code>vud</code> permission is set to true.</li><li><code>drillColumns</code> is applicable only when the <code>drillDown</code> permission is set to true.</li><li><code>inheritParentFilterCriteria</code> is applicable only for reports, not for tables.</li><li><code>validateSystemTags</code> is applicable only when System Tags are enabled for your organization.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.removeSpecificViews",
+      "update": {
+        "description": "Remove specific views"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.removeSpecificViews",
+      "update": {
+        "summary": "Removes the sharing of the listed views for the specified users."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.removeAllSharedViews",
+      "update": {
+        "description": "Remove all views"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.removeAllSharedViews",
+      "update": {
+        "summary": "Removes every view currently shared with the specified users."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.removeGroupShare",
+      "update": {
+        "description": "Remove group share"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.removeGroupShare",
+      "update": {
+        "summary": "Removes the sharing of the listed views for the specified groups."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].delete",
+      "update": {
+        "x-zenesis-title": "Remove Share"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share'].delete",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Specify either <code>viewIds</code> to remove the sharing of particular views, or set <code>removeAllViews</code> to true to remove every view shared with the specified users.</li><li><code>domainName</code> is required only when the shared views have to be removed from a white label domain.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateUserPermissions",
+      "update": {
+        "description": "Update user permissions"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateUserPermissions",
+      "update": {
+        "summary": "Grants export and underlying data permission to the users the view is already shared with."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateGroupPermissions",
+      "update": {
+        "description": "Update group permissions"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateGroupPermissions",
+      "update": {
+        "summary": "Updates the sharing configuration of the view for the specified groups."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateFilterCriteria",
+      "update": {
+        "description": "Update filter criteria"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateFilterCriteria",
+      "update": {
+        "summary": "Replaces the filter criteria applied on the shared report and restricts the columns shared."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share'].put",
+      "update": {
+        "x-zenesis-title": "Update Shared Details For View"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>At least one of <code>emailIds</code> or <code>groupIds</code> must be specified, to identify the users or the groups whose sharing configuration has to be updated.</li><li><code>vudColumns</code> is applicable only when the <code>vud</code> permission is set to true.</li><li><code>drillColumns</code> is applicable only when the <code>drillDown</code> permission is set to true.</li><li><code>inheritParentFilterCriteria</code> is applicable only for reports, not for tables.</li><li><code>validateSystemTags</code> is applicable only when System Tags are enabled for your organization.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share/shareddetails'].get.parameters[2].examples.singleView",
+      "update": {
+        "description": "Single view"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share/shareddetails'].get.parameters[2].examples.singleView",
+      "update": {
+        "summary": "Fetches the shared details of one view."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share/shareddetails'].get.parameters[2].examples.multipleViews",
+      "update": {
+        "description": "Multiple views"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share/shareddetails'].get.parameters[2].examples.multipleViews",
+      "update": {
+        "summary": "Fetches the shared details of several views in one call."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share/shareddetails'].get.responses['200'].content['application/json'].examples.userShare",
+      "update": {
+        "description": "User share"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share/shareddetails'].get.responses['200'].content['application/json'].examples.userShare",
+      "update": {
+        "summary": "View shared with an individual user, with a filter criteria and a restricted set of shared columns."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share/shareddetails'].get.responses['200'].content['application/json'].examples.groupShare",
+      "update": {
+        "description": "Group share"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share/shareddetails'].get.responses['200'].content['application/json'].examples.groupShare",
+      "update": {
+        "summary": "View shared with a group, with the underlying data and drill down options limited to specific columns."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share/shareddetails'].get",
+      "update": {
+        "x-zenesis-title": "Get Shared Details For Views"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/share/shareddetails'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>As this is a GET request, the CONFIG value must be stringified and URL encoded before it is sent.</li><li>When <code>viewIds</code> is omitted, no view is selected and the shared details are not returned.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share/mypermissions'].get.responses['200'].content['application/json'].examples.readOnlyAccess",
+      "update": {
+        "description": "Read only access"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share/mypermissions'].get.responses['200'].content['application/json'].examples.readOnlyAccess",
+      "update": {
+        "summary": "User who can only view the report, with no export or underlying data access."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share/mypermissions'].get.responses['200'].content['application/json'].examples.fullAccess",
+      "update": {
+        "description": "Full access"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share/mypermissions'].get.responses['200'].content['application/json'].examples.fullAccess",
+      "update": {
+        "summary": "User who owns the table and therefore holds every permission on it."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share/mypermissions'].get",
+      "update": {
+        "x-zenesis-title": "Get User Permissions"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share/mypermissions'].get",
+      "update": {
+        "description": "Returns the permissions that the requesting user holds on the specified view. The permissions returned are the effective ones, whether they were granted directly to the user or inherited through a group."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/share/mypermissions'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiInfo": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The permissions are returned for the user whose access token is used in the request, not for an arbitrary user.</li><li>The endpoint path retains the <code>mypermissions</code> segment.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/public'].post.requestBody.content['application/x-www-form-urlencoded'].examples.publicOnWeb",
+      "update": {
+        "description": "Public on web"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/public'].post.requestBody.content['application/x-www-form-urlencoded'].examples.publicOnWeb",
+      "update": {
+        "summary": "Publishes the view to anyone on the web, with export permission granted."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/public'].post.requestBody.content['application/x-www-form-urlencoded'].examples.organizationOnly",
+      "update": {
+        "description": "Organization only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/public'].post.requestBody.content['application/x-www-form-urlencoded'].examples.organizationOnly",
+      "update": {
+        "summary": "Publishes the view to everyone in the Zoho Analytics organization, with underlying data access."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/public'].post.requestBody.content['application/x-www-form-urlencoded'].examples.filteredPublic",
+      "update": {
+        "description": "Filtered public"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/public'].post.requestBody.content['application/x-www-form-urlencoded'].examples.filteredPublic",
+      "update": {
+        "summary": "Publishes the view so that only the East region rows and a restricted set of columns are visible."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/public'].post.responses['200'].content['application/json'].examples.publicUrl",
+      "update": {
+        "description": "Public URL"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/public'].post.responses['200'].content['application/json'].examples.publicUrl",
+      "update": {
+        "summary": "Public URL generated for the view that has just been published."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/public'].post",
+      "update": {
+        "x-zenesis-title": "Make Views Public"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/public'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li><code>CONFIG</code> may be omitted entirely. When it is, the view is published with the default settings.</li><li><code>vudColumns</code> is applicable only when the <code>vud</code> permission is set to true.</li><li><code>drillColumns</code> is applicable only when the <code>drillDown</code> permission is set to true.</li><li><code>inheritParentFilterCriteria</code> is applicable only for reports, not for tables.</li><li><code>validateSystemTags</code> is applicable only when System Tags are enabled for your organization.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/public'].delete",
+      "update": {
+        "x-zenesis-title": "Remove Public Permission"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post.requestBody.content['application/x-www-form-urlencoded'].examples.basicPrivateUrl",
+      "update": {
+        "description": "Basic private URL"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post.requestBody.content['application/x-www-form-urlencoded'].examples.basicPrivateUrl",
+      "update": {
+        "summary": "Creates a private URL that grants export permission and applies no further restrictions."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post.requestBody.content['application/x-www-form-urlencoded'].examples.passwordProtected",
+      "update": {
+        "description": "Password protected"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post.requestBody.content['application/x-www-form-urlencoded'].examples.passwordProtected",
+      "update": {
+        "summary": "Creates a private URL protected with a password and valid until the given expiry date."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post.requestBody.content['application/x-www-form-urlencoded'].examples.regeneratedKey",
+      "update": {
+        "description": "Regenerate key"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post.requestBody.content['application/x-www-form-urlencoded'].examples.regeneratedKey",
+      "update": {
+        "summary": "Generates a new private key, disabling the private link that was issued previously."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post.requestBody.content['application/x-www-form-urlencoded'].examples.filteredPrivateUrl",
+      "update": {
+        "description": "Filtered private URL"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post.requestBody.content['application/x-www-form-urlencoded'].examples.filteredPrivateUrl",
+      "update": {
+        "summary": "Creates a private URL through which only the East region rows and a restricted set of columns are visible."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post.responses['200'].content['application/json'].examples.privateUrl",
+      "update": {
+        "description": "Private URL"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post.responses['200'].content['application/json'].examples.privateUrl",
+      "update": {
+        "summary": "Private URL generated for the view, ending with the newly issued private key."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post",
+      "update": {
+        "x-zenesis-title": "Create Private URL"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post",
+      "update": {
+        "description": "Creates a private URL for the specified view and returns it. The private URL can be protected with a password and given a validity period, and the permissions granted through it are controlled by the config."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li><code>CONFIG</code> may be omitted entirely. When it is, a private URL is created with the default settings.</li><li><code>password</code> and <code>removePassword</code> are mutually exclusive, as are <code>expiryDate</code> and <code>removeExpiryDate</code>.</li><li><code>vudColumns</code> is applicable only when the <code>vud</code> permission is set to true.</li><li><code>drillColumns</code> is applicable only when the <code>drillDown</code> permission is set to true.</li><li>Setting <code>regenerateKey</code> to true disables the private link that was issued previously.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].get.parameters[3].examples.defaultDomain",
+      "update": {
+        "description": "Default domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].get.parameters[3].examples.defaultDomain",
+      "update": {
+        "summary": "Returns the private URL on the default Zoho Analytics domain."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].get.parameters[3].examples.customDomain",
+      "update": {
+        "description": "Custom domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].get.parameters[3].examples.customDomain",
+      "update": {
+        "summary": "Returns the private URL on the configured white label domain."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].get.responses['200'].content['application/json'].examples.privateUrl",
+      "update": {
+        "description": "Private URL"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].get.responses['200'].content['application/json'].examples.privateUrl",
+      "update": {
+        "summary": "Private URL currently in effect for the view."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].get",
+      "update": {
+        "x-zenesis-title": "Get Private URL"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>As this is a GET request, the CONFIG value must be stringified and URL encoded before it is sent.</li><li><code>CONFIG</code> may be omitted entirely, in which case the private URL is returned on the default domain.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/privatelink'].delete",
+      "update": {
+        "x-zenesis-title": "Remove Private Access"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].get.responses['200'].content['application/json'].examples.publicView",
+      "update": {
+        "description": "Public view"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].get.responses['200'].content['application/json'].examples.publicView",
+      "update": {
+        "summary": "View published on the web, with no private link configured."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].get.responses['200'].content['application/json'].examples.privateLinkView",
+      "update": {
+        "description": "Private link view"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].get.responses['200'].content['application/json'].examples.privateLinkView",
+      "update": {
+        "summary": "View shared through a password protected private link, with a filter criteria applied on the published URL."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].get",
+      "update": {
+        "x-zenesis-title": "Get Publish Configurations"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>In <code>privateLinkConfig</code>, a <code>password</code> or <code>expiryDate</code> of <code>-1</code> means that no password or validity period is set.</li><li><code>legendPosition</code> and <code>includeShowHideOption</code> are returned by this API but cannot be set through Update Publish Configurations.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].put.requestBody.content['application/x-www-form-urlencoded'].examples.minimalEmbed",
+      "update": {
+        "description": "Minimal embed"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].put.requestBody.content['application/x-www-form-urlencoded'].examples.minimalEmbed",
+      "update": {
+        "summary": "Renders the view on its own, without the title, description, or toolbar."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].put.requestBody.content['application/x-www-form-urlencoded'].examples.fullToolbar",
+      "update": {
+        "description": "Full toolbar"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].put.requestBody.content['application/x-www-form-urlencoded'].examples.fullToolbar",
+      "update": {
+        "summary": "Renders the view with the toolbar, search box, data type symbols, and the Ask Zia bot."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].put.requestBody.content['application/x-www-form-urlencoded'].examples.filteredEmbed",
+      "update": {
+        "description": "Filtered embed"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].put.requestBody.content['application/x-www-form-urlencoded'].examples.filteredEmbed",
+      "update": {
+        "summary": "Applies a filter criteria on the published URL and refreshes the view every thirty minutes."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].put",
+      "update": {
+        "x-zenesis-title": "Update Publish Configurations"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].put",
+      "update": {
+        "description": "Updates the publish configurations of the specified view. These settings control how the view is rendered when it is accessed in the embedded, public, or private link mode."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/config'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Only the attributes sent in the config are updated; the ones omitted retain their current values.</li><li><code>autoRefresh</code> takes the interval in minutes. Send <code>-1</code> to disable the automatic refresh.</li><li><code>isListed</code> applies to the workspace, not to the individual view.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed'].get.parameters[3].examples.defaultEmbed",
+      "update": {
+        "description": "Default embed"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed'].get.parameters[3].examples.defaultEmbed",
+      "update": {
+        "summary": "Returns an embed URL with the default rendering options and a one hour validity period."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed'].get.parameters[3].examples.filteredEmbed",
+      "update": {
+        "description": "Filtered embed"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed'].get.parameters[3].examples.filteredEmbed",
+      "update": {
+        "summary": "Returns an embed URL through which only the East region rows are visible, with export permission granted."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed'].get.parameters[3].examples.restrictedColumns",
+      "update": {
+        "description": "Restricted columns"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed'].get.parameters[3].examples.restrictedColumns",
+      "update": {
+        "summary": "Returns an embed URL that grants underlying data and drill down access, limited to specific columns."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed'].get.parameters[3].examples.localizedEmbed",
+      "update": {
+        "description": "Localized embed"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed'].get.parameters[3].examples.localizedEmbed",
+      "update": {
+        "summary": "Returns a long lived embed URL rendered in French on the configured white label domain."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed'].get.responses['200'].content['application/json'].examples.embedUrl",
+      "update": {
+        "description": "Embed URL"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed'].get.responses['200'].content['application/json'].examples.embedUrl",
+      "update": {
+        "summary": "Short-lived embed URL generated for the view, carrying the requested configuration."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed'].get",
+      "update": {
+        "x-zenesis-title": "Get Embed URL"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/publish/embed'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiInfo": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>This API is available only to Embedded Analytics customers.</li><li>The generated URL is short-lived and does not require a login. Anyone holding it has the access granted by the config until the validity period elapses.</li></ul>\n</span></blockquote>"
+            }
+          },
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>As this is a GET request, the CONFIG value must be stringified and URL encoded before it is sent.</li><li><code>CONFIG</code> may be omitted entirely, in which case the embed URL is returned with the default rendering options and a one hour validity period.</li><li><code>vudColumns</code> is applicable only when the <code>vud</code> permission is set to true.</li><li><code>drillColumns</code> is applicable only when the <code>drillDown</code> permission is set to true.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].post.requestBody.content['application/x-www-form-urlencoded'].examples.loginRequired",
+      "update": {
+        "description": "Login required"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].post.requestBody.content['application/x-www-form-urlencoded'].examples.loginRequired",
+      "update": {
+        "summary": "Creates a slideshow that can be opened only by users who are logged in to Zoho Analytics."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].post.requestBody.content['application/x-www-form-urlencoded'].examples.publicSlideshow",
+      "update": {
+        "description": "Public slideshow"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].post.requestBody.content['application/x-www-form-urlencoded'].examples.publicSlideshow",
+      "update": {
+        "summary": "Creates a slideshow that can be opened without logging in to Zoho Analytics."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].post.responses['200'].content['application/json'].examples.slideshowCreated",
+      "update": {
+        "description": "Slideshow created"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].post.responses['200'].content['application/json'].examples.slideshowCreated",
+      "update": {
+        "summary": "ID and URL of the slideshow that has just been created."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].post",
+      "update": {
+        "x-zenesis-title": "Create Slideshow"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The order of the IDs in <code>viewIds</code> determines the order in which the views appear in the slideshow.</li><li><code>validateSystemTags</code> is applicable only when System Tags are enabled for your organization.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].get.responses['200'].content['application/json'].examples.multipleSlideshows",
+      "update": {
+        "description": "Multiple slideshows"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].get.responses['200'].content['application/json'].examples.multipleSlideshows",
+      "update": {
+        "summary": "Workspace holding two slideshows, one requiring a login and one open without it."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].get.responses['200'].content['application/json'].examples.noSlideshows",
+      "update": {
+        "description": "No slideshows"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].get.responses['200'].content['application/json'].examples.noSlideshows",
+      "update": {
+        "summary": "Workspace in which no slideshow has been created yet."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides'].get",
+      "update": {
+        "x-zenesis-title": "Get Slideshows"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameSlideshow",
+      "update": {
+        "description": "Rename slideshow"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameSlideshow",
+      "update": {
+        "summary": "Changes only the name of the slideshow, leaving its views and access type as they are."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.replaceViews",
+      "update": {
+        "description": "Replace views"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.replaceViews",
+      "update": {
+        "summary": "Replaces the set of views in the slideshow and opens it up for access without login."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.regenerateKey",
+      "update": {
+        "description": "Regenerate key"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.regenerateKey",
+      "update": {
+        "summary": "Generates a new slide key, disabling the slideshow URL that was issued previously."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].put",
+      "update": {
+        "x-zenesis-title": "Update Slideshow"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Only the attributes sent in the config are updated; the ones omitted retain their current values.</li><li>Sending <code>viewIds</code> replaces the entire set of views in the slideshow rather than adding to it.</li><li>Setting <code>regenerateSlideKey</code> to true disables the slideshow URL that was issued previously.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].delete",
+      "update": {
+        "x-zenesis-title": "Delete Slideshow"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].get.responses['200'].content['application/json'].examples.loginRequired",
+      "update": {
+        "description": "Login required"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].get.responses['200'].content['application/json'].examples.loginRequired",
+      "update": {
+        "summary": "Slideshow of three views that can be opened only by users logged in to Zoho Analytics."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].get.responses['200'].content['application/json'].examples.publicSlideshow",
+      "update": {
+        "description": "Public slideshow"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].get.responses['200'].content['application/json'].examples.publicSlideshow",
+      "update": {
+        "summary": "Slideshow of two views that can be opened without logging in to Zoho Analytics."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}'].get",
+      "update": {
+        "x-zenesis-title": "Get Slideshow Details"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}/publish'].get.parameters[3].examples.autoplaySlideshow",
+      "update": {
+        "description": "Autoplay slideshow"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}/publish'].get.parameters[3].examples.autoplaySlideshow",
+      "update": {
+        "summary": "Returns a URL that scrolls through the views automatically every twenty five seconds."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}/publish'].get.parameters[3].examples.minimalSlideshow",
+      "update": {
+        "description": "Minimal slideshow"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}/publish'].get.parameters[3].examples.minimalSlideshow",
+      "update": {
+        "summary": "Returns a URL that renders the views on their own, without the title or description."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}/publish'].get.parameters[3].examples.customDomainUrl",
+      "update": {
+        "description": "Custom domain"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}/publish'].get.parameters[3].examples.customDomainUrl",
+      "update": {
+        "summary": "Returns the slideshow URL on the configured white label domain."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}/publish'].get.responses['200'].content['application/json'].examples.slideshowUrl",
+      "update": {
+        "description": "Slideshow URL"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}/publish'].get.responses['200'].content['application/json'].examples.slideshowUrl",
+      "update": {
+        "summary": "Slideshow URL carrying the rendering options that were sent in the config."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}/publish'].get",
+      "update": {
+        "x-zenesis-title": "Get Slideshow URL"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/slides/{slide-id}/publish'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>As this is a GET request, the CONFIG value must be stringified and URL encoded before it is sent.</li><li><code>CONFIG</code> may be omitted entirely, in which case the slideshow URL is returned with the default rendering options.</li><li><code>slideInterval</code> must be between 10 and 300 seconds.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.components.schemas.CreateSlideshowConfig.properties.accessType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "With login",
+          "Without login",
+          "Sort"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.SlideInfo.properties.accessType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "With login",
+          "Without login",
+          "Sort"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.SlideshowSummary.properties.accessType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "With login",
+          "Without login",
+          "Sort"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.UpdateSlideshowConfig.properties.accessType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "With login",
+          "Without login",
+          "Sort"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.CreateSlideshowConfig.properties.accessType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.CreateSlideshowConfig.properties.accessType['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.SlideInfo.properties.accessType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.SlideInfo.properties.accessType['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.SlideshowSummary.properties.accessType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.SlideshowSummary.properties.accessType['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.UpdateSlideshowConfig.properties.accessType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.UpdateSlideshowConfig.properties.accessType['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    }
+  ]
+}

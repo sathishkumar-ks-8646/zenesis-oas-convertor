@@ -1,0 +1,1266 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Zoho Analytics API",
+    "version": "v2",
+    "description": "API for Schedules & Alerts in Zoho Analytics — covering creation, management, and triggering of email schedules."
+  },
+  "servers": [
+    {
+      "url": "https://analyticsapi.zoho.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Email Schedules",
+      "description": "APIs for creating, updating, triggering, and deleting email schedules, and retrieving schedule details."
+    }
+  ],
+  "paths": {
+    "/restapi/v2/workspaces/{workspace-id}/emailschedules": {
+      "post": {
+        "operationId": "createEmailSchedule",
+        "summary": "Create Email Schedule",
+        "description": "Create an email schedule in the specified workspace. The schedule emails the views listed in `viewIds`, in the requested `exportType`, to the configured recipients at the frequency defined in `scheduleDetails`.",
+        "tags": [
+          "Email Schedules"
+        ],
+        "x-zenesis-title": "Create Email Schedule",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.create"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/CreateEmailScheduleConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "dailyCsvSchedule": {
+                  "description": "Daily CSV schedule",
+                  "summary": "Emails the listed view as a CSV file every day at 09:00.",
+                  "value": {
+                    "CONFIG": {
+                      "scheduleName": "Daily Sales Snapshot",
+                      "viewIds": [
+                        "1234567890123"
+                      ],
+                      "exportType": "csv",
+                      "scheduleDetails": {
+                        "calendarFrequency": "daily",
+                        "hour": 9,
+                        "minute": 0
+                      },
+                      "emailIds": [
+                        "user1@zylker.com"
+                      ],
+                      "subject": "Daily Sales Snapshot",
+                      "message": "Please find the attached sales snapshot."
+                    }
+                  }
+                },
+                "weeklyPdfSchedule": {
+                  "description": "Weekly PDF schedule",
+                  "summary": "Emails the views as PDF every Monday and Friday at 14:30, with a carbon copy list and the share criteria applied.",
+                  "value": {
+                    "CONFIG": {
+                      "scheduleName": "Weekly Sales Report",
+                      "viewIds": [
+                        "1234567890123",
+                        "1234567890456"
+                      ],
+                      "exportType": "pdf",
+                      "scheduleDetails": {
+                        "calendarFrequency": "weekly",
+                        "hour": 14,
+                        "minute": 30,
+                        "weekDays": [
+                          2,
+                          6
+                        ]
+                      },
+                      "emailIds": [
+                        "user1@zylker.com",
+                        "user2@zylker.com"
+                      ],
+                      "groupIds": [
+                        "1234567890789"
+                      ],
+                      "cc": {
+                        "emailIds": [
+                          "manager@zylker.com"
+                        ],
+                        "groupIds": [
+                          "1234567890999"
+                        ]
+                      },
+                      "applyShareCriteria": true,
+                      "applyDefaultUf": false,
+                      "subject": "Weekly Sales Report",
+                      "message": "Please find the attached weekly report."
+                    }
+                  }
+                },
+                "monthlyImageSchedule": {
+                  "description": "Monthly image schedule",
+                  "summary": "Emails the views as an image on the first and the last day of every month, skipping the System Tag validation.",
+                  "value": {
+                    "CONFIG": {
+                      "scheduleName": "Monthly Revenue Board",
+                      "viewIds": [
+                        "1234567890123"
+                      ],
+                      "exportType": "img",
+                      "scheduleDetails": {
+                        "calendarFrequency": "monthly",
+                        "hour": 8,
+                        "minute": 15,
+                        "monthDays": [
+                          1,
+                          99
+                        ]
+                      },
+                      "emailIds": [
+                        "finance@zylker.com"
+                      ],
+                      "subject": "Monthly Revenue Board",
+                      "validateSystemTags": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created the email schedule.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateEmailScheduleResponse"
+                },
+                "examples": {
+                  "scheduleCreated": {
+                    "description": "Schedule created",
+                    "summary": "Returns the ID of the newly created email schedule.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Create Email Schedule",
+                      "data": {
+                        "scheduleId": "1767024000010886001"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe attributes inside scheduleDetails apply based on the calendarFrequency value.\n<ul><li>weekDay and weekDays - applicable for weekly schedules.</li><li>weekNumber, monthDay and monthDays - applicable for monthly schedules.</li><li>months - applicable for yearly schedules, along with the relevant day attributes.</li></ul>\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nvalidateSystemTags is applicable only when System Tags are enabled for your organization. When it is set to true, a view listed in viewIds that carries an Outdated tag - applied directly, or inherited through lineage from a parent Data Source or Table - causes the request to be rejected, and no views are shared.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getEmailSchedules",
+        "summary": "Get Email Schedules",
+        "description": "Returns the list of email schedules available in the specified workspace.",
+        "tags": [
+          "Email Schedules"
+        ],
+        "x-zenesis-title": "Get Email Schedules",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.metadata.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched the email schedules of the workspace.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetEmailSchedulesResponse"
+                },
+                "examples": {
+                  "multipleSchedules": {
+                    "description": "Multiple schedules",
+                    "summary": "A workspace holding both a weekly dashboard schedule and a daily table schedule.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get email schedules",
+                      "data": {
+                        "emailSchedules": [
+                          {
+                            "scheduleId": "176702400010815003",
+                            "scheduleName": "Dashboard_1",
+                            "schedulePeriod": "weekly on Friday at 14:10 IST",
+                            "schedulesConsumed": 1,
+                            "isEnabled": true,
+                            "createdBy": "user_1@zoho.com",
+                            "views": [
+                              "176702400010388124",
+                              "176702400010388129"
+                            ]
+                          },
+                          {
+                            "scheduleId": "176702400010815001",
+                            "scheduleName": "Table_1",
+                            "schedulePeriod": "daily at 14:10 IST",
+                            "schedulesConsumed": 1,
+                            "isEnabled": true,
+                            "createdBy": "user_1@zoho.com",
+                            "views": [
+                              "176702400010503569"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "noSchedules": {
+                    "description": "No schedules",
+                    "summary": "The workspace has no email schedules configured.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get email schedules",
+                      "data": {
+                        "emailSchedules": []
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}": {
+      "post": {
+        "operationId": "triggerEmailSchedule",
+        "summary": "Trigger Email Schedule",
+        "description": "Trigger the specified email schedule instantly, without waiting for its configured run time.",
+        "tags": [
+          "Email Schedules"
+        ],
+        "x-zenesis-title": "Trigger Email Schedule",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.create"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/schedule-id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Email schedule triggered successfully. No content."
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateEmailSchedule",
+        "summary": "Update Email Schedule",
+        "description": "Update the configurations of the specified email schedule in the workspace.",
+        "tags": [
+          "Email Schedules"
+        ],
+        "x-zenesis-title": "Update Email Schedule",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.update"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/schedule-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/UpdateEmailScheduleConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "changeFrequency": {
+                  "description": "Change frequency",
+                  "summary": "Renames the schedule and switches it to run every day at 10:30.",
+                  "value": {
+                    "CONFIG": {
+                      "scheduleName": "Daily Sales Overview",
+                      "scheduleDetails": {
+                        "calendarFrequency": "daily",
+                        "hour": 10,
+                        "minute": 30
+                      },
+                      "subject": "Daily Sales Overview"
+                    }
+                  }
+                },
+                "updateRecipients": {
+                  "description": "Update recipients",
+                  "summary": "Keeps a yearly frequency and replaces the recipient, group and carbon copy lists.",
+                  "value": {
+                    "CONFIG": {
+                      "scheduleName": "Annual Revenue Report",
+                      "scheduleDetails": {
+                        "calendarFrequency": "yearly",
+                        "hour": 7,
+                        "minute": 0,
+                        "months": [
+                          1,
+                          7
+                        ],
+                        "monthDay": 1
+                      },
+                      "emailIds": [
+                        "finance@zylker.com"
+                      ],
+                      "groupIds": [
+                        "1234567890789"
+                      ],
+                      "cc": {
+                        "emailIds": [
+                          "manager@zylker.com"
+                        ],
+                        "groupIds": [
+                          "1234567890999"
+                        ]
+                      },
+                      "subject": "Annual Revenue Report",
+                      "message": "Here is your updated schedule report."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated the email schedule.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateEmailScheduleResponse"
+                },
+                "examples": {
+                  "scheduleUpdated": {
+                    "description": "Schedule updated",
+                    "summary": "Returns the ID of the email schedule that was updated.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Update email schedule",
+                      "data": {
+                        "scheduleId": "1767024000010887001"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe attributes inside scheduleDetails apply based on the calendarFrequency value.\n<ul><li>weekDay and weekDays - applicable for weekly schedules.</li><li>weekNumber, monthDay and monthDays - applicable for monthly schedules.</li><li>months - applicable for yearly schedules, along with the relevant day attributes.</li></ul>\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nvalidateSystemTags is applicable only when System Tags are enabled for your organization. When it is set to true, a view shared by this schedule that carries an Outdated tag - applied directly, or inherited through lineage from a parent Data Source or Table - causes the request to be rejected, and no views are shared.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteEmailSchedule",
+        "summary": "Delete Email Schedule",
+        "description": "Delete the specified email schedule in the workspace.",
+        "tags": [
+          "Email Schedules"
+        ],
+        "x-zenesis-title": "Delete Email Schedule",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.delete"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/schedule-id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Email schedule deleted successfully. No content."
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}/status": {
+      "put": {
+        "operationId": "changeEmailScheduleStatus",
+        "summary": "Change Email Schedule Status",
+        "description": "Modify the status of the specified email schedule. Use this API to activate a schedule that is currently deactivated, or to deactivate one without deleting it.",
+        "tags": [
+          "Email Schedules"
+        ],
+        "x-zenesis-title": "Change Email Schedule Status",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.update"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/schedule-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/ChangeEmailScheduleStatusConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "activateSchedule": {
+                  "description": "Activate schedule",
+                  "summary": "Resumes a schedule that is currently deactivated.",
+                  "value": {
+                    "CONFIG": {
+                      "operation": "activate"
+                    }
+                  }
+                },
+                "deactivateSchedule": {
+                  "description": "Deactivate schedule",
+                  "summary": "Pauses the schedule without deleting its configuration.",
+                  "value": {
+                    "CONFIG": {
+                      "operation": "deactivate"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Email schedule status updated successfully. No content."
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "org-id": {
+        "name": "ZANALYTICS-ORGID",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Organization ID (can be obtained using Get Organizations API)."
+      },
+      "schedule-id": {
+        "name": "schedule-id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of the email schedule."
+      },
+      "workspace-id": {
+        "name": "workspace-id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of the workspace."
+      }
+    },
+    "securitySchemes": {
+      "iam-oauth2-schema": {
+        "type": "oauth2",
+        "description": "Authentication is based on OAuth2 flow",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://accounts.zoho.com/oauth/v2/auth",
+            "tokenUrl": "https://accounts.zoho.com/oauth/v2/token",
+            "scopes": {
+              "ZohoAnalytics.modeling.create": "Create email schedule resources",
+              "ZohoAnalytics.modeling.update": "Update email schedule resources",
+              "ZohoAnalytics.modeling.delete": "Delete email schedule resources",
+              "ZohoAnalytics.metadata.read": "Read email schedule lists"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ChangeEmailScheduleStatusConfig": {
+        "type": "object",
+        "title": "ChangeEmailScheduleStatusConfig",
+        "description": "JSONObject that holds the new status to be applied to the email schedule.",
+        "required": [
+          "operation"
+        ],
+        "properties": {
+          "operation": {
+            "type": "string",
+            "description": "The new status to be set for the schedule.",
+            "enum": [
+              "activate",
+              "deactivate"
+            ],
+            "x-zenesis-enums-desc": [
+              "Enable schedule",
+              "Disable schedule"
+            ]
+          }
+        }
+      },
+      "CreateEmailScheduleConfig": {
+        "type": "object",
+        "title": "CreateEmailScheduleConfig",
+        "description": "JSONObject that holds the configuration of the email schedule to be created.",
+        "required": [
+          "scheduleName",
+          "viewIds",
+          "exportType",
+          "scheduleDetails"
+        ],
+        "properties": {
+          "scheduleName": {
+            "type": "string",
+            "description": "Name of the schedule."
+          },
+          "viewIds": {
+            "$ref": "#/components/schemas/ScheduleViewIds"
+          },
+          "exportType": {
+            "type": "string",
+            "description": "The type of export.",
+            "enum": [
+              "csv",
+              "xls",
+              "img",
+              "pdf",
+              "html"
+            ],
+            "x-zenesis-enums-desc": [
+              "CSV file",
+              "Excel file",
+              "Image file",
+              "PDF file",
+              "HTML file"
+            ]
+          },
+          "scheduleDetails": {
+            "$ref": "#/components/schemas/ScheduleDetails"
+          },
+          "emailIds": {
+            "$ref": "#/components/schemas/ScheduleEmailIds"
+          },
+          "groupIds": {
+            "$ref": "#/components/schemas/ScheduleGroupIds"
+          },
+          "cc": {
+            "$ref": "#/components/schemas/ScheduleCc"
+          },
+          "applyShareCriteria": {
+            "type": "boolean",
+            "description": "Controls whether the share criteria have to be applied.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "applyDefaultUf": {
+            "type": "boolean",
+            "description": "Controls whether the default user filter has to be applied.",
+            "default": false,
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject of the email."
+          },
+          "message": {
+            "type": "string",
+            "description": "Message content of the email."
+          },
+          "validateSystemTags": {
+            "type": "boolean",
+            "description": "Controls whether the request has to be validated against the System Tags applied to the views. Applicable only when System Tags are enabled for your organization.\n\nWhen true, the request is validated against the System Tags applied to the views listed in `viewIds`. If any of those views carries an **Outdated** tag - applied directly, or inherited through lineage from a parent Data Source or Table - the request is rejected and no views are shared. Set it to false to skip this validation and proceed with the request.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
+      "ScheduleViewIds": {
+        "type": "array",
+        "title": "ScheduleViewIds",
+        "description": "JSONArray of the IDs of the views that have to be shared.",
+        "items": {
+          "type": "string",
+          "description": "ID of a view to be shared."
+        },
+        "examples": [
+          [
+            "1234567890123",
+            "1234567890456"
+          ]
+        ]
+      },
+      "ScheduleDetails": {
+        "type": "object",
+        "title": "ScheduleDetails",
+        "description": "JSONObject with the detailed information about the schedule, such as the time and the frequency at which it runs.\n\nThe attributes that apply depend on the `calendarFrequency` value.\n\n- **weekDay**, **weekDays** - applicable for weekly schedules.\n- **weekNumber**, **monthDay**, **monthDays** - applicable for monthly schedules.\n- **months** - applicable for yearly schedules, along with the relevant day attributes.",
+        "required": [
+          "calendarFrequency",
+          "hour",
+          "minute"
+        ],
+        "properties": {
+          "calendarFrequency": {
+            "type": "string",
+            "description": "The frequency at which the email schedule has to be triggered.",
+            "enum": [
+              "daily",
+              "weekly",
+              "monthly",
+              "yearly"
+            ]
+          },
+          "hour": {
+            "type": "integer",
+            "description": "The hour of the day, from 0 to 23, at which the email schedule has to be triggered.",
+            "minimum": 0,
+            "maximum": 23
+          },
+          "minute": {
+            "type": "integer",
+            "description": "The minute within the hour at which the email schedule has to be triggered. Only five-minute intervals are allowed.",
+            "enum": [
+              0,
+              5,
+              10,
+              15,
+              20,
+              25,
+              30,
+              35,
+              40,
+              45,
+              50,
+              55
+            ]
+          },
+          "weekDay": {
+            "type": "integer",
+            "description": "A particular day of the week on which the email schedule has to be triggered.",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "x-zenesis-enums-desc": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ]
+          },
+          "weekDays": {
+            "$ref": "#/components/schemas/ScheduleWeekDays"
+          },
+          "weekNumber": {
+            "type": "integer",
+            "description": "The week of the month in which the email schedule has to be triggered.",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "x-zenesis-enums-desc": [
+              "First week",
+              "Second week",
+              "Third week",
+              "Fourth week",
+              "Fifth week"
+            ]
+          },
+          "monthDay": {
+            "type": "integer",
+            "description": "A particular day of the month on which the email schedule has to be triggered. Allowed values are 1 to 31, and 99 to denote the last day of the month.",
+            "minimum": 1,
+            "maximum": 99
+          },
+          "monthDays": {
+            "$ref": "#/components/schemas/ScheduleMonthDays"
+          },
+          "months": {
+            "$ref": "#/components/schemas/ScheduleMonths"
+          }
+        },
+        "examples": [
+          {
+            "calendarFrequency": "weekly",
+            "hour": 14,
+            "minute": 30,
+            "weekDays": [
+              2,
+              6
+            ]
+          }
+        ]
+      },
+      "ScheduleWeekDays": {
+        "type": "array",
+        "title": "ScheduleWeekDays",
+        "description": "JSONArray of the days of the week on which the email schedule has to be triggered.",
+        "items": {
+          "type": "integer",
+          "description": "A day of the week.",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "x-zenesis-enums-desc": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ]
+        },
+        "examples": [
+          [
+            2,
+            6
+          ]
+        ]
+      },
+      "ScheduleMonthDays": {
+        "type": "array",
+        "title": "ScheduleMonthDays",
+        "description": "JSONArray of the days of the month on which the email schedule has to be triggered. Allowed values are 1 to 31, and 99 to denote the last day of the month.",
+        "items": {
+          "type": "integer",
+          "description": "A day of the month, or 99 to denote the last day of the month.",
+          "minimum": 1,
+          "maximum": 99
+        },
+        "examples": [
+          [
+            1,
+            15,
+            99
+          ]
+        ]
+      },
+      "ScheduleMonths": {
+        "type": "array",
+        "title": "ScheduleMonths",
+        "description": "JSONArray of the months of the year in which the email schedule has to be triggered.",
+        "items": {
+          "type": "integer",
+          "description": "A month of the year.",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "x-zenesis-enums-desc": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+          ]
+        },
+        "examples": [
+          [
+            1,
+            6,
+            12
+          ]
+        ]
+      },
+      "ScheduleEmailIds": {
+        "type": "array",
+        "title": "ScheduleEmailIds",
+        "description": "JSONArray of the email addresses of the users with whom the views have to be shared.",
+        "items": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address of a recipient."
+        },
+        "examples": [
+          [
+            "user1@zylker.com",
+            "user2@zylker.com"
+          ]
+        ]
+      },
+      "ScheduleGroupIds": {
+        "type": "array",
+        "title": "ScheduleGroupIds",
+        "description": "JSONArray of the IDs of the groups available in the workspace. These IDs ensure that the views are shared with all the participants belonging to the specified groups.",
+        "items": {
+          "type": "string",
+          "description": "ID of a group in the workspace."
+        },
+        "examples": [
+          [
+            "1234567890789"
+          ]
+        ]
+      },
+      "ScheduleCc": {
+        "type": "object",
+        "title": "ScheduleCc",
+        "description": "JSONObject that holds the individual email addresses and the group IDs of the carbon copy recipients.",
+        "properties": {
+          "emailIds": {
+            "$ref": "#/components/schemas/CcEmailIds"
+          },
+          "groupIds": {
+            "$ref": "#/components/schemas/CcGroupIds"
+          }
+        },
+        "examples": [
+          {
+            "emailIds": [
+              "manager@zylker.com"
+            ],
+            "groupIds": [
+              "1234567890999"
+            ]
+          }
+        ]
+      },
+      "CcEmailIds": {
+        "type": "array",
+        "title": "CcEmailIds",
+        "description": "JSONArray of the email addresses of the carbon copy recipients.",
+        "items": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address of a carbon copy recipient."
+        },
+        "examples": [
+          [
+            "manager@zylker.com"
+          ]
+        ]
+      },
+      "CcGroupIds": {
+        "type": "array",
+        "title": "CcGroupIds",
+        "description": "JSONArray of the IDs of the groups whose participants have to be added as carbon copy recipients.",
+        "items": {
+          "type": "string",
+          "description": "ID of a group in the workspace."
+        },
+        "examples": [
+          [
+            "1234567890999"
+          ]
+        ]
+      },
+      "CreateEmailScheduleResponse": {
+        "type": "object",
+        "title": "CreateEmailScheduleResponse",
+        "description": "Response returned on creating an email schedule.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request."
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the action performed."
+          },
+          "data": {
+            "$ref": "#/components/schemas/EmailScheduleIdData"
+          }
+        }
+      },
+      "EmailScheduleIdData": {
+        "type": "object",
+        "title": "EmailScheduleIdData",
+        "description": "JSONObject that holds the ID of the email schedule.",
+        "properties": {
+          "scheduleId": {
+            "type": "string",
+            "description": "ID of the email schedule."
+          }
+        },
+        "examples": [
+          {
+            "scheduleId": "1767024000010886001"
+          }
+        ]
+      },
+      "GetEmailSchedulesResponse": {
+        "type": "object",
+        "title": "GetEmailSchedulesResponse",
+        "description": "Response returned on fetching the email schedules of a workspace.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request."
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the action performed."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetEmailSchedulesResponseData"
+          }
+        }
+      },
+      "GetEmailSchedulesResponseData": {
+        "type": "object",
+        "title": "GetEmailSchedulesResponseData",
+        "description": "JSONObject that holds the email schedules available in the workspace.",
+        "properties": {
+          "emailSchedules": {
+            "$ref": "#/components/schemas/EmailSchedules"
+          }
+        }
+      },
+      "EmailSchedules": {
+        "type": "array",
+        "title": "EmailSchedules",
+        "description": "JSONArray of the email schedules available in the workspace.",
+        "items": {
+          "$ref": "#/components/schemas/EmailScheduleSummary"
+        },
+        "examples": [
+          [
+            {
+              "scheduleId": "176702400010815003",
+              "scheduleName": "Dashboard_1",
+              "schedulePeriod": "weekly on Friday at 14:10 IST",
+              "schedulesConsumed": 1,
+              "isEnabled": true,
+              "createdBy": "user_1@zoho.com",
+              "views": [
+                "176702400010388124",
+                "176702400010388129"
+              ]
+            }
+          ]
+        ]
+      },
+      "EmailScheduleSummary": {
+        "type": "object",
+        "title": "EmailScheduleSummary",
+        "description": "JSONObject with the details of an email schedule.",
+        "properties": {
+          "scheduleId": {
+            "type": "string",
+            "description": "ID of the email schedule."
+          },
+          "scheduleName": {
+            "type": "string",
+            "description": "Name of the email schedule."
+          },
+          "schedulePeriod": {
+            "type": "string",
+            "description": "The frequency and the time at which the schedule runs, in a readable form."
+          },
+          "schedulesConsumed": {
+            "type": "integer",
+            "description": "The number of schedules consumed from the organization's quota by this schedule."
+          },
+          "isEnabled": {
+            "type": "boolean",
+            "description": "Denotes whether the schedule is currently active.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "Email address of the user who created the schedule."
+          },
+          "views": {
+            "$ref": "#/components/schemas/ScheduleViews"
+          }
+        }
+      },
+      "ScheduleViews": {
+        "type": "array",
+        "title": "ScheduleViews",
+        "description": "JSONArray of the IDs of the views shared by the schedule.",
+        "items": {
+          "type": "string",
+          "description": "ID of a view shared by the schedule."
+        },
+        "examples": [
+          [
+            "176702400010388124",
+            "176702400010388129"
+          ]
+        ]
+      },
+      "UpdateEmailScheduleConfig": {
+        "type": "object",
+        "title": "UpdateEmailScheduleConfig",
+        "description": "JSONObject that holds the configuration to be applied to the existing email schedule.",
+        "required": [
+          "scheduleName",
+          "scheduleDetails"
+        ],
+        "properties": {
+          "scheduleName": {
+            "type": "string",
+            "description": "Name of the schedule."
+          },
+          "scheduleDetails": {
+            "$ref": "#/components/schemas/ScheduleDetails"
+          },
+          "emailIds": {
+            "$ref": "#/components/schemas/ScheduleEmailIds"
+          },
+          "groupIds": {
+            "$ref": "#/components/schemas/ScheduleGroupIds"
+          },
+          "cc": {
+            "$ref": "#/components/schemas/ScheduleCc"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject of the email."
+          },
+          "message": {
+            "type": "string",
+            "description": "Message content of the email."
+          },
+          "validateSystemTags": {
+            "type": "boolean",
+            "description": "Controls whether the request has to be validated against the System Tags applied to the views. Applicable only when System Tags are enabled for your organization.\n\nWhen true, the request is validated against the System Tags applied to the views shared by this schedule. If any of those views carries an **Outdated** tag - applied directly, or inherited through lineage from a parent Data Source or Table - the request is rejected and no views are shared. Set it to false to skip this validation and proceed with the request.",
+            "default": true,
+            "enum": [
+              true,
+              false
+            ]
+          }
+        }
+      },
+      "UpdateEmailScheduleResponse": {
+        "type": "object",
+        "title": "UpdateEmailScheduleResponse",
+        "description": "Response returned on updating an email schedule.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request."
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the action performed."
+          },
+          "data": {
+            "$ref": "#/components/schemas/EmailScheduleIdData"
+          }
+        }
+      }
+    }
+  }
+}

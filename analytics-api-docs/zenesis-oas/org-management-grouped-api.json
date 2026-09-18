@@ -1,0 +1,1103 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Zoho Analytics API",
+    "version": "v2",
+    "description": "APIs that return information about the organisations, resource usage, subscription plan, and workspace or view identity lookups available to the authenticated user. These are read-only metadata APIs and do not modify any data."
+  },
+  "servers": [
+    {
+      "url": "https://analyticsapi.zoho.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Org Info & Settings",
+      "description": "APIs for retrieving organisation information, resource usage, subscription details, and workspace or view metadata."
+    }
+  ],
+  "paths": {
+    "/restapi/v2/orgs": {
+      "get": {
+        "tags": [
+          "Org Info & Settings"
+        ],
+        "x-zenesis-title": "Get Organizations",
+        "summary": "Get Organizations",
+        "description": "Returns the list of Zoho Analytics organisations that the authenticated user belongs to. For each organisation the response holds the role of the user within that organisation, the number of workspaces, and the plan details.\n\nThis is a user-scoped API. The `ZANALYTICS-ORGID` header is not required, and the result reflects the membership of the caller across all organisations rather than the contents of a single organisation.",
+        "operationId": "getOrganizations",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.metadata.read"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>Only active organisations are returned. Organisations that are expired or blocked are suppressed from the response.</li>\n<li>A user who holds no Zoho Analytics organisation membership receives HTTP 200 with an empty <code>orgs</code> array. No error is raised.</li>\n<li>Only one entry in the list can have <code>isDefault</code> set to true. When the user belongs to a single organisation, that organisation is always the default.</li>\n<li><code>numberOfWorkspaces</code> is role dependent. For the Account Admin and Organization Admin roles it is the total number of workspaces in the organisation. For every other role it is the number of workspaces shared with the user.</li>\n<li>A user who is an Account Admin in one organisation and a regular user in another sees both organisations in the list, with <code>role</code> and <code>numberOfWorkspaces</code> differing per entry.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "8535",
+                "description": "The OAuth token is invalid or has expired.",
+                "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.read scope."
+              }
+            ],
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrganizationsResponse"
+                },
+                "examples": {
+                  "singleOrganisation": {
+                    "description": "Single organisation",
+                    "summary": "The user is the Account Admin of exactly one organisation, which is therefore also the default organisation.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get organizations",
+                      "data": {
+                        "orgs": [
+                          {
+                            "orgId": "64036181",
+                            "orgName": "acme-analytics",
+                            "orgDesc": "",
+                            "createdBy": "admin@acme.com",
+                            "createdByZuId": "64035928",
+                            "planName": "Enterprise",
+                            "isDefault": true,
+                            "numberOfWorkspaces": 41,
+                            "role": "Account Admin"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "multipleOrganisations": {
+                    "description": "Multiple organisations",
+                    "summary": "The user owns one organisation and holds the Organization Admin role in another. The role and workspace count differ per entry.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get organizations",
+                      "data": {
+                        "orgs": [
+                          {
+                            "orgId": "64036201",
+                            "orgName": "dev-team-analytics",
+                            "orgDesc": "",
+                            "createdBy": "orgadmin@dev.com",
+                            "createdByZuId": "64036024",
+                            "planName": "Premium",
+                            "isDefault": false,
+                            "numberOfWorkspaces": 1,
+                            "role": "Account Admin"
+                          },
+                          {
+                            "orgId": "64036181",
+                            "orgName": "acme-analytics",
+                            "orgDesc": "",
+                            "createdBy": "admin@acme.com",
+                            "createdByZuId": "64035928",
+                            "planName": "Enterprise",
+                            "isDefault": false,
+                            "numberOfWorkspaces": 41,
+                            "role": "Organization Admin"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "sharedUserOrganisations": {
+                    "description": "Shared user",
+                    "summary": "The user owns one organisation and is a shared user in another, where numberOfWorkspaces reflects only the workspaces shared with them.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get organizations",
+                      "data": {
+                        "orgs": [
+                          {
+                            "orgId": "64036287",
+                            "orgName": "shared-user-own-org",
+                            "orgDesc": "",
+                            "createdBy": "shareduser@test.com",
+                            "createdByZuId": "64036387",
+                            "planName": "Premium",
+                            "isDefault": false,
+                            "numberOfWorkspaces": 3,
+                            "role": "Account Admin"
+                          },
+                          {
+                            "orgId": "64036181",
+                            "orgName": "acme-analytics",
+                            "orgDesc": "",
+                            "createdBy": "admin@acme.com",
+                            "createdByZuId": "64035928",
+                            "planName": "Enterprise",
+                            "isDefault": false,
+                            "numberOfWorkspaces": 18,
+                            "role": "User"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "noOrganisations": {
+                    "description": "No organisations",
+                    "summary": "The user holds no Zoho Analytics organisation membership. An empty orgs array is returned instead of an error.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get organizations",
+                      "data": {
+                        "orgs": []
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/resources": {
+      "get": {
+        "tags": [
+          "Org Info & Settings"
+        ],
+        "x-zenesis-title": "Get Resource Details",
+        "summary": "Get Resource Details",
+        "description": "Returns the current resource allocation and usage statistics of the specified organisation. The response covers plan-governed metrics such as user seats, row limits, API units, and scheduled imports, and is useful for monitoring consumption against the plan limits.\n\nThe authenticated user must be an Account Admin or an Organization Admin of the organisation sent in the `ZANALYTICS-ORGID` header.",
+        "operationId": "getResourceDetails",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.usermanagement.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>This API is restricted to Account Admins and Organization Admins. A Workspace Admin or a regular user receives error code 7301.</li>\n<li><code>allocated</code> returns <code>Unlimited</code> when the plan places no cap on the resource. <code>remaining</code> is then also returned as <code>Unlimited</code>.</li>\n<li><code>used</code> returns <code>null</code> when usage tracking for the resource is asynchronous or not yet computed, as happens with <code>archivedrows</code>. <code>remaining</code> is then calculated from <code>allocated</code> assuming zero usage.</li>\n<li>API unit consumption is tracked at sub-unit precision, so the <code>used</code> and <code>remaining</code> values of <code>apiUnits</code> can hold decimal values.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Organisation not found.",
+                "resolution": "Verify the ZANALYTICS-ORGID header value. The organisation ID can be obtained using the Get Organizations API."
+              },
+              {
+                "name": "7301",
+                "description": "The user is not an Account Admin or an Organization Admin of the specified organisation.",
+                "resolution": "Only Account Admins and Organization Admins can view the resource details."
+              },
+              {
+                "name": "8535",
+                "description": "The OAuth token is invalid or has expired.",
+                "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.usermanagement.read scope."
+              }
+            ],
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetResourceDetailsResponse"
+                },
+                "examples": {
+                  "enterprisePlanUsage": {
+                    "description": "Enterprise plan",
+                    "summary": "A plan that mixes fixed and unlimited allocations, including a resource whose usage tracking is deferred (archivedrows) and a resource tracked at sub-unit precision (apiUnits).",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get resource details",
+                      "data": {
+                        "resourceDetails": [
+                          {
+                            "resourceName": "users",
+                            "resourceUsage": {
+                              "allocated": "15",
+                              "used": "4",
+                              "remaining": "11",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "roUsers",
+                            "resourceUsage": {
+                              "allocated": "25",
+                              "used": "2",
+                              "remaining": "23",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "workspaces",
+                            "resourceUsage": {
+                              "allocated": "Unlimited",
+                              "used": "1",
+                              "remaining": "Unlimited",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "rows",
+                            "resourceUsage": {
+                              "allocated": "5000000",
+                              "used": "755",
+                              "remaining": "4999245",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "queryTables",
+                            "resourceUsage": {
+                              "allocated": "Unlimited",
+                              "used": "0",
+                              "remaining": "Unlimited",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "archivedrows",
+                            "resourceUsage": {
+                              "allocated": "500000",
+                              "used": "null",
+                              "remaining": "500000",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "scheduledImports",
+                            "resourceUsage": {
+                              "allocated": "Unlimited",
+                              "used": "0",
+                              "remaining": "Unlimited",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "scheduledEmails",
+                            "resourceUsage": {
+                              "allocated": "30",
+                              "used": "0",
+                              "remaining": "30",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "apiUnits",
+                            "resourceUsage": {
+                              "allocated": "30000",
+                              "used": "23.3",
+                              "remaining": "29976.7",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "scheduledAlerts",
+                            "resourceUsage": {
+                              "allocated": "30",
+                              "used": "0",
+                              "remaining": "30",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "scheduledSnapshots",
+                            "resourceUsage": {
+                              "allocated": "Unlimited",
+                              "used": "0",
+                              "remaining": "Unlimited",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "archiveschedule",
+                            "resourceUsage": {
+                              "allocated": "25",
+                              "used": "0",
+                              "remaining": "25",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "privateLinks",
+                            "resourceUsage": {
+                              "allocated": "15",
+                              "used": "0",
+                              "remaining": "15",
+                              "remarks": ""
+                            }
+                          },
+                          {
+                            "resourceName": "actionsByFlow",
+                            "resourceUsage": {
+                              "allocated": "500",
+                              "used": "0",
+                              "remaining": "500",
+                              "remarks": ""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/subscription": {
+      "get": {
+        "tags": [
+          "Org Info & Settings"
+        ],
+        "x-zenesis-title": "Get Subscription Details",
+        "summary": "Get Subscription Details",
+        "description": "Returns the current subscription plan, the add-on details, the billing date, and the trial status of the specified organisation.\n\nThe authenticated user must be an Account Admin or an Organization Admin of the organisation sent in the `ZANALYTICS-ORGID` header.",
+        "operationId": "getSubscriptionDetails",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.usermanagement.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>This API is restricted to Account Admins and Organization Admins. Any other role receives error code 7301.</li>\n<li>When the organisation is on a trial, <code>trialStatus</code> returns true and <code>trialEndsOn</code> is included in the response. <code>billingDate</code> can return <code>-1</code> during the trial.</li>\n<li>Internal and ultimate plans do not follow the standard billing cycle. For these plans <code>billingDate</code> returns <code>-1</code> and <code>trialStatus</code> returns false.</li>\n<li>When a trial has expired, <code>trialStatus</code> returns false and the organisation can be in a restricted state. Use the Get Resource Details API to check the current limits.</li>\n<li><code>addOns</code> returns an empty string when no add-ons have been purchased.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Organisation not found.",
+                "resolution": "Verify the ZANALYTICS-ORGID header value. The organisation ID can be obtained using the Get Organizations API."
+              },
+              {
+                "name": "7301",
+                "description": "The user is not an Account Admin or an Organization Admin of the specified organisation.",
+                "resolution": "Only Account Admins and Organization Admins can view the subscription details."
+              },
+              {
+                "name": "8535",
+                "description": "The OAuth token is invalid or has expired.",
+                "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.usermanagement.read scope."
+              }
+            ],
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSubscriptionDetailsResponse"
+                },
+                "examples": {
+                  "activeSubscription": {
+                    "description": "Active subscription",
+                    "summary": "A paid plan with add-ons purchased and a scheduled billing date.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get subscription details",
+                      "data": {
+                        "subscription": {
+                          "planName": "Premium",
+                          "addOns": "25 Viewers",
+                          "billingDate": "22 Jun 2021",
+                          "trialStatus": false
+                        }
+                      }
+                    }
+                  },
+                  "trialSubscription": {
+                    "description": "Trial subscription",
+                    "summary": "An organisation on an active trial period. trialEndsOn is returned and billingDate is -1.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get subscription details",
+                      "data": {
+                        "subscription": {
+                          "planName": "Enterprise",
+                          "addOns": "",
+                          "billingDate": "-1",
+                          "trialStatus": true,
+                          "trialEndsOn": "Sat Jul 15 23:59:59 IST 2026"
+                        }
+                      }
+                    }
+                  },
+                  "internalPlan": {
+                    "description": "Internal plan",
+                    "summary": "An internal or ultimate plan that does not follow the standard billing cycle, so billingDate is -1 and trialStatus is false.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get subscription details",
+                      "data": {
+                        "subscription": {
+                          "planName": "Ultimate",
+                          "addOns": "",
+                          "billingDate": "-1",
+                          "trialStatus": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/metadetails": {
+      "get": {
+        "tags": [
+          "Org Info & Settings"
+        ],
+        "x-zenesis-title": "Get Meta Details From Name",
+        "summary": "Get Meta Details From Name",
+        "description": "Resolves a workspace, and optionally a view within it, by name and returns the corresponding IDs. Use this API when the human-readable names of a workspace and a view are known but their IDs are needed to call other workspace-scoped or view-scoped APIs.\n\n- When only `workspaceName` is sent, the response holds the workspace ID, the workspace description, and the organisation ID.\n- When both `workspaceName` and `viewName` are sent, the response additionally holds the ID, description, and type of the view.",
+        "operationId": "getMetaDetails",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.metadata.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "name": "CONFIG",
+            "in": "query",
+            "description": "JSONObject that holds the name of the workspace, and optionally the name of a view within it, to be resolved into IDs. As this is a GET request, the value must be stringified and URL encoded before it is sent.",
+            "required": true,
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/GetMetaDetailsConfig"
+            },
+            "examples": {
+              "workspaceLookup": {
+                "description": "Workspace lookup",
+                "summary": "Resolves a workspace name into its workspace ID. Only workspace information is returned.",
+                "value": {
+                  "workspaceName": "Sales Analytics"
+                }
+              },
+              "workspaceViewLookup": {
+                "description": "View lookup",
+                "summary": "Resolves a workspace name and a view name within it, returning both the workspace ID and the view ID.",
+                "value": {
+                  "workspaceName": "Sales Analytics",
+                  "viewName": "Revenue Trend"
+                }
+              }
+            }
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>Workspace names are unique within an organisation and view names are unique within a workspace. The match is exact and case sensitive, so <code>Sales Analytics</code> and <code>sales analytics</code> are treated as different names.</li>\n<li>The lookup is scoped to the organisation sent in the <code>ZANALYTICS-ORGID</code> header. A workspace of the same name in a different organisation is not found, and the request fails with error code 7104.</li>\n<li>When <code>viewName</code> is sent and the view does not exist in the workspace, the request fails with error code 7104. Workspace metadata is not returned in failure responses.</li>\n<li>When <code>viewName</code> is sent, permission is checked against the view. If the view is not accessible to the user, the request fails with error code 7301 even when the user can see the workspace.</li>\n<li>A workspace-only lookup succeeds only when at least one view in the workspace is shared with the user. If the workspace holds views but none are shared with the user, the request fails with error code 7301.</li>\n<li>This API is the recommended way to bootstrap name-based integrations. Resolve <code>workspaceId</code> and <code>viewId</code> here and pass them to downstream APIs, instead of hard-coding numeric IDs that can change across environments.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "x-zenesis-statuscodes": [
+              {
+                "name": "7103",
+                "description": "Organisation not found.",
+                "resolution": "Verify the ZANALYTICS-ORGID header value. The organisation ID can be obtained using the Get Organizations API."
+              },
+              {
+                "name": "7104",
+                "description": "Workspace or view not found for the provided name.",
+                "resolution": "Verify the exact spelling and case of workspaceName and viewName. The names are case sensitive."
+              },
+              {
+                "name": "7301",
+                "description": "The user does not have Read access on the workspace or the view.",
+                "resolution": "Ensure the workspace or the view is shared with the user, or that the user holds the Workspace Admin, Account Admin, or Organization Admin role."
+              },
+              {
+                "name": "8535",
+                "description": "The OAuth token is invalid or has expired.",
+                "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.read scope."
+              }
+            ],
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMetaDetailsResponse"
+                },
+                "examples": {
+                  "workspaceLookup": {
+                    "description": "Workspace lookup",
+                    "summary": "Response for a workspace-only lookup. The views object is absent because viewName was not sent.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get meta details",
+                      "data": {
+                        "workspaces": {
+                          "workspaceId": "320862000000625871",
+                          "workspaceName": "Sales Analytics",
+                          "workspaceDesc": "",
+                          "orgId": "106044221"
+                        }
+                      }
+                    }
+                  },
+                  "workspaceViewLookup": {
+                    "description": "View lookup",
+                    "summary": "Response for a combined workspace and view lookup. The views object holds the resolved view ID and type.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get meta details",
+                      "data": {
+                        "workspaces": {
+                          "workspaceId": "38190000004180410",
+                          "workspaceName": "Sales Analytics",
+                          "workspaceDesc": "Main sales reporting workspace",
+                          "orgId": "57058019"
+                        },
+                        "views": {
+                          "viewId": "38190000004180412",
+                          "viewName": "Revenue Trend",
+                          "viewDesc": "",
+                          "viewType": "AnalysisView"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "org-id": {
+        "name": "ZANALYTICS-ORGID",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of the organisation on which the operation has to be performed. The organisation ID can be obtained using the Get Organizations API."
+      }
+    },
+    "securitySchemes": {
+      "iam-oauth2-schema": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://accounts.zoho.com/oauth/v2/auth",
+            "tokenUrl": "https://accounts.zoho.com/oauth/v2/token",
+            "refreshUrl": "https://accounts.zoho.com/oauth/v2/token",
+            "scopes": {
+              "ZohoAnalytics.metadata.read": "Read metadata resource from Zoho Analytics.",
+              "ZohoAnalytics.metadata.all": "Full access to metadata in Zoho Analytics.",
+              "ZohoAnalytics.usermanagement.read": "Read user management data in Zoho Analytics.",
+              "ZohoAnalytics.usermanagement.all": "Full access to user management in Zoho Analytics.",
+              "ZohoAnalytics.fullaccess.all": "Full access to all Zoho Analytics features."
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Org": {
+        "type": "object",
+        "title": "Org",
+        "description": "Details of a single organisation that the authenticated user belongs to.",
+        "properties": {
+          "orgId": {
+            "type": "string",
+            "description": "Unique identifier of the organisation. Send this value as the `ZANALYTICS-ORGID` header in organisation-scoped and workspace-scoped APIs.",
+            "examples": [
+              "64036181"
+            ]
+          },
+          "orgName": {
+            "type": "string",
+            "description": "Display name of the organisation.",
+            "examples": [
+              "acme-analytics"
+            ]
+          },
+          "orgDesc": {
+            "type": "string",
+            "description": "Description of the organisation. Returns an empty string when no description is set.",
+            "examples": [
+              ""
+            ]
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "Email address of the user who created and owns the organisation.",
+            "examples": [
+              "admin@acme.com"
+            ]
+          },
+          "createdByZuId": {
+            "type": "string",
+            "description": "Zoho User ID of the organisation creator.",
+            "examples": [
+              "64035928"
+            ]
+          },
+          "planName": {
+            "type": "string",
+            "description": "Name of the subscription plan currently active for the organisation, such as Basic, Standard, Premium, Enterprise, or Ultimate.",
+            "examples": [
+              "Enterprise"
+            ]
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "Denotes whether this is the default organisation of the authenticated user.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "numberOfWorkspaces": {
+            "type": "integer",
+            "description": "Number of workspaces visible to the authenticated user in this organisation. For the Account Admin and Organization Admin roles this is the total number of workspaces in the organisation. For every other role it is the number of workspaces shared with the user.",
+            "examples": [
+              41
+            ]
+          },
+          "role": {
+            "type": "string",
+            "description": "Role of the authenticated user in this organisation.",
+            "enum": [
+              "Account Admin",
+              "Organization Admin",
+              "User"
+            ]
+          }
+        }
+      },
+      "OrgList": {
+        "type": "array",
+        "title": "OrgList",
+        "description": "JSONArray that holds the organisations the authenticated user is a member of. Returns an empty array when the user has no Zoho Analytics organisation membership.",
+        "items": {
+          "$ref": "#/components/schemas/Org"
+        }
+      },
+      "GetOrganizationsResponse": {
+        "type": "object",
+        "title": "GetOrganizationsResponse",
+        "description": "Response returned by the Get Organizations API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "enum": [
+              "success",
+              "failure"
+            ],
+            "x-zenesis-enums-desc": [
+              "Request succeeded",
+              "Request failed"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the operation performed.",
+            "examples": [
+              "Get organizations"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "description": "Container that holds the organisation list.",
+            "properties": {
+              "orgs": {
+                "$ref": "#/components/schemas/OrgList"
+              }
+            }
+          }
+        }
+      },
+      "ResourceUsage": {
+        "type": "object",
+        "title": "ResourceUsage",
+        "description": "JSONObject that holds the allocation and consumption figures of a single resource.",
+        "properties": {
+          "allocated": {
+            "type": "string",
+            "description": "Total allocation of the resource under the current plan. Returns `Unlimited` when the plan places no cap on the resource.",
+            "examples": [
+              "15"
+            ]
+          },
+          "used": {
+            "type": "string",
+            "description": "Quantity of the resource consumed so far.",
+            "examples": [
+              "4"
+            ]
+          },
+          "remaining": {
+            "type": "string",
+            "description": "Allocation still available, calculated as allocated minus used. Returns `Unlimited` when the resource is uncapped.",
+            "examples": [
+              "11"
+            ]
+          },
+          "remarks": {
+            "type": "string",
+            "description": "Additional context about the resource limit. Returns an empty string when no remarks apply.",
+            "examples": [
+              ""
+            ]
+          }
+        }
+      },
+      "ResourceDetail": {
+        "type": "object",
+        "title": "ResourceDetail",
+        "description": "JSONObject that holds the usage details of a single resource type.",
+        "properties": {
+          "resourceName": {
+            "type": "string",
+            "description": "Identifier of the resource type.\n\n- **users** - Paid user seats. These users can create and edit views.\n- **roUsers** - Read-only viewer seats.\n- **workspaces** - Workspaces allowed in the organisation.\n- **rows** - Data rows allowed across all tables.\n- **queryTables** - Query Tables allowed in the organisation.\n- **archivedrows** - Rows allowed in archived (cold storage) tables.\n- **scheduledImports** - Scheduled data import jobs allowed.\n- **scheduledEmails** - Scheduled email reports allowed per month.\n- **apiUnits** - API unit quota. Each API call deducts units based on the operation type.\n- **scheduledAlerts** - Scheduled alert rules allowed.\n- **scheduledSnapshots** - Scheduled snapshot jobs allowed.\n- **archiveschedule** - Archive schedule jobs allowed.\n- **financeMultiorgImports** - Multi-org Finance integration import pipelines allowed.\n- **privateLinks** - Private link connections allowed.\n- **actionsByFlow** - Automated flow action triggers allowed per month.",
+            "enum": [
+              "users",
+              "roUsers",
+              "workspaces",
+              "rows",
+              "queryTables",
+              "archivedrows",
+              "scheduledImports",
+              "scheduledEmails",
+              "apiUnits",
+              "scheduledAlerts",
+              "scheduledSnapshots",
+              "archiveschedule",
+              "financeMultiorgImports",
+              "privateLinks",
+              "actionsByFlow"
+            ]
+          },
+          "resourceUsage": {
+            "$ref": "#/components/schemas/ResourceUsage"
+          }
+        }
+      },
+      "ResourceDetails": {
+        "type": "array",
+        "title": "ResourceDetails",
+        "description": "JSONArray that holds one usage entry for every resource type governed by the plan.",
+        "items": {
+          "$ref": "#/components/schemas/ResourceDetail"
+        }
+      },
+      "GetResourceDetailsResponse": {
+        "type": "object",
+        "title": "GetResourceDetailsResponse",
+        "description": "Response returned by the Get Resource Details API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "enum": [
+              "success",
+              "failure"
+            ],
+            "x-zenesis-enums-desc": [
+              "Request succeeded",
+              "Request failed"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the operation performed.",
+            "examples": [
+              "Get resource details"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "description": "Container that holds the resource usage list.",
+            "properties": {
+              "resourceDetails": {
+                "$ref": "#/components/schemas/ResourceDetails"
+              }
+            }
+          }
+        }
+      },
+      "Subscription": {
+        "type": "object",
+        "title": "Subscription",
+        "description": "JSONObject that holds the subscription details of the organisation.",
+        "properties": {
+          "planName": {
+            "type": "string",
+            "description": "Name of the active subscription plan, such as Basic, Standard, Premium, Enterprise, or Ultimate.",
+            "examples": [
+              "Premium"
+            ]
+          },
+          "addOns": {
+            "type": "string",
+            "description": "Add-on purchases active on the organisation. Returns an empty string when no add-ons have been purchased.",
+            "examples": [
+              "25 Viewers"
+            ]
+          },
+          "billingDate": {
+            "type": "string",
+            "description": "Next billing or renewal date of the organisation, in human-readable format. Returns `-1` when the organisation is on a trial, is on an internal plan with no billing cycle, or when a billing date does not apply.",
+            "examples": [
+              "22 Jun 2021"
+            ]
+          },
+          "trialStatus": {
+            "type": "boolean",
+            "description": "Denotes whether the organisation is currently on an active trial period.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "trialEndsOn": {
+            "type": "string",
+            "description": "Date and time at which the trial period ends, in the standard Java date format. Returned only when `trialStatus` is true.",
+            "examples": [
+              "Sat Jul 15 23:59:59 IST 2026"
+            ]
+          }
+        }
+      },
+      "GetSubscriptionDetailsResponse": {
+        "type": "object",
+        "title": "GetSubscriptionDetailsResponse",
+        "description": "Response returned by the Get Subscription Details API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "enum": [
+              "success",
+              "failure"
+            ],
+            "x-zenesis-enums-desc": [
+              "Request succeeded",
+              "Request failed"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the operation performed.",
+            "examples": [
+              "Get subscription details"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "description": "Container that holds the subscription details.",
+            "properties": {
+              "subscription": {
+                "$ref": "#/components/schemas/Subscription"
+              }
+            }
+          }
+        }
+      },
+      "GetMetaDetailsConfig": {
+        "type": "object",
+        "title": "GetMetaDetailsConfig",
+        "description": "JSONObject that holds the workspace name, and optionally the view name, to be resolved into IDs.",
+        "required": [
+          "workspaceName"
+        ],
+        "properties": {
+          "workspaceName": {
+            "type": "string",
+            "description": "The exact display name of the workspace to be looked up. The name must match the workspace name as it appears in the Zoho Analytics UI, including case. Maximum length is 50 characters.",
+            "maxLength": 50
+          },
+          "viewName": {
+            "type": "string",
+            "description": "The exact display name of a view within the workspace. When this is sent, the response additionally holds the ID, type, and description of the view. When it is omitted, only the workspace information is returned. Maximum length is 50 characters.",
+            "maxLength": 50
+          }
+        }
+      },
+      "MetaWorkspaceDetails": {
+        "type": "object",
+        "title": "MetaWorkspaceDetails",
+        "description": "JSONObject that holds the resolved workspace details.",
+        "properties": {
+          "workspaceId": {
+            "type": "string",
+            "description": "ID of the workspace. Send this value as `<workspace-id>` in workspace-scoped API URLs.",
+            "examples": [
+              "320862000000625871"
+            ]
+          },
+          "workspaceName": {
+            "type": "string",
+            "description": "Display name of the workspace, echoed from the request.",
+            "examples": [
+              "Sales Analytics"
+            ]
+          },
+          "workspaceDesc": {
+            "type": "string",
+            "description": "Description of the workspace. Returns an empty string when no description is set.",
+            "examples": [
+              ""
+            ]
+          },
+          "orgId": {
+            "type": "string",
+            "description": "ID of the organisation that owns the workspace.",
+            "examples": [
+              "106044221"
+            ]
+          }
+        }
+      },
+      "MetaViewDetails": {
+        "type": "object",
+        "title": "MetaViewDetails",
+        "description": "JSONObject that holds the resolved view details. Returned only when `viewName` is sent in the CONFIG parameter.",
+        "properties": {
+          "viewId": {
+            "type": "string",
+            "description": "ID of the view. Send this value as `<view-id>` in view-scoped API URLs.",
+            "examples": [
+              "38190000004180412"
+            ]
+          },
+          "viewName": {
+            "type": "string",
+            "description": "Display name of the view, echoed from the request.",
+            "examples": [
+              "Revenue Trend"
+            ]
+          },
+          "viewDesc": {
+            "type": "string",
+            "description": "Description of the view. Returns an empty string when no description is set.",
+            "examples": [
+              ""
+            ]
+          },
+          "viewType": {
+            "type": "string",
+            "description": "Type of the view, such as Table, AnalysisView, Pivot, SummaryView, Query Table, or Dashboard.",
+            "examples": [
+              "AnalysisView"
+            ]
+          }
+        }
+      },
+      "GetMetaDetailsResponse": {
+        "type": "object",
+        "title": "GetMetaDetailsResponse",
+        "description": "Response returned by the Get Meta Details From Name API.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API request.",
+            "enum": [
+              "success",
+              "failure"
+            ],
+            "x-zenesis-enums-desc": [
+              "Request succeeded",
+              "Request failed"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of the operation performed.",
+            "examples": [
+              "Get meta details"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "description": "Container that holds the resolved workspace and view details.",
+            "properties": {
+              "workspaces": {
+                "$ref": "#/components/schemas/MetaWorkspaceDetails"
+              },
+              "views": {
+                "$ref": "#/components/schemas/MetaViewDetails"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

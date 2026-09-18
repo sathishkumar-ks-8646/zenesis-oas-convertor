@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zenesis-oas"
+version = "1.0.0"
+description = "Convert Zenesis-flavoured OpenAPI documents into clean OpenAPI 3.x"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = []          # standard library only, by design
+
+[project.scripts]
+zenesis-oas = "zenesis_oas.cli:main"
+
+[tool.setuptools]
+packages = ["zenesis_oas"]

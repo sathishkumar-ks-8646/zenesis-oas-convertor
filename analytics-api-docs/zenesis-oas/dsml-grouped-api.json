@@ -1,0 +1,2882 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Zoho Analytics API",
+    "version": "v2",
+    "description": "API for DSML (Data Science & Machine Learning) in Zoho Analytics — covering AutoML analysis creation, execution, deployments, and what-if analysis."
+  },
+  "servers": [
+    {
+      "url": "https://analyticsapi.zoho.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "AutoML Analysis",
+      "description": "APIs for creating, running, deploying, and managing AutoML analyses and models."
+    }
+  ],
+  "paths": {
+    "/restapi/v2/automl/workspaces/{workspace-id}/analysis": {
+      "post": {
+        "tags": [
+          "AutoML Analysis"
+        ],
+        "x-zenesis-title": "Create AutoML Analysis",
+        "summary": "Create AutoML Analysis",
+        "description": "Creates a new AutoML analysis within the workspace. An analysis is defined by the training table, the target column, the input features and the set of algorithms to be trained. The prediction type chosen determines which algorithms can be configured - regression, classification or clustering.",
+        "operationId": "createAutoMLAnalysis",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.create"
+            ]
+          }
+        ],
+        "x-zenesis-doc": {
+          "show": true,
+          "usecaseTags": {
+            "regression": {
+              "name": "Regression Algorithms",
+              "description": "<p>Applicable when <strong>predictionType</strong> is set to <strong>REGRESSION</strong>.</p>"
+            },
+            "classification": {
+              "name": "Classification Algorithms",
+              "description": "<p>Applicable when <strong>predictionType</strong> is set to <strong>CLASSIFICATION</strong>.</p>"
+            },
+            "clustering": {
+              "name": "Clustering Algorithms",
+              "description": "<p>Applicable when <strong>predictionType</strong> is set to <strong>CLUSTERING</strong>.</p>"
+            }
+          }
+        },
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>The algorithm keys sent inside <b>algorithms</b> must belong to the group that matches the selected <b>predictionType</b>.</li>\n<li>More than one algorithm can be configured in a single request. A model is built for each algorithm that is configured.</li>\n<li><b>targetColumn</b> applies to the <b>REGRESSION</b> and <b>CLASSIFICATION</b> prediction types only.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/CreateAutoMLAnalysisConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "regressionAnalysis": {
+                  "description": "Regression analysis",
+                  "summary": "Creates an analysis that predicts a continuous numeric value, training a Random Forest and a Ridge regression model on the same set of features.",
+                  "x-zenesis-usecase-tag": [
+                    "regression"
+                  ],
+                  "value": {
+                    "CONFIG": {
+                      "name": "Revenue_Forecast",
+                      "description": "Predicts revenue from the regional sales table.",
+                      "trainingTableId": 35130000001055717,
+                      "targetColumn": "Revenue",
+                      "predictionType": "REGRESSION",
+                      "features": [
+                        "Cost",
+                        "Region",
+                        "Product"
+                      ],
+                      "serverOption": 1,
+                      "algorithms": {
+                        "randomForestRegression": {
+                          "minimumSampleSplit": 2,
+                          "maximumDepth": 20,
+                          "numberOfTrees": 25
+                        },
+                        "ridgeRegression": {
+                          "shrinkage": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "classificationAnalysis": {
+                  "description": "Classification analysis",
+                  "summary": "Creates an analysis that predicts a discrete class label, training a Decision Tree and a Random Forest classifier in a single request.",
+                  "x-zenesis-usecase-tag": [
+                    "classification"
+                  ],
+                  "value": {
+                    "CONFIG": {
+                      "name": "Analysis-1",
+                      "trainingTableId": 35130000001055717,
+                      "targetColumn": "Sales",
+                      "predictionType": "CLASSIFICATION",
+                      "features": [
+                        "Cost",
+                        "Region",
+                        "Product"
+                      ],
+                      "serverOption": 1,
+                      "algorithms": {
+                        "decisionTreeClassification": {
+                          "minimumSampleSplit": 2,
+                          "maximumDepth": 2
+                        },
+                        "randomForestClassification": {
+                          "minimumSampleSplit": 2,
+                          "maximumDepth": 2,
+                          "numberOfTrees": 25
+                        }
+                      }
+                    }
+                  }
+                },
+                "clusteringAnalysis": {
+                  "description": "Clustering analysis",
+                  "summary": "Creates an unsupervised analysis that groups similar records, so no targetColumn is sent and the larger 16 GB server option is requested.",
+                  "x-zenesis-usecase-tag": [
+                    "clustering"
+                  ],
+                  "value": {
+                    "CONFIG": {
+                      "name": "Customer_Segments",
+                      "description": "Segments customers by spend and engagement.",
+                      "trainingTableId": 35130000001055717,
+                      "predictionType": "CLUSTERING",
+                      "features": [
+                        "Annual Spend",
+                        "Visits",
+                        "Tenure"
+                      ],
+                      "serverOption": 2,
+                      "algorithms": {
+                        "kMeansPP": {
+                          "clustersCount": 5,
+                          "chIndexBasedOptimalK": false,
+                          "calculatePerformanceMetrics": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "AutoML analysis created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAutoMLAnalysisResponse"
+                },
+                "examples": {
+                  "analysisCreated": {
+                    "description": "Analysis created",
+                    "summary": "The AutoML analysis was created and its unique ID is returned in the data object.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Create autoML analysis",
+                      "data": {
+                        "id": "466206000000178110"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AutoML Analysis"
+        ],
+        "x-zenesis-title": "Get AutoML Analysis In Workspace",
+        "summary": "Get AutoML Analysis In Workspace",
+        "description": "Returns the list of AutoML analyses available in the specified workspace. Use the Get AutoML Analysis Details API with a returned analysis ID to fetch the models trained under it.",
+        "operationId": "getAutoMLAnalysisInWorkspace",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.metadata.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AutoML analyses in the workspace fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAutoMLAnalysisInWorkspaceResponse"
+                },
+                "examples": {
+                  "publishedAndDraft": {
+                    "description": "Published and draft",
+                    "summary": "Two analyses in the same workspace, one already trained and one still a draft, distinguished by the isDraft flag.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get autoML analysis in workspace",
+                      "data": {
+                        "analysis": [
+                          {
+                            "id": "466206000000061115",
+                            "name": "New Analysis-1",
+                            "predictionType": "Classification",
+                            "trainingTable": "Sales",
+                            "trainingTableId": "466206000000061002",
+                            "isDraft": false
+                          },
+                          {
+                            "id": "466206000000073001",
+                            "name": "Sales Analysis",
+                            "predictionType": "Regression",
+                            "trainingTable": "Sales",
+                            "trainingTableId": "466206000000061002",
+                            "isDraft": true
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "noAnalysis": {
+                    "description": "No analyses",
+                    "summary": "The workspace has no AutoML analyses, so an empty array is returned instead of an error.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get autoML analysis in workspace",
+                      "data": {
+                        "analysis": []
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/deployments/{deployment-id}/execute": {
+      "post": {
+        "tags": [
+          "AutoML Analysis"
+        ],
+        "x-zenesis-title": "Run AutoML Analysis",
+        "summary": "Run AutoML Analysis",
+        "description": "Executes an AutoML analysis deployment on demand. The predictions are generated using the model bound to the deployment, and the results are written to the output table that was configured when the deployment was created.",
+        "operationId": "runAutoMLAnalysis",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.create"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/analysis-id"
+          },
+          {
+            "$ref": "#/components/parameters/deployment-id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "AutoML analysis deployment executed successfully. No content is returned."
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}": {
+      "delete": {
+        "tags": [
+          "AutoML Analysis"
+        ],
+        "x-zenesis-title": "Delete AutoML Analysis",
+        "summary": "Delete AutoML Analysis",
+        "description": "Deletes the specified AutoML analysis from the workspace. The analysis ID can be obtained using the Get AutoML Analysis In Workspace API.",
+        "operationId": "deleteAutoMLAnalysis",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.delete"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/analysis-id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "AutoML analysis deleted successfully. No content is returned."
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AutoML Analysis"
+        ],
+        "x-zenesis-title": "Get AutoML Analysis Details",
+        "summary": "Get AutoML Analysis Details",
+        "description": "Retrieves the detailed information of a specific AutoML analysis, including the training table, the target column, the input features and every model trained under the analysis with its score and hyperparameters.",
+        "operationId": "getAutoMLAnalysisDetails",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.metadata.read"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>One model is returned for each algorithm that was configured when the analysis was created.</li>\n<li>The hyperparameter values inside <b>algorithm</b> are returned as strings.</li>\n<li><b>stack</b> is the human-readable form of the <b>serverOption</b> that was sent when the analysis was created.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/analysis-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AutoML analysis details fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAutoMLAnalysisDetailsResponse"
+                },
+                "examples": {
+                  "singleModel": {
+                    "description": "Single model",
+                    "summary": "An analysis created with one algorithm, returning the single trained model along with its score and hyperparameters.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get autoML analysis details",
+                      "data": {
+                        "analysis": {
+                          "id": "466206000000198120",
+                          "name": "Analysis-1",
+                          "predictionType": "Classification",
+                          "trainingTable": "Sales",
+                          "trainingTableId": "466206000000061002",
+                          "targetColumn": "Product",
+                          "features": [
+                            "Region",
+                            "Product Category",
+                            "Sales"
+                          ],
+                          "stack": "8 GB",
+                          "status": "Success",
+                          "models": [
+                            {
+                              "id": "466206000000198124",
+                              "name": "Random Forest Classification",
+                              "scoreParamName": "Classification Accuracy",
+                              "score": "38.95",
+                              "trainingStatus": "Completed",
+                              "lastTrainingTime": "28 Jan 2026 20:31:24",
+                              "algorithm": {
+                                "randomForestClassification": {
+                                  "minimumSampleSplit": "2",
+                                  "maximumDepth": "6",
+                                  "numberOfTrees": "25"
+                                }
+                              },
+                              "isDeployed": false
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "multipleModels": {
+                    "description": "Multiple models",
+                    "summary": "An analysis created with two algorithms, returning one model per algorithm, of which only the better scoring one has been deployed.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get autoML analysis details",
+                      "data": {
+                        "analysis": {
+                          "id": "466206000000198120",
+                          "name": "Analysis-1",
+                          "predictionType": "Classification",
+                          "trainingTable": "Sales",
+                          "trainingTableId": "466206000000061002",
+                          "targetColumn": "Product",
+                          "features": [
+                            "Region",
+                            "Product Category",
+                            "Sales"
+                          ],
+                          "stack": "8 GB",
+                          "status": "Success",
+                          "models": [
+                            {
+                              "id": "466206000000198124",
+                              "name": "Random Forest Classification",
+                              "scoreParamName": "Classification Accuracy",
+                              "score": "38.95",
+                              "trainingStatus": "Completed",
+                              "lastTrainingTime": "28 Jan 2026 20:31:24",
+                              "algorithm": {
+                                "randomForestClassification": {
+                                  "minimumSampleSplit": "2",
+                                  "maximumDepth": "6",
+                                  "numberOfTrees": "25"
+                                }
+                              },
+                              "isDeployed": true
+                            },
+                            {
+                              "id": "466206000000198128",
+                              "name": "Decision Tree Classification",
+                              "scoreParamName": "Classification Accuracy",
+                              "score": "31.40",
+                              "trainingStatus": "Completed",
+                              "lastTrainingTime": "28 Jan 2026 20:31:24",
+                              "algorithm": {
+                                "decisionTreeClassification": {
+                                  "minimumSampleSplit": "2",
+                                  "maximumDepth": "6"
+                                }
+                              },
+                              "isDeployed": false
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/automl/analysis": {
+      "get": {
+        "tags": [
+          "AutoML Analysis"
+        ],
+        "x-zenesis-title": "Get AutoML Analysis In Org",
+        "summary": "Get AutoML Analysis In Org",
+        "description": "Returns all the AutoML analyses available in the organization. Each entry also carries the workspace it belongs to, so the analysis can be looked up in detail using the Get AutoML Analysis Details API.",
+        "operationId": "getAutoMLAnalysisInOrg",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.metadata.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AutoML analyses in the organization fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAutoMLAnalysisInOrgResponse"
+                },
+                "examples": {
+                  "analysisAcrossWorkspaces": {
+                    "description": "Multiple workspaces",
+                    "summary": "Two analyses are returned, each carrying the ID and the name of the workspace it belongs to.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get autoML analysis in organization",
+                      "data": {
+                        "analysis": [
+                          {
+                            "id": "466206000000061115",
+                            "name": "New Analysis-1",
+                            "predictionType": "Classification",
+                            "trainingTable": "Sales",
+                            "trainingTableId": "466206000000061002",
+                            "isDraft": false,
+                            "workspaceId": "466206000000061012",
+                            "workspaceName": "AML Analysis"
+                          },
+                          {
+                            "id": "466206000000073001",
+                            "name": "Sales Analysis",
+                            "predictionType": "Classification",
+                            "trainingTable": "Olympics",
+                            "trainingTableId": "466206000000021004",
+                            "isDraft": false,
+                            "workspaceId": "466206000000081014",
+                            "workspaceName": "Olympic Records"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "noAnalysis": {
+                    "description": "No analyses",
+                    "summary": "The organization has no AutoML analyses, so an empty array is returned instead of an error.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get autoML analysis in organization",
+                      "data": {
+                        "analysis": []
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}": {
+      "delete": {
+        "tags": [
+          "AutoML Analysis"
+        ],
+        "x-zenesis-title": "Delete AutoML Analysis Model",
+        "summary": "Delete AutoML Analysis Model",
+        "description": "Deletes a specific model from an AutoML analysis. The model ID can be obtained using the Get AutoML Analysis Details API.",
+        "operationId": "deleteAutoMLAnalysisModel",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.delete"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/analysis-id"
+          },
+          {
+            "$ref": "#/components/parameters/model-id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "AutoML analysis model deleted successfully. No content is returned."
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/deployments": {
+      "get": {
+        "tags": [
+          "AutoML Analysis"
+        ],
+        "x-zenesis-title": "Get Deployments For A Model",
+        "summary": "Get Deployments For A Model",
+        "description": "Returns the deployment details configured for an AutoML analysis model, including the input and output tables, the schedule status and the time at which the deployment last ran.",
+        "operationId": "getDeploymentsForModel",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.metadata.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/analysis-id"
+          },
+          {
+            "$ref": "#/components/parameters/model-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployment details of the model fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDeploymentsForModelResponse"
+                },
+                "examples": {
+                  "truncateAddDeployment": {
+                    "description": "Truncate-add deployment",
+                    "summary": "A deployment that replaces the contents of the output table on every run, showing the time at which it last ran.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get deployments for a model",
+                      "data": {
+                        "deployments": {
+                          "deploymentId": "466206000000094143",
+                          "analysisId": "466206000000073001",
+                          "inputTable": "Sales",
+                          "inputTableId": "466206000000061002",
+                          "outputTable": "Temp",
+                          "outputTableId": "466206000000094076",
+                          "status": "success",
+                          "lastDeploymentTime": "06 Jan 2026 18:47:22",
+                          "outputColumns": [
+                            "Region",
+                            "Product Category",
+                            "Sales"
+                          ],
+                          "predictionColumn": "Sales_Pred",
+                          "stack": "8 GB",
+                          "importType": "truncateadd"
+                        }
+                      }
+                    }
+                  },
+                  "appendDeployment": {
+                    "description": "Append deployment",
+                    "summary": "A deployment that adds each run's predictions to the output table as new records, running on the larger 16 GB server option.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Get deployments for a model",
+                      "data": {
+                        "deployments": {
+                          "deploymentId": "466206000000094188",
+                          "analysisId": "466206000000073001",
+                          "inputTable": "Sales",
+                          "inputTableId": "466206000000061002",
+                          "outputTable": "SalesDep",
+                          "outputTableId": "466206000000094190",
+                          "status": "success",
+                          "lastDeploymentTime": "07 Jan 2026 09:15:03",
+                          "outputColumns": [
+                            "Region",
+                            "Sales"
+                          ],
+                          "predictionColumn": "Sales_Pred",
+                          "stack": "16 GB",
+                          "importType": "append"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AutoML Analysis"
+        ],
+        "x-zenesis-title": "Create AutoML Analysis Deployment",
+        "summary": "Create AutoML Analysis Deployment",
+        "description": "Creates a deployment for an AutoML analysis model. A deployment binds a trained model to an input table and an output table, and defines the schedule on which predictions are generated and written back.",
+        "operationId": "createAutoMLAnalysisDeployment",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.create"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li><b>matchingColumns</b> is mandatory only when <b>importType</b> is set to <b>UPDATEADD</b>. It is ignored for the other import types.</li>\n<li>The <b>scheduleDetails</b> attributes that apply depend on the value of <b>calendarFrequency</b>.</li>\n<li>Set <b>calendarFrequency</b> to <b>none</b> to create a deployment that is not run on a recurring schedule, and trigger it using the Run AutoML Analysis API.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/analysis-id"
+          },
+          {
+            "$ref": "#/components/parameters/model-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/CreateAutoMLAnalysisDeploymentConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "hourlyAppend": {
+                  "description": "Hourly append",
+                  "summary": "Runs the deployment once every three hours and adds each run's predictions to the output table as new records.",
+                  "value": {
+                    "CONFIG": {
+                      "inputTableId": 35130000001055717,
+                      "outputTable": "SalesDep",
+                      "scheduleDetails": {
+                        "calendarFrequency": "hourly",
+                        "interval": 3
+                      },
+                      "outputColumns": [
+                        "Revenue",
+                        "Region"
+                      ],
+                      "predictionColumn": "predicted",
+                      "serverOption": 1,
+                      "timezone": "Asia/Kolkata",
+                      "importType": "APPEND"
+                    }
+                  }
+                },
+                "weeklyUpdateAdd": {
+                  "description": "Weekly upsert",
+                  "summary": "Runs the deployment every Monday at 06:30 and upserts the predictions, matching the existing records on Region and Product.",
+                  "value": {
+                    "CONFIG": {
+                      "inputTableId": 35130000001055717,
+                      "outputTable": "SalesDep",
+                      "scheduleDetails": {
+                        "calendarFrequency": "weekly",
+                        "weekDay": 2,
+                        "hour": 6,
+                        "minute": 30
+                      },
+                      "outputColumns": [
+                        "Revenue",
+                        "Region",
+                        "Product"
+                      ],
+                      "predictionColumn": "predicted",
+                      "serverOption": 2,
+                      "timezone": "Asia/Kolkata",
+                      "importType": "UPDATEADD",
+                      "matchingColumns": [
+                        "Region",
+                        "Product"
+                      ]
+                    }
+                  }
+                },
+                "onDemandTruncateAdd": {
+                  "description": "On-demand refresh",
+                  "summary": "Creates a deployment with no recurring schedule that is triggered using the Run AutoML Analysis API, replacing the output table contents on every run.",
+                  "value": {
+                    "CONFIG": {
+                      "inputTableId": 35130000001055717,
+                      "outputTable": "SalesDep",
+                      "scheduleDetails": {
+                        "calendarFrequency": "none"
+                      },
+                      "outputColumns": [
+                        "Revenue",
+                        "Region"
+                      ],
+                      "predictionColumn": "predicted",
+                      "serverOption": 1,
+                      "importType": "TRUNCATEADD"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "AutoML analysis deployment created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAutoMLAnalysisDeploymentResponse"
+                },
+                "examples": {
+                  "scheduledDeployment": {
+                    "description": "Scheduled deployment",
+                    "summary": "The deployment was created against an existing output table, and the IDs of both the output table and the deployment are returned.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Create autoML analysis deployment",
+                      "data": {
+                        "deployments": {
+                          "outputTableId": "466206000000198129",
+                          "deploymentId": "466206000000198176"
+                        }
+                      }
+                    }
+                  },
+                  "onDemandDeployment": {
+                    "description": "On-demand deployment",
+                    "summary": "The deployment was created without a recurring schedule; use the returned deploymentId with the Run AutoML Analysis API to execute it.",
+                    "value": {
+                      "status": "success",
+                      "summary": "Create autoML analysis deployment",
+                      "data": {
+                        "deployments": {
+                          "outputTableId": "466206000000198320",
+                          "deploymentId": "466206000000198344"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/deployments/{deployment-id}": {
+      "delete": {
+        "tags": [
+          "AutoML Analysis"
+        ],
+        "x-zenesis-title": "Delete AutoML Analysis Model Deployment",
+        "summary": "Delete AutoML Analysis Model Deployment",
+        "description": "Deletes an AutoML analysis deployment. The deployment stops running on its schedule, and the output table it was writing to is retained. The deployment ID can be obtained using the Get Deployments For A Model API.",
+        "operationId": "deleteAutoMLAnalysisModelDeployment",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.delete"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/analysis-id"
+          },
+          {
+            "$ref": "#/components/parameters/deployment-id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "AutoML analysis deployment deleted successfully. No content is returned."
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    },
+    "/restapi/v2/automl/workspaces/{workspace-id}/analysis/{analysis-id}/models/{model-id}/whatif": {
+      "post": {
+        "tags": [
+          "AutoML Analysis"
+        ],
+        "x-zenesis-title": "AutoML What If Analysis",
+        "summary": "AutoML What If Analysis",
+        "description": "Generates a prediction using a trained AutoML model. A hypothetical value is supplied for each feature that the model was trained on, and the model returns the value it predicts for the target column.",
+        "operationId": "autoMLWhatIfAnalysis",
+        "security": [
+          {
+            "iam-oauth2-schema": [
+              "ZohoAnalytics.modeling.create"
+            ]
+          }
+        ],
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul>\n<li>Each key inside <b>features</b> must be the name of a feature column used when the model was trained.</li>\n<li>The prediction is generated in memory and is not written to any table.</li>\n</ul>\n</span></blockquote>"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/org-id"
+          },
+          {
+            "$ref": "#/components/parameters/workspace-id"
+          },
+          {
+            "$ref": "#/components/parameters/analysis-id"
+          },
+          {
+            "$ref": "#/components/parameters/model-id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "CONFIG"
+                ],
+                "properties": {
+                  "CONFIG": {
+                    "$ref": "#/components/schemas/AutoMLWhatIfAnalysisConfig"
+                  }
+                }
+              },
+              "encoding": {
+                "CONFIG": {
+                  "contentType": "application/json"
+                }
+              },
+              "examples": {
+                "regressionInputs": {
+                  "description": "Regression inputs",
+                  "summary": "Supplies one hypothetical value per feature to a regression model, which returns a continuous numeric prediction.",
+                  "value": {
+                    "CONFIG": {
+                      "features": {
+                        "Region": "East",
+                        "Quarter": "Q2",
+                        "Cost": "450"
+                      }
+                    }
+                  }
+                },
+                "classificationInputs": {
+                  "description": "Classification inputs",
+                  "summary": "Supplies one hypothetical value per feature to a classification model, which returns the predicted class label.",
+                  "value": {
+                    "CONFIG": {
+                      "features": {
+                        "Sales": "1000",
+                        "Region": "East",
+                        "Product Category": "Stationery"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "What-If analysis completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutoMLWhatIfAnalysisResponse"
+                },
+                "examples": {
+                  "numericPrediction": {
+                    "description": "Numeric prediction",
+                    "summary": "Returned by a regression model, where the predicted value is a continuous number for the target column.",
+                    "value": {
+                      "status": "success",
+                      "summary": "AutoML what if analysis",
+                      "data": {
+                        "predictions": "1000",
+                        "targetColumn": "Sales"
+                      }
+                    }
+                  },
+                  "classPrediction": {
+                    "description": "Class prediction",
+                    "summary": "Returned by a classification model, where the predicted value is one of the class labels seen in the target column.",
+                    "value": {
+                      "status": "success",
+                      "summary": "AutoML what if analysis",
+                      "data": {
+                        "predictions": "Stationery",
+                        "targetColumn": "Product Category"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+                    "4XX": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/CommonErrorResponse"
+          },
+          "500": {
+            "$ref": "https://raw.githubusercontent.com/sathish-dev-git/Temp/refs/heads/master/zoho-analytics-api-common.json#/components/responses/UnexpectedErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "analysis-id": {
+        "name": "analysis-id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of the AutoML analysis."
+      },
+      "deployment-id": {
+        "name": "deployment-id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of the AutoML analysis deployment."
+      },
+      "model-id": {
+        "name": "model-id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of the AutoML analysis model."
+      },
+      "org-id": {
+        "name": "ZANALYTICS-ORGID",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Organization ID (can be obtained using Get Organizations API)."
+      },
+      "workspace-id": {
+        "name": "workspace-id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of the workspace."
+      }
+    },
+    "securitySchemes": {
+      "iam-oauth2-schema": {
+        "type": "oauth2",
+        "description": "Authentication is based on OAuth2 flow",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://accounts.zoho.com/oauth/v2/auth",
+            "tokenUrl": "https://accounts.zoho.com/oauth/v2/token",
+            "scopes": {
+              "ZohoAnalytics.modeling.create": "Create AutoML analysis and deployments",
+              "ZohoAnalytics.modeling.delete": "Delete AutoML analysis, models, and deployments",
+              "ZohoAnalytics.metadata.read": "Read AutoML analysis details and deployments"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "AutoMLWhatIfAnalysisConfig": {
+        "type": "object",
+        "title": "AutoMLWhatIfAnalysisConfig",
+        "description": "JSONObject holding the hypothetical feature values for which the prediction has to be generated.",
+        "properties": {
+          "features": {
+            "$ref": "#/components/schemas/WhatIfFeatures"
+          }
+        },
+        "required": [
+          "features"
+        ]
+      },
+      "WhatIfFeatures": {
+        "type": "object",
+        "title": "WhatIfFeatures",
+        "description": "JSONObject with the feature name as key and the hypothetical value to be used for the What-If analysis as value.",
+        "properties": {
+          "<column_name>": {
+            "type": "string",
+            "description": "The hypothetical value to be used for that feature. NOTE: key should be the name of a feature column from the training dataset."
+          }
+        },
+        "examples": [
+          {
+            "Region": "East",
+            "Quarter": "Q2"
+          }
+        ]
+      },
+      "AutoMLWhatIfAnalysisResponse": {
+        "type": "object",
+        "title": "AutoMLWhatIfAnalysisResponse",
+        "description": "Response returned on successfully generating a What-If prediction.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request.",
+            "enum": [
+              "success",
+              "failure"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the action that was performed."
+          },
+          "data": {
+            "$ref": "#/components/schemas/AutoMLWhatIfAnalysisResponseData"
+          }
+        }
+      },
+      "AutoMLWhatIfAnalysisResponseData": {
+        "type": "object",
+        "title": "AutoMLWhatIfAnalysisResponseData",
+        "description": "JSONObject holding the prediction generated for the supplied feature values.",
+        "properties": {
+          "predictions": {
+            "type": "string",
+            "description": "Value predicted by the model for the supplied feature values."
+          },
+          "targetColumn": {
+            "type": "string",
+            "description": "Name of the target column for which the prediction was generated."
+          }
+        },
+        "examples": [
+          {
+            "predictions": "1000",
+            "targetColumn": "Sales"
+          }
+        ]
+      },
+      "CreateAutoMLAnalysisConfig": {
+        "type": "object",
+        "title": "CreateAutoMLAnalysisConfig",
+        "description": "JSONObject holding the configuration of the AutoML analysis to be created.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the analysis template. The maximum length is 60 characters.",
+            "maxLength": 60
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the analysis template. The maximum length is 1000 characters.",
+            "maxLength": 1000
+          },
+          "trainingTableId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unique ID of the training table that will be used to build the analysis model."
+          },
+          "targetColumn": {
+            "type": "string",
+            "description": "Name of the target column from the training table that the model will predict.\n\n> **Note:** A target column applies to the **REGRESSION** and **CLASSIFICATION** prediction types. It is not used by **CLUSTERING**, which is unsupervised."
+          },
+          "predictionType": {
+            "type": "string",
+            "description": "Type of prediction to be performed by the model. This value also determines which algorithm keys are valid inside `algorithms`.\n\n- **REGRESSION** - Predicts a continuous numeric value.\n- **CLASSIFICATION** - Predicts a discrete class label.\n- **CLUSTERING** - Groups similar records into clusters.",
+            "enum": [
+              "REGRESSION",
+              "CLASSIFICATION",
+              "CLUSTERING"
+            ]
+          },
+          "features": {
+            "$ref": "#/components/schemas/AutoMLFeatures"
+          },
+          "serverOption": {
+            "type": "integer",
+            "description": "Specifies the server option or environment in which the analysis will be executed.",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "x-zenesis-enums-desc": [
+              "8 GB",
+              "16 GB",
+              "32 GB"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "trainingTableId",
+          "predictionType",
+          "features",
+          "serverOption",
+          "algorithms"
+        ],
+        "oneOf": [
+          {
+            "title": "Regression Algorithms",
+            "x-zenesis-usecase-tag": "regression",
+            "type": "object",
+            "description": "Applicable when predictionType is REGRESSION.",
+            "properties": {
+              "algorithms": {
+                "$ref": "#/components/schemas/RegressionAlgorithms"
+              }
+            }
+          },
+          {
+            "title": "Classification Algorithms",
+            "x-zenesis-usecase-tag": "classification",
+            "type": "object",
+            "description": "Applicable when predictionType is CLASSIFICATION.",
+            "properties": {
+              "algorithms": {
+                "$ref": "#/components/schemas/ClassificationAlgorithms"
+              }
+            }
+          },
+          {
+            "title": "Clustering Algorithms",
+            "x-zenesis-usecase-tag": "clustering",
+            "type": "object",
+            "description": "Applicable when predictionType is CLUSTERING.",
+            "properties": {
+              "algorithms": {
+                "$ref": "#/components/schemas/ClusteringAlgorithms"
+              }
+            }
+          }
+        ]
+      },
+      "AutoMLFeatures": {
+        "type": "array",
+        "title": "AutoMLFeatures",
+        "description": "JSONArray listing the column names from the training table that will be used as input features for training the model. A minimum of 1 and a maximum of 100 features can be sent.",
+        "items": {
+          "type": "string",
+          "description": "Name of a column in the training table to be used as an input feature."
+        },
+        "minItems": 1,
+        "maxItems": 100,
+        "examples": [
+          [
+            "Region",
+            "Product Category",
+            "Sales"
+          ]
+        ]
+      },
+      "RegressionAlgorithms": {
+        "type": "object",
+        "title": "RegressionAlgorithms",
+        "description": "JSONObject holding the configuration of the regression algorithms to be used for training the model. At least one algorithm has to be configured. More than one algorithm can be sent in a single request, and a model is built for each algorithm that is configured.",
+        "properties": {
+          "decisionTreeRegression": {
+            "$ref": "#/components/schemas/DecisionTreeRegressionConfig"
+          },
+          "randomForestRegression": {
+            "$ref": "#/components/schemas/RandomForestRegressionConfig"
+          },
+          "olsRegression": {
+            "$ref": "#/components/schemas/OLSRegressionConfig"
+          },
+          "lassoRegression": {
+            "$ref": "#/components/schemas/LassoRegressionConfig"
+          },
+          "ridgeRegression": {
+            "$ref": "#/components/schemas/RidgeRegressionConfig"
+          },
+          "svmRegressor": {
+            "$ref": "#/components/schemas/SVMRegressorConfig"
+          },
+          "gradientBoostingRegression": {
+            "$ref": "#/components/schemas/GradientBoostingRegressionConfig"
+          }
+        },
+        "examples": [
+          {
+            "randomForestRegression": {
+              "minimumSampleSplit": 2,
+              "maximumDepth": 20,
+              "numberOfTrees": 25
+            },
+            "ridgeRegression": {
+              "shrinkage": 1
+            }
+          }
+        ]
+      },
+      "ClassificationAlgorithms": {
+        "type": "object",
+        "title": "ClassificationAlgorithms",
+        "description": "JSONObject holding the configuration of the classification algorithms to be used for training the model. At least one algorithm has to be configured. More than one algorithm can be sent in a single request, and a model is built for each algorithm that is configured.",
+        "properties": {
+          "gradientBoostingClassification": {
+            "$ref": "#/components/schemas/GradientBoostingClassificationConfig"
+          },
+          "adaptiveBoost": {
+            "$ref": "#/components/schemas/AdaptiveBoostConfig"
+          },
+          "decisionTreeClassification": {
+            "$ref": "#/components/schemas/DecisionTreeClassificationConfig"
+          },
+          "randomForestClassification": {
+            "$ref": "#/components/schemas/RandomForestClassificationConfig"
+          },
+          "logisticRegression": {
+            "$ref": "#/components/schemas/LogisticRegressionConfig"
+          },
+          "linearDiscriminantAnalysis": {
+            "$ref": "#/components/schemas/LinearDiscriminantAnalysisConfig"
+          },
+          "maxEntropy": {
+            "$ref": "#/components/schemas/MaxEntropyConfig"
+          }
+        },
+        "examples": [
+          {
+            "decisionTreeClassification": {
+              "minimumSampleSplit": 2,
+              "maximumDepth": 20
+            },
+            "randomForestClassification": {
+              "minimumSampleSplit": 2,
+              "maximumDepth": 20,
+              "numberOfTrees": 25
+            }
+          }
+        ]
+      },
+      "ClusteringAlgorithms": {
+        "type": "object",
+        "title": "ClusteringAlgorithms",
+        "description": "JSONObject holding the configuration of the clustering algorithms to be used for training the model. At least one algorithm has to be configured. More than one algorithm can be sent in a single request, and a model is built for each algorithm that is configured.",
+        "properties": {
+          "kMeansPP": {
+            "$ref": "#/components/schemas/KMeansPPConfig"
+          },
+          "kModes": {
+            "$ref": "#/components/schemas/KModesConfig"
+          },
+          "kPrototypes": {
+            "$ref": "#/components/schemas/KPrototypesConfig"
+          },
+          "xMeans": {
+            "$ref": "#/components/schemas/XMeansConfig"
+          },
+          "gMeans": {
+            "$ref": "#/components/schemas/GMeansConfig"
+          }
+        },
+        "examples": [
+          {
+            "kMeansPP": {
+              "clustersCount": 5,
+              "chIndexBasedOptimalK": false,
+              "calculatePerformanceMetrics": true
+            }
+          }
+        ]
+      },
+      "DecisionTreeRegressionConfig": {
+        "type": "object",
+        "title": "DecisionTreeRegressionConfig",
+        "description": "JSONObject holding the configuration for a Decision Tree regression model.",
+        "properties": {
+          "minimumSampleSplit": {
+            "type": "integer",
+            "description": "The minimum number of data points required to split a node. Higher values make the tree simpler and help avoid overfitting."
+          },
+          "maximumDepth": {
+            "type": "integer",
+            "description": "Maximum depth of the tree. Smaller values prevent the model from becoming too complex and overfitting the data."
+          }
+        },
+        "examples": [
+          {
+            "minimumSampleSplit": 2,
+            "maximumDepth": 20
+          }
+        ]
+      },
+      "RandomForestRegressionConfig": {
+        "type": "object",
+        "title": "RandomForestRegressionConfig",
+        "description": "JSONObject holding the configuration for a Random Forest regression model.",
+        "properties": {
+          "minimumSampleSplit": {
+            "type": "integer",
+            "description": "The minimum number of data points needed to split a node in each tree. Larger values make the trees more conservative and reduce overfitting."
+          },
+          "maximumDepth": {
+            "type": "integer",
+            "description": "Maximum depth of the tree. Limiting the depth keeps the trees simpler and improves generalization."
+          },
+          "numberOfTrees": {
+            "type": "integer",
+            "description": "The number of decision trees built in the forest. More trees usually improve accuracy but increase training time."
+          }
+        },
+        "examples": [
+          {
+            "minimumSampleSplit": 2,
+            "maximumDepth": 20,
+            "numberOfTrees": 25
+          }
+        ]
+      },
+      "OLSRegressionConfig": {
+        "type": "object",
+        "title": "OLSRegressionConfig",
+        "description": "JSONObject holding the configuration for an Ordinary Least Squares regression model.",
+        "properties": {
+          "intercept": {
+            "type": "boolean",
+            "description": "Controls whether the model learns a constant term (bias). When true, the regression line does not have to pass through the origin. When false, the line is forced through zero.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "allowAlternateModel": {
+            "type": "boolean",
+            "description": "Controls whether the system may switch to a numerically stable alternative when standard OLS fails due to multicollinearity or singular matrices.",
+            "enum": [
+              true,
+              false
+            ]
+          }
+        },
+        "examples": [
+          {
+            "intercept": true,
+            "allowAlternateModel": true
+          }
+        ]
+      },
+      "LassoRegressionConfig": {
+        "type": "object",
+        "title": "LassoRegressionConfig",
+        "description": "JSONObject holding the configuration for a Lasso regression model.",
+        "properties": {
+          "tolerance": {
+            "type": "number",
+            "description": "Sets how small the improvement must be before training stops. Smaller values make the model train longer but more precisely."
+          },
+          "shrinkage": {
+            "type": "integer",
+            "description": "Controls how strongly the coefficients are pushed toward zero. Higher values increase feature selection but can reduce model flexibility."
+          },
+          "maximumIterations": {
+            "type": "integer",
+            "description": "The maximum number of training steps allowed. Higher values help the model converge when the data is complex."
+          }
+        },
+        "examples": [
+          {
+            "tolerance": 0.001,
+            "shrinkage": 1,
+            "maximumIterations": 1000
+          }
+        ]
+      },
+      "RidgeRegressionConfig": {
+        "type": "object",
+        "title": "RidgeRegressionConfig",
+        "description": "JSONObject holding the configuration for a Ridge regression model.",
+        "properties": {
+          "shrinkage": {
+            "type": "integer",
+            "description": "Controls how strongly the coefficients are pushed toward zero. Higher values increase feature selection but can reduce model flexibility."
+          }
+        },
+        "examples": [
+          {
+            "shrinkage": 1
+          }
+        ]
+      },
+      "SVMRegressorConfig": {
+        "type": "object",
+        "title": "SVMRegressorConfig",
+        "description": "JSONObject holding the configuration for a Support Vector Machine regression model.",
+        "properties": {
+          "epsilon": {
+            "type": "number",
+            "description": "Defines a no-penalty zone in which small prediction errors are ignored, helping the model focus on the larger mistakes."
+          },
+          "softMargin": {
+            "type": "number",
+            "description": "Controls how strictly the model fits the data. Higher values force a closer fit, while lower values allow more flexibility to generalize better."
+          },
+          "tolerance": {
+            "type": "number",
+            "description": "Sets how small the change must be before training stops, balancing training time and precision."
+          },
+          "epochs": {
+            "type": "integer",
+            "description": "The number of times the model goes through the training data. More epochs can improve learning but may increase training time."
+          }
+        },
+        "examples": [
+          {
+            "epsilon": 0.1,
+            "softMargin": 1.0,
+            "tolerance": 0.001,
+            "epochs": 100
+          }
+        ]
+      },
+      "GradientBoostingRegressionConfig": {
+        "type": "object",
+        "title": "GradientBoostingRegressionConfig",
+        "description": "JSONObject holding the configuration for a Gradient Boosting regression model.",
+        "properties": {
+          "lossFunction": {
+            "type": "string",
+            "description": "Defines what kind of error the model tries to minimize.",
+            "enum": [
+              "LEASTSQUARES",
+              "QUANTILE",
+              "LEASTABSOLUTEDEVIATION",
+              "HUBER"
+            ]
+          },
+          "maximumDepth": {
+            "type": "integer",
+            "description": "Depth of the tree. Smaller depths keep the trees simple and reduce overfitting."
+          },
+          "maximumNodes": {
+            "type": "integer",
+            "description": "Sets the maximum number of leaf nodes in a tree, controlling how complex each tree can become."
+          },
+          "nodeSize": {
+            "type": "integer",
+            "description": "The minimum number of data points required in a leaf node. Larger values make the model smoother and less sensitive to noise."
+          },
+          "numberOfTrees": {
+            "type": "integer",
+            "description": "The total number of trees added to the model. More trees usually improve accuracy but increase training time."
+          },
+          "shrinkage": {
+            "type": "number",
+            "description": "Controls the learning rate, deciding how much each tree contributes to the final prediction. Smaller values learn more slowly but more reliably."
+          },
+          "subSample": {
+            "type": "number",
+            "description": "The fraction of the data used to train each tree. Smaller values add randomness and help reduce overfitting."
+          }
+        },
+        "examples": [
+          {
+            "lossFunction": "LEASTSQUARES",
+            "maximumDepth": 5,
+            "maximumNodes": 32,
+            "nodeSize": 5,
+            "numberOfTrees": 100,
+            "shrinkage": 0.1,
+            "subSample": 0.8
+          }
+        ]
+      },
+      "GradientBoostingClassificationConfig": {
+        "type": "object",
+        "title": "GradientBoostingClassificationConfig",
+        "description": "JSONObject holding the configuration for a Gradient Boosting classification model.",
+        "properties": {
+          "lossFunction": {
+            "type": "string",
+            "description": "Defines what kind of error the model tries to minimize.",
+            "enum": [
+              "LEASTSQUARES",
+              "QUANTILE",
+              "LEASTABSOLUTEDEVIATION",
+              "HUBER"
+            ]
+          },
+          "maximumDepth": {
+            "type": "integer",
+            "description": "Depth of the tree. Smaller depths keep the trees simple and reduce overfitting."
+          },
+          "maximumNodes": {
+            "type": "integer",
+            "description": "Sets the maximum number of leaf nodes in a tree, controlling how complex each tree can become."
+          },
+          "nodeSize": {
+            "type": "integer",
+            "description": "The minimum number of data points required in a leaf node. Larger values make the model smoother and less sensitive to noise."
+          },
+          "numberOfTrees": {
+            "type": "integer",
+            "description": "The total number of trees added to the model. More trees usually improve accuracy but increase training time."
+          },
+          "shrinkage": {
+            "type": "number",
+            "description": "Controls the learning rate, deciding how much each tree contributes to the final prediction. Smaller values learn more slowly but more reliably."
+          },
+          "subSample": {
+            "type": "number",
+            "description": "The fraction of the data used to train each tree. Smaller values add randomness and help reduce overfitting."
+          }
+        },
+        "examples": [
+          {
+            "lossFunction": "LEASTSQUARES",
+            "maximumDepth": 5,
+            "maximumNodes": 32,
+            "nodeSize": 5,
+            "numberOfTrees": 100,
+            "shrinkage": 0.1,
+            "subSample": 0.8
+          }
+        ]
+      },
+      "AdaptiveBoostConfig": {
+        "type": "object",
+        "title": "AdaptiveBoostConfig",
+        "description": "JSONObject holding the configuration for an Adaptive Boost (AdaBoost) classification model.",
+        "properties": {
+          "maximumDepth": {
+            "type": "integer",
+            "description": "Depth of the tree. Smaller depths keep the trees simple and reduce overfitting."
+          },
+          "maximumNodes": {
+            "type": "integer",
+            "description": "Sets the maximum number of leaf nodes in a tree, controlling how complex each tree can become."
+          },
+          "nodeSize": {
+            "type": "integer",
+            "description": "The minimum number of data points required in a leaf node. Larger values make the model smoother and less sensitive to noise."
+          },
+          "numberOfTrees": {
+            "type": "integer",
+            "description": "The total number of trees added to the model. More trees usually improve accuracy but increase training time."
+          }
+        },
+        "examples": [
+          {
+            "maximumDepth": 5,
+            "maximumNodes": 32,
+            "nodeSize": 5,
+            "numberOfTrees": 100
+          }
+        ]
+      },
+      "DecisionTreeClassificationConfig": {
+        "type": "object",
+        "title": "DecisionTreeClassificationConfig",
+        "description": "JSONObject holding the configuration for a Decision Tree classification model.",
+        "properties": {
+          "minimumSampleSplit": {
+            "type": "integer",
+            "description": "The minimum number of data points required to split a node. Higher values make the tree simpler and help avoid overfitting."
+          },
+          "maximumDepth": {
+            "type": "integer",
+            "description": "Maximum depth of the tree. Smaller values prevent the model from becoming too complex and overfitting the data."
+          }
+        },
+        "examples": [
+          {
+            "minimumSampleSplit": 2,
+            "maximumDepth": 20
+          }
+        ]
+      },
+      "RandomForestClassificationConfig": {
+        "type": "object",
+        "title": "RandomForestClassificationConfig",
+        "description": "JSONObject holding the configuration for a Random Forest classification model.",
+        "properties": {
+          "minimumSampleSplit": {
+            "type": "integer",
+            "description": "The minimum number of data points needed to split a node in each tree. Larger values make the trees more conservative and reduce overfitting."
+          },
+          "maximumDepth": {
+            "type": "integer",
+            "description": "Maximum depth of the tree. Limiting the depth keeps the trees simpler and improves generalization."
+          },
+          "numberOfTrees": {
+            "type": "integer",
+            "description": "The number of decision trees built in the forest. More trees usually improve accuracy but increase training time."
+          }
+        },
+        "examples": [
+          {
+            "minimumSampleSplit": 2,
+            "maximumDepth": 20,
+            "numberOfTrees": 25
+          }
+        ]
+      },
+      "LogisticRegressionConfig": {
+        "type": "object",
+        "title": "LogisticRegressionConfig",
+        "description": "JSONObject holding the configuration for a Logistic Regression classification model.",
+        "properties": {
+          "lambda": {
+            "type": "number",
+            "description": "Controls the strength of the regularization, helping prevent overfitting by penalizing very large coefficient values."
+          },
+          "maximumIterations": {
+            "type": "integer",
+            "description": "The maximum number of training steps the model can take to find the best parameters."
+          },
+          "tolerance": {
+            "type": "number",
+            "description": "Sets how small the improvement must be before training stops, balancing accuracy and training time."
+          }
+        },
+        "examples": [
+          {
+            "lambda": 0.1,
+            "maximumIterations": 500,
+            "tolerance": 0.001
+          }
+        ]
+      },
+      "LinearDiscriminantAnalysisConfig": {
+        "type": "object",
+        "title": "LinearDiscriminantAnalysisConfig",
+        "description": "JSONObject holding the configuration for a Linear Discriminant Analysis classification model.",
+        "properties": {
+          "tolerance": {
+            "type": "number",
+            "description": "Sets how small the improvement must be before training stops, balancing accuracy and training time."
+          }
+        },
+        "examples": [
+          {
+            "tolerance": 0.001
+          }
+        ]
+      },
+      "MaxEntropyConfig": {
+        "type": "object",
+        "title": "MaxEntropyConfig",
+        "description": "JSONObject holding the configuration for a Max Entropy (Multinomial Logistic Regression) classification model.",
+        "properties": {
+          "lambda": {
+            "type": "number",
+            "description": "Controls the strength of the regularization, helping prevent overfitting by penalizing very large coefficient values."
+          },
+          "maximumIterations": {
+            "type": "integer",
+            "description": "The maximum number of training steps the model can take to find the best parameters."
+          },
+          "tolerance": {
+            "type": "number",
+            "description": "Sets how small the improvement must be before training stops, balancing accuracy and training time."
+          }
+        },
+        "examples": [
+          {
+            "lambda": 0.1,
+            "maximumIterations": 500,
+            "tolerance": 0.001
+          }
+        ]
+      },
+      "KMeansPPConfig": {
+        "type": "object",
+        "title": "KMeansPPConfig",
+        "description": "JSONObject holding the configuration for a K-Means++ clustering model.",
+        "properties": {
+          "clustersCount": {
+            "type": "integer",
+            "description": "The number of clusters the algorithm will form when a fixed value of k is provided."
+          },
+          "kMax": {
+            "type": "integer",
+            "description": "The maximum number of clusters to try when the algorithm is allowed to search for an optimal k."
+          },
+          "chIndexBasedOptimalK": {
+            "type": "boolean",
+            "description": "Controls whether the model automatically selects the best number of clusters using the Calinski-Harabasz index.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "calculatePerformanceMetrics": {
+            "type": "boolean",
+            "description": "Controls whether the clustering quality metrics are computed after training, which helps evaluate how good the clusters are.",
+            "enum": [
+              true,
+              false
+            ]
+          }
+        },
+        "examples": [
+          {
+            "clustersCount": 5,
+            "kMax": 10,
+            "chIndexBasedOptimalK": false,
+            "calculatePerformanceMetrics": true
+          }
+        ]
+      },
+      "KModesConfig": {
+        "type": "object",
+        "title": "KModesConfig",
+        "description": "JSONObject holding the configuration for a K-Modes clustering model, used for categorical data.",
+        "properties": {
+          "clustersCount": {
+            "type": "integer",
+            "description": "The fixed number of clusters the algorithm will create."
+          },
+          "minimumClusterCount": {
+            "type": "integer",
+            "description": "The smallest number of clusters to consider when searching for the best clustering."
+          },
+          "maximumClusterCount": {
+            "type": "integer",
+            "description": "The largest number of clusters to consider when searching for the best clustering."
+          },
+          "dissimilarityMeasure": {
+            "type": "string",
+            "description": "Defines how the difference between categorical data points is calculated - for example, simple matching against frequency-based methods.",
+            "enum": [
+              "BINARY",
+              "GLOBAL_FREQUENCY",
+              "RELATIVE_FREQUENCY",
+              "JARO_WINKLER",
+              "LEVENSHTEIN",
+              "JACCARD"
+            ]
+          }
+        },
+        "examples": [
+          {
+            "clustersCount": 4,
+            "minimumClusterCount": 2,
+            "maximumClusterCount": 8,
+            "dissimilarityMeasure": "BINARY"
+          }
+        ]
+      },
+      "KPrototypesConfig": {
+        "type": "object",
+        "title": "KPrototypesConfig",
+        "description": "JSONObject holding the configuration for a K-Prototypes clustering model, used for mixed numerical and categorical data.",
+        "properties": {
+          "clustersCount": {
+            "type": "integer",
+            "description": "The number of clusters the algorithm will form when a fixed value of k is provided."
+          },
+          "kMax": {
+            "type": "integer",
+            "description": "The maximum number of clusters to try when the algorithm is allowed to search for an optimal k."
+          },
+          "chIndexBasedOptimalK": {
+            "type": "boolean",
+            "description": "Controls whether the model automatically selects the best number of clusters using the Calinski-Harabasz index.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "gamma": {
+            "type": "number",
+            "description": "Controls the balance between the numerical and the categorical features. Higher values give more importance to categorical data when forming the clusters."
+          }
+        },
+        "examples": [
+          {
+            "clustersCount": 5,
+            "kMax": 10,
+            "chIndexBasedOptimalK": false,
+            "gamma": 0.5
+          }
+        ]
+      },
+      "XMeansConfig": {
+        "type": "object",
+        "title": "XMeansConfig",
+        "description": "JSONObject holding the configuration for an X-Means clustering model, an extension of K-Means.",
+        "properties": {
+          "kMax": {
+            "type": "integer",
+            "description": "The maximum number of clusters to try when the algorithm is allowed to search for an optimal k."
+          },
+          "maximumIterations": {
+            "type": "integer",
+            "description": "The maximum number of training steps the model can take to find the best parameters."
+          },
+          "tolerance": {
+            "type": "number",
+            "description": "Sets how small the improvement must be before training stops, balancing accuracy and training time."
+          }
+        },
+        "examples": [
+          {
+            "kMax": 10,
+            "maximumIterations": 100,
+            "tolerance": 0.001
+          }
+        ]
+      },
+      "GMeansConfig": {
+        "type": "object",
+        "title": "GMeansConfig",
+        "description": "JSONObject holding the configuration for a G-Means clustering model, which determines k based on a statistical test.",
+        "properties": {
+          "kMax": {
+            "type": "integer",
+            "description": "The maximum number of clusters to try when the algorithm is allowed to search for an optimal k."
+          },
+          "maximumIterations": {
+            "type": "integer",
+            "description": "The maximum number of training steps the model can take to find the best parameters."
+          },
+          "tolerance": {
+            "type": "number",
+            "description": "Sets how small the improvement must be before training stops, balancing accuracy and training time."
+          }
+        },
+        "examples": [
+          {
+            "kMax": 10,
+            "maximumIterations": 100,
+            "tolerance": 0.001
+          }
+        ]
+      },
+      "CreateAutoMLAnalysisDeploymentConfig": {
+        "type": "object",
+        "title": "CreateAutoMLAnalysisDeploymentConfig",
+        "description": "JSONObject holding the configuration of the AutoML analysis deployment to be created.",
+        "properties": {
+          "inputTableId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unique ID of the input table from which the data will be read for the AutoML analysis deployment."
+          },
+          "outputTable": {
+            "type": "string",
+            "description": "Name of the output table in which the prediction results will be stored."
+          },
+          "scheduleDetails": {
+            "$ref": "#/components/schemas/DeploymentScheduleDetails"
+          },
+          "outputColumns": {
+            "$ref": "#/components/schemas/DeploymentOutputColumns"
+          },
+          "predictionColumn": {
+            "type": "string",
+            "description": "Name of the column in which the predictions will be generated."
+          },
+          "serverOption": {
+            "type": "integer",
+            "description": "Specifies the server memory configuration used to execute the AutoML deployment job.",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "x-zenesis-enums-desc": [
+              "8 GB",
+              "16 GB",
+              "32 GB"
+            ]
+          },
+          "timezone": {
+            "type": "string",
+            "description": "Timezone to be used when scheduling the deployment job.",
+            "examples": [
+              "Asia/Kolkata"
+            ]
+          },
+          "importType": {
+            "type": "string",
+            "description": "Specifies how the prediction results are imported into the output table.\n\n- **APPEND** - Adds the prediction results to the output table as new records.\n- **TRUNCATEADD** - Deletes all the existing rows in the output table and then adds the prediction results.\n- **UPDATEADD** - Updates the records whose `matchingColumns` values match, and adds the remaining results as new records.",
+            "enum": [
+              "APPEND",
+              "TRUNCATEADD",
+              "UPDATEADD"
+            ]
+          },
+          "matchingColumns": {
+            "$ref": "#/components/schemas/DeploymentMatchingColumns"
+          }
+        },
+        "required": [
+          "inputTableId",
+          "outputTable",
+          "scheduleDetails",
+          "outputColumns",
+          "predictionColumn",
+          "serverOption",
+          "importType"
+        ]
+      },
+      "DeploymentScheduleDetails": {
+        "type": "object",
+        "title": "DeploymentScheduleDetails",
+        "description": "JSONObject holding the scheduling configuration used to run the AutoML analysis deployment. The attributes that apply depend on the value of `calendarFrequency`.",
+        "properties": {
+          "calendarFrequency": {
+            "type": "string",
+            "description": "Defines the frequency at which the deployment job should run. Set this to `none` to create a deployment that is not run on a recurring schedule, and trigger it on demand using the Run AutoML Analysis API.",
+            "enum": [
+              "none",
+              "hourly",
+              "daily",
+              "weekly",
+              "monthly"
+            ]
+          },
+          "interval": {
+            "type": "integer",
+            "description": "Specifies the interval for the schedule, based on `calendarFrequency`. For example, when `calendarFrequency` is hourly, an interval of 3 runs the deployment once every 3 hours."
+          },
+          "hour": {
+            "type": "integer",
+            "description": "Specifies the hour of the day, from 0 to 23, at which the deployment job should be triggered.",
+            "minimum": 0,
+            "maximum": 23
+          },
+          "hourInterval": {
+            "type": "integer",
+            "description": "Specifies the hour interval between executions, where applicable."
+          },
+          "minute": {
+            "type": "integer",
+            "description": "Specifies the minute within the hour, from 0 to 59, at which the deployment job should be triggered.",
+            "minimum": 0,
+            "maximum": 59
+          },
+          "weekDay": {
+            "type": "integer",
+            "description": "Specifies the day of the week on which the deployment job should be triggered.",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "x-zenesis-enums-desc": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ]
+          },
+          "monthDay": {
+            "type": "integer",
+            "description": "Specifies the day of the month on which the deployment job should be triggered. Allowed values are 1 to 31, and 99 to indicate the last day of the month.",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              99
+            ]
+          }
+        },
+        "required": [
+          "calendarFrequency"
+        ],
+        "examples": [
+          {
+            "calendarFrequency": "hourly",
+            "interval": 3
+          }
+        ]
+      },
+      "DeploymentOutputColumns": {
+        "type": "array",
+        "title": "DeploymentOutputColumns",
+        "description": "JSONArray listing the column names that will be written to the output table as part of the prediction results. A minimum of 1 and a maximum of 100 columns can be sent.",
+        "items": {
+          "type": "string",
+          "description": "Name of a column to be written to the output table."
+        },
+        "minItems": 1,
+        "maxItems": 100,
+        "examples": [
+          [
+            "Revenue",
+            "Region"
+          ]
+        ]
+      },
+      "DeploymentMatchingColumns": {
+        "type": "array",
+        "title": "DeploymentMatchingColumns",
+        "description": "JSONArray listing the column names used to match the existing records in the output table. This attribute is mandatory only when `importType` is UPDATEADD, and is ignored for the other import types.",
+        "items": {
+          "type": "string",
+          "description": "Name of a column used to match an existing record in the output table."
+        },
+        "examples": [
+          [
+            "Region",
+            "Product"
+          ]
+        ]
+      },
+      "CreateAutoMLAnalysisDeploymentResponse": {
+        "type": "object",
+        "title": "CreateAutoMLAnalysisDeploymentResponse",
+        "description": "Response returned on successfully creating an AutoML analysis deployment.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request.",
+            "enum": [
+              "success",
+              "failure"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the action that was performed."
+          },
+          "data": {
+            "$ref": "#/components/schemas/CreateAutoMLAnalysisDeploymentResponseData"
+          }
+        }
+      },
+      "CreateAutoMLAnalysisDeploymentResponseData": {
+        "type": "object",
+        "title": "CreateAutoMLAnalysisDeploymentResponseData",
+        "description": "JSONObject holding the details of the AutoML analysis deployment that was created.",
+        "properties": {
+          "deployments": {
+            "$ref": "#/components/schemas/AutoMLDeploymentDetails"
+          }
+        },
+        "examples": [
+          {
+            "deployments": {
+              "outputTableId": "466206000000198129",
+              "deploymentId": "466206000000198176"
+            }
+          }
+        ]
+      },
+      "AutoMLDeploymentDetails": {
+        "type": "object",
+        "title": "AutoMLDeploymentDetails",
+        "description": "JSONObject holding the details of the deployment that was created.",
+        "properties": {
+          "outputTableId": {
+            "type": "string",
+            "description": "Unique ID of the output table in which the predictions are stored."
+          },
+          "deploymentId": {
+            "type": "string",
+            "description": "Unique ID of the deployment that was created."
+          }
+        },
+        "examples": [
+          {
+            "outputTableId": "466206000000198129",
+            "deploymentId": "466206000000198176"
+          }
+        ]
+      },
+      "CreateAutoMLAnalysisResponse": {
+        "type": "object",
+        "title": "CreateAutoMLAnalysisResponse",
+        "description": "Response returned on successfully creating an AutoML analysis.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request.",
+            "enum": [
+              "success",
+              "failure"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the action that was performed."
+          },
+          "data": {
+            "$ref": "#/components/schemas/CreateAutoMLAnalysisResponseData"
+          }
+        }
+      },
+      "CreateAutoMLAnalysisResponseData": {
+        "type": "object",
+        "title": "CreateAutoMLAnalysisResponseData",
+        "description": "JSONObject holding the details of the AutoML analysis that was created.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the AutoML analysis that was created."
+          }
+        },
+        "examples": [
+          {
+            "id": "466206000000178110"
+          }
+        ]
+      },
+      "GetAutoMLAnalysisDetailsResponse": {
+        "type": "object",
+        "title": "GetAutoMLAnalysisDetailsResponse",
+        "description": "Response returned on successfully fetching the details of an AutoML analysis.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request.",
+            "enum": [
+              "success",
+              "failure"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the action that was performed."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetAutoMLAnalysisDetailsResponseData"
+          }
+        }
+      },
+      "GetAutoMLAnalysisDetailsResponseData": {
+        "type": "object",
+        "title": "GetAutoMLAnalysisDetailsResponseData",
+        "description": "JSONObject holding the details of the requested AutoML analysis.",
+        "properties": {
+          "analysis": {
+            "$ref": "#/components/schemas/AutoMLAnalysisDetails"
+          }
+        }
+      },
+      "AutoMLAnalysisDetails": {
+        "type": "object",
+        "title": "AutoMLAnalysisDetails",
+        "description": "JSONObject holding the full details of the AutoML analysis, including every model trained under it.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the AutoML analysis."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the AutoML analysis."
+          },
+          "predictionType": {
+            "type": "string",
+            "description": "Type of prediction the analysis performs. NOTE: the response returns this value in title case, whereas the Create AutoML Analysis API expects it in upper case.",
+            "enum": [
+              "Regression",
+              "Classification",
+              "Clustering"
+            ]
+          },
+          "trainingTable": {
+            "type": "string",
+            "description": "Name of the training table on which the analysis was built."
+          },
+          "trainingTableId": {
+            "type": "string",
+            "description": "Unique ID of the training table on which the analysis was built."
+          },
+          "targetColumn": {
+            "type": "string",
+            "description": "Name of the target column the analysis predicts."
+          },
+          "features": {
+            "$ref": "#/components/schemas/AutoMLFeatures"
+          },
+          "stack": {
+            "type": "string",
+            "description": "Server memory configuration used, expressed in human-readable form. This corresponds to the `serverOption` value that was sent when the analysis or deployment was created.",
+            "examples": [
+              "8 GB"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status of the analysis. NOTE: this is the status of the analysis itself, and is distinct from the `status` of the API response."
+          },
+          "models": {
+            "$ref": "#/components/schemas/AutoMLModelList"
+          }
+        }
+      },
+      "AutoMLModelList": {
+        "type": "array",
+        "title": "AutoMLModelList",
+        "description": "JSONArray holding the models trained as part of the analysis. One model is present for each algorithm that was configured when the analysis was created.",
+        "items": {
+          "$ref": "#/components/schemas/AutoMLModelDetails"
+        },
+        "examples": [
+          [
+            {
+              "id": "466206000000198124",
+              "name": "Random Forest Classification",
+              "scoreParamName": "Classification Accuracy",
+              "score": "38.95",
+              "trainingStatus": "Completed",
+              "lastTrainingTime": "28 Jan 2026 20:31:24",
+              "isDeployed": false
+            }
+          ]
+        ]
+      },
+      "AutoMLModelDetails": {
+        "type": "object",
+        "title": "AutoMLModelDetails",
+        "description": "JSONObject holding the details of a single model trained as part of the analysis.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the model."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the algorithm the model was trained with."
+          },
+          "scoreParamName": {
+            "type": "string",
+            "description": "Name of the metric used to score the model. The metric depends on the prediction type of the analysis."
+          },
+          "score": {
+            "type": "string",
+            "description": "Value of the scoring metric achieved by the model, returned as a string."
+          },
+          "trainingStatus": {
+            "type": "string",
+            "description": "Current training status of the model."
+          },
+          "lastTrainingTime": {
+            "type": "string",
+            "description": "Time at which the model was last trained. The timestamp is returned in the `dd MMM yyyy HH:mm:ss` format."
+          },
+          "algorithm": {
+            "$ref": "#/components/schemas/ModelAlgorithm"
+          },
+          "isDeployed": {
+            "type": "boolean",
+            "description": "Indicates whether a deployment currently exists for the model.",
+            "enum": [
+              true,
+              false
+            ]
+          }
+        },
+        "examples": [
+          {
+            "id": "466206000000198124",
+            "name": "Random Forest Classification",
+            "scoreParamName": "Classification Accuracy",
+            "score": "38.95",
+            "trainingStatus": "Completed",
+            "lastTrainingTime": "28 Jan 2026 20:31:24",
+            "algorithm": {
+              "randomForestClassification": {
+                "minimumSampleSplit": "2",
+                "maximumDepth": "6",
+                "numberOfTrees": "25"
+              }
+            },
+            "isDeployed": false
+          }
+        ]
+      },
+      "ModelAlgorithm": {
+        "type": "object",
+        "title": "ModelAlgorithm",
+        "description": "JSONObject with the algorithm name as key and the hyperparameter configuration used to train the model as value.",
+        "properties": {
+          "<algorithm_name>": {
+            "$ref": "#/components/schemas/ModelAlgorithmParameters"
+          }
+        },
+        "examples": [
+          {
+            "randomForestClassification": {
+              "minimumSampleSplit": "2",
+              "maximumDepth": "6",
+              "numberOfTrees": "25"
+            }
+          }
+        ]
+      },
+      "ModelAlgorithmParameters": {
+        "type": "object",
+        "title": "ModelAlgorithmParameters",
+        "description": "JSONObject with the hyperparameter name as key and its configured value as value. NOTE: the values are returned as strings, even for the hyperparameters that are documented as Integer or Decimal in the Create AutoML Analysis API.",
+        "properties": {
+          "<parameter_name>": {
+            "type": "string",
+            "description": "The configured value of that hyperparameter. NOTE: key should be a hyperparameter name valid for the algorithm."
+          }
+        },
+        "examples": [
+          {
+            "minimumSampleSplit": "2",
+            "maximumDepth": "6",
+            "numberOfTrees": "25"
+          }
+        ]
+      },
+      "GetAutoMLAnalysisInWorkspaceResponse": {
+        "type": "object",
+        "title": "GetAutoMLAnalysisInWorkspaceResponse",
+        "description": "Response returned on successfully fetching the AutoML analyses in the workspace.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request.",
+            "enum": [
+              "success",
+              "failure"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the action that was performed."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetAutoMLAnalysisInWorkspaceResponseData"
+          }
+        }
+      },
+      "GetAutoMLAnalysisInWorkspaceResponseData": {
+        "type": "object",
+        "title": "GetAutoMLAnalysisInWorkspaceResponseData",
+        "description": "JSONObject holding the AutoML analyses available in the workspace.",
+        "properties": {
+          "analysis": {
+            "$ref": "#/components/schemas/WorkspaceAnalysisList"
+          }
+        }
+      },
+      "WorkspaceAnalysisList": {
+        "type": "array",
+        "title": "WorkspaceAnalysisList",
+        "description": "JSONArray holding the AutoML analyses available in the workspace.",
+        "items": {
+          "$ref": "#/components/schemas/WorkspaceAnalysisSummary"
+        },
+        "examples": [
+          [
+            {
+              "id": "466206000000061115",
+              "name": "New Analysis-1",
+              "predictionType": "Classification",
+              "trainingTable": "Sales",
+              "trainingTableId": "466206000000061002",
+              "isDraft": false
+            }
+          ]
+        ]
+      },
+      "WorkspaceAnalysisSummary": {
+        "type": "object",
+        "title": "WorkspaceAnalysisSummary",
+        "description": "JSONObject holding the summary of a single AutoML analysis in the workspace.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the AutoML analysis."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the AutoML analysis."
+          },
+          "predictionType": {
+            "type": "string",
+            "description": "Type of prediction the analysis performs. NOTE: the response returns this value in title case, whereas the Create AutoML Analysis API expects it in upper case.",
+            "enum": [
+              "Regression",
+              "Classification",
+              "Clustering"
+            ]
+          },
+          "trainingTable": {
+            "type": "string",
+            "description": "Name of the training table on which the analysis was built."
+          },
+          "trainingTableId": {
+            "type": "string",
+            "description": "Unique ID of the training table on which the analysis was built."
+          },
+          "isDraft": {
+            "type": "boolean",
+            "description": "Indicates whether the analysis is still a draft and has not been trained.",
+            "enum": [
+              true,
+              false
+            ]
+          }
+        },
+        "examples": [
+          {
+            "id": "466206000000061115",
+            "name": "New Analysis-1",
+            "predictionType": "Classification",
+            "trainingTable": "Sales",
+            "trainingTableId": "466206000000061002",
+            "isDraft": false
+          }
+        ]
+      },
+      "GetAutoMLAnalysisInOrgResponse": {
+        "type": "object",
+        "title": "GetAutoMLAnalysisInOrgResponse",
+        "description": "Response returned on successfully fetching the AutoML analyses in the organization.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request.",
+            "enum": [
+              "success",
+              "failure"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the action that was performed."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetAutoMLAnalysisInOrgResponseData"
+          }
+        }
+      },
+      "GetAutoMLAnalysisInOrgResponseData": {
+        "type": "object",
+        "title": "GetAutoMLAnalysisInOrgResponseData",
+        "description": "JSONObject holding the AutoML analyses available in the organization.",
+        "properties": {
+          "analysis": {
+            "$ref": "#/components/schemas/OrgAnalysisList"
+          }
+        }
+      },
+      "OrgAnalysisList": {
+        "type": "array",
+        "title": "OrgAnalysisList",
+        "description": "JSONArray holding the AutoML analyses available across the organization.",
+        "items": {
+          "$ref": "#/components/schemas/OrgAnalysisSummary"
+        },
+        "examples": [
+          [
+            {
+              "id": "466206000000061115",
+              "name": "New Analysis-1",
+              "predictionType": "Classification",
+              "trainingTable": "Sales",
+              "trainingTableId": "466206000000061002",
+              "isDraft": false,
+              "workspaceId": "466206000000061012",
+              "workspaceName": "AML Analysis"
+            }
+          ]
+        ]
+      },
+      "OrgAnalysisSummary": {
+        "type": "object",
+        "title": "OrgAnalysisSummary",
+        "description": "JSONObject holding the summary of a single AutoML analysis in the organization, along with the workspace it belongs to.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of the AutoML analysis."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the AutoML analysis."
+          },
+          "predictionType": {
+            "type": "string",
+            "description": "Type of prediction the analysis performs. NOTE: the response returns this value in title case, whereas the Create AutoML Analysis API expects it in upper case.",
+            "enum": [
+              "Regression",
+              "Classification",
+              "Clustering"
+            ]
+          },
+          "trainingTable": {
+            "type": "string",
+            "description": "Name of the training table on which the analysis was built."
+          },
+          "trainingTableId": {
+            "type": "string",
+            "description": "Unique ID of the training table on which the analysis was built."
+          },
+          "isDraft": {
+            "type": "boolean",
+            "description": "Indicates whether the analysis is still a draft and has not been trained.",
+            "enum": [
+              true,
+              false
+            ]
+          },
+          "workspaceId": {
+            "type": "string",
+            "description": "Unique ID of the workspace that holds the analysis."
+          },
+          "workspaceName": {
+            "type": "string",
+            "description": "Name of the workspace that holds the analysis."
+          }
+        },
+        "examples": [
+          {
+            "id": "466206000000061115",
+            "name": "New Analysis-1",
+            "predictionType": "Classification",
+            "trainingTable": "Sales",
+            "trainingTableId": "466206000000061002",
+            "isDraft": false,
+            "workspaceId": "466206000000061012",
+            "workspaceName": "AML Analysis"
+          }
+        ]
+      },
+      "GetDeploymentsForModelResponse": {
+        "type": "object",
+        "title": "GetDeploymentsForModelResponse",
+        "description": "Response returned on successfully fetching the deployment details of an AutoML analysis model.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the request.",
+            "enum": [
+              "success",
+              "failure"
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "description": "Summary of the action that was performed."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetDeploymentsForModelResponseData"
+          }
+        }
+      },
+      "GetDeploymentsForModelResponseData": {
+        "type": "object",
+        "title": "GetDeploymentsForModelResponseData",
+        "description": "JSONObject holding the deployment configured for the model.",
+        "properties": {
+          "deployments": {
+            "$ref": "#/components/schemas/ModelDeploymentDetails"
+          }
+        }
+      },
+      "ModelDeploymentDetails": {
+        "type": "object",
+        "title": "ModelDeploymentDetails",
+        "description": "JSONObject holding the details of the deployment configured for the model.",
+        "properties": {
+          "deploymentId": {
+            "type": "string",
+            "description": "Unique ID of the deployment."
+          },
+          "analysisId": {
+            "type": "string",
+            "description": "Unique ID of the AutoML analysis the deployment belongs to."
+          },
+          "inputTable": {
+            "type": "string",
+            "description": "Name of the input table from which the data is read."
+          },
+          "inputTableId": {
+            "type": "string",
+            "description": "Unique ID of the input table from which the data is read."
+          },
+          "outputTable": {
+            "type": "string",
+            "description": "Name of the output table in which the prediction results are stored."
+          },
+          "outputTableId": {
+            "type": "string",
+            "description": "Unique ID of the output table in which the prediction results are stored."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the most recent run of the deployment. NOTE: this is distinct from the `status` of the API response."
+          },
+          "lastDeploymentTime": {
+            "type": "string",
+            "description": "Time at which the deployment was last run. The timestamp is returned in the `dd MMM yyyy HH:mm:ss` format."
+          },
+          "outputColumns": {
+            "$ref": "#/components/schemas/DeploymentOutputColumns"
+          },
+          "predictionColumn": {
+            "type": "string",
+            "description": "Name of the column in which the predictions are generated."
+          },
+          "stack": {
+            "type": "string",
+            "description": "Server memory configuration used, expressed in human-readable form. This corresponds to the `serverOption` value that was sent when the analysis or deployment was created.",
+            "examples": [
+              "8 GB"
+            ]
+          },
+          "importType": {
+            "type": "string",
+            "description": "Specifies how the prediction results are imported into the output table. NOTE: the response returns this value in lower case, whereas the Create AutoML Analysis Deployment API expects it in upper case."
+          }
+        }
+      }
+    }
+  }
+}

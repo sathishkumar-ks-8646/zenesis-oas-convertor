@@ -1,0 +1,4 @@
+[submodule "analytics-api-docs"]
+	path = analytics-api-docs
+	url = https://github.com/sathish-dev-git/analytics-api-docs.git
+	branch = main

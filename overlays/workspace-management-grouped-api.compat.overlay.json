@@ -1,0 +1,1878 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zenesis legacy compatibility - workspace-management-grouped-api - shrink this to zero",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].get.responses['200'].content['application/json'].examples.ownedOnly",
+      "update": {
+        "description": "Owned only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].get.responses['200'].content['application/json'].examples.ownedOnly",
+      "update": {
+        "summary": "An Account Admin who owns all the workspaces of the organization and has none shared from other organizations."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].get.responses['200'].content['application/json'].examples.ownedAndShared",
+      "update": {
+        "description": "Owned and shared"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].get.responses['200'].content['application/json'].examples.ownedAndShared",
+      "update": {
+        "summary": "A user who owns a workspace in their own organization and has a workspace from another organization shared with them."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.read scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].get",
+      "update": {
+        "x-zenesis-title": "Get All Workspace List"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].get",
+      "update": {
+        "description": "Returns all the workspaces accessible to the requesting user, covering both the workspaces they own or administer and the workspaces shared with them. The response separates the two into the `ownedWorkspaces` and the `sharedWorkspaces` arrays.\n\nThis API is scoped to the user and not to the organization. It returns only the workspaces that the requesting user has some level of access to. Account Admins see all the workspaces of their organization in the owned list."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>This API combines the results of the Get Owned Workspace List and the Get Shared Workspace List APIs for the requesting user.</li><li>The API is scoped to the user and not to the organization. It returns only the workspaces that the requesting user has some level of access to, across all the organizations. Account Admins see all the workspaces of their organization in the owned list.</li><li>The <b>ZANALYTICS-ORGID</b> header is not required for this API.</li><li>The <b>workspaceId</b> values returned by this API are the primary source of the workspace IDs used in all the workspace specific API calls.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].post.requestBody.content['application/x-www-form-urlencoded'].examples.nameOnly",
+      "update": {
+        "description": "Name only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].post.requestBody.content['application/x-www-form-urlencoded'].examples.nameOnly",
+      "update": {
+        "summary": "Creates a workspace with a name alone. The description is stored as an empty string."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].post.requestBody.content['application/x-www-form-urlencoded'].examples.withDescription",
+      "update": {
+        "description": "With description"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].post.requestBody.content['application/x-www-form-urlencoded'].examples.withDescription",
+      "update": {
+        "summary": "Creates a workspace with both a name and a description."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].post.responses['200'].content['application/json'].examples.workspaceCreated",
+      "update": {
+        "description": "Workspace created"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].post.responses['200'].content['application/json'].examples.workspaceCreated",
+      "update": {
+        "summary": "The ID of the newly created workspace is returned in the data object."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].post.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7301",
+            "description": "The user is not an Account Admin or an Organization Admin of the target organization.",
+            "resolution": "Ensure that the requesting user has Account Admin or Organization Admin privileges in the target organization."
+          },
+          {
+            "name": "7951",
+            "description": "The organization has reached its workspace creation limit based on the current subscription plan.",
+            "resolution": "Upgrade the subscription plan or delete the unused workspaces before creating a new workspace."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.modeling.create scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].post",
+      "update": {
+        "x-zenesis-title": "Create Workspace"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].post",
+      "update": {
+        "description": "Creates a new empty workspace in the specified organization. The workspace is created with no tables, views or users, and the content has to be added using the subsequent APIs. The requesting user should be an Account Admin or an Organization Admin of the target organization."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The <b>workspaceName</b> should be unique within the organization. Creating a workspace with a name that is already in use fails with error code 7111.</li><li>The <b>workspaceName</b> can hold a maximum of 50 characters and the <b>workspaceDesc</b> can hold a maximum of 250 characters. Exceeding these limits is rejected during parameter validation.</li><li>When <b>workspaceDesc</b> is omitted, the description is stored as an empty string. It can be updated later using the Rename Workspace API.</li><li>The response data holds only the <b>workspaceId</b>. Use the Get Workspace Info or the Get All Workspace List API to retrieve the complete workspace record.</li><li>The workspace secret key is not generated at creation time. Use the Get Workspace Secret Key API when the key is needed for a cross-organization copy.</li><li>The number of workspaces that can be created depends on the subscription plan of the organization. Reaching the limit fails with error code 7951.</li><li>Organization Admins are allowed to create workspaces within their organization.</li><li>The workspace is created with no tables or views. The content has to be added using the subsequent APIs.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/owned'].get.responses['200'].content['application/json'].examples.multipleWorkspaces",
+      "update": {
+        "description": "Multiple workspaces"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/owned'].get.responses['200'].content['application/json'].examples.multipleWorkspaces",
+      "update": {
+        "summary": "The organization holds more than one workspace."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/owned'].get.responses['200'].content['application/json'].examples.noWorkspaces",
+      "update": {
+        "description": "No workspaces"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/owned'].get.responses['200'].content['application/json'].examples.noWorkspaces",
+      "update": {
+        "summary": "The organization holds no workspace and an empty array is returned."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/owned'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7301",
+            "description": "The user is not the Account Admin. Organization Admins and Workspace Admins cannot invoke this API.",
+            "resolution": "Invoke this API using the credentials of the Account Admin of the organization."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.read scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/owned'].get",
+      "update": {
+        "x-zenesis-title": "Get Owned Workspace List"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/owned'].get",
+      "update": {
+        "description": "Returns all the workspaces present in the organization of the requesting user, irrespective of how they are shared. This is an admin scoped API and can be invoked only by the Account Admin of the organization."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/owned'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>This API can be invoked only by the Account Admin of the organization. Organization Admins and Workspace Admins invoking this API fail with error code 7301.</li><li>The API returns all the workspaces present in the organization of the requesting Account Admin, including the workspaces that the Account Admin did not create and does not administer directly.</li><li>The organization scope is resolved from the session of the requesting user. The <b>ZANALYTICS-ORGID</b> header is not required for this API.</li><li>The Get All Workspace List API differs from this API. It returns the owned and the shared workspaces of the requesting user across all the organizations, and it can be invoked by any user.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/shared'].get.responses['200'].content['application/json'].examples.sharedFromOtherOrg",
+      "update": {
+        "description": "Shared workspaces"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/shared'].get.responses['200'].content['application/json'].examples.sharedFromOtherOrg",
+      "update": {
+        "summary": "A workspace from another organization is shared with the requesting user."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/shared'].get.responses['200'].content['application/json'].examples.noSharedWorkspaces",
+      "update": {
+        "description": "No shared workspaces"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/shared'].get.responses['200'].content['application/json'].examples.noSharedWorkspaces",
+      "update": {
+        "summary": "No workspace is shared with the requesting user and an empty array is returned."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/shared'].get.responses['200'].content['application/json'].examples.clientPortalWorkspace",
+      "update": {
+        "description": "Client Portal user"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/shared'].get.responses['200'].content['application/json'].examples.clientPortalWorkspace",
+      "update": {
+        "summary": "A Client Portal or white label user retrieving the workspace of their portal."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/shared'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.read scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/shared'].get",
+      "update": {
+        "x-zenesis-title": "Get Shared Workspace List"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/shared'].get",
+      "update": {
+        "description": "Returns all the workspaces that have been shared with the requesting user from other organizations. The workspaces present in the organization of the requesting user are not included. Use the Get All Workspace List API to retrieve the owned and the shared workspaces together."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/shared'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>This API returns only the workspaces shared with the requesting user by users from other organizations. The workspaces present in the organization of the requesting user are not included.</li><li>The result of this API is a subset of the result of the Get All Workspace List API.</li><li>The scope is resolved from the identity of the requesting user. The <b>ZANALYTICS-ORGID</b> header is not required for this API.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get.parameters[2].examples.basicInfo",
+      "update": {
+        "description": "Basic info"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get.parameters[2].examples.basicInfo",
+      "update": {
+        "summary": "Retrieves the workspace metadata without the role details of the requesting user."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get.parameters[2].examples.withRoleInfo",
+      "update": {
+        "description": "With role info"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get.parameters[2].examples.withRoleInfo",
+      "update": {
+        "summary": "Retrieves the workspace metadata along with the userRoleInfo object of the requesting user."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get.responses['200'].content['application/json'].examples.basicInfo",
+      "update": {
+        "description": "Basic info"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get.responses['200'].content['application/json'].examples.basicInfo",
+      "update": {
+        "summary": "The workspace metadata alone is returned, as withUserRoleInfo is not set."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get.responses['200'].content['application/json'].examples.accountAdminRole",
+      "update": {
+        "description": "Account Admin role"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get.responses['200'].content['application/json'].examples.accountAdminRole",
+      "update": {
+        "summary": "The requesting user is an Account Admin, so roleId is 0 and isCustomRoleUser is false."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get.responses['200'].content['application/json'].examples.customRoleUser",
+      "update": {
+        "description": "Custom role"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get.responses['200'].content['application/json'].examples.customRoleUser",
+      "update": {
+        "summary": "The requesting user holds a custom role, so isCustomRoleUser is true and roleId holds the custom role ID."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id given in the request URL."
+          },
+          {
+            "name": "7301",
+            "description": "The user does not have any access to the specified workspace. The user should be a Workspace Admin or should have at least one view of this workspace shared with them.",
+            "resolution": "Verify that the user has been added to the workspace or has a view of the workspace shared with them."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.read scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get",
+      "update": {
+        "x-zenesis-title": "Get Workspace Info"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get",
+      "update": {
+        "description": "Returns the metadata of the specified workspace. The requesting user should have at least some level of access to the workspace, either as a Workspace Admin, a shared user, a group member, or a user with at least Read permission on a view within the workspace.\n\nThe optional `withUserRoleInfo` key enriches the response with the role details of the requesting user within the workspace."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The <b>data.workspaces</b> key of the response holds a single JSONObject and not a JSONArray. This differs from the Get All, the Get Owned and the Get Shared Workspace List APIs.</li><li>Setting <b>withUserRoleInfo</b> to false, which is the default, returns the workspace metadata alone and is the fastest response option.</li><li>Setting <b>withUserRoleInfo</b> to true adds the <b>userRoleInfo</b> object to the response. An Account Admin gets the role name Account Admin with roleId 0 and isCustomRoleUser false, an Organization Admin gets the role name Organization Admin with roleId 0, and a custom role user gets isCustomRoleUser true along with the ID and the display name of the custom role. For a shared user with no workspace level role, the role name may reflect their view level access role.</li><li>The workspace secret key is not returned by this API. Use the Get Workspace Secret Key API to retrieve it.</li><li>This API is available to any user who has at least one view of the workspace shared with them, in addition to the Workspace Admins, the Account Admins and the Organization Admins.</li><li>The <b>ZANALYTICS-ORGID</b> header is not required for this API, as the organization is resolved from the workspace ID.</li><li>As this is a GET request, the CONFIG value should be stringified and URL encoded before it is sent.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post.requestBody.content['application/x-www-form-urlencoded'].examples.sameOrgStructureOnly",
+      "update": {
+        "description": "Structure only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post.requestBody.content['application/x-www-form-urlencoded'].examples.sameOrgStructureOnly",
+      "update": {
+        "summary": "Copies the workspace within the same organization without the table data. The workspaceKey is not required."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post.requestBody.content['application/x-www-form-urlencoded'].examples.sameOrgWithData",
+      "update": {
+        "description": "With data"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post.requestBody.content['application/x-www-form-urlencoded'].examples.sameOrgWithData",
+      "update": {
+        "summary": "Copies the workspace within the same organization along with all the table data."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post.requestBody.content['application/x-www-form-urlencoded'].examples.crossOrgAccountAdmin",
+      "update": {
+        "description": "Cross-org copy"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post.requestBody.content['application/x-www-form-urlencoded'].examples.crossOrgAccountAdmin",
+      "update": {
+        "summary": "Copies the workspace into another organization as an Account Admin. ZANALYTICS-ORGID holds the destination organization ID and the workspaceKey of the source workspace authorizes the copy."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post.requestBody.content['application/x-www-form-urlencoded'].examples.crossOrgDestHeader",
+      "update": {
+        "description": "Org Admin copy"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post.requestBody.content['application/x-www-form-urlencoded'].examples.crossOrgDestHeader",
+      "update": {
+        "summary": "Copies the workspace into another organization as an Organization Admin. ZANALYTICS-ORGID holds the source organization ID and ZANALYTICS-DEST-ORGID holds the destination organization ID."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post.responses['200'].content['application/json'].examples.workspaceCopied",
+      "update": {
+        "description": "Workspace copied"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post.responses['200'].content['application/json'].examples.workspaceCopied",
+      "update": {
+        "summary": "The ID of the newly created copy is returned in the data object."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Source workspace not found.",
+            "resolution": "Verify the workspace-id of the source workspace given in the request URL."
+          },
+          {
+            "name": "7301",
+            "description": "The user is not an Account Admin or an Organization Admin of the destination organization.",
+            "resolution": "Ensure that the requesting user is an admin of the destination organization and not of the source organization alone."
+          },
+          {
+            "name": "7951",
+            "description": "The destination organization has reached its workspace limit.",
+            "resolution": "Upgrade the subscription plan of the destination organization or remove the unused workspaces."
+          },
+          {
+            "name": "8024",
+            "description": "A cross-organization copy was attempted without a valid workspaceKey, or the key provided does not match the secret key of the source workspace.",
+            "resolution": "Obtain the correct workspaceKey of the source workspace using the Get Workspace Secret Key API and retry. Omit workspaceKey for copies within the same organization."
+          },
+          {
+            "name": "8058",
+            "description": "The organization ID provided in the ZANALYTICS-DEST-ORGID header does not exist.",
+            "resolution": "Provide a valid, existing organization ID in the ZANALYTICS-DEST-ORGID header."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.modeling.create scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post",
+      "update": {
+        "x-zenesis-title": "Copy Workspace"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post",
+      "update": {
+        "description": "Creates a copy of an existing workspace, either within the same organization or in a different organization. The copy can optionally include all the table data and can retain the import source connections of the source workspace.\n\nWhen the destination organization differs from the organization that owns the source workspace, the secret key of the source workspace has to be provided as `workspaceKey` to authorize the copy. The key can be obtained using the Get Workspace Secret Key API. The requesting user should be an Account Admin or an Organization Admin of the destination organization.\n\n> **Rate limit:** Only one copy operation is allowed to run at a time per organization."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Only one copy operation is allowed to run at a time per organization. A second request raised while a copy is in progress is rejected.</li><li>For a copy within the same organization, set <b>ZANALYTICS-ORGID</b> to the organization of the source workspace. The <b>workspaceKey</b> is not validated in this case.</li><li>For a cross-organization copy by an Account Admin, set <b>ZANALYTICS-ORGID</b> to the destination organization ID and provide the <b>workspaceKey</b> of the source workspace.</li><li>For a cross-organization copy by an Organization Admin, set <b>ZANALYTICS-ORGID</b> to the source organization ID and <b>ZANALYTICS-DEST-ORGID</b> to the destination organization ID. The system validates that the requesting user is a member of the destination organization before the copy begins.</li><li>A <b>ZANALYTICS-DEST-ORGID</b> that does not refer to an existing organization fails with error code 8058. A requesting user who is not a member of that organization fails with error code 7301.</li><li>A cross-organization copy raised without a <b>workspaceKey</b>, or with a key that does not match the secret key of the source workspace, fails with error code 8024.</li><li>The description of the source workspace is not copied. Provide <b>newWorkspaceDesc</b> explicitly to set a description on the copy.</li><li>When <b>copyWithImportSource</b> is set to true, only the import based data sources such as the scheduled syncs, the file imports and the API pushed data are retained. Live and direct database connections cannot be copied and have to be reconnected manually.</li><li>Setting <b>copyWithData</b> to true on a large workspace increases both the duration and the resource usage of the operation significantly.</li><li>The copy fails with error code 7951 when the destination organization has reached its workspace limit.</li><li>The response data holds only the <b>workspaceId</b> of the copy. Use the Get Workspace Info API to retrieve the complete record.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameOnly",
+      "update": {
+        "description": "Rename only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameOnly",
+      "update": {
+        "summary": "Changes the workspace name alone. As workspaceDesc is omitted, the existing description is cleared."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameAndDescribe",
+      "update": {
+        "description": "Rename and describe"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.renameAndDescribe",
+      "update": {
+        "summary": "Changes the workspace name and sets a new description in the same request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.descriptionOnly",
+      "update": {
+        "description": "Description only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.descriptionOnly",
+      "update": {
+        "summary": "Updates the description alone by passing the existing workspace name unchanged."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id given in the request URL."
+          },
+          {
+            "name": "7111",
+            "description": "The workspace name is already used by another workspace in the organization.",
+            "resolution": "Choose a workspace name that is not already in use within the organization."
+          },
+          {
+            "name": "7301",
+            "description": "The user is not an Account Admin or an Organization Admin.",
+            "resolution": "Ensure that the requesting user has Account Admin or Organization Admin privileges in the organization."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.modeling.update scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].put",
+      "update": {
+        "x-zenesis-title": "Rename Workspace"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].put",
+      "update": {
+        "description": "Updates the name and the description of an existing workspace. Both the values are replaced atomically. When `workspaceDesc` is omitted, the existing description is reset to an empty string and the previous value is not preserved. The requesting user should be an Account Admin or an Organization Admin of the organization that owns the workspace."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Rename Workspace returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>When <b>workspaceDesc</b> is omitted, the existing description of the workspace is permanently reset to an empty string. Always pass the current description, read using the Get Workspace Info API, when only the name has to be changed.</li><li>Renaming the workspace to its existing name succeeds without an error.</li><li>The <b>workspaceName</b> should be unique within the organization. Renaming to a name that is already in use fails with error code 7111.</li><li>The <b>workspaceName</b> can hold a maximum of 50 characters and the <b>workspaceDesc</b> can hold a maximum of 250 characters. Exceeding these limits is rejected during parameter validation.</li><li>The name and the description are replaced atomically. Both values in the request overwrite the stored values.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].delete.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id given in the request URL."
+          },
+          {
+            "name": "7301",
+            "description": "The user is not an Account Admin or an Organization Admin.",
+            "resolution": "Ensure that the requesting user has Account Admin or Organization Admin privileges in the organization."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.modeling.delete scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].delete",
+      "update": {
+        "x-zenesis-title": "Delete Workspace"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].delete",
+      "update": {
+        "description": "Permanently deletes the specified workspace along with all its contents, including the tables, views, dashboards, formulas, import configurations and sharing settings. This operation is irreversible. The requesting user should be an Account Admin or an Organization Admin of the organization that owns the workspace."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}'].delete",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Delete Workspace returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>The deletion is permanent. There is no trash or recycle mechanism for workspaces, and the workspace along with all its views, data, import configurations and sharing settings cannot be recovered.</li><li>All the sharing configurations of the workspace are removed. Users who had access to the views in this workspace lose that access at the moment of deletion.</li><li>The workspace level admin role of the Workspace Admins is removed. Their organization membership and their access to the other workspaces are not affected.</li><li>Any scheduled or in-progress data import job in the workspace is cancelled.</li><li>This API accepts an optional CONFIG parameter. No CONFIG key is required for the standard use of this API.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/secretkey'].get.parameters[2].examples.existingKey",
+      "update": {
+        "description": "Existing key"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/secretkey'].get.parameters[2].examples.existingKey",
+      "update": {
+        "summary": "Retrieves the existing secret key of the workspace without modifying it."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/secretkey'].get.parameters[2].examples.regenerateKey",
+      "update": {
+        "description": "Regenerate key"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/secretkey'].get.parameters[2].examples.regenerateKey",
+      "update": {
+        "summary": "Generates a new secret key, stores it against the workspace and returns it. The previous key is invalidated."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/secretkey'].get.responses['200'].content['application/json'].examples.secretKeyReturned",
+      "update": {
+        "description": "Secret key"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/secretkey'].get.responses['200'].content['application/json'].examples.secretKeyReturned",
+      "update": {
+        "summary": "The current secret key of the workspace is returned in the data object."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/secretkey'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id given in the request URL."
+          },
+          {
+            "name": "7301",
+            "description": "The user is not an Account Admin or an Organization Admin.",
+            "resolution": "Ensure that the requesting user has Account Admin or Organization Admin privileges in the organization."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.read scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/secretkey'].get",
+      "update": {
+        "x-zenesis-title": "Get Workspace Secret Key"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/secretkey'].get",
+      "update": {
+        "description": "Returns the secret key of the specified workspace. This key is passed as the `workspaceKey` parameter while performing a cross-organization Copy Workspace operation, and it authorizes the copying of the workspace into a different organization.\n\nThe key can optionally be regenerated, which permanently invalidates the previous key. The requesting user should be an Account Admin or an Organization Admin of the organization that owns the workspace."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/secretkey'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Setting <b>regenerateKey</b> to false, which is the default, is safe to invoke repeatedly. The existing key is returned each time, and a key is generated on the first call when none exists.</li><li>Setting <b>regenerateKey</b> to true invalidates the previous key immediately. A cross-organization copy attempted with the old key after regeneration fails with error code 8024. A copy operation that had already started before the regeneration is not affected, as the key is validated only at the start of the copy.</li><li>The workspace secret key is returned only by this API. It is not present in the response of the Get Workspace Info, the Get All Workspace List or any other API.</li><li>Only the Account Admins and the Organization Admins of the organization that owns the workspace can retrieve the key.</li><li>As this is a GET request, the CONFIG value should be stringified and URL encoded before it is sent.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/template/data'].get.parameters[2].examples.selectedViews",
+      "update": {
+        "description": "Selected views"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/template/data'].get.parameters[2].examples.selectedViews",
+      "update": {
+        "summary": "Exports two specific views as a template using the system generated file name."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/template/data'].get.parameters[2].examples.customFileName",
+      "update": {
+        "description": "Custom file name"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/template/data'].get.parameters[2].examples.customFileName",
+      "update": {
+        "summary": "Exports three views as a template and names the exported file explicitly."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/template/data'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id given in the request URL."
+          },
+          {
+            "name": "7104",
+            "description": "One or more of the specified view IDs do not exist.",
+            "resolution": "Verify that all the values in viewIds are valid using the Get View List API."
+          },
+          {
+            "name": "7301",
+            "description": "The user is not a Workspace Admin, an Account Admin or an Organization Admin.",
+            "resolution": "Ensure that the requesting user has at least Workspace Admin access to the workspace."
+          },
+          {
+            "name": "7319",
+            "description": "One or more of the specified view IDs do not belong to the specified workspace.",
+            "resolution": "Ensure that all the values in viewIds belong to the workspace identified by the workspace-id in the request URL."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.read scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/template/data'].get",
+      "update": {
+        "x-zenesis-title": "Export as Template"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/template/data'].get",
+      "update": {
+        "description": "Exports the selected views of the specified workspace as a reusable template file in the `.atpt` (Zoho Analytics Template) format. The response is a binary file attachment and not a JSON payload, and it can be imported into another workspace to recreate the selected views along with their structural dependencies.\n\nThe template holds the schema definitions of the selected tables and views, the formula and lookup columns, the calculated fields and the view design configurations. The data rows of the source tables are not exported."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/template/data'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The response of this API is a binary <b>.atpt</b> file and not a JSON payload. Handle the response as a binary stream and write it to the disk as a <b>.atpt</b> file.</li><li>The template file holds the structure and the design alone. The schema definitions, the formula and lookup columns, the calculated fields and the view design configurations are exported, but the data rows of the source tables are not.</li><li>The <b>viewIds</b> array cannot be empty. It should hold a minimum of one view ID and a maximum of 1000 view IDs.</li><li>All the view IDs should belong to the workspace specified in the request URL. A view ID that belongs to a different workspace fails with error code 7319.</li><li>The structural dependencies of the selected views are included automatically. A table referenced by a lookup column is added to the template even when its ID is not listed in <b>viewIds</b>.</li><li>When <b>fileName</b> is omitted, the name of the exported file is generated from the workspace name.</li><li>As this is a GET request, the CONFIG value should be stringified and URL encoded before it is sent.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/default'].post.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id given in the request URL."
+          },
+          {
+            "name": "7301",
+            "description": "The user has no access to the specified workspace. No view of this workspace has been shared with them and they are not a Workspace Admin.",
+            "resolution": "Ensure that the user is a member of the workspace or has at least one view of the workspace shared with them before marking it as the default workspace."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.update scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/default'].post",
+      "update": {
+        "x-zenesis-title": "Add Default Workspace"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/default'].post",
+      "update": {
+        "description": "Marks the specified workspace as the default workspace of the requesting user. The default workspace is the workspace that opens automatically when the user logs in to Zoho Analytics.\n\nA user can hold only one default workspace at a time. When a different workspace is already set as the default, it is replaced silently. Invoking this API on a workspace that is already the default succeeds without error."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/default'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Add Default Workspace returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>A user can hold only one default workspace at a time. When the user already holds a different workspace as the default, the previous default is replaced silently and no error is raised.</li><li>This API is idempotent. Invoking it on a workspace that is already the default workspace of the user succeeds without error and makes no change.</li><li>The requesting user should have at least one view of the workspace shared with them. A user with no access to any view of the workspace cannot mark it as the default workspace and the request fails with error code 7301.</li><li>The default preference continues to be stored even when the user loses access to the workspace later. However, the workspace is not presented as accessible until the access is restored.</li><li>After this API is invoked, the workspace is returned with isDefault as true in the response of the Get All Workspace List and the Get Shared Workspace List APIs. Use those APIs to verify the change.</li><li>The preferences are stored per user and per organization. Marking a workspace as the default for one user has no effect on the preferences of any other user.</li><li>Client Portal users and standard Zoho Analytics users maintain separate preference stores, even when they access the same workspace. A Client Portal user should access the workspace through the portal domain in which it is shared with them, failing which the access check fails with error code 7301.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/default'].delete.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id given in the request URL."
+          },
+          {
+            "name": "7301",
+            "description": "The user has no access to the specified workspace.",
+            "resolution": "Ensure that the user is a member of the workspace or has at least one view of the workspace shared with them."
+          },
+          {
+            "name": "7415",
+            "description": "The specified workspace is not the current default workspace of the requesting user. This API does not succeed silently for a workspace that is not the default.",
+            "resolution": "Use the Get All Workspace List API to identify the workspace that holds isDefault as true, and invoke this API with that workspace ID."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.update scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/default'].delete",
+      "update": {
+        "x-zenesis-title": "Remove Default Workspace"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/default'].delete",
+      "update": {
+        "description": "Removes the default workspace designation from the specified workspace for the requesting user. After this operation, the user holds no default workspace until a new one is set.\n\nUnlike the Add Default Workspace API, this API is not idempotent. When the specified workspace is not the current default workspace of the user, the request fails with error code 7415. Verify the current default using the Get All Workspace List API, which returns `isDefault` as true for the current default, before invoking this API."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/default'].delete",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Remove Default Workspace returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>This API is not idempotent. When the specified workspace is not the current default workspace of the requesting user, the request fails with error code 7415 instead of succeeding silently.</li><li>Use the Get All Workspace List API to confirm that the target workspace holds isDefault as true before invoking this API.</li><li>This behaviour differs from the Add Default Workspace API, which is idempotent, and from the Remove Favourite Workspace API, which succeeds silently when the workspace is not in the favourites.</li><li>After the designation is removed, the user holds no default workspace. A new default has to be set explicitly using the Add Default Workspace API.</li><li>Invoking this API immediately after the Add Default Workspace API succeeds, as the workspace can be set and unset in sequence.</li><li>The requesting user should have at least one view of the workspace shared with them, failing which the request fails with error code 7301.</li><li>The preferences are stored per user and per organization. Removing the default designation for one user has no effect on the preferences of any other user.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/favorite'].post.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id given in the request URL."
+          },
+          {
+            "name": "7301",
+            "description": "The user has no access to the specified workspace.",
+            "resolution": "Ensure that the user is a member of the workspace or has at least one view of the workspace shared with them."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.update scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/favorite'].post",
+      "update": {
+        "x-zenesis-title": "Add Favourite Workspace"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/favorite'].post",
+      "update": {
+        "description": "Adds the specified workspace to the list of favourite workspaces of the requesting user. Favourite workspaces are surfaced at the top of the workspace listings for quick navigation.\n\nA user can mark any number of workspaces as favourite, as there is no exclusivity constraint. When the workspace is already present in the favourites, the request succeeds silently without error."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/favorite'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Add Favourite Workspace returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>This API is idempotent. When the workspace is already present in the favourites of the user, the request succeeds without error and no duplicate entry is created.</li><li>There is no limit on the number of workspaces a user can mark as favourite. Unlike the default workspace, the favourite preference carries no exclusivity constraint.</li><li>The requesting user should have at least one view of the workspace shared with them. Access is checked at the workspace level and no permission beyond basic read access is required. A user with no access fails with error code 7301.</li><li>The favourite preference is not exposed as a distinct field in the response of the standard workspace list APIs.</li><li>The preferences are stored per user and per organization. Adding a workspace to the favourites of one user has no effect on the preferences of any other user.</li><li>Client Portal users and standard Zoho Analytics users maintain separate preference stores, even when they access the same workspace. A Client Portal user should access the workspace through the portal domain in which it is shared with them, failing which the access check fails with error code 7301.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/favorite'].delete.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id given in the request URL."
+          },
+          {
+            "name": "7301",
+            "description": "The user has no access to the specified workspace.",
+            "resolution": "Ensure that the user is a member of the workspace or has at least one view of the workspace shared with them."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.update scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/favorite'].delete",
+      "update": {
+        "x-zenesis-title": "Remove Favourite Workspace"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/favorite'].delete",
+      "update": {
+        "description": "Removes the specified workspace from the list of favourite workspaces of the requesting user.\n\nThis API is idempotent. When the workspace is not present in the favourites of the user, the request succeeds silently without error. This differs from the Remove Default Workspace API, which fails with error code 7415 in the equivalent situation."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/favorite'].delete",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Remove Favourite Workspace returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>This API is idempotent. When the workspace is not present in the favourites of the user, the request succeeds silently without error.</li><li>This behaviour differs from the Remove Default Workspace API, which fails with error code 7415 when the workspace is not the current default. This is the key behavioural difference between the two remove operations.</li><li>The requesting user should have at least one view of the workspace shared with them, failing which the request fails with error code 7301.</li><li>The preferences are stored per user and per organization. Removing a workspace from the favourites of one user has no effect on the preferences of any other user.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/wlaccess'].post.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id given in the request URL."
+          },
+          {
+            "name": "7301",
+            "description": "The requesting user is not an Account Admin or an Organization Admin of the organization that owns the workspace, or the Account Admin of the workspace does not have a White Label or Client Portal domain configured.",
+            "resolution": "Ensure that the requesting user is an admin of the organization and that the organization holds an active White Label domain setup."
+          },
+          {
+            "name": "12049",
+            "description": "The workspace is already enabled for White Label domain access. Enabling an already enabled workspace is not idempotent.",
+            "resolution": "Verify the current domain access state before invoking this API. Use the Disable Workspace for Domain Access API first when the workspace has to be enabled again, such as after a domain reconfiguration."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.update scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/wlaccess'].post",
+      "update": {
+        "x-zenesis-title": "Enable Workspace for Domain Access"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/wlaccess'].post",
+      "update": {
+        "description": "Enables the specified workspace for access through the White Label or Client Portal domain of the organization. Once enabled, the workspace becomes visible and accessible to the users who log in through the configured custom domain URL, and the views shared with the portal users appear under that domain.\n\nThe portal domain is resolved automatically from the White Label configuration of the Account Admin of the workspace, so no domain name parameter is required. Invoking this API on a workspace that is already enabled for domain access fails with error code 12049."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/wlaccess'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Enable Workspace for Domain Access returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>This API requires two conditions to be met at the same time. The requesting user should be an Account Admin or an Organization Admin of the organization that owns the workspace, and the Account Admin of the workspace should have an active White Label or Client Portal domain configured for the organization. When the organization holds no White Label domain, the request fails with error code 7301 even for an Account Admin.</li><li>The portal domain is resolved automatically from the White Label configuration of the Account Admin of the workspace. No domain name has to be passed as a parameter, and a workspace can be associated with only one portal domain.</li><li>This API is not idempotent. Invoking it on a workspace that is already enabled for domain access fails with error code 12049. Verify the current state before invoking this API.</li><li>A workspace is disabled for domain access by default when it is created, even in an organization that already holds a configured portal. It has to be enabled explicitly before portal users can access it.</li><li>Each workspace has to be enabled individually. Enabling one workspace has no effect on the other workspaces of the organization.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/wlaccess'].delete.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace-id given in the request URL."
+          },
+          {
+            "name": "7301",
+            "description": "The requesting user is not an Account Admin or an Organization Admin of the organization that owns the workspace, or the Account Admin of the workspace does not have a White Label or Client Portal domain configured.",
+            "resolution": "Ensure that the requesting user is an admin of the organization and that the organization holds an active White Label domain setup."
+          },
+          {
+            "name": "12050",
+            "description": "The workspace is not currently enabled for White Label domain access. Disabling an already disabled workspace is not idempotent.",
+            "resolution": "Verify the current domain access state before invoking this API. Invoke this API only on a workspace that was enabled using the Enable Workspace for Domain Access API."
+          },
+          {
+            "name": "8535",
+            "description": "The OAuth token is invalid or has expired.",
+            "resolution": "Provide a valid OAuth token generated with the ZohoAnalytics.metadata.update scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/wlaccess'].delete",
+      "update": {
+        "x-zenesis-title": "Disable Workspace for Domain Access"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/wlaccess'].delete",
+      "update": {
+        "description": "Removes the specified workspace from the White Label or Client Portal domain of the organization. Once disabled, the workspace is no longer accessible to the users who log in through the custom portal domain URL, and the users who had access through the portal lose it immediately.\n\nDisabling gates only the access through the portal domain. It does not remove any view level sharing or user membership, and the workspace remains fully accessible through the standard Zoho Analytics URL for the non-portal users. Invoking this API on a workspace that is not currently enabled for domain access fails with error code 12050."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/wlaccess'].delete",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Disable Workspace for Domain Access returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>This API requires two conditions to be met at the same time. The requesting user should be an Account Admin or an Organization Admin of the organization that owns the workspace, and the organization should hold an active White Label or Client Portal domain.</li><li>This API is not idempotent. Invoking it on a workspace that is not currently enabled for domain access fails with error code 12050. Verify the current state before invoking this API.</li><li>Disabling the workspace gates only the access through the portal domain URL. It does not remove any user from the workspace and does not revoke any view level sharing, and the workspace along with its data remains intact.</li><li>Portal users who are also standard Zoho Analytics users can continue to access the workspace through the standard Zoho Analytics URL. Only the users who exist exclusively as portal users lose meaningful access.</li><li>The view level shares are preserved. When the workspace is enabled again using the Enable Workspace for Domain Access API, the portal users regain access without any re-sharing, and the domain association is restored from the current White Label configuration of the Account Admin.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].get.responses['200'].content['application/json'].examples.nestedFolders",
+      "update": {
+        "description": "Nested folders"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].get.responses['200'].content['application/json'].examples.nestedFolders",
+      "update": {
+        "summary": "A Workspace Admin retrieving a workspace that holds the default folder along with two root level folders and their sub-folders."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].get.responses['200'].content['application/json'].examples.filteredForSharedUser",
+      "update": {
+        "description": "Filtered list"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].get.responses['200'].content['application/json'].examples.filteredForSharedUser",
+      "update": {
+        "summary": "A shared user retrieving the same workspace. Only the folders holding a view accessible to them are returned, along with the parent of the accessible sub-folder."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].get.responses['200'].content['application/json'].examples.defaultFolderOnly",
+      "update": {
+        "description": "Default folder only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].get.responses['200'].content['application/json'].examples.defaultFolderOnly",
+      "update": {
+        "summary": "A workspace that holds no folder other than the default folder created along with it."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7301",
+            "description": "The user does not have permission to perform this operation.",
+            "resolution": "Ensure that the user is a Workspace Admin of the workspace, or has at least Read access to one or more views in the workspace."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].get",
+      "update": {
+        "x-zenesis-title": "Get Folder List"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].get",
+      "update": {
+        "description": "Returns all the folders present in the specified workspace, along with their names, descriptions, display order, default status and parent folder references.\n\nWorkspace Admins receive every folder of the workspace. Shared users and group members receive a filtered list holding only the folders that contain at least one view they have access to."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Workspace Admins receive every folder of the workspace. Shared users and group members receive a filtered list holding only the folders that contain at least one view they have access to. When a view inside a sub-folder is accessible to the user, both the sub-folder and its parent folder are included.</li><li>The folders array is returned empty when the workspace holds no folder, or when the requesting user has access to no view in the workspace.</li><li>The parentFolderId is always returned as a quoted string and not as a number. The value -1 indicates that the folder is at the root level and has no parent.</li><li>The folders are sorted by folderIndex within their hierarchy level. The default folder always holds folderIndex as -1.</li><li>Exactly one folder of a workspace holds isDefault as true at any point in time.</li><li>Exactly one level of nesting is supported. A root level folder can hold sub-folders, and a sub-folder cannot hold children of its own.</li><li>This API is the entry point for all the other folder APIs. The folderId values returned here are used as the folder-id in the request URL of the Rename Folder, Delete Folder, Change Folder Hierarchy, Change Folder Position and Make Default Folder APIs, as the parentFolderId in the Create Folder and Change Folder Hierarchy APIs, as the referenceFolderId in the Change Folder Position API, and as the folderId in the Move Views To Folder API.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].post.requestBody.content['application/x-www-form-urlencoded'].examples.rootFolder",
+      "update": {
+        "description": "Root folder"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].post.requestBody.content['application/x-www-form-urlencoded'].examples.rootFolder",
+      "update": {
+        "summary": "Creates a folder at the root level of the workspace, as parentFolderId is not sent."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].post.requestBody.content['application/x-www-form-urlencoded'].examples.subFolder",
+      "update": {
+        "description": "Sub-folder"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].post.requestBody.content['application/x-www-form-urlencoded'].examples.subFolder",
+      "update": {
+        "summary": "Creates a folder nested under an existing root level folder."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].post.requestBody.content['application/x-www-form-urlencoded'].examples.defaultFolder",
+      "update": {
+        "description": "Default folder"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].post.requestBody.content['application/x-www-form-urlencoded'].examples.defaultFolder",
+      "update": {
+        "summary": "Creates a root level folder and sets it as the default folder of the workspace in the same request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].post.responses['200'].content['application/json'].examples.folderCreated",
+      "update": {
+        "description": "Folder created"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].post.responses['200'].content['application/json'].examples.folderCreated",
+      "update": {
+        "summary": "The ID of the newly created folder is returned in the data object."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].post.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7140",
+            "description": "A folder with the same name already exists in the workspace.",
+            "resolution": "Provide a folder name that is not already in use within the workspace."
+          },
+          {
+            "name": "7144",
+            "description": "The specified parentFolderId does not exist.",
+            "resolution": "Verify the parentFolderId value using the Get Folder List API."
+          },
+          {
+            "name": "7301",
+            "description": "The user does not have permission to perform this operation.",
+            "resolution": "Ensure that the user is a Workspace Admin of the workspace or has the Create Folder permission on the workspace."
+          },
+          {
+            "name": "7414",
+            "description": "The folder name cannot be empty.",
+            "resolution": "Provide a non-empty value for folderName."
+          },
+          {
+            "name": "7496",
+            "description": "The maximum sub-folder nesting depth has been exceeded.",
+            "resolution": "Only one level of nesting is supported. A sub-folder cannot hold children of its own, so the parentFolderId should refer to a root level folder."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].post",
+      "update": {
+        "x-zenesis-title": "Create Folder"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].post",
+      "update": {
+        "description": "Creates a new folder in the specified workspace. The folder can optionally be created as a sub-folder of an existing root level folder, and can be set as the default folder of the workspace at the time of creation."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>The folderName should be unique within the workspace. Creating a folder with a name that is already in use fails with error code 7140, and an empty name fails with error code 7414.</li><li>The folderName can hold a maximum of 200 characters and the folderDesc can hold a maximum of 250 characters.</li><li>When folderDesc is omitted, the description is stored as an empty string and not as null.</li><li>When parentFolderId is omitted or set to -1, the folder is created at the root level.</li><li>Exactly one level of nesting is supported. The parentFolderId should refer to a root level folder, and nesting inside an existing sub-folder fails with error code 7496.</li><li>Setting makeDefaultFolder to true triggers the Make Default Folder operation internally. The folder that was the default until then loses its isDefault status.</li><li>The response data holds only the folderId. Use the Get Folder List API to retrieve the complete folder record, covering the name, the description, the index, the default status and the parent folder.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.preserveDescription",
+      "update": {
+        "description": "Preserve description"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.preserveDescription",
+      "update": {
+        "summary": "Changes the folder name while passing back the existing description, read using the Get Folder List API, so that it is not cleared."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateDescription",
+      "update": {
+        "description": "Update description"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateDescription",
+      "update": {
+        "summary": "Changes the folder name and sets a new description in the same request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7140",
+            "description": "A folder with the same name already exists in the workspace.",
+            "resolution": "Provide a folder name that is not already in use within the workspace."
+          },
+          {
+            "name": "7144",
+            "description": "The specified folder does not exist.",
+            "resolution": "Verify the folder ID using the Get Folder List API."
+          },
+          {
+            "name": "7301",
+            "description": "The user does not have permission to perform this operation.",
+            "resolution": "Ensure that the user is a Workspace Admin of the workspace or has the Create Folder permission on the workspace."
+          },
+          {
+            "name": "7414",
+            "description": "The folder name cannot be empty.",
+            "resolution": "Provide a non-empty value for folderName."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].put",
+      "update": {
+        "x-zenesis-title": "Rename Folder"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].put",
+      "update": {
+        "description": "Updates the name and the description of an existing folder. When `folderDesc` is omitted, the existing description is reset to an empty string and the previous value is not preserved."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Rename Folder returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>When folderDesc is omitted, the existing description of the folder is permanently reset to an empty string. This is intentional behaviour and not a defect. Always read the current folderDesc using the Get Folder List API and pass it back when only the name has to be changed.</li><li>Renaming the folder to its existing name succeeds without an error.</li><li>The folderName should be unique within the workspace. Renaming to a name that is already in use fails with error code 7140, and an empty name fails with error code 7414.</li><li>The folderName can hold a maximum of 200 characters and the folderDesc can hold a maximum of 250 characters.</li><li>The folder-id in the request URL should be obtained using the Get Folder List API.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.retainViews",
+      "update": {
+        "description": "Retain views"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.retainViews",
+      "update": {
+        "summary": "Deletes the folder container alone. The views present inside it are moved to the root level of the workspace."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.deleteViews",
+      "update": {
+        "description": "Delete views"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].delete.requestBody.content['application/x-www-form-urlencoded'].examples.deleteViews",
+      "update": {
+        "summary": "Deletes the folder along with all the views present inside it, including the tables and their dependent reports and dashboards."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].delete.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7144",
+            "description": "The specified folder does not exist.",
+            "resolution": "Verify the folder ID using the Get Folder List API."
+          },
+          {
+            "name": "7277",
+            "description": "The folder holds tables that have dependent child views, so the deletion is blocked.",
+            "resolution": "Set deleteDependentViews to true to delete the folder along with all the dependent views, or delete the dependent views manually before retrying."
+          },
+          {
+            "name": "7301",
+            "description": "The user does not have permission to perform this operation.",
+            "resolution": "Ensure that the user is a Workspace Admin of the workspace or has the Create Folder permission on the workspace."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].delete",
+      "update": {
+        "x-zenesis-title": "Delete Folder"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].delete",
+      "update": {
+        "description": "Deletes the specified folder from the workspace. By default the views present inside the folder are retained and moved to the root level of the workspace, and only the folder container is removed. The views can optionally be deleted along with the folder."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}'].delete",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Delete Folder returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>When deleteDependentViews is omitted or set to false, the views present inside the folder are not deleted. They are retained and become accessible at the root level of the workspace, and only the folder container is removed.</li><li>When the folder holds a table that has dependent child reports or dashboards, deletion with deleteDependentViews set to false fails with error code 7277. Either delete the dependent views first, or set deleteDependentViews to true.</li><li>Setting deleteDependentViews to true permanently deletes all the views inside the folder, including the tables and their child reports and dashboards. This cannot be undone.</li><li>Deleting the current default folder is allowed. The workspace holds no default folder until the Make Default Folder API is invoked.</li><li>The folder-id in the request URL should be obtained using the Get Folder List API.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/default'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7144",
+            "description": "The specified folder does not exist.",
+            "resolution": "Verify the folder ID using the Get Folder List API."
+          },
+          {
+            "name": "7301",
+            "description": "The user does not have permission to perform this operation.",
+            "resolution": "Ensure that the user is a Workspace Admin of the workspace or has the Create Folder permission on the workspace."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/default'].put",
+      "update": {
+        "x-zenesis-title": "Make Default Folder"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/default'].put",
+      "update": {
+        "description": "Sets the specified folder as the default folder of the workspace. The default folder is where a new view is placed when no folder is selected explicitly. The folder that was the default until then loses that status, as a workspace holds exactly one default folder at any point in time.\n\nThis API is idempotent. Invoking it on a folder that is already the default folder succeeds without error."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/default'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Make Default Folder returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>The folder that was the default until then immediately loses its isDefault status. A workspace holds exactly one default folder at any point in time.</li><li>This API is idempotent. Invoking it on a folder that is already the default folder succeeds without error and makes no change.</li><li>Use the Get Folder List API after invoking this API to confirm that isDefault is true on the intended folder.</li><li>The folder-id in the request URL should be obtained using the Get Folder List API.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/move'].put.requestBody.content['application/x-www-form-urlencoded'].examples.promoteToRoot",
+      "update": {
+        "description": "Promote folder"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/move'].put.requestBody.content['application/x-www-form-urlencoded'].examples.promoteToRoot",
+      "update": {
+        "summary": "Promotes the specified sub-folder to become a root level folder. The parentFolderId is not sent."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/move'].put.requestBody.content['application/x-www-form-urlencoded'].examples.nestUnderParent",
+      "update": {
+        "description": "Nest folder"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/move'].put.requestBody.content['application/x-www-form-urlencoded'].examples.nestUnderParent",
+      "update": {
+        "summary": "Nests the specified root level folder under another root level folder given in parentFolderId."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/move'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7144",
+            "description": "The specified folder or the specified parent folder does not exist.",
+            "resolution": "Verify the folder IDs using the Get Folder List API."
+          },
+          {
+            "name": "7301",
+            "description": "The user does not have permission to perform this operation.",
+            "resolution": "Ensure that the user is a Workspace Admin of the workspace or has the Create Folder permission on the workspace."
+          },
+          {
+            "name": "8119",
+            "description": "The value provided for hierarchy is invalid. Only 0 and 1 are accepted.",
+            "resolution": "Pass 0 to promote a sub-folder to the root level, or 1 to nest a folder under a parent folder."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/move'].put",
+      "update": {
+        "x-zenesis-title": "Change Folder Hierarchy"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/move'].put",
+      "update": {
+        "description": "Changes the hierarchical position of a folder, either by promoting a sub-folder to the root level or by nesting an existing root level folder under another root level folder. Exactly one level of nesting is supported, so the folder given in `parentFolderId` should itself be at the root level."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/move'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Change Folder Hierarchy returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>When hierarchy is set to 0, the parentFolderId should not be sent. The parent link of the folder is removed and it becomes a root level folder.</li><li>When hierarchy is set to 1, the parentFolderId is mandatory. Omitting it results in an error.</li><li>The parentFolderId should refer to a root level folder, that is, a folder whose own parentFolderId is -1. A folder cannot be nested inside an existing sub-folder, as exactly one level of nesting is supported.</li><li>Only the values 0 and 1 are accepted for hierarchy. Any other value fails with error code 8119 before any change is made.</li><li>Both the folder-id in the request URL and the parentFolderId should be obtained using the Get Folder List API. Verify that the parentFolderId target is a root level folder before invoking this API.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/reorder'].put.requestBody.content['application/x-www-form-urlencoded'].examples.reorderRootFolder",
+      "update": {
+        "description": "Reorder folder"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/reorder'].put.requestBody.content['application/x-www-form-urlencoded'].examples.reorderRootFolder",
+      "update": {
+        "summary": "Places the specified root level folder immediately above another root level folder."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/reorder'].put.requestBody.content['application/x-www-form-urlencoded'].examples.reorderSubFolder",
+      "update": {
+        "description": "Reorder sub-folder"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/reorder'].put.requestBody.content['application/x-www-form-urlencoded'].examples.reorderSubFolder",
+      "update": {
+        "summary": "Places the specified sub-folder immediately above another sub-folder of the same parent."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/reorder'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7144",
+            "description": "The specified folder or the specified reference folder does not exist.",
+            "resolution": "Verify the folder IDs using the Get Folder List API."
+          },
+          {
+            "name": "7301",
+            "description": "The user does not have permission to perform this operation.",
+            "resolution": "Ensure that the user is a Workspace Admin of the workspace or has the Create Folder permission on the workspace."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/reorder'].put",
+      "update": {
+        "x-zenesis-title": "Change Folder Position"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/reorder'].put",
+      "update": {
+        "description": "Reorders a folder by placing it immediately above another folder at the same hierarchy level. Both the folder being reordered and the reference folder should be at the root level, or should be sub-folders of the same parent."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/folders/{folder-id}/reorder'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Change Folder Position returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>The folder identified by the folder-id in the request URL is placed immediately above the folder given in referenceFolderId in the sorted list.</li><li>Both the folders should be at the same hierarchy level, that is, both at the root level or both sub-folders of the same parent. Reordering across levels is not supported and produces unexpected results.</li><li>The folderIndex values of the affected folders are recalculated after this operation. Use the Get Folder List API to confirm the new ordering.</li><li>Both the folder-id in the request URL and the referenceFolderId should be obtained using the Get Folder List API.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/movetofolder'].put.requestBody.content['application/x-www-form-urlencoded'].examples.singleView",
+      "update": {
+        "description": "Single view"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/movetofolder'].put.requestBody.content['application/x-www-form-urlencoded'].examples.singleView",
+      "update": {
+        "summary": "Moves one view into the destination folder."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/movetofolder'].put.requestBody.content['application/x-www-form-urlencoded'].examples.bulkViews",
+      "update": {
+        "description": "Bulk move"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/movetofolder'].put.requestBody.content['application/x-www-form-urlencoded'].examples.bulkViews",
+      "update": {
+        "summary": "Moves several views into the destination folder in one request."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/movetofolder'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7144",
+            "description": "The specified destination folder does not exist.",
+            "resolution": "Verify the folderId value using the Get Folder List API."
+          },
+          {
+            "name": "7301",
+            "description": "The user does not have permission to perform this operation.",
+            "resolution": "Ensure that the user is a Workspace Admin of the workspace or has the Create Folder permission on the workspace."
+          },
+          {
+            "name": "7319",
+            "description": "One or more of the specified view IDs do not belong to the specified workspace.",
+            "resolution": "Ensure that all the values in viewIds belong to the workspace identified by the workspace-id in the request URL."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/movetofolder'].put",
+      "update": {
+        "x-zenesis-title": "Move Views To Folder"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/movetofolder'].put",
+      "update": {
+        "description": "Moves one or more views, covering tables, reports and dashboards, into the specified destination folder of the workspace. All the views should belong to the same workspace, and a maximum of 1000 view IDs can be moved in a single request.\n\nThe operation is transactional. A single view ID that does not belong to the workspace fails the entire request before any view is moved."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/movetofolder'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<ul><li>Move Views To Folder returns a bare HTTP 204 No Content on success. There is no response body and no <b>status</b> or <b>summary</b> JSON to parse, so check only the HTTP status code. A JSON payload is returned only on failure.</li><li>This operation is transactional. Either all the specified views are moved or none of them are. A single view ID that does not belong to the workspace fails the entire request with error code 7319 before any view is moved.</li><li>A maximum of 1000 view IDs can be moved in a single request. Split the operation into multiple requests when more views have to be moved.</li><li>The destination folder can be a root level folder or a sub-folder.</li><li>There is no restriction on the type of the view. Tables, reports and dashboards can all be moved.</li><li>The folderId should be obtained using the Get Folder List API, and the viewIds should be obtained using the Get View List API for the workspace.</li></ul>\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    }
+  ]
+}

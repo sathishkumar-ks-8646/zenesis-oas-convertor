@@ -1,0 +1,377 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zenesis legacy compatibility - schedules-alerts-grouped-api - shrink this to zero",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].post.requestBody.content['application/x-www-form-urlencoded'].examples.dailyCsvSchedule",
+      "update": {
+        "description": "Daily CSV schedule"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].post.requestBody.content['application/x-www-form-urlencoded'].examples.dailyCsvSchedule",
+      "update": {
+        "summary": "Emails the listed view as a CSV file every day at 09:00."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].post.requestBody.content['application/x-www-form-urlencoded'].examples.weeklyPdfSchedule",
+      "update": {
+        "description": "Weekly PDF schedule"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].post.requestBody.content['application/x-www-form-urlencoded'].examples.weeklyPdfSchedule",
+      "update": {
+        "summary": "Emails the views as PDF every Monday and Friday at 14:30, with a carbon copy list and the share criteria applied."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].post.requestBody.content['application/x-www-form-urlencoded'].examples.monthlyImageSchedule",
+      "update": {
+        "description": "Monthly image schedule"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].post.requestBody.content['application/x-www-form-urlencoded'].examples.monthlyImageSchedule",
+      "update": {
+        "summary": "Emails the views as an image on the first and the last day of every month, skipping the System Tag validation."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].post.responses['200'].content['application/json'].examples.scheduleCreated",
+      "update": {
+        "description": "Schedule created"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].post.responses['200'].content['application/json'].examples.scheduleCreated",
+      "update": {
+        "summary": "Returns the ID of the newly created email schedule."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].post",
+      "update": {
+        "x-zenesis-title": "Create Email Schedule"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe attributes inside scheduleDetails apply based on the calendarFrequency value.\n<ul><li>weekDay and weekDays - applicable for weekly schedules.</li><li>weekNumber, monthDay and monthDays - applicable for monthly schedules.</li><li>months - applicable for yearly schedules, along with the relevant day attributes.</li></ul>\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nvalidateSystemTags is applicable only when System Tags are enabled for your organization. When it is set to true, a view listed in viewIds that carries an Outdated tag - applied directly, or inherited through lineage from a parent Data Source or Table - causes the request to be rejected, and no views are shared.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].get.responses['200'].content['application/json'].examples.multipleSchedules",
+      "update": {
+        "description": "Multiple schedules"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].get.responses['200'].content['application/json'].examples.multipleSchedules",
+      "update": {
+        "summary": "A workspace holding both a weekly dashboard schedule and a daily table schedule."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].get.responses['200'].content['application/json'].examples.noSchedules",
+      "update": {
+        "description": "No schedules"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].get.responses['200'].content['application/json'].examples.noSchedules",
+      "update": {
+        "summary": "The workspace has no email schedules configured."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules'].get",
+      "update": {
+        "x-zenesis-title": "Get Email Schedules"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}'].post",
+      "update": {
+        "x-zenesis-title": "Trigger Email Schedule"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.changeFrequency",
+      "update": {
+        "description": "Change frequency"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.changeFrequency",
+      "update": {
+        "summary": "Renames the schedule and switches it to run every day at 10:30."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateRecipients",
+      "update": {
+        "description": "Update recipients"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.updateRecipients",
+      "update": {
+        "summary": "Keeps a yearly frequency and replaces the recipient, group and carbon copy lists."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}'].put.responses['200'].content['application/json'].examples.scheduleUpdated",
+      "update": {
+        "description": "Schedule updated"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}'].put.responses['200'].content['application/json'].examples.scheduleUpdated",
+      "update": {
+        "summary": "Returns the ID of the email schedule that was updated."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}'].put",
+      "update": {
+        "x-zenesis-title": "Update Email Schedule"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe attributes inside scheduleDetails apply based on the calendarFrequency value.\n<ul><li>weekDay and weekDays - applicable for weekly schedules.</li><li>weekNumber, monthDay and monthDays - applicable for monthly schedules.</li><li>months - applicable for yearly schedules, along with the relevant day attributes.</li></ul>\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nvalidateSystemTags is applicable only when System Tags are enabled for your organization. When it is set to true, a view shared by this schedule that carries an Outdated tag - applied directly, or inherited through lineage from a parent Data Source or Table - causes the request to be rejected, and no views are shared.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}'].delete",
+      "update": {
+        "x-zenesis-title": "Delete Email Schedule"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}/status'].put.requestBody.content['application/x-www-form-urlencoded'].examples.activateSchedule",
+      "update": {
+        "description": "Activate schedule"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}/status'].put.requestBody.content['application/x-www-form-urlencoded'].examples.activateSchedule",
+      "update": {
+        "summary": "Resumes a schedule that is currently deactivated."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}/status'].put.requestBody.content['application/x-www-form-urlencoded'].examples.deactivateSchedule",
+      "update": {
+        "description": "Deactivate schedule"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}/status'].put.requestBody.content['application/x-www-form-urlencoded'].examples.deactivateSchedule",
+      "update": {
+        "summary": "Pauses the schedule without deleting its configuration."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/emailschedules/{schedule-id}/status'].put",
+      "update": {
+        "x-zenesis-title": "Change Email Schedule Status"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.components.schemas.ChangeEmailScheduleStatusConfig.properties.operation",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enable schedule",
+          "Disable schedule"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.CreateEmailScheduleConfig.properties.exportType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "CSV file",
+          "Excel file",
+          "Image file",
+          "PDF file",
+          "HTML file"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ScheduleDetails.properties.weekDay",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ScheduleDetails.properties.weekNumber",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "First week",
+          "Second week",
+          "Third week",
+          "Fourth week",
+          "Fifth week"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ScheduleWeekDays.items",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ScheduleMonths.items",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ChangeEmailScheduleStatusConfig.properties.operation['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.CreateEmailScheduleConfig.properties.exportType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ScheduleDetails.properties.weekDay['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ScheduleDetails.properties.weekDay['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ScheduleDetails.properties.weekNumber['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ScheduleDetails.properties.weekNumber['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ScheduleWeekDays.items['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ScheduleWeekDays.items['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ScheduleMonths.items['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ScheduleMonths.items['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    }
+  ]
+}

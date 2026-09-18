@@ -1,0 +1,24 @@
+name: Validate API source documents
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate naming, completeness and integrity
+        run: python3 tools/validate_api_docs.py --strict
+      - name: Check every JSON document parses
+        run: |
+          python3 -c "import json;json.load(open('zoho-analytics-api-common.json'))"
+          for f in zenesis-oas/*.json zenesis-oas-samples/*.json; do
+            python3 -c "import json,sys;json.load(open(sys.argv[1]))" "$f"
+          done

@@ -1,0 +1,78 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zenesis renderer configuration - data-modeling-schema-grouped-api",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/columns'].post.requestBody.content['application/x-www-form-urlencoded'].examples.singleColumn",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "single"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/columns'].post.requestBody.content['application/x-www-form-urlencoded'].examples.singlePiiColumn",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "single"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/columns'].post.requestBody.content['application/x-www-form-urlencoded'].examples.bulkColumns",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "bulk"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/columns'].post.requestBody.content['application/x-www-form-urlencoded'].examples.bulkMandatoryColumns",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "bulk"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/views/{view-id}/columns'].post",
+      "update": {
+        "x-zenesis-doc": {
+          "show": true,
+          "usecaseTags": {
+            "single": {
+              "name": "Single Column Attributes",
+              "description": "<p>Applicable when a <strong>single column</strong> is added. The ID of the new column is returned in the response.</p>"
+            },
+            "bulk": {
+              "name": "Bulk Column Attributes",
+              "description": "<p>Applicable when several columns are added in one request through the <strong>columns</strong> array. Individual column IDs are not returned.</p>"
+            }
+          }
+        }
+      },
+      "x-migration": "Renderer layout config."
+    },
+    {
+      "target": "$.components.schemas.AddColumnConfig.oneOf[0]",
+      "update": {
+        "x-zenesis-usecase-tag": "single"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.AddColumnConfig.oneOf[1]",
+      "update": {
+        "x-zenesis-usecase-tag": "bulk"
+      },
+      "x-migration": "Renderer grouping key."
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "vendor_prefix": "x-zenesis-",
+  "unknown_key_policy": "warn",
+  "options": {
+    "unswap_examples": true,
+    "emit_enum_varnames": true
+  },
+  "rules": {
+    "x-zenesis-title": {
+      "action": "drop",
+      "verify": "equals_sibling",
+      "sibling": "summary"
+    },
+    "x-zenesis-doc": {
+      "action": "drop"
+    },
+    "x-zenesis-usecase-tag": {
+      "action": "drop"
+    },
+    "x-zenesis-sections": {
+      "action": "fold_sections",
+      "heading": "Notes",
+      "text_fields": [
+        "value"
+      ],
+      "skip_covered": true
+    },
+    "x-zenesis-enums-desc": {
+      "action": "enum_descriptions"
+    },
+    "x-zenesis-statuscodes": {
+      "action": "fold_status_codes",
+      "heading": "Error codes"
+    },
+    "x-zenesis-security": {
+      "action": "fold_throttles",
+      "heading": "Rate limit"
+    },
+    "x-zenesis-shared-note": {
+      "action": "drop"
+    },
+    "x-zenesis-shared-notes": {
+      "action": "drop"
+    },
+    "x-zenesis-description-pageName": {
+      "action": "drop"
+    }
+  }
+}

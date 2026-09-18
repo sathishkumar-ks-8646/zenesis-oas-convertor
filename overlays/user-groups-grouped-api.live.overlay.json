@@ -1,0 +1,165 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zenesis renderer configuration - user-groups-grouped-api",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.standardUserAddition",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "simple"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.workspaceAdminAddition",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "simple"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainAddition",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "simple"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.bulkRoleAddition",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "bulk"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post.requestBody.content['application/x-www-form-urlencoded'].examples.bulkPortalAddition",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "bulk"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users'].post",
+      "update": {
+        "x-zenesis-doc": {
+          "show": true,
+          "usecaseTags": {
+            "simple": {
+              "name": "Simple Mode Attributes",
+              "description": "<p>Applicable when the same <strong>role</strong> has to be applied to every email address in the request.</p>"
+            },
+            "bulk": {
+              "name": "Bulk Mode Attributes",
+              "description": "<p>Applicable when several groups of users have to be handled with different roles or different client portal domains in a single request. A maximum of <strong>20</strong> groups can be sent, and the root level <strong>emailIds</strong>, <strong>role</strong> and <strong>domainName</strong> values are ignored when <strong>users</strong> is present.</p>"
+            }
+          }
+        }
+      },
+      "x-migration": "Renderer layout config."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.promoteToWorkspaceAdmin",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "simple"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.customRoleAssignment",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "simple"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.portalDomainRoleChange",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "simple"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.bulkRoleChange",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "bulk"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put.requestBody.content['application/x-www-form-urlencoded'].examples.bulkPortalRoleChange",
+      "update": {
+        "x-zenesis-usecase-tag": [
+          "bulk"
+        ]
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/users/role'].put",
+      "update": {
+        "x-zenesis-doc": {
+          "show": true,
+          "usecaseTags": {
+            "simple": {
+              "name": "Simple Mode Attributes",
+              "description": "<p>Applicable when the same <strong>role</strong> has to be applied to every email address in the request.</p>"
+            },
+            "bulk": {
+              "name": "Bulk Mode Attributes",
+              "description": "<p>Applicable when several groups of users have to be handled with different roles or different client portal domains in a single request. A maximum of <strong>20</strong> groups can be sent, and the root level <strong>emailIds</strong>, <strong>role</strong> and <strong>domainName</strong> values are ignored when <strong>users</strong> is present.</p>"
+            }
+          }
+        }
+      },
+      "x-migration": "Renderer layout config."
+    },
+    {
+      "target": "$.components.schemas.AddWorkspaceUsersConfig.oneOf[0]",
+      "update": {
+        "x-zenesis-usecase-tag": "simple"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.AddWorkspaceUsersConfig.oneOf[1]",
+      "update": {
+        "x-zenesis-usecase-tag": "bulk"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ChangeWorkspaceUsersRoleConfig.oneOf[0]",
+      "update": {
+        "x-zenesis-usecase-tag": "simple"
+      },
+      "x-migration": "Renderer grouping key."
+    },
+    {
+      "target": "$.components.schemas.ChangeWorkspaceUsersRoleConfig.oneOf[1]",
+      "update": {
+        "x-zenesis-usecase-tag": "bulk"
+      },
+      "x-migration": "Renderer grouping key."
+    }
+  ]
+}

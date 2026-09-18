@@ -1,0 +1,2496 @@
+{
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Zenesis legacy compatibility - reports-dashboards-grouped-api - shrink this to zero",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.tags[0]",
+      "update": {
+        "x-zenesis-description-pageName": "Reports Overview"
+      }
+    },
+    {
+      "target": "$.tags[1]",
+      "update": {
+        "x-zenesis-description-pageName": "Dashboards Overview"
+      }
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.requestBody.content['application/x-www-form-urlencoded'].examples.barChartRankingFilter",
+      "update": {
+        "description": "Bar chart"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.requestBody.content['application/x-www-form-urlencoded'].examples.barChartRankingFilter",
+      "update": {
+        "summary": "Creates a bar chart of sales by product, restricted to the top five products by average cost."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.requestBody.content['application/x-www-form-urlencoded'].examples.pivotWithWindowFunctions",
+      "update": {
+        "description": "Pivot table"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.requestBody.content['application/x-www-form-urlencoded'].examples.pivotWithWindowFunctions",
+      "update": {
+        "summary": "Creates a pivot table of product by year with percentage-of-total and percentage-of-column calculations, and explicit layout and theme settings."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.requestBody.content['application/x-www-form-urlencoded'].examples.comboChartMergedAxes",
+      "update": {
+        "description": "Merged axes chart"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.requestBody.content['application/x-www-form-urlencoded'].examples.comboChartMergedAxes",
+      "update": {
+        "summary": "Creates a combo chart whose two y-axes are merged onto a single scale, with a multi-select product user filter, placed in a specific folder."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.responses['200'].content['application/json'].examples.chartCreated",
+      "update": {
+        "description": "Chart created"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.responses['200'].content['application/json'].examples.chartCreated",
+      "update": {
+        "summary": "A chart view was created and its view ID returned."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.responses['200'].content['application/json'].examples.pivotCreated",
+      "update": {
+        "description": "Pivot created"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.responses['200'].content['application/json'].examples.pivotCreated",
+      "update": {
+        "summary": "A pivot view was created and its view ID returned."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.responses['200'].content['application/json'].examples.summaryCreated",
+      "update": {
+        "description": "Summary created"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.responses['200'].content['application/json'].examples.summaryCreated",
+      "update": {
+        "summary": "A summary view was created and its view ID returned."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Provide a valid workspace ID in the URL."
+          },
+          {
+            "name": "7104",
+            "description": "The specified base table does not exist in the workspace.",
+            "resolution": "Ensure baseTableName matches an existing table in the workspace."
+          },
+          {
+            "name": "7111",
+            "description": "A view with the given title already exists in the workspace.",
+            "resolution": "Choose a title that is unique within the workspace."
+          },
+          {
+            "name": "7301",
+            "description": "User does not have permission to create a report.",
+            "resolution": "Ensure the user is an Account Admin, Organization Admin, Workspace Admin, Shared User, Group Member, or has Create Report permission on the workspace."
+          },
+          {
+            "name": "8021",
+            "description": "Invalid view type specified.",
+            "resolution": "Set reportType to chart, pivot or summary."
+          },
+          {
+            "name": "8050",
+            "description": "Invalid value provided.",
+            "resolution": "Check that all CONFIG field values are within the allowed ranges and types."
+          },
+          {
+            "name": "8075",
+            "description": "Invalid chart type parameter.",
+            "resolution": "Provide a valid chartType value, such as bar, line or pie."
+          },
+          {
+            "name": "8119",
+            "description": "Invalid value for attribute.",
+            "resolution": "Verify that all attribute values in axisColumns, filters and settings conform to the allowed constraints."
+          },
+          {
+            "name": "8252",
+            "description": "Invalid report type.",
+            "resolution": "Ensure reportType is chart, pivot or summary."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid OAuth token.",
+            "resolution": "Provide a valid, non-expired OAuth token in the Authorization header."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post",
+      "update": {
+        "x-zenesis-title": "Create Analysis View"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post",
+      "update": {
+        "description": "Creates a new analysis view - a chart, a pivot table or a summary view - in the specified workspace, based on a referenced base table. The view is configured through the CONFIG JSON parameter, which specifies the report type, the axis columns, the filters and the visualization settings.\n\nThe authenticated user must be an Account Admin or an Organization Admin, or a Workspace Admin, or a Shared User, or a Group Member, or any user with Create Report permission on the workspace."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequest": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "orgIdHeader",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a workspace-scoped API. The <b>ZANALYTICS-ORGID</b> header carrying the organization ID that owns the workspace is mandatory. A workspaceKey in the format <b>orgid/workspacename</b> (for example, 700000123456/Sales_Analytics) may be used in place of the numeric workspace ID in the URL path.\n</span></blockquote>"
+            }
+          },
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "configUrlEncoded",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CONFIG parameter must be sent as a URL encoded JSON string in a form field named <b>CONFIG</b>, with the content type <b>application/x-www-form-urlencoded</b>.\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "x-zenesis-shared-note": "chartOnlyAttributes",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<b>chartType</b>, <b>isAxisMerge</b> and <b>mergeAxisInfo</b> apply only when <b>reportType</b> is chart. <b>chartType</b> is required for chart views, and <b>mergeAxisInfo</b> must be supplied whenever <b>isAxisMerge</b> is true.\n</span></blockquote>"
+            },
+            "3": {
+              "type": "editor",
+              "x-zenesis-shared-note": "axisTypeCasing",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nAxis type casing differs between request and response. The Create and Update samples use camelCase (<b>xAxis</b>, <b>yAxis</b>, <b>colorAxis</b>), while Get Report Metadata returns the lowercase forms (<b>xaxis</b>, <b>yaxis</b>, <b>coloraxis</b>, <b>sizeaxis</b>, <b>textaxis</b>, <b>groupby</b>, <b>summarize</b>), which the documentation states are the canonical values. When building a Create or Update CONFIG from a Get Report Metadata response, copy the axis type values verbatim.\n</span></blockquote>"
+            },
+            "4": {
+              "type": "editor",
+              "x-zenesis-shared-note": "configSizeLimit",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CONFIG parameter has a maximum serialized size of 10 MB. Ensure that the nested arrays - <b>axisColumns</b>, <b>mergeAxisInfo</b>, <b>filters</b> and <b>userFilters</b> - do not push the total CONFIG payload beyond this limit.\n</span></blockquote>"
+            }
+          },
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "reportCloneWorkflow",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe <b>reportConfig</b> object returned by Get Report Metadata is structurally identical to the Create CONFIG, so it can be used directly as a clone template. Change <b>title</b> to a value that is unique in the workspace, keep <b>baseTableName</b>, and verify that every <b>columnName</b> and <b>tableName</b> exists in the target workspace's base table before posting.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.changeChartType",
+      "update": {
+        "description": "Chart type change"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.changeChartType",
+      "update": {
+        "summary": "Switches the view to a line chart and replaces its axis columns with a month-year x-axis and two measures."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.pivotWithFilter",
+      "update": {
+        "description": "Pivot filter update"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.pivotWithFilter",
+      "update": {
+        "summary": "Replaces the axis configuration of a pivot view, applies a year filter and sets the layout and theme."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.enableAxisMerge",
+      "update": {
+        "description": "Enable axis merge"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.enableAxisMerge",
+      "update": {
+        "summary": "Turns on axis merge across two of the y-axes of a combo chart and applies a custom theme."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Provide a valid workspace ID in the URL."
+          },
+          {
+            "name": "7104",
+            "description": "The specified view does not exist.",
+            "resolution": "Ensure the view ID in the URL corresponds to an existing analysis view."
+          },
+          {
+            "name": "7111",
+            "description": "A view with the given title already exists in the workspace.",
+            "resolution": "Choose a title that is unique within the workspace."
+          },
+          {
+            "name": "7301",
+            "description": "User does not have permission to update this view.",
+            "resolution": "Ensure the user is an Account Admin, Organization Admin, View Owner, Shared User, Group Member, or has Design Modify permission on the view."
+          },
+          {
+            "name": "8021",
+            "description": "Invalid view type specified.",
+            "resolution": "Set reportType to chart, pivot or summary. It must match the existing view type."
+          },
+          {
+            "name": "8050",
+            "description": "Invalid value provided.",
+            "resolution": "Check that all CONFIG field values are within the allowed ranges and types."
+          },
+          {
+            "name": "8075",
+            "description": "Invalid chart type parameter.",
+            "resolution": "Provide a valid chartType value, such as bar, line or pie."
+          },
+          {
+            "name": "8100",
+            "description": "Operation not supported for this analysis view widget.",
+            "resolution": "Ensure the update operation is valid for the current view type."
+          },
+          {
+            "name": "8119",
+            "description": "Invalid value for attribute.",
+            "resolution": "Verify that all attribute values in axisColumns, filters and settings conform to the allowed constraints."
+          },
+          {
+            "name": "8252",
+            "description": "Invalid report type.",
+            "resolution": "Ensure reportType is chart, pivot or summary."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid OAuth token.",
+            "resolution": "Provide a valid, non-expired OAuth token in the Authorization header."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}'].put",
+      "update": {
+        "x-zenesis-title": "Update Analysis View"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}'].put",
+      "update": {
+        "description": "Resets and updates the configuration of an existing analysis view in the specified workspace. The whole view configuration - axis columns, filters, user filters, chart type and settings - is replaced with the values provided in the CONFIG parameter, so anything that is omitted reverts to its empty default. Fetch the current configuration with Get Report Metadata, modify it, and send the complete object back.\n\nThe authenticated user must be an Account Admin or an Organization Admin, or the View Owner, or a Shared User, or a Group Member, or any user with Design Modify permission on the view."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiInfo": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "reportFullReset",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nUpdate Analysis View performs a full configuration reset, not a patch.<ul><li>Every axis column, filter, user filter and settings entry is replaced with the values sent in the CONFIG.</li><li>Fields that are not provided revert to their empty defaults - omitting <b>axisColumns</b>, <b>filters</b> or <b>userFilters</b> clears them.</li><li><b>description</b> is cleared if it is omitted.</li><li>Always fetch the current state with Get Report Metadata, modify it, then send the complete configuration back.</li></ul>\n</span></blockquote>"
+            }
+          },
+          "apiRequest": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "orgIdHeader",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a workspace-scoped API. The <b>ZANALYTICS-ORGID</b> header carrying the organization ID that owns the workspace is mandatory. A workspaceKey in the format <b>orgid/workspacename</b> (for example, 700000123456/Sales_Analytics) may be used in place of the numeric workspace ID in the URL path.\n</span></blockquote>"
+            }
+          },
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "configUrlEncoded",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CONFIG parameter must be sent as a URL encoded JSON string in a form field named <b>CONFIG</b>, with the content type <b>application/x-www-form-urlencoded</b>.\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "x-zenesis-shared-note": "reportReadOnlyFields",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe following fields cannot be changed through Update Analysis View:<ul><li><b>title</b> - silently ignored; the existing display name is always preserved.</li><li><b>folderId</b> - the request fails if the value differs from the view's current folder. Omit it entirely.</li><li><b>reportType</b> - must match the existing view type. A mismatch fails with error code 8021.</li><li><b>baseTableName</b> - derived from the view's stored parent reference. Sending it is harmless but has no effect.</li></ul>\n</span></blockquote>"
+            },
+            "3": {
+              "type": "editor",
+              "x-zenesis-shared-note": "chartOnlyAttributes",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<b>chartType</b>, <b>isAxisMerge</b> and <b>mergeAxisInfo</b> apply only when <b>reportType</b> is chart. <b>chartType</b> is required for chart views, and <b>mergeAxisInfo</b> must be supplied whenever <b>isAxisMerge</b> is true.\n</span></blockquote>"
+            },
+            "4": {
+              "type": "editor",
+              "x-zenesis-shared-note": "axisTypeCasing",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nAxis type casing differs between request and response. The Create and Update samples use camelCase (<b>xAxis</b>, <b>yAxis</b>, <b>colorAxis</b>), while Get Report Metadata returns the lowercase forms (<b>xaxis</b>, <b>yaxis</b>, <b>coloraxis</b>, <b>sizeaxis</b>, <b>textaxis</b>, <b>groupby</b>, <b>summarize</b>), which the documentation states are the canonical values. When building a Create or Update CONFIG from a Get Report Metadata response, copy the axis type values verbatim.\n</span></blockquote>"
+            },
+            "5": {
+              "type": "editor",
+              "x-zenesis-shared-note": "configSizeLimit",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CONFIG parameter has a maximum serialized size of 10 MB. Ensure that the nested arrays - <b>axisColumns</b>, <b>mergeAxisInfo</b>, <b>filters</b> and <b>userFilters</b> - do not push the total CONFIG payload beyond this limit.\n</span></blockquote>"
+            }
+          },
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "updateNoResponseBody",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis API returns no response body on success - only an HTTP 204 No Content status. There is no JSON payload to parse; check the HTTP status code alone. Only failure responses carry a JSON error payload.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.barChartMetadata",
+      "update": {
+        "description": "Simple bar chart"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.barChartMetadata",
+      "update": {
+        "summary": "A chart view with a single dimension on the x-axis and a single aggregated measure on the y-axis - the minimum reportConfig structure."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.bubbleChartMetadata",
+      "update": {
+        "description": "Bubble chart"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.bubbleChartMetadata",
+      "update": {
+        "summary": "A bubble chart using three axis types, where the sizeaxis entry drives the bubble size."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.colorAxisMetadata",
+      "update": {
+        "description": "Color grouped chart"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.colorAxisMetadata",
+      "update": {
+        "summary": "A stacked bar chart that splits the bars by a categorical dimension through a coloraxis entry."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.filteredChartMetadata",
+      "update": {
+        "description": "Filtered chart"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.filteredChartMetadata",
+      "update": {
+        "summary": "A chart saved with an active year filter, showing how the filters array is returned."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.mergedAxisMetadata",
+      "update": {
+        "description": "Merged axes chart"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.mergedAxisMetadata",
+      "update": {
+        "summary": "A combo chart with axis merge active, where isAxisMerge is true and both y-axis columns are listed."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.wildcardFilterMetadata",
+      "update": {
+        "description": "Wildcard filters"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.wildcardFilterMetadata",
+      "update": {
+        "summary": "A chart saved with two wildcard filters on different columns, showing multiple entries in the filters array."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.heatMapMetadata",
+      "update": {
+        "description": "Heat map chart"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200'].content['application/json'].examples.heatMapMetadata",
+      "update": {
+        "summary": "A heat map where the color axis carries the aggregated measure rather than a grouping dimension."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Provide a valid workspace ID in the URL."
+          },
+          {
+            "name": "7104",
+            "description": "The specified view does not exist in the workspace.",
+            "resolution": "Ensure the view ID in the URL corresponds to an existing analysis view."
+          },
+          {
+            "name": "7301",
+            "description": "User does not have permission to view this report's metadata.",
+            "resolution": "Ensure the user is an Account Admin, Organization Admin, View Owner, or has Design Modify permission on the view."
+          },
+          {
+            "name": "8021",
+            "description": "Invalid view type for the requested operation.",
+            "resolution": "Ensure the target view is an analysis view - a chart, pivot or summary view."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid OAuth token.",
+            "resolution": "Provide a valid, non-expired OAuth token in the Authorization header."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get",
+      "update": {
+        "x-zenesis-title": "Get Report Metadata"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get",
+      "update": {
+        "description": "Retrieves the full configuration metadata of an existing analysis view - a chart, a pivot table or a summary view - in the specified workspace. The response carries the report type, the chart sub-type, the axis column definitions, the applied filters and the visualization settings exactly as they are stored.\n\nThe returned `reportConfig` is structurally identical to the Create Analysis View CONFIG, which makes this API the first step of any safe update or clone workflow.\n\nThe authenticated user must be an Account Admin or an Organization Admin, or the View Owner, or any user with Design Modify permission on the view."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/reports/{view-id}/metadata'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequest": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "orgIdHeader",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a workspace-scoped API. The <b>ZANALYTICS-ORGID</b> header carrying the organization ID that owns the workspace is mandatory. A workspaceKey in the format <b>orgid/workspacename</b> (for example, 700000123456/Sales_Analytics) may be used in place of the numeric workspace ID in the URL path.\n</span></blockquote>"
+            }
+          },
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "axisTypeCasing",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nAxis type casing differs between request and response. The Create and Update samples use camelCase (<b>xAxis</b>, <b>yAxis</b>, <b>colorAxis</b>), while Get Report Metadata returns the lowercase forms (<b>xaxis</b>, <b>yaxis</b>, <b>coloraxis</b>, <b>sizeaxis</b>, <b>textaxis</b>, <b>groupby</b>, <b>summarize</b>), which the documentation states are the canonical values. When building a Create or Update CONFIG from a Get Report Metadata response, copy the axis type values verbatim.\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "x-zenesis-shared-note": "reportFullReset",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nUpdate Analysis View performs a full configuration reset, not a patch.<ul><li>Every axis column, filter, user filter and settings entry is replaced with the values sent in the CONFIG.</li><li>Fields that are not provided revert to their empty defaults - omitting <b>axisColumns</b>, <b>filters</b> or <b>userFilters</b> clears them.</li><li><b>description</b> is cleared if it is omitted.</li><li>Always fetch the current state with Get Report Metadata, modify it, then send the complete configuration back.</li></ul>\n</span></blockquote>"
+            },
+            "3": {
+              "type": "editor",
+              "x-zenesis-shared-note": "reportCloneWorkflow",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe <b>reportConfig</b> object returned by Get Report Metadata is structurally identical to the Create CONFIG, so it can be used directly as a clone template. Change <b>title</b> to a value that is unique in the workspace, keep <b>baseTableName</b>, and verify that every <b>columnName</b> and <b>tableName</b> exists in the target workspace's base table before posting.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards'].get.responses['200'].content['application/json'].examples.ownedAndShared",
+      "update": {
+        "description": "Owned and shared"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards'].get.responses['200'].content['application/json'].examples.ownedAndShared",
+      "update": {
+        "summary": "The user owns two dashboards and has one more shared with them."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards'].get.responses['200'].content['application/json'].examples.ownedOnly",
+      "update": {
+        "description": "Owned only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards'].get.responses['200'].content['application/json'].examples.ownedOnly",
+      "update": {
+        "summary": "The user owns one dashboard and nothing has been shared with them, so sharedViews comes back empty."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards'].get.responses['200'].content['application/json'].examples.noDashboards",
+      "update": {
+        "description": "No dashboards"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards'].get.responses['200'].content['application/json'].examples.noDashboards",
+      "update": {
+        "summary": "The user has no dashboards at all and both lists come back empty."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7301",
+            "description": "User does not have permission to retrieve dashboards.",
+            "resolution": "Ensure the request uses a valid OAuth token for an active Zoho Analytics user."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid OAuth token.",
+            "resolution": "Provide a valid, non-expired OAuth token in the Authorization header."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards'].get",
+      "update": {
+        "x-zenesis-title": "Get All Dashboards"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards'].get",
+      "update": {
+        "description": "Returns all dashboards accessible to the authenticated user - both those owned by the user and those shared with them - across every organization and workspace. The response groups the results into two separate lists, `ownedViews` and `sharedViews`.\n\nThis API has no request parameters; all context is derived from the OAuth token. The authenticated user may be any active Zoho Analytics user."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiInfo": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "userScopeListing",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a user service level API - it returns dashboards across every organization the caller belongs to.<ul><li>The <b>ZANALYTICS-ORGID</b> header is not required.</li><li>The OAuth token must be issued with user level scope.</li></ul>\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardCustomDomain",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nGet Shared Dashboards is available on custom domains. Get All Dashboards and Get Owned Dashboards are disabled on custom domains. The workspace-scoped dashboard APIs are accessible on custom domains subject to additional permission checks.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/owned'].get.responses['200'].content['application/json'].examples.multipleWorkspaces",
+      "update": {
+        "description": "Multiple workspaces"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/owned'].get.responses['200'].content['application/json'].examples.multipleWorkspaces",
+      "update": {
+        "summary": "The Account Admin owns dashboards in two different workspaces and organizations."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/owned'].get.responses['200'].content['application/json'].examples.singleDashboard",
+      "update": {
+        "description": "Single dashboard"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/owned'].get.responses['200'].content['application/json'].examples.singleDashboard",
+      "update": {
+        "summary": "The Account Admin owns one dashboard."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/owned'].get.responses['200'].content['application/json'].examples.noDashboards",
+      "update": {
+        "description": "No dashboards"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/owned'].get.responses['200'].content['application/json'].examples.noDashboards",
+      "update": {
+        "summary": "The Account Admin owns no dashboards and the list comes back empty."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/owned'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7301",
+            "description": "User does not have permission to retrieve owned dashboards.",
+            "resolution": "Ensure the authenticated user is an Account Admin."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid OAuth token.",
+            "resolution": "Provide a valid, non-expired OAuth token in the Authorization header."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/owned'].get",
+      "update": {
+        "x-zenesis-title": "Get Owned Dashboards"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/owned'].get",
+      "update": {
+        "description": "Returns the list of dashboards owned by the authenticated user across every organization, as a single `views` array.\n\nThis API has no request parameters; all context is derived from the OAuth token. The authenticated user must be an Account Admin."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/owned'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiInfo": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "userScopeListing",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a user service level API - it returns dashboards across every organization the caller belongs to.<ul><li>The <b>ZANALYTICS-ORGID</b> header is not required.</li><li>The OAuth token must be issued with user level scope.</li></ul>\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardCustomDomain",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nGet Shared Dashboards is available on custom domains. Get All Dashboards and Get Owned Dashboards are disabled on custom domains. The workspace-scoped dashboard APIs are accessible on custom domains subject to additional permission checks.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/shared'].get.responses['200'].content['application/json'].examples.multipleShared",
+      "update": {
+        "description": "Multiple shared"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/shared'].get.responses['200'].content['application/json'].examples.multipleShared",
+      "update": {
+        "summary": "Two dashboards from different organizations have been shared with the user; sharedBy carries the email of each sharer."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/shared'].get.responses['200'].content['application/json'].examples.favoriteShared",
+      "update": {
+        "description": "Favorite shared"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/shared'].get.responses['200'].content['application/json'].examples.favoriteShared",
+      "update": {
+        "summary": "One shared dashboard that the requesting user has marked as a favorite."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/shared'].get.responses['200'].content['application/json'].examples.noDashboards",
+      "update": {
+        "description": "No dashboards"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/shared'].get.responses['200'].content['application/json'].examples.noDashboards",
+      "update": {
+        "summary": "Nothing has been shared with the user and the list comes back empty."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/shared'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7301",
+            "description": "User does not have permission to retrieve shared dashboards.",
+            "resolution": "Ensure the request uses a valid OAuth token for an active Zoho Analytics user."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid OAuth token.",
+            "resolution": "Provide a valid, non-expired OAuth token in the Authorization header."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/shared'].get",
+      "update": {
+        "x-zenesis-title": "Get Shared Dashboards"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/shared'].get",
+      "update": {
+        "description": "Returns all dashboards that have been shared with the authenticated user across every organization and workspace, as a single `views` array. Unlike Get All Dashboards, this endpoint returns only shared dashboards, and it is also available on custom domains.\n\nThis API has no request parameters; all context is derived from the OAuth token. The authenticated user may be any active Zoho Analytics user."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/dashboards/shared'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiInfo": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "userScopeListing",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a user service level API - it returns dashboards across every organization the caller belongs to.<ul><li>The <b>ZANALYTICS-ORGID</b> header is not required.</li><li>The OAuth token must be issued with user level scope.</li></ul>\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardCustomDomain",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nGet Shared Dashboards is available on custom domains. Get All Dashboards and Get Owned Dashboards are disabled on custom domains. The workspace-scoped dashboard APIs are accessible on custom domains subject to additional permission checks.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards'].post.requestBody.content['application/x-www-form-urlencoded'].examples.minimalDashboard",
+      "update": {
+        "description": "Minimal dashboard"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards'].post.requestBody.content['application/x-www-form-urlencoded'].examples.minimalDashboard",
+      "update": {
+        "summary": "Creates a free form dashboard holding two view cards side by side, with the default theme."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards'].post.requestBody.content['application/x-www-form-urlencoded'].examples.gradientThemeDashboard",
+      "update": {
+        "description": "Gradient theme"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards'].post.requestBody.content['application/x-www-form-urlencoded'].examples.gradientThemeDashboard",
+      "update": {
+        "summary": "Creates a dashboard with a linear gradient background, custom card styling, a global user filter and exports restricted to CSV."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards'].post.requestBody.content['application/x-www-form-urlencoded'].examples.imageThemeDashboard",
+      "update": {
+        "description": "Image theme"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards'].post.requestBody.content['application/x-www-form-urlencoded'].examples.imageThemeDashboard",
+      "update": {
+        "summary": "Creates a dashboard with an image background alongside an HTML card, an image card and a view card."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards'].post.responses['200'].content['application/json'].examples.dashboardCreated",
+      "update": {
+        "description": "Dashboard created"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards'].post.responses['200'].content['application/json'].examples.dashboardCreated",
+      "update": {
+        "summary": "The dashboard was created; the response returns its ID and the display name as stored."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards'].post.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify that the workspace ID in the URL is correct and accessible to the user."
+          },
+          {
+            "name": "7111",
+            "description": "A dashboard with the same name already exists in the workspace.",
+            "resolution": "Use a different displayName value."
+          },
+          {
+            "name": "7301",
+            "description": "User does not have permission to create a dashboard.",
+            "resolution": "Ensure the user is an Account Admin, Organization Admin, Workspace Admin, Shared User, Group Member, or has Create Report permission."
+          },
+          {
+            "name": "8072",
+            "description": "The target object is not a valid dashboard.",
+            "resolution": "Verify the request parameters and ensure the workspace supports dashboard creation."
+          },
+          {
+            "name": "8119",
+            "description": "One or more CONFIG field values are invalid, such as an invalid color or an out-of-range number.",
+            "resolution": "Review the CONFIG JSON and correct the invalid values."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid OAuth token.",
+            "resolution": "Provide a valid, non-expired OAuth token with the ZohoAnalytics.modeling.create scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards'].post",
+      "update": {
+        "x-zenesis-title": "Create Dashboard"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards'].post",
+      "update": {
+        "description": "Creates a new dashboard in the specified workspace. The dashboard is defined through the CONFIG JSON parameter, which carries the display name, the layout card map and, optionally, the visual theme and the behaviour settings.\n\nThe authenticated user must be an Account Admin or an Organization Admin, or a Workspace Admin, or a Shared User, or a Group Member, or any user with Create Report permission on the workspace."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards'].post",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequest": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "orgIdHeader",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a workspace-scoped API. The <b>ZANALYTICS-ORGID</b> header carrying the organization ID that owns the workspace is mandatory. A workspaceKey in the format <b>orgid/workspacename</b> (for example, 700000123456/Sales_Analytics) may be used in place of the numeric workspace ID in the URL path.\n</span></blockquote>"
+            }
+          },
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "configUrlEncoded",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CONFIG parameter must be sent as a URL encoded JSON string in a form field named <b>CONFIG</b>, with the content type <b>application/x-www-form-urlencoded</b>.\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardViewNameByName",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nA VIEW card identifies an analysis view by its display name in <b>viewName</b>, not by its ID. If the referenced view is renamed or deleted the card renders as broken, and when cloning across workspaces the <b>viewName</b> values must be updated to match views that exist in the target workspace.\n</span></blockquote>"
+            },
+            "3": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardLayoutTypePreset",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nWhen <b>layoutType</b> is set to a grid preset (1 to 4), the server auto-injects a USERFILTERS card at position \"1\" and rearranges the view cards into columns, so the card indices that were sent may be renumbered. Omit <b>layoutType</b>, or set it to 0, for a free form layout, and call Get Dashboard Metadata afterwards to confirm the layout that was actually stored.\n</span></blockquote>"
+            }
+          },
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardIdEquivalence",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<b>dashboardConfig.objId</b> in the metadata response, <b>data.dashboardId</b> in the Create Dashboard response and <b>viewId</b> in the listing APIs are the same value under three different field names. Any of them can be used as the dashboard ID in the URL path.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.parameters[3].examples.fullMetadata",
+      "update": {
+        "description": "Full metadata"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.parameters[3].examples.fullMetadata",
+      "update": {
+        "summary": "Returns every section together with the objId, displayName and description identity fields."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.parameters[3].examples.layoutOnly",
+      "update": {
+        "description": "Layout only"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.parameters[3].examples.layoutOnly",
+      "update": {
+        "summary": "Returns just the layout card map, which is the section to fetch before appending a card."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.parameters[3].examples.themesAndSettings",
+      "update": {
+        "description": "Themes and settings"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.parameters[3].examples.themesAndSettings",
+      "update": {
+        "summary": "Returns two sections at once through a comma separated list."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.responses['200'].content['application/json'].examples.defaultThemeDashboard",
+      "update": {
+        "description": "Default theme"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.responses['200'].content['application/json'].examples.defaultThemeDashboard",
+      "update": {
+        "summary": "A free form dashboard on the default theme, holding a user filter card and a view card."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.responses['200'].content['application/json'].examples.htmlCardDashboard",
+      "update": {
+        "description": "HTML card"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.responses['200'].content['application/json'].examples.htmlCardDashboard",
+      "update": {
+        "summary": "A dashboard whose first card renders styled HTML markup above an embedded pivot view."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.responses['200'].content['application/json'].examples.imageCardDashboard",
+      "update": {
+        "description": "Image card"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.responses['200'].content['application/json'].examples.imageCardDashboard",
+      "update": {
+        "summary": "A dashboard on a solid theme, pairing an image card with a view card."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.responses['200'].content['application/json'].examples.gradientThemeDashboard",
+      "update": {
+        "description": "Gradient theme"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.responses['200'].content['application/json'].examples.gradientThemeDashboard",
+      "update": {
+        "summary": "A dashboard on a linear gradient theme with full card styling and exports restricted to CSV, showing how theme scalars are returned as strings."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.responses['200'].content['application/json'].examples.solidThemeDashboard",
+      "update": {
+        "description": "Solid theme"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.responses['200'].content['application/json'].examples.solidThemeDashboard",
+      "update": {
+        "summary": "A dashboard on a solid theme with card borders and a chart palette, and a single view card."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get.responses['200']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace ID in the URL."
+          },
+          {
+            "name": "7104",
+            "description": "Dashboard not found.",
+            "resolution": "Verify that the dashboard ID exists and belongs to the specified workspace."
+          },
+          {
+            "name": "7301",
+            "description": "User does not have permission to view this dashboard.",
+            "resolution": "Ensure the user is an Account Admin, Organization Admin, View Owner, or has Read Only permission on the dashboard."
+          },
+          {
+            "name": "8072",
+            "description": "The target object is not a valid dashboard.",
+            "resolution": "Verify that the dashboard ID refers to a dashboard rather than a report or another view type."
+          },
+          {
+            "name": "8102",
+            "description": "Dashboard view type not supported for this operation.",
+            "resolution": "The dashboard may be a tabbed dashboard, which is not supported through this API."
+          },
+          {
+            "name": "8119",
+            "description": "Invalid value supplied for the include attribute.",
+            "resolution": "Use one or more of all, themes, layout and settings."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid OAuth token.",
+            "resolution": "Provide a valid, non-expired OAuth token with the ZohoAnalytics.modeling.read scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get",
+      "update": {
+        "x-zenesis-title": "Get Dashboard Metadata"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get",
+      "update": {
+        "description": "Retrieves the stored configuration of a dashboard in the specified workspace - its identity attributes, the visual theme, the layout card map and the behaviour settings. The optional CONFIG parameter narrows the response to specific sections.\n\nThis is the first step of any safe update: fetch the section to be changed, merge the change into it, then send the complete section back through Update Dashboard.\n\nThe authenticated user must be an Account Admin or an Organization Admin, or the View Owner, or any user with Read Only permission on the dashboard."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}/metadata'].get",
+      "update": {
+        "x-zenesis-sections": {
+          "apiRequest": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "orgIdHeader",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a workspace-scoped API. The <b>ZANALYTICS-ORGID</b> header carrying the organization ID that owns the workspace is mandatory. A workspaceKey in the format <b>orgid/workspacename</b> (for example, 700000123456/Sales_Analytics) may be used in place of the numeric workspace ID in the URL path.\n</span></blockquote>"
+            }
+          },
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardIncludeSemantics",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe <b>include</b> attribute controls which sections are returned.<ul><li><b>all</b>, or omitting CONFIG altogether, returns objId, displayName, description, themes, layout and settings.</li><li>A specific section such as themes returns only that section, without the objId, displayName and description identity fields.</li><li>Several sections can be requested as a comma separated list, for example themes,layout.</li></ul>\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "x-zenesis-shared-note": "configGetUrlEncoded",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nAs this is a GET request, the CONFIG value must be stringified and URL encoded before it is sent.\n</span></blockquote>"
+            }
+          },
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardStringScalars",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe metadata response serializes theme and settings scalars as strings even where the CONFIG accepts numbers - for example a <b>layoutType</b> sent as 6 is returned as \"6\", and a card <b>opacity</b> sent as 0.2 is returned as \"0.2\". Only the layout card geometry (<b>width</b>, <b>height</b>, <b>left</b>, <b>top</b>) is returned as numbers. Sections that were never customized are omitted from the response entirely.\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardIdEquivalence",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<b>dashboardConfig.objId</b> in the metadata response, <b>data.dashboardId</b> in the Create Dashboard response and <b>viewId</b> in the listing APIs are the same value under three different field names. Any of them can be used as the dashboard ID in the URL path.\n</span></blockquote>"
+            },
+            "3": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardSectionReplace",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nUpdate Dashboard replaces a whole section rather than merging into it. When <b>layout</b>, <b>themes</b> or <b>settings</b> is included, every stored row for that section is deleted and exactly what was sent is stored.<ul><li>Sending only some settings keys reverts all other settings to their system defaults.</li><li>A section that is absent from the CONFIG is left unchanged, so it is safe to omit sections that are not being modified.</li><li>Fetch the section with Get Dashboard Metadata, merge the change into it, then send the complete section back.</li></ul>\n</span></blockquote>"
+            }
+          },
+          "apiResponseCodes": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardTabbedUnsupported",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nTabbed dashboards are not supported by the V2 API. Calling this API on a tabbed dashboard fails with error code 8102.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.layoutUpdate",
+      "update": {
+        "description": "Layout replacement"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.layoutUpdate",
+      "update": {
+        "summary": "Replaces the whole layout with three cards. Any card that is not listed here is removed from the dashboard."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.themeUpdate",
+      "update": {
+        "description": "Theme replacement"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.themeUpdate",
+      "update": {
+        "summary": "Switches the dashboard to a solid dark theme with custom card borders and font colors, leaving the layout and the settings untouched."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.settingsUpdate",
+      "update": {
+        "description": "Settings replacement"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.settingsUpdate",
+      "update": {
+        "summary": "Restricts the export formats and turns on the global user filter. Every settings attribute that is omitted here reverts to its system default."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.resetTheme",
+      "update": {
+        "description": "Theme reset"
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}'].put.requestBody.content['application/x-www-form-urlencoded'].examples.resetTheme",
+      "update": {
+        "summary": "Clears every theme customization and restores the system default theme in a single call."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}'].put.responses['204']",
+      "update": {
+        "x-zenesis-statuscodes": [
+          {
+            "name": "7103",
+            "description": "Workspace not found.",
+            "resolution": "Verify the workspace ID in the URL."
+          },
+          {
+            "name": "7104",
+            "description": "Dashboard not found.",
+            "resolution": "Verify that the dashboard ID exists and belongs to the specified workspace."
+          },
+          {
+            "name": "7301",
+            "description": "User does not have permission to update this dashboard.",
+            "resolution": "Ensure the user is an Account Admin, Organization Admin, View Owner, or has Design Modify permission on the dashboard."
+          },
+          {
+            "name": "8072",
+            "description": "The target object is not a valid dashboard.",
+            "resolution": "Verify that the dashboard ID refers to a dashboard."
+          },
+          {
+            "name": "8102",
+            "description": "Dashboard view type not supported for this operation.",
+            "resolution": "Tabbed dashboards cannot be updated through this API."
+          },
+          {
+            "name": "8119",
+            "description": "One or more CONFIG field values are invalid, such as an out-of-range number or an invalid color.",
+            "resolution": "Review the CONFIG JSON and correct the invalid values."
+          },
+          {
+            "name": "8535",
+            "description": "Invalid OAuth token.",
+            "resolution": "Provide a valid, non-expired OAuth token with the ZohoAnalytics.modeling.update scope."
+          }
+        ]
+      },
+      "x-migration": "Now a Markdown table in the operation description."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}'].put",
+      "update": {
+        "x-zenesis-title": "Update Dashboard"
+      },
+      "x-migration": "Identical to `summary`. Make the renderer fall back to it."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}'].put",
+      "update": {
+        "description": "Updates an existing dashboard in the specified workspace. Every attribute of the CONFIG is optional and a section that is left out is not touched, but a section that is sent replaces the stored one wholesale rather than merging into it. Fetch the section with Get Dashboard Metadata, merge the change into it, then send the complete section back.\n\n`displayName` and `description` are not part of this CONFIG - a dedicated rename API is needed to change the dashboard name.\n\nThe authenticated user must be an Account Admin or an Organization Admin, or the View Owner, or any user with Design Modify permission on the dashboard."
+      },
+      "x-migration": "Re-swaps the example fields for the current renderer."
+    },
+    {
+      "target": "$.paths['/restapi/v2/workspaces/{workspace-id}/dashboards/{dashboard-id}'].put",
+      "update": {
+        "x-zenesis-sections": {
+          "apiInfo": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardSectionReplace",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nUpdate Dashboard replaces a whole section rather than merging into it. When <b>layout</b>, <b>themes</b> or <b>settings</b> is included, every stored row for that section is deleted and exactly what was sent is stored.<ul><li>Sending only some settings keys reverts all other settings to their system defaults.</li><li>A section that is absent from the CONFIG is left unchanged, so it is safe to omit sections that are not being modified.</li><li>Fetch the section with Get Dashboard Metadata, merge the change into it, then send the complete section back.</li></ul>\n</span></blockquote>"
+            }
+          },
+          "apiRequest": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "orgIdHeader",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a workspace-scoped API. The <b>ZANALYTICS-ORGID</b> header carrying the organization ID that owns the workspace is mandatory. A workspaceKey in the format <b>orgid/workspacename</b> (for example, 700000123456/Sales_Analytics) may be used in place of the numeric workspace ID in the URL path.\n</span></blockquote>"
+            }
+          },
+          "apiRequestParameters": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "configUrlEncoded",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CONFIG parameter must be sent as a URL encoded JSON string in a form field named <b>CONFIG</b>, with the content type <b>application/x-www-form-urlencoded</b>.\n</span></blockquote>"
+            },
+            "2": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardViewNameByName",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nA VIEW card identifies an analysis view by its display name in <b>viewName</b>, not by its ID. If the referenced view is renamed or deleted the card renders as broken, and when cloning across workspaces the <b>viewName</b> values must be updated to match views that exist in the target workspace.\n</span></blockquote>"
+            },
+            "3": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardLayoutTypePreset",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nWhen <b>layoutType</b> is set to a grid preset (1 to 4), the server auto-injects a USERFILTERS card at position \"1\" and rearranges the view cards into columns, so the card indices that were sent may be renumbered. Omit <b>layoutType</b>, or set it to 0, for a free form layout, and call Get Dashboard Metadata afterwards to confirm the layout that was actually stored.\n</span></blockquote>"
+            }
+          },
+          "apiResponseParameters": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "updateNoResponseBody",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis API returns no response body on success - only an HTTP 204 No Content status. There is no JSON payload to parse; check the HTTP status code alone. Only failure responses carry a JSON error payload.\n</span></blockquote>"
+            }
+          },
+          "apiResponseCodes": {
+            "1": {
+              "type": "editor",
+              "x-zenesis-shared-note": "dashboardTabbedUnsupported",
+              "value": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nTabbed dashboards are not supported by the V2 API. Calling this API on a tabbed dashboard fails with error code 8102.\n</span></blockquote>"
+            }
+          }
+        }
+      },
+      "x-migration": "HTML restatement of `description`. Retire it."
+    },
+    {
+      "target": "$.components.schemas.AxisColumn.properties.type",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Horizontal axis",
+          "Vertical axis",
+          "Color segments",
+          "Bubble size",
+          "Text label",
+          "Hover tooltip",
+          "Pivot row",
+          "Pivot column",
+          "Pivot measure",
+          "Summary grouping",
+          "Summary measure",
+          "Custom axis"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.AxisColumn.properties.operation",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Raw value",
+          "Sum",
+          "Average",
+          "Row count",
+          "Unique count",
+          "Minimum",
+          "Maximum",
+          "Standard deviation",
+          "Variance",
+          "Percentile",
+          "As dimension",
+          "Range bucket",
+          "Geographic mapping",
+          "By year",
+          "By quarter",
+          "By month",
+          "By month-year",
+          "Absolute quarter",
+          "Full datetime",
+          "Seasonal period"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.AxisColumn.properties.geoRole",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Latitude coordinate",
+          "Longitude coordinate",
+          "Text location"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.AxisColumn.properties.sort",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Ascending",
+          "Descending"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ColumnFormat.properties.thousandSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Off",
+          "On"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ColumnFormat.properties.decimalSeparator",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Period",
+          "Comma"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ColumnFormat.properties.numberingType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "None",
+          "Thousands",
+          "Millions",
+          "Billions"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.WindowFunction.properties.baseFunction",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Raw value",
+          "Sum",
+          "Average",
+          "Row count",
+          "Unique count",
+          "Minimum",
+          "Maximum",
+          "Standard deviation",
+          "Variance",
+          "Percentile",
+          "As dimension",
+          "Range bucket",
+          "Geographic mapping",
+          "By year",
+          "By quarter",
+          "By month",
+          "By month-year",
+          "Absolute quarter",
+          "Full datetime",
+          "Seasonal period"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ReportFilter.properties.operation",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Raw value",
+          "Sum",
+          "Average",
+          "Row count",
+          "Unique count",
+          "Minimum",
+          "Maximum",
+          "Standard deviation",
+          "Variance",
+          "Percentile",
+          "As dimension",
+          "Range bucket",
+          "Geographic mapping",
+          "By year",
+          "By quarter",
+          "By month",
+          "By month-year",
+          "Absolute quarter",
+          "Full datetime",
+          "Seasonal period"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.UserFilter.properties.operation",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Raw value",
+          "Sum",
+          "Average",
+          "Row count",
+          "Unique count",
+          "Minimum",
+          "Maximum",
+          "Standard deviation",
+          "Variance",
+          "Percentile",
+          "As dimension",
+          "Range bucket",
+          "Geographic mapping",
+          "By year",
+          "By quarter",
+          "By month",
+          "By month-year",
+          "Absolute quarter",
+          "Full datetime",
+          "Seasonal period"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.UserFilter.properties.compType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Dropdown selector",
+          "Checklist selector",
+          "Range slider",
+          "Date picker"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.UserFilter.properties.behaviour",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "All values",
+          "Relevant only",
+          "Context-aware"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ViewSettingsThemes.properties.themeRowSpacing",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Compact",
+          "Normal",
+          "Relaxed"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.CreateReportConfig.properties.reportType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Chart view",
+          "Pivot table",
+          "Summary view"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.UpdateReportConfig.properties.reportType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Chart view",
+          "Pivot table",
+          "Summary view"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.CreateReportResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded",
+          "Request failed"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.GetReportMetadataResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded",
+          "Request failed"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ReportConfigMetadata.properties.reportType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Chart view",
+          "Pivot table",
+          "Summary view"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ReportMetadataAxisColumn.properties.type",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Horizontal axis",
+          "Vertical axis",
+          "Color segments",
+          "Bubble size",
+          "Text label",
+          "Hover tooltip",
+          "Pivot row",
+          "Pivot column",
+          "Pivot measure",
+          "Summary grouping",
+          "Summary measure",
+          "Custom axis"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ReportMetadataAxisColumn.properties.operation",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Raw value",
+          "Sum",
+          "Average",
+          "Row count",
+          "Unique count",
+          "Minimum",
+          "Maximum",
+          "Standard deviation",
+          "Variance",
+          "Percentile",
+          "As dimension",
+          "Range bucket",
+          "Geographic mapping",
+          "By year",
+          "By quarter",
+          "By month",
+          "By month-year",
+          "Absolute quarter",
+          "Full datetime",
+          "Seasonal period"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.ReportMetadataAxisColumn.properties.geoRole",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Latitude coordinate",
+          "Longitude coordinate",
+          "Text location"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.GetDashboardsResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded",
+          "Request failed"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.GetDashboardListResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded",
+          "Request failed"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardLayoutCard.properties.type",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Analysis view",
+          "HTML content",
+          "Title text",
+          "Paragraph text",
+          "Image card",
+          "Embedded URL",
+          "User filters",
+          "Removed card"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemes.properties.default",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Reset theme",
+          "Keep theme"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeImage.properties.flip",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Flipped",
+          "Not flipped"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeImage.properties.fitType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Cover",
+          "Contain",
+          "Stretch"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeCard.properties.paletteType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Themed palette",
+          "Custom palette"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardChartEffect.properties.apply",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "No effect",
+          "Apply effect"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.enableGlobalUF",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.enableGlobalValueUF",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.smartAlignCharts",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.showContextualOptions",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.allowEmbedInsights",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.enableSortMenu",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.reportAsFilter",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.hideColumnOptions",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.allowVUD",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.allowInsights",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.fitToWidth",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.layoutType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Browser width",
+          "Custom width",
+          "Tabloid size",
+          "Letter size",
+          "A4 size",
+          "A3 size"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.allowDrillDown",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.applyImmediateUF",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.timeSlicer",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.mapSync",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardAllowExport.properties.csv",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardAllowExport.properties.excel",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardAllowExport.properties.html",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardAllowExport.properties.image",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardAllowExport.properties.pdf",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardAllowExport.properties.zohoSheet",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Enabled",
+          "Disabled"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.CreateDashboardConfig.properties.layoutType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Free form",
+          "Single column",
+          "Two columns",
+          "Three columns",
+          "Four columns"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.UpdateDashboardConfig.properties.layoutType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Free form",
+          "Single column",
+          "Two columns",
+          "Three columns",
+          "Four columns"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.CreateDashboardResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded",
+          "Request failed"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.GetDashboardMetadataResponse.properties.status",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Request succeeded",
+          "Request failed"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemesMetadata.properties.default",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Reset theme",
+          "Keep theme"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeImageMetadata.properties.flip",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Flipped",
+          "Not flipped"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeImageMetadata.properties.fitType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Cover",
+          "Contain",
+          "Stretch"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeCardMetadata.properties.paletteType",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "Themed palette",
+          "Custom palette"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components.schemas.DashboardChartEffectMetadata.properties.apply",
+      "update": {
+        "x-zenesis-enums-desc": [
+          "No effect",
+          "Apply effect"
+        ]
+      },
+      "x-migration": "Positional array. Read x-enumDescriptions instead."
+    },
+    {
+      "target": "$.components",
+      "update": {
+        "x-zenesis-shared-notes": {
+          "description": "Canonical text of the notes that apply to more than one API in this module, distilled from the Appendices of the Reports and Dashboards help pages. Each operation carries a materialised copy of the relevant entries inside its x-zenesis-sections, tagged with x-zenesis-shared-note naming the key it came from. Edit a note here first, then propagate it to the operations that reference it.",
+          "notes": {
+            "axisTypeCasing": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nAxis type casing differs between request and response. The Create and Update samples use camelCase (<b>xAxis</b>, <b>yAxis</b>, <b>colorAxis</b>), while Get Report Metadata returns the lowercase forms (<b>xaxis</b>, <b>yaxis</b>, <b>coloraxis</b>, <b>sizeaxis</b>, <b>textaxis</b>, <b>groupby</b>, <b>summarize</b>), which the documentation states are the canonical values. When building a Create or Update CONFIG from a Get Report Metadata response, copy the axis type values verbatim.\n</span></blockquote>",
+            "chartOnlyAttributes": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<b>chartType</b>, <b>isAxisMerge</b> and <b>mergeAxisInfo</b> apply only when <b>reportType</b> is chart. <b>chartType</b> is required for chart views, and <b>mergeAxisInfo</b> must be supplied whenever <b>isAxisMerge</b> is true.\n</span></blockquote>",
+            "configGetUrlEncoded": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nAs this is a GET request, the CONFIG value must be stringified and URL encoded before it is sent.\n</span></blockquote>",
+            "configSizeLimit": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CONFIG parameter has a maximum serialized size of 10 MB. Ensure that the nested arrays - <b>axisColumns</b>, <b>mergeAxisInfo</b>, <b>filters</b> and <b>userFilters</b> - do not push the total CONFIG payload beyond this limit.\n</span></blockquote>",
+            "configUrlEncoded": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe CONFIG parameter must be sent as a URL encoded JSON string in a form field named <b>CONFIG</b>, with the content type <b>application/x-www-form-urlencoded</b>.\n</span></blockquote>",
+            "dashboardCustomDomain": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nGet Shared Dashboards is available on custom domains. Get All Dashboards and Get Owned Dashboards are disabled on custom domains. The workspace-scoped dashboard APIs are accessible on custom domains subject to additional permission checks.\n</span></blockquote>",
+            "dashboardIdEquivalence": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\n<b>dashboardConfig.objId</b> in the metadata response, <b>data.dashboardId</b> in the Create Dashboard response and <b>viewId</b> in the listing APIs are the same value under three different field names. Any of them can be used as the dashboard ID in the URL path.\n</span></blockquote>",
+            "dashboardIncludeSemantics": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe <b>include</b> attribute controls which sections are returned.<ul><li><b>all</b>, or omitting CONFIG altogether, returns objId, displayName, description, themes, layout and settings.</li><li>A specific section such as themes returns only that section, without the objId, displayName and description identity fields.</li><li>Several sections can be requested as a comma separated list, for example themes,layout.</li></ul>\n</span></blockquote>",
+            "dashboardLayoutTypePreset": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nWhen <b>layoutType</b> is set to a grid preset (1 to 4), the server auto-injects a USERFILTERS card at position \"1\" and rearranges the view cards into columns, so the card indices that were sent may be renumbered. Omit <b>layoutType</b>, or set it to 0, for a free form layout, and call Get Dashboard Metadata afterwards to confirm the layout that was actually stored.\n</span></blockquote>",
+            "dashboardSectionReplace": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nUpdate Dashboard replaces a whole section rather than merging into it. When <b>layout</b>, <b>themes</b> or <b>settings</b> is included, every stored row for that section is deleted and exactly what was sent is stored.<ul><li>Sending only some settings keys reverts all other settings to their system defaults.</li><li>A section that is absent from the CONFIG is left unchanged, so it is safe to omit sections that are not being modified.</li><li>Fetch the section with Get Dashboard Metadata, merge the change into it, then send the complete section back.</li></ul>\n</span></blockquote>",
+            "dashboardStringScalars": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe metadata response serializes theme and settings scalars as strings even where the CONFIG accepts numbers - for example a <b>layoutType</b> sent as 6 is returned as \"6\", and a card <b>opacity</b> sent as 0.2 is returned as \"0.2\". Only the layout card geometry (<b>width</b>, <b>height</b>, <b>left</b>, <b>top</b>) is returned as numbers. Sections that were never customized are omitted from the response entirely.\n</span></blockquote>",
+            "dashboardTabbedUnsupported": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nTabbed dashboards are not supported by the V2 API. Calling this API on a tabbed dashboard fails with error code 8102.\n</span></blockquote>",
+            "dashboardViewNameByName": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nA VIEW card identifies an analysis view by its display name in <b>viewName</b>, not by its ID. If the referenced view is renamed or deleted the card renders as broken, and when cloning across workspaces the <b>viewName</b> values must be updated to match views that exist in the target workspace.\n</span></blockquote>",
+            "orgIdHeader": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a workspace-scoped API. The <b>ZANALYTICS-ORGID</b> header carrying the organization ID that owns the workspace is mandatory. A workspaceKey in the format <b>orgid/workspacename</b> (for example, 700000123456/Sales_Analytics) may be used in place of the numeric workspace ID in the URL path.\n</span></blockquote>",
+            "reportCloneWorkflow": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe <b>reportConfig</b> object returned by Get Report Metadata is structurally identical to the Create CONFIG, so it can be used directly as a clone template. Change <b>title</b> to a value that is unique in the workspace, keep <b>baseTableName</b>, and verify that every <b>columnName</b> and <b>tableName</b> exists in the target workspace's base table before posting.\n</span></blockquote>",
+            "reportFullReset": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nUpdate Analysis View performs a full configuration reset, not a patch.<ul><li>Every axis column, filter, user filter and settings entry is replaced with the values sent in the CONFIG.</li><li>Fields that are not provided revert to their empty defaults - omitting <b>axisColumns</b>, <b>filters</b> or <b>userFilters</b> clears them.</li><li><b>description</b> is cleared if it is omitted.</li><li>Always fetch the current state with Get Report Metadata, modify it, then send the complete configuration back.</li></ul>\n</span></blockquote>",
+            "reportReadOnlyFields": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThe following fields cannot be changed through Update Analysis View:<ul><li><b>title</b> - silently ignored; the existing display name is always preserved.</li><li><b>folderId</b> - the request fails if the value differs from the view's current folder. Omit it entirely.</li><li><b>reportType</b> - must match the existing view type. A mismatch fails with error code 8021.</li><li><b>baseTableName</b> - derived from the view's stored parent reference. Sending it is harmless but has no effect.</li></ul>\n</span></blockquote>",
+            "updateNoResponseBody": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis API returns no response body on success - only an HTTP 204 No Content status. There is no JSON payload to parse; check the HTTP status code alone. Only failure responses carry a JSON error payload.\n</span></blockquote>",
+            "userScopeListing": "<blockquote>Note:<br>\n<span style=\"font-weight:normal;\">\nThis is a user service level API - it returns dashboards across every organization the caller belongs to.<ul><li>The <b>ZANALYTICS-ORGID</b> header is not required.</li><li>The OAuth token must be issued with user level scope.</li></ul>\n</span></blockquote>"
+          }
+        }
+      }
+    },
+    {
+      "target": "$.components.schemas.AxisColumn.properties.type['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.AxisColumn.properties.operation['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.AxisColumn.properties.geoRole['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.AxisColumn.properties.sort['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ColumnFormat.properties.thousandSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ColumnFormat.properties.thousandSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ColumnFormat.properties.decimalSeparator['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ColumnFormat.properties.decimalSeparator['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ColumnFormat.properties.numberingType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ColumnFormat.properties.numberingType['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.WindowFunction.properties.baseFunction['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ReportFilter.properties.operation['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.UserFilter.properties.operation['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.UserFilter.properties.compType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.UserFilter.properties.behaviour['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ViewSettingsThemes.properties.themeRowSpacing['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ViewSettingsThemes.properties.themeRowSpacing['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.CreateReportConfig.properties.reportType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.UpdateReportConfig.properties.reportType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.CreateReportResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.GetReportMetadataResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ReportConfigMetadata.properties.reportType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ReportMetadataAxisColumn.properties.type['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ReportMetadataAxisColumn.properties.operation['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.ReportMetadataAxisColumn.properties.geoRole['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.GetDashboardsResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.GetDashboardListResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardLayoutCard.properties.type['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemes.properties.default['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeImage.properties.flip['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeImage.properties.fitType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeCard.properties.paletteType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeCard.properties.paletteType['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardChartEffect.properties.apply['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardChartEffect.properties.apply['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.enableGlobalUF['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.enableGlobalValueUF['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.smartAlignCharts['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.showContextualOptions['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.allowEmbedInsights['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.enableSortMenu['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.reportAsFilter['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.hideColumnOptions['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.allowVUD['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.allowInsights['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.fitToWidth['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.layoutType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.allowDrillDown['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.applyImmediateUF['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.timeSlicer['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardSettings.properties.mapSync['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardAllowExport.properties.csv['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardAllowExport.properties.excel['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardAllowExport.properties.html['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardAllowExport.properties.image['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardAllowExport.properties.pdf['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardAllowExport.properties.zohoSheet['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.CreateDashboardConfig.properties.layoutType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.CreateDashboardConfig.properties.layoutType['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.UpdateDashboardConfig.properties.layoutType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.UpdateDashboardConfig.properties.layoutType['x-enum-varnames']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.CreateDashboardResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.GetDashboardMetadataResponse.properties.status['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemesMetadata.properties.default['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeImageMetadata.properties.flip['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeImageMetadata.properties.fitType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardThemeCardMetadata.properties.paletteType['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    },
+    {
+      "target": "$.components.schemas.DashboardChartEffectMetadata.properties.apply['x-enumDescriptions']",
+      "remove": true,
+      "x-migration": "Optional. Only needed for byte-identical output; the Zenesis renderer ignores unknown keys."
+    }
+  ]
+}
